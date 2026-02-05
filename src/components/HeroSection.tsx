@@ -86,7 +86,7 @@ const HeroSection = () => {
         >
           <a
             href="#"
-            className="inline-block bg-primary text-primary-foreground font-bold rounded-lg px-12 py-5 text-lg uppercase tracking-wider transition-all duration-300 hover:shadow-lg hover:shadow-primary/40 hover:-translate-y-1 hover:brightness-110"
+            className="inline-block bg-accent text-accent-foreground font-bold rounded-lg px-12 py-5 text-lg uppercase tracking-wider transition-all duration-300 hover:shadow-lg hover:shadow-accent/40 hover:-translate-y-1 hover:brightness-110"
           >
             Yes! Show Me How!
           </a>

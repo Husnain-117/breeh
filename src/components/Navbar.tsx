@@ -37,10 +37,10 @@ const Navbar = () => {
       }`}
     >
       <div
-        className={`max-w-7xl mx-auto transition-all duration-500 ${
+        className={`max-w-7xl mx-auto transition-all duration-500 rounded-2xl ${
           scrolled
-            ? "bg-accent rounded-2xl shadow-xl shadow-accent/20 px-6 lg:px-8"
-            : "bg-transparent px-2 lg:px-4"
+            ? "bg-accent shadow-xl shadow-accent/20 px-6 lg:px-8"
+            : "bg-accent/15 backdrop-blur-md border border-primary-foreground/20 px-6 lg:px-8"
         }`}
       >
         <div className="flex items-center justify-between h-14 lg:h-16">
