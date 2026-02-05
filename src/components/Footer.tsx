@@ -1,54 +1,31 @@
-import { Linkedin, Twitter, Youtube, Mail } from "lucide-react";
-
 const footerLinks = {
-  Platform: ["AI Agent Builder", "Knowledge AI", "VoiceX Engine", "Copilot", "Analytics", "Integrations"],
-  Solutions: ["Customer Service", "Employee Experience", "Sales & Marketing", "Commerce", "BFSI", "Healthcare"],
-  Resources: ["Blog", "Case Studies", "Documentation", "API Reference", "ROI Calculator", "Webinars"],
-  Company: ["About Us", "Careers", "Press", "Partners", "Contact", "Trust Center"],
+  Platform: ["AI Receptionist", "Appointment Scheduling", "Patient Communication", "Call Analytics", "Integrations"],
+  Solutions: ["Dental Clinics", "Orthodontics", "Oral Surgery", "DSO / Groups", "Multi-Location"],
+  Company: ["About Us", "Careers", "Press", "Partners", "Contact"],
+  Resources: ["Blog", "Case Studies", "Documentation", "ROI Calculator", "Webinars"],
 };
 
 const Footer = () => {
   return (
-    <footer className="section-dark border-t border-white/5">
+    <footer className="bg-background border-t border-border">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-20">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-10 lg:gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10 lg:gap-8">
           {/* Brand Column */}
-          <div className="col-span-2">
+          <div className="col-span-2 md:col-span-1">
             <a href="/" className="flex items-center gap-2 mb-6">
-              <div className="w-9 h-9 rounded-lg gradient-bg-primary flex items-center justify-center font-display font-bold text-primary-foreground text-lg">
+              <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center font-display font-bold text-primary-foreground text-base">
                 B
               </div>
-              <span className="font-display font-bold text-xl text-section-dark-foreground">
-                Breeh<span className="gradient-text">AI</span>
+              <span className="font-display font-bold text-lg text-foreground">
+                Breeh<span className="text-primary">AI</span>
               </span>
             </a>
-            <p className="text-sm text-section-dark-foreground/40 mb-6 max-w-xs leading-relaxed">
-              The world's leading agentic AI platform for autonomous customer 
-              and employee experiences.
-            </p>
-            <div className="flex gap-3">
-              {[
-                { icon: Linkedin, label: "LinkedIn" },
-                { icon: Twitter, label: "Twitter" },
-                { icon: Youtube, label: "YouTube" },
-                { icon: Mail, label: "Email" },
-              ].map((social) => (
-                <a
-                  key={social.label}
-                  href="#"
-                  aria-label={social.label}
-                  className="w-10 h-10 rounded-xl flex items-center justify-center text-section-dark-foreground/40 hover:text-primary hover:bg-white/5 transition-all duration-300"
-                >
-                  <social.icon className="w-4 h-4" />
-                </a>
-              ))}
-            </div>
           </div>
 
           {/* Link Columns */}
           {Object.entries(footerLinks).map(([title, links]) => (
             <div key={title}>
-              <h4 className="font-display font-semibold text-sm text-section-dark-foreground mb-4">
+              <h4 className="font-display font-semibold text-sm text-accent mb-4">
                 {title}
               </h4>
               <ul className="space-y-3">
@@ -56,7 +33,7 @@ const Footer = () => {
                   <li key={link}>
                     <a
                       href="#"
-                      className="text-sm text-section-dark-foreground/40 hover:text-primary transition-colors duration-200"
+                      className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
                     >
                       {link}
                     </a>
@@ -68,16 +45,16 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-section-dark-foreground/30">
+        <div className="mt-16 pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-xs text-muted-foreground">
             © {new Date().getFullYear()} Breeh AI. All rights reserved.
           </p>
           <div className="flex gap-6">
-            {["Privacy Policy", "Terms of Service", "Cookie Policy", "Security"].map((link) => (
+            {["Privacy Policy", "Terms of Service", "HIPAA Compliance", "Security"].map((link) => (
               <a
                 key={link}
                 href="#"
-                className="text-xs text-section-dark-foreground/30 hover:text-section-dark-foreground/60 transition-colors"
+                className="text-xs text-muted-foreground hover:text-foreground transition-colors"
               >
                 {link}
               </a>

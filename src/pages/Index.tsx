@@ -1,12 +1,13 @@
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import TrustedBy from "@/components/TrustedBy";
-import FeaturesSection from "@/components/FeaturesSection";
-import SolutionsSection from "@/components/SolutionsSection";
-import TestimonialsSection from "@/components/TestimonialsSection";
-import StatsSection from "@/components/StatsSection";
+import CaseStudiesSection from "@/components/CaseStudiesSection";
+import WhyBreehSection from "@/components/WhyBreehSection";
+import SecuritySection from "@/components/SecuritySection";
+import DemosSection from "@/components/DemosSection";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
+import FloatingCallButton from "@/components/FloatingCallButton";
 
 const Index = () => {
   return (
@@ -14,12 +15,13 @@ const Index = () => {
       <Navbar />
       <HeroSection />
       <TrustedBy />
-      <FeaturesSection />
-      <SolutionsSection />
-      <StatsSection />
-      <TestimonialsSection />
+      <CaseStudiesSection />
+      <WhyBreehSection />
+      <SecuritySection />
+      <DemosSection />
       <CTASection />
       <Footer />
+      <FloatingCallButton />
     </div>
   );
 };

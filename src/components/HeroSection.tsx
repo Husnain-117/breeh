@@ -1,54 +1,67 @@
-import { motion } from "framer-motion";
-import { ArrowRight, Play } from "lucide-react";
-import heroBg from "@/assets/hero-bg.jpg";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import heroBg1 from "@/assets/hero-dental-1.jpg";
+import heroBg2 from "@/assets/hero-dental-2.jpg";
+
+const slides = [heroBg1, heroBg2];
 
 const HeroSection = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 6000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <section className="hero-section relative min-h-screen flex items-center overflow-hidden">
-      {/* Background Image */}
-      <div className="absolute inset-0 z-0">
-        <img
-          src={heroBg}
-          alt=""
-          className="w-full h-full object-cover opacity-30"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-hero/60 via-hero/80 to-hero" />
-      </div>
+    <section className="relative min-h-screen flex items-center overflow-hidden">
+      {/* Background Images with crossfade */}
+      <AnimatePresence mode="sync">
+        {slides.map((slide, i) => (
+          i === currentSlide && (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1.5 }}
+              className="absolute inset-0 z-0"
+            >
+              <img
+                src={slide}
+                alt=""
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-foreground/80 via-foreground/60 to-foreground/20" />
+            </motion.div>
+          )
+        ))}
+      </AnimatePresence>
 
-      {/* Animated Orbs */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-primary/10 blur-[120px] animate-float" />
-      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-secondary/15 blur-[100px] animate-float" style={{ animationDelay: "3s" }} />
-
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 pt-32 pb-20">
-        <div className="max-w-4xl mx-auto text-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 pt-32 pb-20 w-full">
+        <div className="max-w-2xl">
           {/* Badge */}
-          <motion.div
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card mb-8"
+            className="text-sm font-semibold text-primary-foreground/80 tracking-wide mb-6"
           >
-            <span className="w-2 h-2 rounded-full gradient-bg-primary animate-pulse" />
-            <span className="text-sm font-medium text-hero-foreground/80">
-              Introducing Breeh AI Agentic Platform
-            </span>
-            <ArrowRight className="w-3.5 h-3.5 text-primary" />
-          </motion.div>
+            AI-Powered Dental Receptionist Platform
+          </motion.p>
 
           {/* Headline */}
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="font-display font-bold text-5xl md:text-6xl lg:text-7xl leading-tight tracking-tight mb-6"
+            className="font-display font-bold text-5xl md:text-6xl lg:text-7xl leading-[1.1] tracking-tight mb-8"
           >
-            <span className="text-hero-foreground">Autonomous AI </span>
-            <br />
-            <span className="gradient-text">experiences</span>
-            <span className="text-hero-foreground"> that</span>
-            <br />
-            <span className="text-hero-foreground">deliver </span>
-            <span className="gradient-text-purple">results</span>
+            <span className="text-primary-foreground">Smarter Interactions with </span>
+            <span className="text-primary">AI Agents</span>
+            <span className="text-primary-foreground"> That Think, Act, and Resolve</span>
           </motion.h1>
 
           {/* Subheadline */}
@@ -56,56 +69,45 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.4 }}
-            className="text-lg md:text-xl text-hero-foreground/60 max-w-2xl mx-auto mb-10 leading-relaxed"
+            className="text-base md:text-lg text-primary-foreground/70 mb-8 leading-relaxed"
           >
-            Transform customer and employee experiences with human-like AI agents
-            that resolve issues, boost conversions, and reduce costs — across
-            voice, chat, and email.
+            Transform your dental practice with Breeh AI's Agentic platform to
+            autonomously handle patient calls, bookings, and follow-ups at scale
           </motion.p>
 
-          {/* CTAs */}
+          {/* Bullet Points */}
+          <motion.ul
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.5 }}
+            className="space-y-3 mb-10 text-primary-foreground/80"
+          >
+            <li className="flex items-center gap-2 text-sm md:text-base">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary-foreground/60" />
+              AI-powered call answering for increased bookings & accuracy
+            </li>
+            <li className="flex items-center gap-2 text-sm md:text-base">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary-foreground/60" />
+              Human-like conversations via voice, chat & SMS
+            </li>
+            <li className="flex items-center gap-2 text-sm md:text-base">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary-foreground/60" />
+              Seamless PMS integrations to go live faster
+            </li>
+          </motion.ul>
+
+          {/* CTA */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.6 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <a href="#" className="btn-primary-gradient flex items-center gap-2 text-base">
-              Book a Demo
-              <ArrowRight className="w-4 h-4" />
+            <a href="#" className="inline-block bg-primary text-primary-foreground font-semibold rounded-full px-10 py-4 text-base transition-all duration-300 hover:shadow-lg hover:shadow-primary/30 hover:-translate-y-0.5">
+              Book a demo
             </a>
-            <a href="#" className="btn-outline-light flex items-center gap-2 text-base">
-              <Play className="w-4 h-4" />
-              Watch Video
-            </a>
-          </motion.div>
-
-          {/* Stats Row */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.8 }}
-            className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8"
-          >
-            {[
-              { value: "1100+", label: "Enterprise Clients" },
-              { value: "35+", label: "Languages Supported" },
-              { value: "90%", label: "Automation Rate" },
-              { value: "70%", label: "Cost Reduction" },
-            ].map((stat) => (
-              <div key={stat.label} className="text-center">
-                <div className="font-display font-bold text-3xl md:text-4xl gradient-text mb-1">
-                  {stat.value}
-                </div>
-                <div className="text-sm text-hero-foreground/50">{stat.label}</div>
-              </div>
-            ))}
           </motion.div>
         </div>
       </div>
-
-      {/* Bottom gradient fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
     </section>
   );
 };

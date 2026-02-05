@@ -1,50 +1,36 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Sparkles } from "lucide-react";
+import ctaPerson from "@/assets/cta-person.jpg";
 
 const CTASection = () => {
   return (
-    <section className="py-24 lg:py-32 bg-background relative overflow-hidden">
+    <section className="section-lavender py-24 lg:py-32 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="relative rounded-[2rem] overflow-hidden"
+          className="grid lg:grid-cols-5 gap-0 rounded-3xl overflow-hidden shadow-xl"
         >
-          {/* Background gradient */}
-          <div className="absolute inset-0 gradient-bg-purple" />
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/10 to-transparent" />
-          
-          {/* Floating orbs */}
-          <div className="absolute top-10 right-10 w-40 h-40 rounded-full bg-primary/20 blur-[60px] animate-float" />
-          <div className="absolute bottom-10 left-10 w-32 h-32 rounded-full bg-primary/15 blur-[50px] animate-float" style={{ animationDelay: "2s" }} />
-
-          <div className="relative z-10 py-20 px-8 md:px-16 text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm mb-8">
-              <Sparkles className="w-4 h-4 text-primary" />
-              <span className="text-sm font-medium text-white/90">Start transforming today</span>
-            </div>
-
-            <h2 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-white mb-6 leading-tight">
-              Ready to build the future
-              <br />
-              of customer experience?
+          {/* Left content */}
+          <div className="lg:col-span-3 bg-background p-10 md:p-16 flex flex-col justify-center">
+            <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl text-foreground mb-6 leading-tight">
+              Cut Costs, Boost Bookings, Delight Patients — Discover Breeh AI
             </h2>
-            <p className="text-lg text-white/60 max-w-xl mx-auto mb-10">
-              Join 1100+ enterprises already using Breeh AI to deliver 
-              autonomous, human-like experiences at scale.
-            </p>
-
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a href="#" className="btn-primary-gradient flex items-center gap-2 text-base">
-                Book a Demo
-                <ArrowRight className="w-4 h-4" />
-              </a>
-              <a href="#" className="btn-outline-light text-base">
-                Calculate Your ROI
+            <div>
+              <a href="#" className="inline-block bg-foreground text-background font-semibold rounded-full px-8 py-4 text-base transition-all duration-300 hover:bg-foreground/90 hover:-translate-y-0.5 hover:shadow-lg">
+                Book a demo
               </a>
             </div>
+          </div>
+
+          {/* Right image */}
+          <div className="lg:col-span-2 relative">
+            <img
+              src={ctaPerson}
+              alt="Dental professional using Breeh AI"
+              className="w-full h-full object-cover min-h-[300px]"
+            />
           </div>
         </motion.div>
       </div>
