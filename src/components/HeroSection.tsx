@@ -16,7 +16,7 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Images with crossfade */}
       <AnimatePresence mode="sync">
         {slides.map((slide, i) => (
@@ -34,80 +34,67 @@ const HeroSection = () => {
                 alt=""
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-foreground/80 via-foreground/60 to-foreground/20" />
+              {/* Dark overlay with subtle warm tint */}
+              <div className="absolute inset-0 bg-foreground/70" />
+              <div className="absolute inset-0 bg-gradient-to-t from-foreground via-foreground/40 to-foreground/60" />
             </motion.div>
           )
         ))}
       </AnimatePresence>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 pt-32 pb-20 w-full">
-        <div className="max-w-2xl">
-          {/* Badge */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-sm font-semibold text-primary-foreground/80 tracking-wide mb-6"
-          >
-            AI-Powered Dental Receptionist Platform
-          </motion.p>
+      {/* Content - Centered */}
+      <div className="relative z-10 max-w-5xl mx-auto px-6 lg:px-8 text-center pt-20">
+        {/* Small label */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-sm md:text-base font-semibold tracking-[0.2em] uppercase text-primary-foreground/80 mb-8"
+        >
+          Dental Practice Owners
+        </motion.p>
 
-          {/* Headline */}
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="font-display font-bold text-5xl md:text-6xl lg:text-7xl leading-[1.1] tracking-tight mb-8"
-          >
-            <span className="text-primary-foreground">Smarter Interactions with </span>
-            <span className="text-primary">AI Agents</span>
-            <span className="text-primary-foreground"> That Think, Act, and Resolve</span>
-          </motion.h1>
+        {/* Big Bold Headline */}
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="font-display font-bold text-5xl md:text-7xl lg:text-8xl leading-[0.95] tracking-tight text-primary-foreground uppercase mb-8"
+        >
+          Do You Want
+          <br />
+          More Patients?
+        </motion.h1>
 
-          {/* Subheadline */}
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.4 }}
-            className="text-base md:text-lg text-primary-foreground/70 mb-8 leading-relaxed"
-          >
-            Transform your dental practice with Breeh AI's Agentic platform to
-            autonomously handle patient calls, bookings, and follow-ups at scale
-          </motion.p>
+        {/* Subtitle */}
+        <motion.p
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.4 }}
+          className="text-base md:text-lg text-primary-foreground/70 max-w-2xl mx-auto mb-10 leading-relaxed"
+        >
+          Discover how 500+ dental practices are using Breeh AI to
+          <br className="hidden md:block" />
+          never miss a patient call and fill their schedules automatically.
+        </motion.p>
 
-          {/* Bullet Points */}
-          <motion.ul
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.5 }}
-            className="space-y-3 mb-10 text-primary-foreground/80"
+        {/* CTA Button */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.6 }}
+        >
+          <a
+            href="#"
+            className="inline-block bg-primary text-primary-foreground font-bold rounded-lg px-12 py-5 text-lg uppercase tracking-wider transition-all duration-300 hover:shadow-lg hover:shadow-primary/40 hover:-translate-y-1 hover:brightness-110"
           >
-            <li className="flex items-center gap-2 text-sm md:text-base">
-              <span className="w-1.5 h-1.5 rounded-full bg-primary-foreground/60" />
-              AI-powered call answering for increased bookings & accuracy
-            </li>
-            <li className="flex items-center gap-2 text-sm md:text-base">
-              <span className="w-1.5 h-1.5 rounded-full bg-primary-foreground/60" />
-              Human-like conversations via voice, chat & SMS
-            </li>
-            <li className="flex items-center gap-2 text-sm md:text-base">
-              <span className="w-1.5 h-1.5 rounded-full bg-primary-foreground/60" />
-              Seamless PMS integrations to go live faster
-            </li>
-          </motion.ul>
-
-          {/* CTA */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.6 }}
-          >
-            <a href="#" className="inline-block bg-primary text-primary-foreground font-semibold rounded-full px-10 py-4 text-base transition-all duration-300 hover:shadow-lg hover:shadow-primary/30 hover:-translate-y-0.5">
-              Book a demo
-            </a>
-          </motion.div>
-        </div>
+            Yes! Show Me How!
+          </a>
+        </motion.div>
       </div>
+
+      {/* Bottom gradient fade */}
+      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-foreground to-transparent z-[5]" />
     </section>
   );
 };
