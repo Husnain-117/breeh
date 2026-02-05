@@ -23,7 +23,7 @@ const SecuritySection = () => {
           className="rounded-[2rem] overflow-hidden"
           style={{
             background:
-              "linear-gradient(135deg, hsl(248 65% 55%) 0%, hsl(217 91% 60%) 50%, hsl(210 100% 80%) 100%)",
+              "linear-gradient(135deg, hsl(248 65% 55%) 0%, hsl(248 60% 58%) 30%, hsl(217 91% 60%) 60%, hsl(210 100% 80%) 100%)",
           }}
         >
           {/* Header inside gradient */}
