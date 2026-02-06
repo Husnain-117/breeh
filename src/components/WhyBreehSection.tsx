@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageSquare, Calendar, Phone, BarChart3, ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -51,9 +51,34 @@ const features = [
 
 const WhyBreehSection = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [direction, setDirection] = useState(1);
 
-  const next = () => setActiveIndex((prev) => (prev + 1) % features.length);
-  const prev = () => setActiveIndex((prev) => (prev - 1 + features.length) % features.length);
+  const next = useCallback(() => {
+    setDirection(1);
+    setActiveIndex((prev) => (prev + 1) % features.length);
+  }, []);
+
+  const prev = useCallback(() => {
+    setDirection(-1);
+    setActiveIndex((prev) => (prev - 1 + features.length) % features.length);
+  }, []);
+
+  const goTo = useCallback((i: number) => {
+    setDirection(i > activeIndex ? 1 : -1);
+    setActiveIndex(i);
+  }, [activeIndex]);
+
+  // Auto-play every 5 seconds
+  useEffect(() => {
+    const interval = setInterval(next, 5000);
+    return () => clearInterval(interval);
+  }, [next]);
+
+  const slideVariants = {
+    enter: (dir: number) => ({ x: dir > 0 ? 300 : -300, opacity: 0, scale: 0.97 }),
+    center: { x: 0, opacity: 1, scale: 1 },
+    exit: (dir: number) => ({ x: dir > 0 ? -300 : 300, opacity: 0, scale: 0.97 }),
+  };
 
   return (
     <section className="section-lavender py-20 lg:py-28 relative overflow-hidden">
@@ -80,43 +105,16 @@ const WhyBreehSection = () => {
           </p>
         </motion.div>
 
-        {/* Progress indicators */}
-        <div className="flex justify-center gap-2 mb-8">
-          {features.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setActiveIndex(i)}
-              className={`h-1.5 rounded-full transition-all duration-500 ${
-                i === activeIndex
-                  ? "w-10 bg-accent"
-                  : "w-4 bg-border hover:bg-muted-foreground/30"
-              }`}
-            />
-          ))}
-        </div>
-
         {/* Card Container */}
-        <div className="relative min-h-[340px] md:min-h-[300px]">
-          {/* Nav arrows */}
-          <button
-            onClick={prev}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 w-10 h-10 rounded-full border border-border flex items-center justify-center hover:border-accent hover:text-accent transition-colors bg-background shadow-sm z-20"
-          >
-            <ChevronLeft className="w-5 h-5" />
-          </button>
-          <button
-            onClick={next}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 w-10 h-10 rounded-full border border-border flex items-center justify-center hover:border-accent hover:text-accent transition-colors bg-background shadow-sm z-20"
-          >
-            <ChevronRight className="w-5 h-5" />
-          </button>
-
-          <AnimatePresence mode="wait">
+        <div className="relative min-h-[380px] md:min-h-[340px]">
+          <AnimatePresence mode="wait" custom={direction}>
             <motion.div
               key={activeIndex}
-              initial={{ opacity: 0, x: 80, scale: 0.97 }}
-              animate={{ opacity: 1, x: 0, scale: 1 }}
-              exit={{ opacity: 0, x: -80, scale: 0.97 }}
+              custom={direction}
+              variants={slideVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
               transition={{ duration: 0.5, ease: "easeInOut" }}
               className="grid lg:grid-cols-5 gap-0 rounded-3xl overflow-hidden shadow-xl"
             >
@@ -172,6 +170,37 @@ const WhyBreehSection = () => {
               </div>
             </motion.div>
           </AnimatePresence>
+        </div>
+
+        {/* Bottom Controls — progress dots + arrows centered */}
+        <div className="flex items-center justify-center gap-4 mt-8">
+          <button
+            onClick={prev}
+            className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:border-accent hover:text-accent transition-colors bg-background shadow-sm"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+
+          <div className="flex gap-2">
+            {features.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => goTo(i)}
+                className={`h-1.5 rounded-full transition-all duration-500 ${
+                  i === activeIndex
+                    ? "w-10 bg-accent"
+                    : "w-4 bg-border hover:bg-muted-foreground/30"
+                }`}
+              />
+            ))}
+          </div>
+
+          <button
+            onClick={next}
+            className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:border-accent hover:text-accent transition-colors bg-background shadow-sm"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
         </div>
       </div>
     </section>

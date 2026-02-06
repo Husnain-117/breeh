@@ -1,46 +1,20 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import heroBg1 from "@/assets/hero-dental-1.jpg";
-import heroBg2 from "@/assets/hero-dental-2.jpg";
-
-const slides = [heroBg1, heroBg2];
+import { motion } from "framer-motion";
+import heroBg from "@/assets/hero-dental.jpg";
 
 const HeroSection = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 6000);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Images with crossfade */}
-      <AnimatePresence mode="sync">
-        {slides.map((slide, i) => (
-          i === currentSlide && (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 1.5 }}
-              className="absolute inset-0 z-0"
-            >
-              <img
-                src={slide}
-                alt=""
-                className="w-full h-full object-cover"
-              />
-              {/* Dark overlay with subtle warm tint */}
-              <div className="absolute inset-0 bg-foreground/70" />
-              <div className="absolute inset-0 bg-gradient-to-t from-foreground via-foreground/40 to-foreground/60" />
-            </motion.div>
-          )
-        ))}
-      </AnimatePresence>
+      {/* Single Background Image */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src={heroBg}
+          alt="Modern dental office"
+          className="w-full h-full object-cover"
+        />
+        {/* Dark overlay */}
+        <div className="absolute inset-0 bg-foreground/70" />
+        <div className="absolute inset-0 bg-gradient-to-t from-foreground via-foreground/40 to-foreground/60" />
+      </div>
 
       {/* Content - Centered */}
       <div className="relative z-10 max-w-5xl mx-auto px-6 lg:px-8 text-center pt-20">
