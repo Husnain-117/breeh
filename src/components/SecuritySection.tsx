@@ -23,12 +23,12 @@ const SecuritySection = () => {
           className="rounded-[2rem] overflow-hidden"
           style={{
             background:
-              "linear-gradient(135deg, hsl(248 65% 55%) 0%, hsl(248 60% 58%) 30%, hsl(217 91% 60%) 60%, hsl(210 100% 80%) 100%)",
+              "linear-gradient(135deg, hsl(217 91% 53%) 0%, hsl(230 80% 60%) 30%, hsl(248 65% 60%) 60%, hsl(270 70% 70%) 100%)",
           }}
         >
           {/* Header inside gradient */}
           <div className="pt-16 pb-8 px-8 md:px-16">
-            <h2 className="font-display font-bold text-3xl md:text-5xl text-accent-foreground italic leading-tight">
+            <h2 className="font-display font-bold text-3xl md:text-5xl text-primary-foreground italic leading-tight">
               Deploy with confidence,
               <br />
               deliver value faster
@@ -79,9 +79,13 @@ const SecuritySection = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: 0.3 }}
-                  className="gradient-bg-primary rounded-full px-6 py-3 self-start shadow-md"
+                  className="rounded-full px-6 py-3 self-start shadow-md"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, hsl(248 65% 60%), hsl(217 91% 53%))",
+                  }}
                 >
-                  <span className="text-accent-foreground font-semibold text-sm">
+                  <span className="text-primary-foreground font-semibold text-sm">
                     Go to market faster with 50+ integrations
                   </span>
                 </motion.div>
@@ -128,7 +132,7 @@ const SecuritySection = () => {
               className="mt-6"
             >
               <div className="bg-background/80 backdrop-blur-sm rounded-full px-8 py-4 inline-flex items-center gap-3 shadow-md">
-                <Shield className="w-5 h-5 text-accent" />
+                <Shield className="w-5 h-5 text-primary" />
                 <span className="font-semibold text-foreground text-sm">
                   HIPAA-compliant security with Safe AI
                 </span>

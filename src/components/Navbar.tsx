@@ -37,20 +37,22 @@ const Navbar = () => {
       }`}
     >
       <div
-        className={`max-w-7xl mx-auto transition-all duration-500 rounded-2xl ${
+        className={`max-w-7xl mx-auto transition-all duration-500 rounded-2xl px-6 lg:px-8 ${
           scrolled
-            ? "bg-accent shadow-xl shadow-accent/20 px-6 lg:px-8"
-            : "bg-accent/15 backdrop-blur-md border border-primary-foreground/20 px-6 lg:px-8"
+            ? "shadow-xl shadow-accent/20"
+            : "border border-primary-foreground/15"
         }`}
+        style={{
+          background: scrolled
+            ? "linear-gradient(135deg, hsl(248 50% 25%) 0%, hsl(248 45% 35%) 40%, hsl(217 60% 40%) 100%)"
+            : "linear-gradient(135deg, hsla(248, 50%, 20%, 0.75) 0%, hsla(248, 45%, 30%, 0.65) 40%, hsla(217, 60%, 35%, 0.55) 100%)",
+          backdropFilter: scrolled ? "none" : "blur(16px)",
+        }}
       >
         <div className="flex items-center justify-between h-14 lg:h-16">
           {/* Logo */}
           <a href="/" className="flex items-center gap-2 group">
-            <span
-              className={`font-display font-bold text-xl transition-colors duration-300 ${
-                scrolled ? "text-accent-foreground" : "text-primary-foreground"
-              }`}
-            >
+            <span className="font-display font-bold text-xl text-primary-foreground">
               Breeh AI
             </span>
           </a>
@@ -64,13 +66,7 @@ const Navbar = () => {
                 onMouseEnter={() => setActiveDropdown(item.label)}
                 onMouseLeave={() => setActiveDropdown(null)}
               >
-                <button
-                  className={`flex items-center gap-1 px-4 py-2 text-sm font-medium transition-colors duration-300 ${
-                    scrolled
-                      ? "text-accent-foreground/80 hover:text-accent-foreground"
-                      : "text-primary-foreground/70 hover:text-primary-foreground"
-                  }`}
-                >
+                <button className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-primary-foreground/70 hover:text-primary-foreground transition-colors duration-300">
                   {item.label}
                   {item.children && <ChevronDown className="w-3.5 h-3.5" />}
                 </button>
@@ -111,21 +107,13 @@ const Navbar = () => {
           <div className="hidden lg:flex items-center gap-3">
             <a
               href="#"
-              className={`rounded-full px-5 py-2 text-sm font-semibold transition-all duration-300 ${
-                scrolled
-                  ? "text-accent-foreground/80 hover:text-accent-foreground"
-                  : "text-primary-foreground/70 hover:text-primary-foreground"
-              }`}
+              className="rounded-full px-5 py-2 text-sm font-semibold text-primary-foreground/70 hover:text-primary-foreground transition-colors duration-300"
             >
               FAQ
             </a>
             <a
               href="#"
-              className={`rounded-full px-6 py-2.5 text-sm font-semibold transition-all duration-300 ${
-                scrolled
-                  ? "bg-background text-foreground hover:bg-background/90 shadow-sm"
-                  : "bg-primary-foreground text-foreground hover:bg-primary-foreground/90"
-              }`}
+              className="rounded-full px-6 py-2.5 text-sm font-semibold bg-primary-foreground text-foreground hover:bg-primary-foreground/90 shadow-sm transition-all duration-300"
             >
               BOOK DEMO
             </a>
@@ -133,9 +121,7 @@ const Navbar = () => {
 
           {/* Mobile Toggle */}
           <button
-            className={`lg:hidden transition-colors ${
-              scrolled ? "text-accent-foreground" : "text-primary-foreground"
-            }`}
+            className="lg:hidden text-primary-foreground transition-colors"
             onClick={() => setMobileOpen(!mobileOpen)}
           >
             {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
