@@ -1,5 +1,5 @@
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { MessageSquare, Calendar, Phone, BarChart3 } from "lucide-react";
 
 const features = [
@@ -50,109 +50,154 @@ const features = [
 ];
 
 const WhyBreehSection = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!sectionRef.current) return;
+      const rect = sectionRef.current.getBoundingClientRect();
+      const sectionHeight = sectionRef.current.offsetHeight;
+      const viewportHeight = window.innerHeight;
+
+      // Calculate how far we've scrolled through the sticky section
+      const scrolled = -rect.top;
+      const totalScrollable = sectionHeight - viewportHeight;
+
+      if (totalScrollable <= 0) return;
+
+      const progress = Math.max(0, Math.min(1, scrolled / totalScrollable));
+      const index = Math.min(
+        features.length - 1,
+        Math.floor(progress * features.length)
+      );
+      setActiveIndex(index);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <section className="section-lavender py-24 lg:py-32 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="text-center mb-20"
-        >
-          <p className="text-sm font-semibold text-accent tracking-wide mb-3">
-            Why Breeh AI
-          </p>
-          <h2 className="font-display font-bold text-4xl md:text-5xl text-foreground mb-6">
-            The Power of Agentic at Every Stage
-            <br />
-            of Dental Practice Management
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Delight patients, empower staff and provide useful insights to practice
-            owners with our powerful agentic AI platform that understands dental
-            workflows, maintains context and achieves complex business goals.
-          </p>
-        </motion.div>
+    <section
+      ref={sectionRef}
+      className="relative"
+      style={{ height: `${features.length * 100 + 50}vh` }}
+    >
+      <div className="sticky top-0 min-h-screen flex flex-col justify-center section-lavender py-24 lg:py-32 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+          {/* Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="text-center mb-16"
+          >
+            <p className="text-sm font-semibold text-accent tracking-wide mb-3">
+              Why Breeh AI
+            </p>
+            <h2 className="font-display font-bold text-4xl md:text-5xl text-foreground mb-6">
+              The Power of Agentic at Every Stage
+              <br />
+              of Dental Practice Management
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+              Delight patients, empower staff and provide useful insights to practice
+              owners with our powerful agentic AI platform.
+            </p>
+          </motion.div>
 
-        {/* Horizontal scrolling cards */}
-        <div ref={containerRef} className="relative">
-          <div className="space-y-6">
-            {features.map((feature, index) => (
-              <FeatureCard key={feature.title} feature={feature} index={index} />
+          {/* Progress indicators */}
+          <div className="flex justify-center gap-2 mb-10">
+            {features.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => {
+                  if (!sectionRef.current) return;
+                  const sectionTop = sectionRef.current.offsetTop;
+                  const sectionHeight = sectionRef.current.offsetHeight;
+                  const viewportHeight = window.innerHeight;
+                  const totalScrollable = sectionHeight - viewportHeight;
+                  const targetScroll = sectionTop + (i / features.length) * totalScrollable;
+                  window.scrollTo({ top: targetScroll, behavior: "smooth" });
+                }}
+                className={`h-1.5 rounded-full transition-all duration-500 ${
+                  i === activeIndex
+                    ? "w-10 bg-accent"
+                    : "w-4 bg-border hover:bg-muted-foreground/30"
+                }`}
+              />
             ))}
+          </div>
+
+          {/* Card Container */}
+          <div className="relative min-h-[380px] md:min-h-[340px]">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeIndex}
+                initial={{ opacity: 0, x: 80, scale: 0.97 }}
+                animate={{ opacity: 1, x: 0, scale: 1 }}
+                exit={{ opacity: 0, x: -80, scale: 0.97 }}
+                transition={{ duration: 0.5, ease: "easeInOut" }}
+                className="grid lg:grid-cols-5 gap-0 rounded-3xl overflow-hidden shadow-xl"
+              >
+                {/* Dark Left Panel */}
+                <div
+                  className="lg:col-span-3 p-10 md:p-12 flex flex-col justify-center"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, hsl(248 50% 22%) 0%, hsl(248 45% 30%) 50%, hsl(217 50% 35%) 100%)",
+                  }}
+                >
+                  <div className="w-12 h-12 rounded-xl bg-accent/20 flex items-center justify-center mb-6">
+                    {(() => {
+                      const Icon = features[activeIndex].icon;
+                      return <Icon className="w-6 h-6 text-accent-foreground" />;
+                    })()}
+                  </div>
+                  <h3 className="font-display font-bold text-2xl md:text-3xl text-primary-foreground mb-4">
+                    {features[activeIndex].title}
+                  </h3>
+                  <p className="text-primary-foreground/60 leading-relaxed text-base">
+                    {features[activeIndex].description}
+                  </p>
+                </div>
+
+                {/* Light Right Panel - Chat mockup */}
+                <div className="lg:col-span-2 bg-background p-8 flex items-center justify-center">
+                  <div className="bg-muted rounded-2xl p-6 w-full max-w-xs">
+                    <div className="space-y-3">
+                      {features[activeIndex].chat.map((msg, i) => (
+                        <motion.div
+                          key={i}
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.4, delay: 0.2 + i * 0.15 }}
+                          className={`${
+                            msg.from === "patient"
+                              ? "bg-primary/10 rounded-xl rounded-bl-sm"
+                              : "bg-accent/10 rounded-xl rounded-br-sm ml-6"
+                          } p-3`}
+                        >
+                          <p className="text-xs text-foreground">{msg.text}</p>
+                        </motion.div>
+                      ))}
+                    </div>
+                    <div className="mt-4 flex items-center gap-2">
+                      <div className="w-6 h-6 rounded-full bg-accent flex items-center justify-center">
+                        <span className="text-[10px] font-bold text-accent-foreground">B</span>
+                      </div>
+                      <span className="text-[10px] text-muted-foreground">Breeh AI Assistant</span>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
       </div>
     </section>
-  );
-};
-
-const FeatureCard = ({
-  feature,
-  index,
-}: {
-  feature: (typeof features)[0];
-  index: number;
-}) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, x: index % 2 === 0 ? -60 : 60 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.7, delay: 0.1 }}
-      className="grid lg:grid-cols-5 gap-0 rounded-3xl overflow-hidden shadow-xl min-h-[320px]"
-    >
-      {/* Dark Left Panel */}
-      <div className="lg:col-span-3 bg-section-dark p-10 md:p-12 flex flex-col justify-center">
-        <div className="w-12 h-12 rounded-xl bg-accent/20 flex items-center justify-center mb-6">
-          <feature.icon className="w-6 h-6 text-accent-foreground" />
-        </div>
-        <h3 className="font-display font-bold text-2xl md:text-3xl text-section-dark-foreground mb-4">
-          {feature.title}
-        </h3>
-        <p className="text-section-dark-foreground/60 leading-relaxed text-base">
-          {feature.description}
-        </p>
-      </div>
-
-      {/* Light Right Panel - Chat mockup */}
-      <div className="lg:col-span-2 bg-background p-8 flex items-center justify-center">
-        <div className="bg-muted rounded-2xl p-6 w-full max-w-xs">
-          <div className="space-y-3">
-            {feature.chat.map((msg, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: 0.3 + i * 0.15 }}
-                className={`${
-                  msg.from === "patient"
-                    ? "bg-primary/10 rounded-xl rounded-bl-sm"
-                    : "bg-accent/10 rounded-xl rounded-br-sm ml-6"
-                } p-3`}
-              >
-                <p className="text-xs text-foreground">{msg.text}</p>
-              </motion.div>
-            ))}
-          </div>
-          <div className="mt-4 flex items-center gap-2">
-            <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center">
-              <span className="text-[10px] font-bold text-primary-foreground">B</span>
-            </div>
-            <span className="text-[10px] text-muted-foreground">Breeh AI Assistant</span>
-          </div>
-        </div>
-      </div>
-    </motion.div>
   );
 };
 
