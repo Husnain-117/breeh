@@ -4,8 +4,8 @@ import { ArrowRight } from "lucide-react";
 const brands = [
   { name: "Aspen Dental", color: "bg-primary", textColor: "text-primary-foreground" },
   { name: "SmileDirect", color: "bg-accent", textColor: "text-accent-foreground" },
-  { name: "Heartland", color: "bg-emerald-600", textColor: "text-white" },
-  { name: "Pacific Dental", color: "bg-red-500", textColor: "text-white" },
+  { name: "Heartland", color: "bg-primary/80", textColor: "text-primary-foreground" },
+  { name: "Pacific Dental", color: "bg-accent/80", textColor: "text-accent-foreground" },
 ];
 
 const CaseStudiesSection = () => {

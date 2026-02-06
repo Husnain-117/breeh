@@ -125,7 +125,7 @@ const WhyBreehSection = () => {
                 className="lg:col-span-3 p-10 md:p-12 flex flex-col justify-center"
                 style={{
                   background:
-                    "linear-gradient(135deg, hsl(248 50% 22%) 0%, hsl(248 45% 30%) 50%, hsl(217 50% 35%) 100%)",
+                    "linear-gradient(135deg, hsl(244 50% 20%) 0%, hsl(244 50% 28%) 50%, hsl(244 55% 35%) 100%)",
                 }}
               >
                 <div className="w-12 h-12 rounded-xl bg-accent/20 flex items-center justify-center mb-6">

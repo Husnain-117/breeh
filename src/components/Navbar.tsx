@@ -44,8 +44,8 @@ const Navbar = () => {
         }`}
         style={{
           background: scrolled
-            ? "linear-gradient(135deg, hsl(248 50% 25%) 0%, hsl(248 45% 35%) 40%, hsl(217 60% 40%) 100%)"
-            : "linear-gradient(135deg, hsla(248, 50%, 20%, 0.75) 0%, hsla(248, 45%, 30%, 0.65) 40%, hsla(217, 60%, 35%, 0.55) 100%)",
+            ? "linear-gradient(135deg, hsl(244 50% 30%) 0%, hsl(244 55% 40%) 40%, hsl(244 63% 55%) 100%)"
+            : "linear-gradient(135deg, hsla(244, 50%, 22%, 0.75) 0%, hsla(244, 55%, 32%, 0.65) 40%, hsla(244, 63%, 45%, 0.55) 100%)",
           backdropFilter: scrolled ? "none" : "blur(16px)",
         }}
       >
