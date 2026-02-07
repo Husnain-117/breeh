@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Menu, X } from "lucide-react";
+import breehLogo from "@/assets/breeh-logo.png";
 
 const navItems = [
   {
@@ -16,7 +17,11 @@ const navItems = [
   { label: "About" },
 ];
 
-const Navbar = () => {
+interface NavbarProps {
+  onBookDemo?: () => void;
+}
+
+const Navbar = ({ onBookDemo }: NavbarProps) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -52,9 +57,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-14 lg:h-16">
           {/* Logo */}
           <a href="/" className="flex items-center gap-2 group">
-            <span className="font-display font-bold text-xl text-primary-foreground">
-              Breeh AI
-            </span>
+            <img src={breehLogo} alt="Breeh AI" className="h-8 w-auto brightness-0 invert" />
           </a>
 
           {/* Desktop Nav Links */}
@@ -113,6 +116,7 @@ const Navbar = () => {
             </a>
             <a
               href="#"
+              onClick={(e) => { e.preventDefault(); onBookDemo?.(); }}
               className="rounded-full px-6 py-2.5 text-sm font-semibold bg-primary-foreground text-foreground hover:bg-primary-foreground/90 shadow-sm transition-all duration-300"
             >
               BOOK DEMO
@@ -152,6 +156,7 @@ const Navbar = () => {
                 </a>
                 <a
                   href="#"
+                  onClick={(e) => { e.preventDefault(); onBookDemo?.(); setMobileOpen(false); }}
                   className="block text-center bg-accent text-accent-foreground font-semibold rounded-full px-6 py-2.5 text-sm"
                 >
                   BOOK DEMO

@@ -27,7 +27,7 @@ const DemosSection = () => {
   const prev = () => setCurrent((prev) => (prev - 1 + demos.length) % demos.length);
 
   return (
-    <section className="py-24 lg:py-32 bg-background relative overflow-hidden">
+    <section className="py-24 lg:py-32 bg-background relative overflow-hidden" id="demos">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Header */}
         <motion.div

@@ -1,4 +1,5 @@
 import { Linkedin, Twitter, Youtube, Instagram } from "lucide-react";
+import breehLogo from "@/assets/breeh-logo.png";
 
 const footerLinks = {
   Platform: [
@@ -46,9 +47,7 @@ const Footer = () => {
           {/* Brand Column */}
           <div className="col-span-2 md:col-span-1 lg:col-span-2">
             <a href="/" className="flex items-center gap-2 mb-6">
-              <span className="font-display font-bold text-xl text-foreground">
-                Breeh<span className="text-accent">AI</span>
-              </span>
+              <img src={breehLogo} alt="Breeh AI" className="h-10 w-auto" />
             </a>
 
             {/* Social Icons */}

@@ -75,28 +75,58 @@ const faqItems = [
   },
 ];
 
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.4,
+      delay: i * 0.06,
+      ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number],
+    },
+  }),
+};
+
 const FAQItem = ({
   item,
   isOpen,
   onToggle,
+  index,
 }: {
   item: (typeof faqItems)[0];
   isOpen: boolean;
   onToggle: () => void;
+  index: number;
 }) => (
-  <button
+  <motion.button
+    custom={index}
+    initial="hidden"
+    whileInView="visible"
+    viewport={{ once: true }}
+    variants={itemVariants}
     onClick={onToggle}
-    className="w-full text-left bg-muted/30 border border-border/50 rounded-xl px-6 py-5 transition-all duration-300 hover:border-primary/30 group"
+    className={`w-full text-left rounded-xl px-6 py-5 transition-all duration-300 group ${
+      isOpen
+        ? "bg-primary/5 border border-primary/20 shadow-md"
+        : "bg-muted/30 border border-border/50 hover:border-primary/30 hover:bg-muted/50"
+    }`}
   >
     <div className="flex items-center justify-between gap-4">
       <span className="text-sm font-medium text-foreground pr-4">
         {item.question}
       </span>
-      <ChevronDown
-        className={`w-4 h-4 text-muted-foreground flex-shrink-0 transition-transform duration-300 ${
-          isOpen ? "rotate-180" : ""
-        }`}
-      />
+      <motion.div
+        animate={{ rotate: isOpen ? 180 : 0 }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+        className="flex-shrink-0"
+      >
+        <ChevronDown
+          className={`w-4 h-4 transition-colors duration-300 ${
+            isOpen ? "text-primary" : "text-muted-foreground"
+          }`}
+        />
+      </motion.div>
     </div>
     <AnimatePresence>
       {isOpen && (
@@ -104,16 +134,21 @@ const FAQItem = ({
           initial={{ height: 0, opacity: 0 }}
           animate={{ height: "auto", opacity: 1 }}
           exit={{ height: 0, opacity: 0 }}
-          transition={{ duration: 0.3 }}
+          transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
           className="overflow-hidden"
         >
-          <p className="text-sm text-muted-foreground mt-4 leading-relaxed">
+          <motion.p
+            initial={{ y: -10 }}
+            animate={{ y: 0 }}
+            transition={{ duration: 0.3, delay: 0.1 }}
+            className="text-sm text-muted-foreground mt-4 leading-relaxed"
+          >
             {item.answer}
-          </p>
+          </motion.p>
         </motion.div>
       )}
     </AnimatePresence>
-  </button>
+  </motion.button>
 );
 
 const FAQSection = () => {
@@ -123,7 +158,7 @@ const FAQSection = () => {
   const rightColumn = faqItems.filter((_, i) => i % 2 !== 0);
 
   return (
-    <section className="py-24 lg:py-32 bg-background relative overflow-hidden">
+    <section className="py-24 lg:py-32 bg-muted/20 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -133,12 +168,18 @@ const FAQSection = () => {
           transition={{ duration: 0.7 }}
           className="text-center mb-16"
         >
-          <div className="flex items-center justify-center gap-3 mb-4">
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="flex items-center justify-center gap-3 mb-4"
+          >
             <div className="w-8 h-[2px] bg-primary" />
             <span className="text-sm font-semibold text-primary tracking-wide">
               FAQ
             </span>
-          </div>
+          </motion.div>
           <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl text-foreground mb-4">
             Frequently Asked Questions
           </h2>
@@ -148,19 +189,14 @@ const FAQSection = () => {
         </motion.div>
 
         {/* Two-column FAQ grid */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="grid md:grid-cols-2 gap-4"
-        >
+        <div className="grid md:grid-cols-2 gap-4">
           {/* Left column */}
           <div className="flex flex-col gap-4">
             {leftColumn.map((item, i) => (
               <FAQItem
                 key={i}
                 item={item}
+                index={i * 2}
                 isOpen={openIndex === i * 2}
                 onToggle={() =>
                   setOpenIndex(openIndex === i * 2 ? null : i * 2)
@@ -175,6 +211,7 @@ const FAQSection = () => {
               <FAQItem
                 key={i}
                 item={item}
+                index={i * 2 + 1}
                 isOpen={openIndex === i * 2 + 1}
                 onToggle={() =>
                   setOpenIndex(openIndex === i * 2 + 1 ? null : i * 2 + 1)
@@ -182,7 +219,7 @@ const FAQSection = () => {
               />
             ))}
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
