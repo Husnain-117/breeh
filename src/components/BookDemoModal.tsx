@@ -85,10 +85,10 @@ const BookDemoModal = ({ open, onOpenChange }: BookDemoModalProps) => {
             {/* Header */}
             <div
               className="p-8 text-center"
-              style={{
-                background:
-                  "linear-gradient(135deg, hsl(244 63% 55%) 0%, hsl(244 50% 45%) 50%, hsl(260 60% 65%) 100%)",
-              }}
+            style={{
+              background:
+                "linear-gradient(135deg, hsl(243 90% 64%) 0%, hsl(243 70% 52%) 50%, hsl(252 70% 65%) 100%)",
+            }}
             >
               <div className="flex items-center justify-center gap-2 mb-3">
                 <span className="font-display font-bold text-lg text-primary-foreground tracking-tight">Breeh AI</span>

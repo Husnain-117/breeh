@@ -49,8 +49,8 @@ const Navbar = ({ onBookDemo }: NavbarProps) => {
         }`}
         style={{
           background: scrolled
-            ? "linear-gradient(135deg, hsl(244 50% 30%) 0%, hsl(244 55% 40%) 40%, hsl(244 63% 55%) 100%)"
-            : "linear-gradient(135deg, hsla(244, 50%, 22%, 0.75) 0%, hsla(244, 55%, 32%, 0.65) 40%, hsla(244, 63%, 45%, 0.55) 100%)",
+            ? "linear-gradient(135deg, hsl(240 50% 22%) 0%, hsl(243 70% 35%) 40%, hsl(243 90% 58%) 100%)"
+            : "linear-gradient(135deg, hsla(240, 50%, 18%, 0.8) 0%, hsla(243, 70%, 30%, 0.7) 40%, hsla(243, 90%, 50%, 0.6) 100%)",
           backdropFilter: scrolled ? "none" : "blur(16px)",
         }}
       >

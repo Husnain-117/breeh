@@ -17,7 +17,7 @@ const CTASection = ({ onBookDemo }: CTASectionProps) => {
           className="rounded-t-3xl overflow-hidden shadow-xl"
           style={{
             background:
-              "linear-gradient(135deg, hsl(244 50% 20%) 0%, hsl(244 55% 30%) 50%, hsl(244 63% 45%) 100%)",
+              "linear-gradient(135deg, hsl(240 50% 14%) 0%, hsl(243 60% 26%) 50%, hsl(243 90% 58%) 100%)",
           }}
         >
           <div className="grid lg:grid-cols-5 gap-0">
@@ -63,7 +63,7 @@ const CTASection = ({ onBookDemo }: CTASectionProps) => {
                 alt="Dental professional using Breeh AI"
                 className="w-full h-full object-cover min-h-[300px]"
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-[hsl(244_50%_20%)] to-transparent opacity-30" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[hsl(240_50%_14%)] to-transparent opacity-30" />
             </div>
           </div>
         </motion.div>
