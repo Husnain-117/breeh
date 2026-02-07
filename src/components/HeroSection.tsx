@@ -41,7 +41,7 @@ const HeroSection = ({ onBookDemo }: HeroSectionProps) => {
         >
           Do You Want
           <br />
-          More Patients?
+          More Appointments?
         </motion.h1>
 
         {/* Subtitle */}
@@ -51,7 +51,7 @@ const HeroSection = ({ onBookDemo }: HeroSectionProps) => {
           transition={{ duration: 0.7, delay: 0.4 }}
           className="text-base md:text-lg text-primary-foreground/70 max-w-2xl mx-auto mb-10 leading-relaxed"
         >
-          Discover how 500+ dental practices are using Breeh AI to
+          Discover how many dental practices are using Breeh AI to
           <br className="hidden md:block" />
           never miss a patient call and fill their schedules automatically.
         </motion.p>

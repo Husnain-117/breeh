@@ -20,7 +20,7 @@ const TrustedBy = () => {
             <p className="text-primary-foreground/80 text-sm font-semibold leading-tight">
               Trusted by
               <br />
-              <span className="text-primary-foreground font-bold text-lg">500+ dental practices</span>
+              <span className="text-primary-foreground font-bold text-lg">many dental practices</span>
             </p>
           </motion.div>
 

@@ -39,7 +39,7 @@ const CTASection = ({ onBookDemo }: CTASectionProps) => {
                 transition={{ duration: 0.6, delay: 0.3 }}
                 className="text-primary-foreground/60 mb-8 text-base leading-relaxed max-w-lg"
               >
-                Join 500+ dental practices already using Breeh AI to never miss a call and fill their schedules automatically.
+                Join many dental practices already using Breeh AI to never miss a call and fill their schedules automatically.
               </motion.p>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
