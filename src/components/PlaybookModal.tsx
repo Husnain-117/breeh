@@ -71,7 +71,7 @@ const PlaybookModal = ({ open, onOpenChange }: PlaybookModalProps) => {
             className="p-8 md:p-10 flex flex-col justify-center"
             style={{
               background:
-                "linear-gradient(135deg, hsl(244 63% 55%) 0%, hsl(244 50% 40%) 50%, hsl(260 55% 50%) 100%)",
+                "linear-gradient(135deg, hsl(243 90% 64%) 0%, hsl(243 70% 48%) 50%, hsl(252 65% 55%) 100%)",
             }}
           >
             <div className="w-12 h-12 rounded-xl bg-primary-foreground/20 flex items-center justify-center mb-6">
@@ -99,7 +99,7 @@ const PlaybookModal = ({ open, onOpenChange }: PlaybookModalProps) => {
           <div className="p-8 md:p-10 flex items-center">
             {showSuccess ? (
               <div className="text-center w-full">
-                <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
+                <CheckCircle className="w-16 h-16 text-primary mx-auto mb-4" />
                 <h3 className="font-display font-bold text-xl text-foreground mb-4">
                   Check Your Inbox!
                 </h3>
