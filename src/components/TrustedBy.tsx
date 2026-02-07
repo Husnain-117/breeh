@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
 
 const logos = [
-  "Crossroads Dental", "T Management", "Impressions Dentistry", "Fuller Smiles",
-  "ZenDentistry", "Aspen Dental", "Heartland", "Pacific Dental",
-  "Smile Direct", "Dental365", "Western Dental", "Sage Dental",
+  "Aspen Dental", "Heartland", "Pacific Dental", "Smile Direct",
+  "Benevis", "Dental365", "Western Dental", "Sage Dental",
+  "42North", "Great Expressions", "Affordable Care", "DentalOne",
 ];
 
 const TrustedBy = () => {
@@ -17,21 +17,20 @@ const TrustedBy = () => {
             viewport={{ once: true }}
             className="flex-shrink-0"
           >
-            <p className="text-primary-foreground/60 text-xs font-semibold uppercase tracking-wider leading-tight">
-              You are in great company with
+            <p className="text-primary-foreground/80 text-sm font-semibold leading-tight">
+              Trusted by
               <br />
-              <span className="text-primary-foreground font-bold text-sm normal-case tracking-normal">
-                modern dental groups and DSOs
-              </span>
+              <span className="text-primary-foreground font-bold text-lg">500+ dental practices</span>
             </p>
           </motion.div>
 
           <div className="h-10 w-px bg-primary-foreground/20 flex-shrink-0" />
 
-          {/* Marquee */}
+          {/* Scrolling Marquee */}
           <div className="relative overflow-hidden flex-1">
             <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-foreground to-transparent z-10" />
             <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-foreground to-transparent z-10" />
+
             <div className="flex animate-marquee">
               {[...logos, ...logos].map((logo, i) => (
                 <div

@@ -1,65 +1,40 @@
 import { motion } from "framer-motion";
-import breehLogo from "@/assets/breeh-logo.png";
+import ctaPerson from "@/assets/cta-person.jpg";
 
 const CTASection = () => {
   return (
-    <section className="py-20 lg:py-28 relative overflow-hidden">
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(135deg, hsl(244 50% 12%) 0%, hsl(244 45% 18%) 50%, hsl(244 40% 22%) 100%)",
-        }}
-      />
-
-      <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-8 text-center">
+    <section className="section-lavender pt-16 lg:pt-24 pb-0 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.8 }}
+          className="grid lg:grid-cols-5 gap-0 rounded-t-3xl overflow-hidden shadow-xl bg-background"
         >
-          <div className="flex justify-center mb-8">
+          {/* Left content */}
+          <div className="lg:col-span-3 p-10 md:p-16 flex flex-col justify-center">
+            <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl text-foreground mb-8 leading-tight">
+              Cut Costs, Boost Bookings, Delight Patients — Discover Breeh AI
+            </h2>
+            <div>
+              <a
+                href="#"
+                className="inline-block bg-foreground text-background font-semibold rounded-full px-8 py-4 text-base transition-all duration-300 hover:bg-foreground/90 hover:-translate-y-0.5 hover:shadow-lg"
+              >
+                Book a demo
+              </a>
+            </div>
+          </div>
+
+          {/* Right image */}
+          <div className="lg:col-span-2 relative">
             <img
-              src={breehLogo}
-              alt="Breeh AI"
-              className="w-16 h-16 object-contain"
+              src={ctaPerson}
+              alt="Dental professional using Breeh AI"
+              className="w-full h-full object-cover min-h-[300px]"
             />
           </div>
-
-          <span className="inline-flex items-center gap-2 text-sm font-semibold text-primary tracking-wide mb-6">
-            <span className="w-8 h-[2px] bg-primary rounded-full" />
-            Get Started Today
-          </span>
-
-          <h2 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-primary-foreground leading-tight mb-6">
-            Ready to Capture Every
-            <br />
-            <span className="text-primary">Patient Opportunity?</span>
-          </h2>
-
-          <p className="text-primary-foreground/60 text-lg mb-10 max-w-xl mx-auto">
-            Join practices already growing with Breeh AI.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="#"
-              className="inline-block bg-primary text-primary-foreground font-bold rounded-full px-10 py-4 text-sm uppercase tracking-wider transition-all duration-300 hover:shadow-lg hover:shadow-primary/30 hover:-translate-y-0.5"
-            >
-              Schedule Your Demo
-            </a>
-            <a
-              href="#"
-              className="inline-block border-2 border-primary-foreground/20 text-primary-foreground font-bold rounded-full px-10 py-4 text-sm uppercase tracking-wider transition-all duration-300 hover:border-primary hover:text-primary hover:-translate-y-0.5"
-            >
-              Start Free Trial
-            </a>
-          </div>
-
-          <p className="text-primary-foreground/40 text-sm mt-6">
-            No setup fees, cancel anytime.
-          </p>
         </motion.div>
       </div>
     </section>

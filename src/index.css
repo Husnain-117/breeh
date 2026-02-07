@@ -213,8 +213,8 @@
 }
 
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px hsla(244, 63%, 61%, 0.2); }
-  50% { box-shadow: 0 0 40px hsla(244, 63%, 61%, 0.45); }
+  0%, 100% { box-shadow: 0 0 20px hsla(244, 63%, 61%, 0.15); }
+  50% { box-shadow: 0 0 40px hsla(244, 63%, 61%, 0.35); }
 }
 
 @keyframes hero-fade {
