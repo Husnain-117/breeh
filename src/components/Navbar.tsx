@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Menu, X } from "lucide-react";
-import breehLogo from "@/assets/breeh-logo.png";
+
 
 const navItems = [
   {
@@ -57,7 +57,7 @@ const Navbar = ({ onBookDemo }: NavbarProps) => {
         <div className="flex items-center justify-between h-14 lg:h-16">
           {/* Logo */}
           <a href="/" className="flex items-center gap-2 group">
-            <img src={breehLogo} alt="Breeh AI" className="h-8 w-auto brightness-0 invert" />
+            <span className="font-display font-bold text-xl text-primary-foreground tracking-tight">Breeh AI</span>
           </a>
 
           {/* Desktop Nav Links */}

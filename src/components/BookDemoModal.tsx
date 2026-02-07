@@ -8,7 +8,7 @@ import { toast } from "sonner";
 import emailjs from "@emailjs/browser";
 import { Calendar, CheckCircle, Mail, Building, Phone, MessageSquare } from "lucide-react";
 import { EMAILJS_CONFIG } from "@/lib/config";
-import breehLogo from "@/assets/breeh-logo.png";
+
 
 interface BookDemoModalProps {
   open: boolean;
@@ -91,7 +91,7 @@ const BookDemoModal = ({ open, onOpenChange }: BookDemoModalProps) => {
               }}
             >
               <div className="flex items-center justify-center gap-2 mb-3">
-                <img src={breehLogo} alt="Breeh AI" className="h-8 w-auto brightness-0 invert" />
+                <span className="font-display font-bold text-lg text-primary-foreground tracking-tight">Breeh AI</span>
                 <Calendar className="w-5 h-5 text-primary-foreground" />
                 <span className="text-primary-foreground/80 text-sm font-semibold">
                   Free Demo
