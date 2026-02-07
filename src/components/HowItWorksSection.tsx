@@ -25,9 +25,49 @@ const steps = [
   },
 ];
 
+const cardVariants = {
+  hidden: { opacity: 0, y: 50, scale: 0.95 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.6,
+      delay: i * 0.2,
+      ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number],
+    },
+  }),
+};
+
+const iconVariants = {
+  hidden: { scale: 0, rotate: -45 },
+  visible: (i: number) => ({
+    scale: 1,
+    rotate: 0,
+    transition: {
+      type: "spring" as const,
+      stiffness: 200,
+      damping: 15,
+      delay: i * 0.2 + 0.3,
+    },
+  }),
+};
+
+const numberVariants = {
+  hidden: { opacity: 0, x: 30 },
+  visible: (i: number) => ({
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.8,
+      delay: i * 0.2 + 0.1,
+    },
+  }),
+};
+
 const HowItWorksSection = () => {
   return (
-    <section className="py-24 lg:py-32 bg-background relative overflow-hidden">
+    <section className="py-24 lg:py-32 bg-muted/30 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -37,12 +77,18 @@ const HowItWorksSection = () => {
           transition={{ duration: 0.7 }}
           className="text-center mb-16"
         >
-          <div className="flex items-center justify-center gap-3 mb-4">
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="flex items-center justify-center gap-3 mb-4"
+          >
             <div className="w-8 h-[2px] bg-primary" />
             <span className="text-sm font-semibold text-primary tracking-wide">
               How It Works
             </span>
-          </div>
+          </motion.div>
           <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl text-foreground mb-4">
             It's Easy to Get Started with Breeh
           </h2>
@@ -56,21 +102,42 @@ const HowItWorksSection = () => {
           {steps.map((step, i) => (
             <motion.div
               key={step.number}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              custom={i}
+              initial="hidden"
+              whileInView="visible"
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.15 }}
-              className="relative bg-muted/40 border border-border/60 rounded-2xl p-8 md:p-10 overflow-hidden"
+              variants={cardVariants}
+              whileHover={{ y: -8, transition: { duration: 0.3 } }}
+              className="relative bg-background border border-border/60 rounded-2xl p-8 md:p-10 overflow-hidden shadow-sm hover:shadow-xl hover:border-primary/30 transition-shadow duration-500"
             >
               {/* Large background number */}
-              <span className="absolute top-4 right-6 font-display font-bold text-[5rem] leading-none text-primary/[0.07] select-none pointer-events-none">
+              <motion.span
+                custom={i}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={numberVariants}
+                className="absolute top-4 right-6 font-display font-bold text-[5rem] leading-none text-primary/[0.07] select-none pointer-events-none"
+              >
                 {step.number}
-              </span>
+              </motion.span>
+
+              {/* Connecting line for non-last cards */}
+              {i < steps.length - 1 && (
+                <div className="hidden md:block absolute top-1/2 -right-3 w-6 h-[2px] bg-primary/20 z-10" />
+              )}
 
               {/* Icon */}
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-6 relative z-10">
+              <motion.div
+                custom={i}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={iconVariants}
+                className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-6 relative z-10"
+              >
                 <step.icon className="w-5 h-5 text-primary" />
-              </div>
+              </motion.div>
 
               {/* Content */}
               <h3 className="font-display font-bold text-lg text-foreground mb-3 relative z-10">
@@ -88,7 +155,7 @@ const HowItWorksSection = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.4 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
           className="text-center"
         >
           <a

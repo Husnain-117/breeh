@@ -1,7 +1,11 @@
 import { motion } from "framer-motion";
 import heroBg from "@/assets/hero-dental.jpg";
 
-const HeroSection = () => {
+interface HeroSectionProps {
+  onBookDemo?: () => void;
+}
+
+const HeroSection = ({ onBookDemo }: HeroSectionProps) => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Single Background Image */}
@@ -60,6 +64,7 @@ const HeroSection = () => {
         >
           <a
             href="#"
+            onClick={(e) => { e.preventDefault(); onBookDemo?.(); }}
             className="inline-block bg-accent text-accent-foreground font-bold rounded-lg px-12 py-5 text-lg uppercase tracking-wider transition-all duration-300 hover:shadow-lg hover:shadow-accent/40 hover:-translate-y-1 hover:brightness-110"
           >
             Yes! Show Me How!

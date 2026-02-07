@@ -9,7 +9,7 @@ const stats = [
 
 const MissionSection = () => {
   return (
-    <section className="py-24 lg:py-32 bg-background relative overflow-hidden">
+    <section className="py-24 lg:py-32 bg-background relative overflow-hidden" id="mission">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left Content */}
