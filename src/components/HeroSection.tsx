@@ -15,9 +15,10 @@ const HeroSection = ({ onBookDemo }: HeroSectionProps) => {
           alt="Modern dental office"
           className="w-full h-full object-cover"
         />
-        {/* Dark overlay */}
-        <div className="absolute inset-0 bg-foreground/70" />
-        <div className="absolute inset-0 bg-gradient-to-t from-foreground via-foreground/40 to-foreground/60" />
+        {/* Overlay with user-specified light purple */}
+        <div className="absolute inset-0 bg-[hsla(243.1,69.4%,61.6%,0.42)]/90 mix-blend-multiply" />
+        <div className="absolute inset-0 bg-gradient-to-tr from-foreground/80 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-foreground via-transparent to-transparent opacity-80" />
       </div>
 
       {/* Content - Centered */}

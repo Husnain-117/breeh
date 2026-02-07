@@ -5,9 +5,9 @@ import { MessageSquare, Calendar, Phone, BarChart3, ChevronLeft, ChevronRight } 
 const features = [
   {
     icon: Phone,
-    title: "Answer every patient call, 24/7",
+    title: "Always-On Front Desk",
     description:
-      "Build, test and deploy powerful AI agents with simple natural language prompts. These agents can think, respond and act autonomously, handling patient calls across complex scheduling scenarios with human-like conversation.",
+      "Breeh AI answers every patient call instantly, 24/7. It handles complex scheduling, questions, and triage just like a human receptionist, but without hold times.",
     chat: [
       { from: "patient", text: "Hi! I'd like to schedule a cleaning appointment for next week." },
       { from: "ai", text: "Of course! I have openings on Tuesday at 2pm and Thursday at 10am. Which works best for you?" },
@@ -16,7 +16,7 @@ const features = [
   },
   {
     icon: Calendar,
-    title: "Smart appointment scheduling",
+    title: "Intelligent Scheduling",
     description:
       "Automatically book, reschedule and confirm appointments in real-time. Breeh AI syncs with your practice management system so your calendar is always up to date.",
     chat: [
@@ -27,7 +27,7 @@ const features = [
   },
   {
     icon: MessageSquare,
-    title: "Patient follow-up & reminders",
+    title: "Patient Follow-Up & Recall",
     description:
       "Send automated appointment reminders, recall notices, and post-visit follow-ups via SMS, email, and voice — reducing no-shows by up to 40%.",
     chat: [
@@ -38,7 +38,7 @@ const features = [
   },
   {
     icon: BarChart3,
-    title: "Practice analytics & insights",
+    title: "Practice Analytics",
     description:
       "Real-time dashboards with call analytics, booking trends, patient satisfaction scores, and staff performance metrics to optimize your practice.",
     chat: [
@@ -95,13 +95,13 @@ const WhyBreehSection = () => {
             Why Breeh AI
           </p>
           <h2 className="font-display font-bold text-4xl md:text-5xl text-foreground mb-6">
-            The Power of Agentic at Every Stage
+            The AI Receptionist That
             <br />
-            of Dental Practice Management
+            Integrates Seamlessly
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Delight patients, empower staff and provide useful insights to practice
-            owners with our powerful agentic AI platform.
+            Delight patients, empower staff, and provide useful insights to practice
+            owners with an always-on digital front desk.
           </p>
         </motion.div>
 
@@ -150,11 +150,10 @@ const WhyBreehSection = () => {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.4, delay: 0.2 + i * 0.15 }}
-                        className={`${
-                          msg.from === "patient"
-                            ? "bg-primary/10 rounded-xl rounded-bl-sm"
-                            : "bg-accent/10 rounded-xl rounded-br-sm ml-6"
-                        } p-3`}
+                        className={`${msg.from === "patient"
+                          ? "bg-primary/10 rounded-xl rounded-bl-sm"
+                          : "bg-accent/10 rounded-xl rounded-br-sm ml-6"
+                          } p-3`}
                       >
                         <p className="text-xs text-foreground">{msg.text}</p>
                       </motion.div>
@@ -186,11 +185,10 @@ const WhyBreehSection = () => {
               <button
                 key={i}
                 onClick={() => goTo(i)}
-                className={`h-1.5 rounded-full transition-all duration-500 ${
-                  i === activeIndex
-                    ? "w-10 bg-accent"
-                    : "w-4 bg-border hover:bg-muted-foreground/30"
-                }`}
+                className={`h-1.5 rounded-full transition-all duration-500 ${i === activeIndex
+                  ? "w-10 bg-accent"
+                  : "w-4 bg-border hover:bg-muted-foreground/30"
+                  }`}
               />
             ))}
           </div>

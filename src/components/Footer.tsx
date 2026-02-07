@@ -3,7 +3,7 @@ import { Linkedin, Twitter, Youtube, Instagram } from "lucide-react";
 
 const footerLinks = {
   Platform: [
-    { label: "AI Receptionist", isNew: false },
+    { label: "AI Dental Receptionist", isNew: false },
     { label: "Appointment Scheduling", isNew: false },
     { label: "Patient Communication", isNew: false },
     { label: "Call Analytics", isNew: false },

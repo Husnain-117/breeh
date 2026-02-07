@@ -30,7 +30,7 @@ const CTASection = ({ onBookDemo }: CTASectionProps) => {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl text-primary-foreground mb-6 leading-tight"
               >
-                Cut Costs, Boost Bookings, Delight Patients — Discover Breeh AI
+                Hire Your AI Receptionist Today
               </motion.h2>
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
@@ -39,7 +39,7 @@ const CTASection = ({ onBookDemo }: CTASectionProps) => {
                 transition={{ duration: 0.6, delay: 0.3 }}
                 className="text-primary-foreground/60 mb-8 text-base leading-relaxed max-w-lg"
               >
-                Join many dental practices already using Breeh AI to never miss a call and fill their schedules automatically.
+                Automate your front desk with Breeh AI. Join many dental practices already using Breeh AI to never miss a call and fill their schedules automatically.
               </motion.p>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}

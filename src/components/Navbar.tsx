@@ -37,22 +37,14 @@ const Navbar = ({ onBookDemo }: NavbarProps) => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled ? "py-2 px-4 lg:px-8" : "py-4 px-4 lg:px-8"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? "py-2 px-4 lg:px-8" : "py-4 px-4 lg:px-8"
+        }`}
     >
       <div
-        className={`max-w-7xl mx-auto transition-all duration-500 rounded-2xl px-6 lg:px-8 ${
-          scrolled
-            ? "shadow-xl shadow-accent/20"
-            : "border border-primary-foreground/15"
-        }`}
-        style={{
-          background: scrolled
-            ? "linear-gradient(135deg, hsl(240 50% 22%) 0%, hsl(243 70% 35%) 40%, hsl(243 90% 58%) 100%)"
-            : "linear-gradient(135deg, hsla(240, 50%, 18%, 0.8) 0%, hsla(243, 70%, 30%, 0.7) 40%, hsla(243, 90%, 50%, 0.6) 100%)",
-          backdropFilter: scrolled ? "none" : "blur(16px)",
-        }}
+        className={`max-w-7xl mx-auto transition-all duration-500 rounded-2xl px-6 lg:px-8 border border-white/10 ${scrolled
+          ? "bg-accent shadow-xl shadow-accent/20"
+          : "bg-[hsla(243.1,69.4%,61.6%,0.42)] backdrop-blur-md"
+          }`}
       >
         <div className="flex items-center justify-between h-14 lg:h-16">
           {/* Logo */}

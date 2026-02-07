@@ -17,7 +17,7 @@
     --popover-foreground: 234 25% 14%;
 
     /* Primary — Playbook brand purple (#6C63FF) */
-    --primary: 243 95% 69%;
+    --primary: 243 90% 64%;
     --primary-foreground: 0 0% 100%;
 
     /* Secondary — very light purple tint */
@@ -36,7 +36,7 @@
 
     --border: 240 18% 90%;
     --input: 240 18% 90%;
-    --ring: 243 95% 69%;
+    --ring: 243 90% 64%;
 
     --radius: 0.75rem;
 
@@ -45,7 +45,7 @@
     --hero-foreground: 0 0% 100%;
     --section-dark: 240 50% 14%;
     --section-dark-foreground: 0 0% 100%;
-    --gradient-start: 243 95% 69%;
+    --gradient-start: 243 90% 64%;
     --gradient-end: 252 70% 78%;
     --lavender-bg: 243 80% 96%;
     --text-heading: 234 25% 14%;
@@ -74,7 +74,12 @@
     font-family: 'Inter', sans-serif;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: 'Space Grotesk', sans-serif;
   }
 }
@@ -203,26 +208,59 @@
 }
 
 @keyframes scroll-logos {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
 }
 
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px hsla(243, 95%, 69%, 0.15); }
-  50% { box-shadow: 0 0 40px hsla(243, 95%, 69%, 0.35); }
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px hsla(243, 95%, 69%, 0.15);
+  }
+
+  50% {
+    box-shadow: 0 0 40px hsla(243, 95%, 69%, 0.35);
+  }
 }
 
 @keyframes hero-fade {
-  0% { opacity: 0; }
-  10% { opacity: 1; }
-  45% { opacity: 1; }
-  55% { opacity: 0; }
-  100% { opacity: 0; }
+  0% {
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  45% {
+    opacity: 1;
+  }
+
+  55% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0;
+  }
 }
 
 .animate-float {
