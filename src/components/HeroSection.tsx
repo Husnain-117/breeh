@@ -63,13 +63,12 @@ const HeroSection = ({ onBookDemo }: HeroSectionProps) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.6 }}
         >
-          <a
-            href="#"
-            onClick={(e) => { e.preventDefault(); onBookDemo?.(); }}
+          <button
+            onClick={onBookDemo}
             className="inline-block bg-accent text-accent-foreground font-bold rounded-lg px-12 py-5 text-lg uppercase tracking-wider transition-all duration-300 hover:shadow-lg hover:shadow-accent/40 hover:-translate-y-1 hover:brightness-110"
           >
             Yes! Show Me How!
-          </a>
+          </button>
         </motion.div>
       </div>
 
