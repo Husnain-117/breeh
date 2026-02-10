@@ -31,7 +31,7 @@ const Index = () => {
       <DemosSection />
       <FAQSection />
       <CTASection onBookDemo={openCalendly} />
-      <Footer onOpenPlaybook={() => setPlaybookOpen(true)} />
+      <Footer onOpenPlaybook={() => setPlaybookOpen(true)} onBookDemo={openCalendly} />
       <FloatingCallButton />
       <PlaybookModal open={playbookOpen} onOpenChange={setPlaybookOpen} />
     </div>

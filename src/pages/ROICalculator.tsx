@@ -160,7 +160,7 @@ const ROICalculator = () => {
               <div className="w-14 h-14 rounded-xl bg-primary-foreground/20 flex items-center justify-center mx-auto mb-4">
                 <Calculator className="w-7 h-7 text-primary-foreground" />
               </div>
-              <h1 className="font-display font-bold text-2xl text-primary-foreground mb-2">
+              <h1 className="font-display font-bold text-2xl text-primary-foreground mb-2 uppercase">
                 ROI Calculator
               </h1>
               <p className="text-primary-foreground/70 text-sm">
@@ -254,12 +254,12 @@ const ROICalculator = () => {
                     </div>
 
                     <div className="space-y-3">
-                      <Button onClick={handleSaveResults} variant="outline" className="w-full border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 gap-2" disabled={isSaving}>
+                      <Button onClick={handleSaveResults} variant="outline" className="w-full border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground gap-2" disabled={isSaving}>
                         <Save className="w-4 h-4" /> {isSaving ? "Saving..." : "Save My Results"}
                       </Button>
                       <Button
                         onClick={() => window.open(SITE_CONFIG.calendlyUrl, "_blank")}
-                        className="w-full bg-primary-foreground text-foreground hover:bg-primary-foreground/90 font-bold gap-2"
+                        className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-bold gap-2"
                       >
                         <Calendar className="w-4 h-4" /> Schedule a Demo
                       </Button>
