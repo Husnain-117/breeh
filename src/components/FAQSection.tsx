@@ -158,7 +158,7 @@ const FAQSection = () => {
   const rightColumn = faqItems.filter((_, i) => i % 2 !== 0);
 
   return (
-    <section className="py-24 lg:py-32 bg-muted/20 relative overflow-hidden">
+    <section id="faq" className="py-24 lg:py-32 bg-muted/20 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Header */}
         <motion.div

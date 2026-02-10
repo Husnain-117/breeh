@@ -10,29 +10,29 @@ import FAQSection from "@/components/FAQSection";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
 import FloatingCallButton from "@/components/FloatingCallButton";
-import BookDemoModal from "@/components/BookDemoModal";
 import PlaybookModal from "@/components/PlaybookModal";
+import { SITE_CONFIG } from "@/lib/config";
 
 const Index = () => {
-  const [demoOpen, setDemoOpen] = useState(false);
   const [playbookOpen, setPlaybookOpen] = useState(false);
 
-  const openDemo = () => setDemoOpen(true);
+  const openCalendly = () => {
+    window.open(SITE_CONFIG.calendlyUrl, "_blank");
+  };
 
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
-      <Navbar onBookDemo={openDemo} />
-      <HeroSection onBookDemo={openDemo} />
+      <Navbar onBookDemo={openCalendly} onOpenPlaybook={() => setPlaybookOpen(true)} />
+      <HeroSection onBookDemo={openCalendly} />
       <TrustedBy />
       <WhyBreehSection />
       <MissionSection />
-      <HowItWorksSection />
+      <HowItWorksSection onBookDemo={openCalendly} />
       <DemosSection />
       <FAQSection />
-      <CTASection onBookDemo={openDemo} />
-      <Footer />
+      <CTASection onBookDemo={openCalendly} />
+      <Footer onOpenPlaybook={() => setPlaybookOpen(true)} />
       <FloatingCallButton />
-      <BookDemoModal open={demoOpen} onOpenChange={setDemoOpen} />
       <PlaybookModal open={playbookOpen} onOpenChange={setPlaybookOpen} />
     </div>
   );

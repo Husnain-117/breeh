@@ -14,7 +14,54 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      calculator_leads: {
+        Row: {
+          annual_revenue_lost: number | null
+          conversion_rate: number | null
+          created_at: string
+          email: string
+          id: string
+          missed_call_percent: number | null
+          monthly_calls: number | null
+          name: string
+          patient_value: number | null
+          recovered_revenue: number | null
+          recovery_rate: number | null
+          roi_multiple: number | null
+          unreturned_percent: number | null
+        }
+        Insert: {
+          annual_revenue_lost?: number | null
+          conversion_rate?: number | null
+          created_at?: string
+          email: string
+          id?: string
+          missed_call_percent?: number | null
+          monthly_calls?: number | null
+          name: string
+          patient_value?: number | null
+          recovered_revenue?: number | null
+          recovery_rate?: number | null
+          roi_multiple?: number | null
+          unreturned_percent?: number | null
+        }
+        Update: {
+          annual_revenue_lost?: number | null
+          conversion_rate?: number | null
+          created_at?: string
+          email?: string
+          id?: string
+          missed_call_percent?: number | null
+          monthly_calls?: number | null
+          name?: string
+          patient_value?: number | null
+          recovered_revenue?: number | null
+          recovery_rate?: number | null
+          roi_multiple?: number | null
+          unreturned_percent?: number | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

@@ -65,7 +65,11 @@ const numberVariants = {
   }),
 };
 
-const HowItWorksSection = () => {
+interface HowItWorksSectionProps {
+  onBookDemo?: () => void;
+}
+
+const HowItWorksSection = ({ onBookDemo }: HowItWorksSectionProps) => {
   return (
     <section className="py-24 lg:py-32 bg-muted/30 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -158,12 +162,12 @@ const HowItWorksSection = () => {
           transition={{ duration: 0.5, delay: 0.6 }}
           className="text-center"
         >
-          <a
-            href="#"
+          <button
+            onClick={onBookDemo}
             className="inline-block bg-primary text-primary-foreground font-bold rounded-full px-10 py-4 text-sm uppercase tracking-wider transition-all duration-300 hover:bg-primary/90 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/30"
           >
             Get Started
-          </a>
+          </button>
         </motion.div>
       </div>
     </section>

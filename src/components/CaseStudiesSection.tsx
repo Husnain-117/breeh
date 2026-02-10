@@ -10,7 +10,7 @@ const brands = [
 
 const CaseStudiesSection = () => {
   return (
-    <section className="section-lavender py-24 lg:py-32 relative overflow-hidden">
+    <section id="case-studies" className="section-lavender py-24 lg:py-32 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Header */}
         <motion.div

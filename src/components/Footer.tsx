@@ -1,36 +1,9 @@
 import { Linkedin, Twitter, Youtube, Instagram } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
-
-const footerLinks = {
-  Platform: [
-    { label: "AI Dental Receptionist", isNew: false },
-    { label: "Appointment Scheduling", isNew: false },
-    { label: "Patient Communication", isNew: false },
-    { label: "Call Analytics", isNew: false },
-    { label: "Integrations", isNew: false },
-  ],
-  Solutions: [
-    { label: "Dental Clinics", isNew: false },
-    { label: "Orthodontics", isNew: false },
-    { label: "Oral Surgery", isNew: false },
-    { label: "DSO / Groups", isNew: false },
-    { label: "Multi-Location", isNew: false },
-  ],
-  Company: [
-    { label: "About Us", isNew: false },
-    { label: "Careers", isNew: false },
-    { label: "Press", isNew: false },
-    { label: "Partners", isNew: false },
-    { label: "Pricing", isNew: false },
-  ],
-  Resources: [
-    { label: "Blog", isNew: false },
-    { label: "ROI Calculator", isNew: true },
-    { label: "Case Studies", isNew: false },
-    { label: "Documentation", isNew: false },
-    { label: "Webinars", isNew: false },
-  ],
-};
+interface FooterProps {
+  onOpenPlaybook?: () => void;
+}
 
 const socialLinks = [
   { icon: Linkedin, href: "#", label: "LinkedIn" },
@@ -39,7 +12,40 @@ const socialLinks = [
   { icon: Instagram, href: "#", label: "Instagram" },
 ];
 
-const Footer = () => {
+const Footer = ({ onOpenPlaybook }: FooterProps) => {
+  const navigate = useNavigate();
+
+  const footerLinks = {
+    Platform: [
+      { label: "AI Dental Receptionist" },
+      { label: "Appointment Scheduling" },
+      { label: "Patient Communication" },
+      { label: "Call Analytics" },
+      { label: "Integrations" },
+    ],
+    Solutions: [
+      { label: "Dental Clinics" },
+      { label: "Orthodontics" },
+      { label: "Oral Surgery" },
+      { label: "DSO / Groups" },
+      { label: "Multi-Location" },
+    ],
+    Company: [
+      { label: "About Us" },
+      { label: "Careers" },
+      { label: "Press" },
+      { label: "Partners" },
+      { label: "Pricing" },
+    ],
+    Resources: [
+      { label: "Playbook", onClick: onOpenPlaybook },
+      { label: "ROI Calculator", isNew: true, onClick: () => navigate("/roi-calculator") },
+      { label: "Case Studies" },
+      { label: "Documentation" },
+      { label: "Webinars" },
+    ],
+  };
+
   return (
     <footer className="bg-background border-t border-border/50">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-20">
@@ -49,8 +55,6 @@ const Footer = () => {
             <a href="/" className="flex items-center gap-2 mb-6">
               <span className="font-display font-bold text-2xl text-foreground tracking-tight">Breeh AI</span>
             </a>
-
-            {/* Social Icons */}
             <div className="flex gap-3 mt-4">
               {socialLinks.map((social) => (
                 <a
@@ -68,23 +72,19 @@ const Footer = () => {
           {/* Link Columns */}
           {Object.entries(footerLinks).map(([title, links]) => (
             <div key={title}>
-              <h4 className="font-display font-semibold text-sm text-accent mb-4">
-                {title}
-              </h4>
+              <h4 className="font-display font-semibold text-sm text-accent mb-4">{title}</h4>
               <ul className="space-y-3">
                 {links.map((link) => (
                   <li key={link.label}>
-                    <a
-                      href="#"
+                    <button
+                      onClick={link.onClick}
                       className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200 inline-flex items-center gap-2"
                     >
                       {link.label}
-                      {link.isNew && (
-                        <span className="text-[10px] font-bold bg-accent text-accent-foreground rounded-full px-2 py-0.5">
-                          New
-                        </span>
+                      {"isNew" in link && link.isNew && (
+                        <span className="text-[10px] font-bold bg-accent text-accent-foreground rounded-full px-2 py-0.5">New</span>
                       )}
-                    </a>
+                    </button>
                   </li>
                 ))}
               </ul>
@@ -95,21 +95,11 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="mt-16 pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex flex-wrap gap-6">
-            {["Terms of Service", "Privacy Policy", "HIPAA Compliance", "Security"].map(
-              (link) => (
-                <a
-                  key={link}
-                  href="#"
-                  className="text-xs text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  {link}
-                </a>
-              )
-            )}
+            {["Terms of Service", "Privacy Policy", "HIPAA Compliance", "Security"].map((link) => (
+              <a key={link} href="#" className="text-xs text-muted-foreground hover:text-foreground transition-colors">{link}</a>
+            ))}
           </div>
-          <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} Breeh AI. All rights reserved.
-          </p>
+          <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} Breeh AI. All rights reserved.</p>
         </div>
       </div>
     </footer>

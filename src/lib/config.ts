@@ -17,6 +17,7 @@ export const ELEVENLABS_CONFIG = {
 export const SITE_CONFIG = {
   url: "https://www.breehai.com",
   playbookPath: "/Breeh-AI-Playbook.pdf",
+  calendlyUrl: "https://calendly.com/husnainn-akram/30min",
   get playbookUrl() {
     return `${this.url}${this.playbookPath}`;
   },
