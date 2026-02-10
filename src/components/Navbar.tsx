@@ -97,12 +97,6 @@ const Navbar = ({ onBookDemo, onOpenPlaybook }: NavbarProps) => {
             </div>
 
             <button
-              onClick={() => scrollToSection("case-studies")}
-              className="px-4 py-2 text-sm font-medium text-primary-foreground/70 hover:text-primary-foreground transition-colors duration-300"
-            >
-              Case Studies
-            </button>
-            <button
               onClick={() => scrollToSection("mission")}
               className="px-4 py-2 text-sm font-medium text-primary-foreground/70 hover:text-primary-foreground transition-colors duration-300"
             >
@@ -151,9 +145,6 @@ const Navbar = ({ onBookDemo, onOpenPlaybook }: NavbarProps) => {
                   {item.label}
                 </button>
               ))}
-              <button onClick={() => scrollToSection("case-studies")} className="block text-foreground font-medium py-2 w-full text-left">
-                Case Studies
-              </button>
               <button onClick={() => scrollToSection("mission")} className="block text-foreground font-medium py-2 w-full text-left">
                 About
               </button>
