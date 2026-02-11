@@ -1,7 +1,6 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
-import { Resend } from "npm:resend@2.0.0";
 
-const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
+const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -55,14 +54,22 @@ const handler = async (req: Request): Promise<Response> => {
       throw new Error("Invalid notification type");
     }
 
-    const emailResponse = await resend.emails.send({
-      from: "Breeh AI <onboarding@resend.dev>",
-      to: [ADMIN_EMAIL],
-      subject,
-      html,
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${RESEND_API_KEY}`,
+      },
+      body: JSON.stringify({
+        from: "Breeh AI <onboarding@resend.dev>",
+        to: [ADMIN_EMAIL],
+        subject,
+        html,
+      }),
     });
 
-    console.log("Email sent:", emailResponse);
+    const data = await res.json();
+    console.log("Email sent:", data);
 
     return new Response(JSON.stringify({ success: true }), {
       status: 200,
