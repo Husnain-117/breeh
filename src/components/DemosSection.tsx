@@ -1,64 +1,33 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Play, Pause, ChevronLeft, ChevronRight } from "lucide-react";
-import demoAnalytics from "@/assets/demo-analytics.mp4";
-import demoCallHandling from "@/assets/demo-call-handling.mp4";
-import demoScheduler from "@/assets/demo-scheduler.mp4";
+import demoAnalytics from "@/assets/product-hero.jpg";
+import demoCallHandling from "@/assets/product-connection.jpg";
+import demoScheduler from "@/assets/product-integration.jpg";
 
 const demos = [
   {
     title: "Call Analytics Dashboard",
     description: "Discover powerful analytics for AI agent optimization in your dental practice",
-    video: demoAnalytics,
+    image: demoAnalytics,
   },
   {
     title: "AI Call Handling",
     description: "Unleash the true potential of automated patient communication via Agentic AI",
-    video: demoCallHandling,
+    image: demoCallHandling,
   },
   {
     title: "Appointment Scheduler",
     description: "Smart scheduling that syncs with your PMS and fills your calendar automatically",
-    video: demoScheduler,
+    image: demoScheduler,
   },
 ];
 
 const DemosSection = () => {
   const [current, setCurrent] = useState(0);
-  const [playing, setPlaying] = useState<number | null>(null);
-  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
   const next = () => setCurrent((prev) => (prev + 1) % demos.length);
   const prev = () => setCurrent((prev) => (prev - 1 + demos.length) % demos.length);
-
-  const togglePlay = (index: number) => {
-    const video = videoRefs.current[index];
-    if (!video) return;
-    if (playing === index) {
-      video.pause();
-      setPlaying(null);
-    } else {
-      // Pause any other playing video
-      videoRefs.current.forEach((v, i) => {
-        if (v && i !== index) v.pause();
-      });
-      video.play();
-      setPlaying(index);
-    }
-  };
-
-  // Pause video when sliding away
-  useEffect(() => {
-    videoRefs.current.forEach((v, i) => {
-      if (v && i !== current) {
-        v.pause();
-        v.currentTime = 0;
-      }
-    });
-    if (playing !== null && playing !== current) {
-      setPlaying(null);
-    }
-  }, [current]);
 
   return (
     <section className="py-24 lg:py-32 section-alt relative overflow-hidden" id="demos">
@@ -96,42 +65,31 @@ const DemosSection = () => {
                     zIndex: isCenter ? 10 : 1,
                   }}
                   transition={{ duration: 0.5, ease: "easeInOut" }}
-                  className={`absolute w-full max-w-2xl ${
-                    isCenter ? "" : "pointer-events-none"
-                  }`}
+                  className={`absolute w-full max-w-2xl ${isCenter ? "" : "pointer-events-none"
+                    }`}
                 >
                   <div className="rounded-3xl overflow-hidden shadow-2xl border border-border bg-secondary">
-                    {/* Video container */}
-                    <div className="relative aspect-video bg-foreground/5">
-                      <video
-                        ref={(el) => { videoRefs.current[index] = el; }}
-                        src={demo.video}
-                        className="w-full h-full object-cover"
-                        loop
-                        muted
-                        playsInline
-                        preload="metadata"
-                        onEnded={() => setPlaying(null)}
+                    {/* Image container */}
+                    <div className="relative aspect-video bg-foreground/5 cursor-pointer group" onClick={() => window.open("https://calendly.com/breeh-ai/30min", "_blank")}>
+                      <img
+                        src={demo.image}
+                        alt={demo.title}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                       />
+                      <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors" />
 
-                      {/* Play/Pause overlay */}
+                      {/* Play overlay */}
                       {isCenter && (
-                        <button
-                          onClick={() => togglePlay(index)}
-                          className="absolute inset-0 flex items-center justify-center bg-foreground/10 hover:bg-foreground/20 transition-colors group"
-                        >
+                        <div className="absolute inset-0 flex items-center justify-center">
                           <motion.div
                             initial={{ scale: 0.8, opacity: 0 }}
                             animate={{ scale: 1, opacity: 1 }}
-                            className="w-16 h-16 rounded-full bg-accent flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform"
+                            whileHover={{ scale: 1.1 }}
+                            className="w-20 h-20 rounded-full bg-accent/90 backdrop-blur-sm flex items-center justify-center shadow-lg cursor-pointer"
                           >
-                            {playing === index ? (
-                              <Pause className="w-6 h-6 text-accent-foreground" fill="currentColor" />
-                            ) : (
-                              <Play className="w-6 h-6 text-accent-foreground ml-1" fill="currentColor" />
-                            )}
+                            <Play className="w-8 h-8 text-white ml-1" fill="currentColor" />
                           </motion.div>
-                        </button>
+                        </div>
                       )}
                     </div>
 
@@ -168,11 +126,10 @@ const DemosSection = () => {
                 <button
                   key={i}
                   onClick={() => setCurrent(i)}
-                  className={`h-1.5 rounded-full transition-all duration-500 ${
-                    i === current
-                      ? "w-10 bg-accent"
-                      : "w-4 bg-border hover:bg-muted-foreground/30"
-                  }`}
+                  className={`h-1.5 rounded-full transition-all duration-500 ${i === current
+                    ? "w-10 bg-accent"
+                    : "w-4 bg-border hover:bg-muted-foreground/30"
+                    }`}
                 />
               ))}
             </div>

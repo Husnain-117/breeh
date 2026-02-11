@@ -9,10 +9,7 @@ import {
     MousePointer2, BarChart3, Quote, ArrowRight, ShieldCheck,
     CheckCircle2, Monitor
 } from "lucide-react";
-import productHeroImg from "@/assets/product-hero.jpg";
-import productConnectionImg from "@/assets/product-connection.jpg";
-import productHowWorksImg from "@/assets/product-howworks.jpg";
-import productIntegrationImg from "@/assets/product-integration.jpg";
+
 
 const Product = () => {
     const [playbookOpen, setPlaybookOpen] = useState(false);
@@ -33,73 +30,73 @@ const Product = () => {
         <div className="min-h-screen bg-background overflow-x-hidden font-body">
             <Navbar onBookDemo={openCalendly} onOpenPlaybook={() => setPlaybookOpen(true)} />
 
-            {/* 1. Hero Section */}
+            {/* 1. Hero Section - Text Only */}
             <section className="pt-32 pb-20 px-6 lg:px-8 section-lavender">
-                <div className="max-w-7xl mx-auto text-center">
+                <div className="max-w-4xl mx-auto text-center">
                     <motion.p
                         {...fadeInUp}
-                        className="text-primary font-semibold tracking-wide mb-4 text-sm"
+                        className="text-primary font-semibold tracking-wide mb-4 text-sm uppercase"
                     >
                         AI That Augments Your Team
                     </motion.p>
                     <motion.h1
                         {...fadeInUp}
                         transition={{ delay: 0.1, duration: 0.6 }}
-                        className="font-display font-bold text-4xl md:text-6xl text-foreground mb-6 leading-tight"
+                        className="font-display font-bold text-5xl md:text-7xl text-foreground mb-8 leading-tight"
                     >
-                        Your AI Dental Receptionist <br className="hidden md:block" />
-                        Never Misses a Patient Call
+                        Your AI Dental Receptionist <br />
+                        <span className="text-primary">Never Misses a Call</span>
                     </motion.h1>
                     <motion.p
                         {...fadeInUp}
                         transition={{ delay: 0.2, duration: 0.6 }}
-                        className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10"
+                        className="text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed"
                     >
                         Advanced virtual dental receptionist technology built specifically for modern practices, dental groups, and DSOs.
                     </motion.p>
                     <motion.div
                         {...fadeInUp}
                         transition={{ delay: 0.3, duration: 0.6 }}
+                        className="flex items-center justify-center gap-4"
                     >
                         <button
                             onClick={openCalendly}
-                            className="btn-primary flex items-center gap-2 mx-auto"
+                            className="btn-primary flex items-center gap-2 px-8 py-4 text-lg"
                         >
-                            See Product Demo <ChevronRight className="w-4 h-4" />
+                            See Product Demo <ChevronRight className="w-5 h-5" />
                         </button>
                     </motion.div>
 
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
+                        initial={{ opacity: 0, y: 40 }}
+                        whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.4, duration: 0.8 }}
-                        className="mt-16 relative max-w-4xl mx-auto"
+                        className="mt-20 relative max-w-3xl mx-auto"
                     >
-                        <div className="bg-secondary rounded-3xl p-8 md:p-12 overflow-hidden border border-border">
-                            <div className="flex flex-col md:flex-row items-center gap-12 text-left">
-                                <div className="flex-1 space-y-4">
-                                    <div className="bg-card p-4 rounded-xl flex items-center gap-4 animate-float border border-border">
-                                        <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-                                            <MessageSquare className="w-5 h-5" />
-                                        </div>
-                                        <div className="text-left">
-                                            <p className="text-xs text-muted-foreground">New Inquiry</p>
-                                            <p className="text-sm font-medium text-foreground">Schedule appointment for tomorrow?</p>
-                                        </div>
+                        <div className="bg-white/50 backdrop-blur-sm rounded-3xl p-8 border border-white/20 shadow-xl relative overflow-hidden">
+                            {/* Decorative gradients */}
+                            <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -z-10"></div>
+                            <div className="absolute bottom-0 left-0 w-64 h-64 bg-accent/5 rounded-full blur-3xl -z-10"></div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div className="bg-white p-6 rounded-2xl flex items-center gap-4 border border-border shadow-sm">
+                                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                                        <MessageSquare className="w-6 h-6" />
                                     </div>
-                                    <div className="bg-card p-4 rounded-xl flex items-center gap-4 animate-float border border-border" style={{ animationDelay: "1s" }}>
-                                        <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-                                            <Zap className="w-5 h-5" />
-                                        </div>
-                                        <div className="text-left">
-                                            <p className="text-xs text-muted-foreground">AI Response</p>
-                                            <p className="text-sm font-medium text-foreground">Slot confirmed! Patient added to CRM.</p>
-                                        </div>
+                                    <div className="text-left">
+                                        <p className="text-xs text-muted-foreground font-semibold uppercase tracking-wider mb-1">New Inquiry</p>
+                                        <p className="text-base font-medium text-foreground">"Can I schedule an appointment for tomorrow?"</p>
                                     </div>
                                 </div>
-                                <div className="flex-1">
-                                    <img src={productHeroImg} alt="AI dental receptionist workspace" className="rounded-2xl w-full object-cover shadow-lg" />
+                                <div className="bg-primary/5 p-6 rounded-2xl flex items-center gap-4 border border-primary/10 shadow-sm">
+                                    <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white shrink-0">
+                                        <Zap className="w-6 h-6" />
+                                    </div>
+                                    <div className="text-left">
+                                        <p className="text-xs text-primary font-semibold uppercase tracking-wider mb-1">AI Response</p>
+                                        <p className="text-base font-medium text-foreground">"I found a slot at 2 PM. Booked firmly!"</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -107,62 +104,56 @@ const Product = () => {
                 </div>
             </section>
 
-            {/* 2. Workforce Section */}
+            {/* 2. Workforce Section - Text Only */}
             <section className="py-24 section-alt px-6 lg:px-8">
-                <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16 text-left">
-                    <motion.div
-                        initial={{ opacity: 0, x: -30 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        className="flex-1"
-                    >
-                        <h2 className="font-display font-bold text-3xl md:text-4xl text-foreground mb-6 leading-tight">
-                            Your <span className="text-primary italic">dedicated AI dental receptionist</span> works alongside your team 24/7.
+                <div className="max-w-5xl mx-auto">
+                    <div className="text-center mb-16">
+                        <h2 className="font-display font-bold text-3xl md:text-5xl text-foreground mb-6 leading-tight">
+                            Your <span className="text-primary italic">Dedicated AI Receptionist</span> <br /> Works 24/7
                         </h2>
-                        <p className="text-muted-foreground mb-8 leading-relaxed">
-                            Built by a team with a track record in enterprise-grade AI and tested across high-volume dental group practices and DSOs, our virtual dental receptionist platform enhances your team's capabilities while ensuring no patient opportunity slips through the cracks.
+                        <p className="text-muted-foreground text-lg max-w-3xl mx-auto leading-relaxed">
+                            Built by a team with a track record in enterprise-grade AI and tested across high-volume dental group practices and DSOs. Our platform enhances your team's capabilities while ensuring no patient opportunity slips through the cracks.
                         </p>
-                        <div className="space-y-4">
-                            <div className="flex items-start gap-4">
-                                <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-primary mt-1">
-                                    <ChevronRight className="w-4 h-4" />
-                                </div>
-                                <p className="text-sm font-medium text-foreground">Fills open slots automatically</p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            className="bg-card p-8 rounded-3xl border border-border shadow-sm flex flex-col gap-4 hover:border-primary/50 transition-colors"
+                        >
+                            <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-2">
+                                <ChevronRight className="w-6 h-6" />
                             </div>
-                            <div className="flex items-start gap-4">
-                                <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-primary mt-1">
-                                    <ChevronRight className="w-4 h-4" />
-                                </div>
-                                <p className="text-sm font-medium text-foreground">Handles high call volumes without breaks</p>
+                            <h3 className="font-display font-bold text-2xl text-foreground">Fills Open Slots Automatically</h3>
+                            <p className="text-muted-foreground leading-relaxed">
+                                Intelligently scans your practice management software to find and fill gaps in your schedule, maximizing chair utilization without manual intervention.
+                            </p>
+                        </motion.div>
+
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.1 }}
+                            className="bg-card p-8 rounded-3xl border border-border shadow-sm flex flex-col gap-4 hover:border-primary/50 transition-colors"
+                        >
+                            <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-2">
+                                <PhoneCall className="w-6 h-6" />
                             </div>
-                        </div>
-                    </motion.div>
-                    <motion.div
-                        initial={{ opacity: 0, x: 30 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        className="flex-1 relative"
-                    >
-                        <div className="aspect-square bg-secondary rounded-3xl overflow-hidden relative border border-border">
-                            <img src={productConnectionImg} alt="AI phone system" className="w-full h-full object-cover" />
-                            <div className="absolute bottom-8 left-8 right-8 bg-card p-4 rounded-xl flex items-center gap-3 border border-border shadow-md">
-                                <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-                                    <Zap className="w-4 h-4" />
-                                </div>
-                                <div>
-                                    <p className="text-xs font-semibold text-foreground">Good News!</p>
-                                    <p className="text-[10px] text-muted-foreground">All missed calls are answered.</p>
-                                </div>
-                                <span className="text-[10px] ml-auto text-muted-foreground">34m ago</span>
-                            </div>
-                        </div>
-                    </motion.div>
+                            <h3 className="font-display font-bold text-2xl text-foreground">Handles High Call Volumes</h3>
+                            <p className="text-muted-foreground leading-relaxed">
+                                Never let a busy signal turn away a patient. Our AI manages simultaneous calls with infinite patience and perfect accuracy, day or night.
+                            </p>
+                        </motion.div>
+                    </div>
                 </div>
             </section>
 
-            {/* 3. Call Recovery Section */}
+            {/* 3. Call Recovery Section - Text Only */}
             <section className="py-24 section-lavender px-6 lg:px-8">
-                <div className="max-w-7xl mx-auto text-center mb-16">
+                <div className="max-w-4xl mx-auto text-center">
                     <motion.span
                         {...fadeInUp}
                         className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-6"
@@ -179,111 +170,120 @@ const Product = () => {
                     <motion.p
                         {...fadeInUp}
                         transition={{ delay: 0.2, duration: 0.6 }}
-                        className="text-muted-foreground max-w-xl mx-auto mb-10"
+                        className="text-xl text-muted-foreground max-w-2xl mx-auto mb-12"
                     >
                         24/7 virtual dental receptionist response that feels completely human.
+                        Capture every opportunity, even when your office is closed.
                     </motion.p>
-                    <motion.button
-                        {...fadeInUp}
-                        transition={{ delay: 0.3, duration: 0.6 }}
-                        className="btn-outline-primary flex items-center gap-2 mx-auto"
-                    >
-                        <Play className="w-4 h-4 fill-current" /> Watch Missed Call Demo
-                    </motion.button>
-                </div>
 
-                <motion.div
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8"
-                >
-                    <div className="bg-card border border-border rounded-2xl p-10 flex flex-col justify-center text-left shadow-sm">
-                        <PhoneCall className="w-12 h-12 text-primary mb-6" />
-                        <h3 className="font-display font-bold text-2xl mb-4 text-foreground">Immediate Connection</h3>
-                        <p className="text-muted-foreground">Even when your front desk is busy with patients, Breeh AI steps in within seconds to help the caller.</p>
-                    </div>
-                    <div className="relative group">
-                        <div className="w-full h-full bg-secondary rounded-3xl overflow-hidden border border-border">
-                            <img src={productConnectionImg} alt="AI phone connection" className="w-full h-full object-cover" />
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        className="bg-white/80 backdrop-blur-md border border-white/20 rounded-3xl p-10 md:p-14 shadow-lg mx-auto"
+                    >
+                        <div className="flex flex-col items-center gap-6">
+                            <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center text-primary animate-pulse-glow">
+                                <PhoneCall className="w-10 h-10" />
+                            </div>
+                            <h3 className="font-display font-bold text-3xl text-foreground">Immediate Connection</h3>
+                            <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
+                                "Even when your front desk is busy with patients, Breeh AI steps in within seconds to help the caller, answering questions, booking appointments, and capturing details directly into your PMS."
+                            </p>
+                            <motion.button
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                className="mt-4 btn-outline-primary flex items-center gap-2"
+                            >
+                                <Play className="w-4 h-4 fill-current" /> Watch Context-Aware Demo
+                            </motion.button>
                         </div>
-                    </div>
-                </motion.div>
+                    </motion.div>
+                </div>
             </section>
 
-            {/* 4. Process Section - How It Works */}
+            {/* 4. Process Section - Text Only */}
             <section className="py-24 section-alt px-6 lg:px-8">
-                <div className="max-w-7xl mx-auto flex flex-col md:flex-row-reverse items-center gap-16 text-left">
-                    <motion.div
-                        initial={{ opacity: 0, x: 30 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        className="flex-1"
-                    >
+                <div className="max-w-6xl mx-auto">
+                    <div className="text-center mb-16">
                         <motion.span
                             className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-6"
                         >
                             The Process
                         </motion.span>
-                        <h2 className="font-display font-bold text-3xl md:text-4xl text-foreground mb-6">How it works</h2>
-                        <p className="text-muted-foreground mb-8 leading-relaxed">
-                            When calls go to voicemail, your AI dental receptionist immediately texts the patient with a caring message. Our dental virtual assistant conducts natural conversations, asking about their visit reason, preferred appointment times, and books them directly. Patients often think they're chatting with your human staff because our AI receptionist responds with such genuine care and understanding.
+                        <h2 className="font-display font-bold text-3xl md:text-5xl text-foreground mb-6">How it Works</h2>
+                        <p className="text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">
+                            From missed call to booked appointment, our AI handles the entire workflow seamlessly, ensuring your patient feels heard and valued.
                         </p>
-                    </motion.div>
-                    <motion.div
-                        initial={{ opacity: 0, x: -30 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        className="flex-1 relative"
-                    >
-                        <div className="aspect-square bg-secondary rounded-3xl overflow-hidden border border-border">
-                            <img src={productHowWorksImg} alt="AI workflow diagram" className="w-full h-full object-cover" />
-                        </div>
-                    </motion.div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+                        {/* Connecting Line (Desktop) */}
+                        <div className="hidden md:block absolute top-12 left-[16%] right-[16%] h-0.5 bg-gradient-to-r from-primary/20 via-primary/50 to-primary/20 -z-0"></div>
+
+                        {[
+                            { step: "01", title: "Call Detection", desc: "When a call goes to voicemail, our AI instantly detects it and initiates the recovery protocol." },
+                            { step: "02", title: "AI Engagement", desc: "Your AI dental receptionist texts the patient with a warm, personal message asking how to help." },
+                            { step: "03", title: "Booking & Success", desc: "The AI engages in natural conversation to schedule their visit and syncs it to your calendar." }
+                        ].map((item, i) => (
+                            <motion.div
+                                key={i}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: i * 0.2 }}
+                                className="bg-card p-8 rounded-3xl border border-border flex flex-col items-center text-center relative z-10 shadow-sm hover:translate-y-[-5px] transition-transform"
+                            >
+                                <div className="w-12 h-12 rounded-full bg-primary text-white font-bold flex items-center justify-center text-sm mb-6 shadow-lg shadow-primary/20">
+                                    {item.step}
+                                </div>
+                                <h3 className="font-display font-bold text-xl text-foreground mb-3">{item.title}</h3>
+                                <p className="text-muted-foreground leading-relaxed">{item.desc}</p>
+                            </motion.div>
+                        ))}
+                    </div>
                 </div>
             </section>
 
-            {/* 5. Integration Section */}
+            {/* 5. Integration Section - Text Only */}
             <section className="py-24 section-lavender px-6 lg:px-8">
-                <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16 text-left">
-                    <motion.div
-                        initial={{ opacity: 0, x: -30 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        className="flex-1"
+                <div className="max-w-5xl mx-auto text-center">
+                    <motion.span
+                        className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-6"
                     >
-                        <motion.span
-                            className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-6"
-                        >
-                            Easy Setup for Your Practice
-                        </motion.span>
-                        <h2 className="font-display font-bold text-3xl md:text-4xl text-foreground mb-6 leading-tight">
-                            Seamless integration
-                        </h2>
-                        <p className="text-muted-foreground mb-8 leading-relaxed">
-                            No need to change your phone system - our virtual dental receptionist integrates in just 5 minutes through simple call-forwarding. Syncs all conversations and appointments directly to your practice management software.
-                        </p>
-                        <div className="grid grid-cols-2 gap-4">
-                            <div className="p-4 bg-secondary rounded-xl flex items-center gap-3 border border-border">
-                                <Share2 className="w-5 h-5 text-primary" />
-                                <span className="text-xs font-medium text-foreground">Auto-Sync</span>
-                            </div>
-                            <div className="p-4 bg-secondary rounded-xl flex items-center gap-3 border border-border">
-                                <Zap className="w-5 h-5 text-primary" />
-                                <span className="text-xs font-medium text-foreground">5-Min Setup</span>
-                            </div>
-                        </div>
-                    </motion.div>
-                    <motion.div
-                        initial={{ opacity: 0, x: 30 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        className="flex-1"
-                    >
-                        <div className="aspect-video bg-secondary rounded-3xl overflow-hidden border border-border">
-                            <img src={productIntegrationImg} alt="Practice management integration" className="w-full h-full object-cover" />
-                        </div>
-                    </motion.div>
+                        Easy Setup for Your Practice
+                    </motion.span>
+                    <h2 className="font-display font-bold text-3xl md:text-5xl text-foreground mb-6 leading-tight">
+                        Seamless Integration <br /> with Your Existing Workflow
+                    </h2>
+                    <p className="text-muted-foreground text-lg mb-12 max-w-2xl mx-auto">
+                        No need to change your phone system. Our virtual dental receptionist integrates in just 5 minutes through simple call-forwarding and syncs directly with your practice management software.
+                    </p>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        {[
+                            { icon: Share2, title: "Auto-Sync", desc: "Instantly pushes appointment details and patient notes to your PMS." },
+                            { icon: Zap, title: "5-Minute Setup", desc: "Get started today with simple call forwarding. No complex hardware." },
+                            { icon: ShieldCheck, title: "HIPAA Compliant", desc: "Enterprise-grade security ensuring your patient data is always protected." }
+                        ].map((item, i) => (
+                            <motion.div
+                                key={i}
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                whileInView={{ opacity: 1, scale: 1 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: i * 0.1 }}
+                                className="bg-white p-6 rounded-2xl border border-border flex flex-col items-center gap-4 hover:shadow-md transition-shadow"
+                            >
+                                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                                    <item.icon className="w-6 h-6" />
+                                </div>
+                                <div>
+                                    <h3 className="font-bold text-foreground mb-2">{item.title}</h3>
+                                    <p className="text-sm text-muted-foreground">{item.desc}</p>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
                 </div>
             </section>
 
@@ -530,17 +530,17 @@ const Product = () => {
 
                         <motion.div
                             layoutId="dashboard"
-                            className="bg-secondary rounded-3xl p-8 md:p-12 border border-border aspect-video flex flex-col md:flex-row gap-12 text-left"
+                            className="bg-[hsl(244_50%_22%)] text-white rounded-3xl p-8 md:p-12 border border-white/10 aspect-video flex flex-col md:flex-row gap-12 text-left shadow-2xl"
                         >
                             <div className="flex-1 space-y-6">
-                                <h3 className="font-display font-bold text-2xl text-foreground">Performance tracking</h3>
-                                <p className="text-sm text-muted-foreground leading-relaxed">
+                                <h3 className="font-display font-bold text-2xl text-white">Practice Analytics</h3>
+                                <p className="text-sm text-white/70 leading-relaxed">
                                     Monitor how your AI dental receptionist handles inbound calls, response rates, and revenue attribution. ROI measurement: Clear data showing how many patients your virtual dental receptionist captured.
                                 </p>
                             </div>
                             <div className="flex-1 flex flex-col justify-center items-center text-center">
-                                <div className="text-5xl font-bold text-foreground mb-2">36%</div>
-                                <p className="text-xs text-muted-foreground mb-8">of missed new callers don't call back again</p>
+                                <div className="text-5xl font-bold text-white mb-2">36%</div>
+                                <p className="text-xs text-white/60 mb-8">of missed new callers don't call back again</p>
                                 <div className="grid grid-cols-4 gap-4">
                                     {[1, 2, 3, 4].map(k => (
                                         <div key={k} className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary text-xs">

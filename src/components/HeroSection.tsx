@@ -16,9 +16,8 @@ const HeroSection = ({ onBookDemo }: HeroSectionProps) => {
           className="w-full h-full object-cover"
         />
         {/* Overlay with primary color */}
-        <div className="absolute inset-0 bg-primary/60 mix-blend-multiply" />
-        <div className="absolute inset-0 bg-gradient-to-tr from-[hsl(244_50%_22%)] via-transparent to-transparent opacity-80" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[hsl(244_50%_22%)] via-transparent to-transparent opacity-80" />
+        {/* Simple solid color overlay */}
+        <div className="absolute inset-0 bg-[hsl(244_50%_22%)]/80" />
       </div>
 
       {/* Content - Centered */}
@@ -72,8 +71,8 @@ const HeroSection = ({ onBookDemo }: HeroSectionProps) => {
         </motion.div>
       </div>
 
-      {/* Bottom gradient fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[hsl(245_100%_97%)] to-transparent z-[5]" />
+      {/* Bottom gradient fade - Simplified */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent z-[5]" />
     </section>
   );
 };
