@@ -71,7 +71,7 @@ interface HowItWorksSectionProps {
 
 const HowItWorksSection = ({ onBookDemo }: HowItWorksSectionProps) => {
   return (
-    <section className="py-24 lg:py-32 bg-muted/30 relative overflow-hidden">
+    <section className="py-24 lg:py-32 section-lavender relative overflow-hidden" id="how-it-works">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -112,7 +112,7 @@ const HowItWorksSection = ({ onBookDemo }: HowItWorksSectionProps) => {
               viewport={{ once: true }}
               variants={cardVariants}
               whileHover={{ y: -8, transition: { duration: 0.3 } }}
-              className="relative bg-background border border-border/60 rounded-2xl p-8 md:p-10 overflow-hidden shadow-sm hover:shadow-xl hover:border-primary/30 transition-shadow duration-500"
+              className="relative bg-card border border-border rounded-2xl p-8 md:p-10 overflow-hidden shadow-sm hover:shadow-xl hover:border-primary/30 transition-shadow duration-500"
             >
               {/* Large background number */}
               <motion.span

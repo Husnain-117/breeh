@@ -107,8 +107,8 @@ const FAQItem = ({
     variants={itemVariants}
     onClick={onToggle}
     className={`w-full text-left rounded-xl px-6 py-5 transition-all duration-300 group ${isOpen
-        ? "bg-primary/5 border border-primary/20 shadow-md"
-        : "bg-muted/30 border border-border/50 hover:border-primary/30 hover:bg-muted/50"
+        ? "bg-secondary border border-primary/20 shadow-md"
+        : "bg-card border border-border hover:border-primary/30 hover:bg-secondary"
       }`}
   >
     <div className="flex items-center justify-between gap-4">
@@ -156,7 +156,7 @@ const FAQSection = () => {
   const rightColumn = faqItems.filter((_, i) => i % 2 !== 0);
 
   return (
-    <section id="faq" className="py-24 lg:py-32 bg-muted/20 relative overflow-hidden">
+    <section id="faq" className="py-24 lg:py-32 section-lavender relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Header */}
         <motion.div

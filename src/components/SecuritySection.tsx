@@ -12,7 +12,7 @@ const integrations = ["Dentrix", "Eaglesoft", "Open Dental", "Curve Dental"];
 
 const SecuritySection = () => {
   return (
-    <section className="section-lavender py-16 lg:py-24 relative overflow-hidden">
+    <section className="section-alt py-16 lg:py-24 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Main gradient card */}
         <motion.div
@@ -44,7 +44,7 @@ const SecuritySection = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="bg-background rounded-2xl p-8 md:p-10 shadow-lg"
+                className="bg-card rounded-2xl p-8 md:p-10 shadow-lg border border-border"
               >
                 <div className="flex gap-5 mb-6">
                   {certifications.map((cert) => (
@@ -96,7 +96,7 @@ const SecuritySection = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.35 }}
-                  className="bg-background rounded-2xl p-8 md:p-10 shadow-lg flex-1"
+                  className="bg-card rounded-2xl p-8 md:p-10 shadow-lg flex-1 border border-border"
                 >
                   <div className="flex flex-wrap gap-4 mb-6">
                     {integrations.map((name) => (
@@ -131,7 +131,7 @@ const SecuritySection = () => {
               transition={{ duration: 0.5, delay: 0.4 }}
               className="mt-6"
             >
-              <div className="bg-background/80 backdrop-blur-sm rounded-full px-8 py-4 inline-flex items-center gap-3 shadow-md">
+              <div className="bg-card backdrop-blur-sm rounded-full px-8 py-4 inline-flex items-center gap-3 shadow-md border border-border">
                 <Shield className="w-5 h-5 text-primary" />
                 <span className="font-semibold text-foreground text-sm">
                   HIPAA-compliant security with Safe AI
