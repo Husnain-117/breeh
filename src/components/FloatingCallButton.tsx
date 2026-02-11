@@ -57,7 +57,7 @@ const FloatingCallButton = () => {
             className="fixed bottom-24 right-6 z-50 w-72 rounded-2xl shadow-2xl overflow-hidden border border-border"
             style={{
               background:
-                "linear-gradient(135deg, hsl(240 50% 14%) 0%, hsl(243 60% 26%) 100%)",
+                "linear-gradient(135deg, hsl(244 50% 22%) 0%, hsl(244 58% 40%) 100%)",
             }}
           >
             <div className="p-5">

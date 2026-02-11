@@ -47,9 +47,9 @@ const Navbar = ({ onBookDemo, onOpenPlaybook }: NavbarProps) => {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? "py-2 px-4 lg:px-8" : "py-4 px-4 lg:px-8"}`}
     >
       <div
-        className={`max-w-7xl mx-auto transition-all duration-500 rounded-2xl px-6 lg:px-8 border border-white/10 ${scrolled
-          ? "bg-accent shadow-xl shadow-accent/20"
-          : "bg-[hsla(243.1,69.4%,61.6%,0.42)] backdrop-blur-md"
+        className={`max-w-7xl mx-auto transition-all duration-500 rounded-2xl px-6 lg:px-8 border border-primary/20 ${scrolled
+          ? "bg-primary shadow-xl shadow-primary/20"
+          : "bg-primary/60 backdrop-blur-md"
           }`}
       >
         <div className="flex items-center justify-between h-14 lg:h-16">

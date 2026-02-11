@@ -8,7 +8,7 @@ const logos = [
 
 const TrustedBy = () => {
   return (
-    <section className="py-10 bg-foreground overflow-hidden">
+    <section className="py-10 bg-[hsl(244_50%_22%)] overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center gap-8">
           <motion.div
@@ -28,8 +28,8 @@ const TrustedBy = () => {
 
           {/* Scrolling Marquee */}
           <div className="relative overflow-hidden flex-1">
-            <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-foreground to-transparent z-10" />
-            <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-foreground to-transparent z-10" />
+            <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[hsl(244_50%_22%)] to-transparent z-10" />
+            <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[hsl(244_50%_22%)] to-transparent z-10" />
 
             <div className="flex animate-marquee">
               {[...logos, ...logos].map((logo, i) => (

@@ -23,7 +23,7 @@ const SecuritySection = () => {
           className="rounded-[2rem] overflow-hidden"
           style={{
             background:
-              "linear-gradient(135deg, hsl(244 63% 55%) 0%, hsl(244 55% 50%) 30%, hsl(244 50% 45%) 60%, hsl(260 60% 65%) 100%)",
+              "linear-gradient(135deg, hsl(244 58% 61%) 0%, hsl(244 55% 50%) 30%, hsl(244 50% 40%) 60%, hsl(244 58% 65%) 100%)",
           }}
         >
           {/* Header inside gradient */}
@@ -82,7 +82,7 @@ const SecuritySection = () => {
                   className="rounded-full px-6 py-3 self-start shadow-md"
                   style={{
                     background:
-                      "linear-gradient(135deg, hsl(244 63% 55%), hsl(244 50% 45%))",
+                      "linear-gradient(135deg, hsl(244 58% 61%), hsl(244 50% 42%))",
                   }}
                 >
                   <span className="text-primary-foreground font-semibold text-sm">
