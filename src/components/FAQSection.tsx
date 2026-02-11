@@ -106,11 +106,10 @@ const FAQItem = ({
     viewport={{ once: true }}
     variants={itemVariants}
     onClick={onToggle}
-    className={`w-full text-left rounded-xl px-6 py-5 transition-all duration-300 group ${
-      isOpen
+    className={`w-full text-left rounded-xl px-6 py-5 transition-all duration-300 group ${isOpen
         ? "bg-primary/5 border border-primary/20 shadow-md"
         : "bg-muted/30 border border-border/50 hover:border-primary/30 hover:bg-muted/50"
-    }`}
+      }`}
   >
     <div className="flex items-center justify-between gap-4">
       <span className="text-sm font-medium text-foreground pr-4">
@@ -122,9 +121,8 @@ const FAQItem = ({
         className="flex-shrink-0"
       >
         <ChevronDown
-          className={`w-4 h-4 transition-colors duration-300 ${
-            isOpen ? "text-primary" : "text-muted-foreground"
-          }`}
+          className={`w-4 h-4 transition-colors duration-300 ${isOpen ? "text-primary" : "text-muted-foreground"
+            }`}
         />
       </motion.div>
     </div>
@@ -134,7 +132,7 @@ const FAQItem = ({
           initial={{ height: 0, opacity: 0 }}
           animate={{ height: "auto", opacity: 1 }}
           exit={{ height: 0, opacity: 0 }}
-          transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+          transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] as const }}
           className="overflow-hidden"
         >
           <motion.p
