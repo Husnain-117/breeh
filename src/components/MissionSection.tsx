@@ -9,7 +9,7 @@ const stats = [
 
 const MissionSection = () => {
   return (
-    <section className="py-24 lg:py-32 bg-background relative overflow-hidden" id="mission">
+    <section className="py-24 lg:py-32 section-alt relative overflow-hidden" id="mission">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left Content */}
@@ -65,7 +65,7 @@ const MissionSection = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.15 }}
-                className="bg-muted/50 border border-border/60 rounded-2xl p-8 md:p-10"
+                className="bg-secondary border border-border rounded-2xl p-8 md:p-10"
               >
                 <p className="font-display font-bold text-4xl md:text-5xl text-primary mb-2">
                   {stat.value}

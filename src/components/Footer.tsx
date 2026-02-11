@@ -40,7 +40,7 @@ const Footer = ({ onOpenPlaybook, onBookDemo }: FooterProps) => {
   };
 
   return (
-    <footer className="bg-[hsl(244_50%_22%)]">
+    <footer className="bg-primary">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-20">
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-10 lg:gap-8">
           {/* Brand Column */}

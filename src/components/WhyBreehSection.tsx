@@ -81,7 +81,7 @@ const WhyBreehSection = () => {
   };
 
   return (
-    <section className="section-lavender py-20 lg:py-28 relative overflow-hidden">
+    <section className="section-lavender py-20 lg:py-28 relative overflow-hidden" id="why-breeh">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -141,8 +141,8 @@ const WhyBreehSection = () => {
               </div>
 
               {/* Light Right Panel - Chat mockup */}
-              <div className="lg:col-span-2 bg-background p-8 flex items-center justify-center">
-                <div className="bg-muted rounded-2xl p-6 w-full max-w-xs">
+              <div className="lg:col-span-2 bg-secondary p-8 flex items-center justify-center">
+                <div className="bg-card rounded-2xl p-6 w-full max-w-xs shadow-sm border border-border">
                   <div className="space-y-3">
                     {features[activeIndex].chat.map((msg, i) => (
                       <motion.div

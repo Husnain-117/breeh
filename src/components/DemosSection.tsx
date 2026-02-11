@@ -61,7 +61,7 @@ const DemosSection = () => {
   }, [current]);
 
   return (
-    <section className="py-24 lg:py-32 bg-background relative overflow-hidden" id="demos">
+    <section className="py-24 lg:py-32 section-alt relative overflow-hidden" id="demos">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -100,7 +100,7 @@ const DemosSection = () => {
                     isCenter ? "" : "pointer-events-none"
                   }`}
                 >
-                  <div className="rounded-3xl overflow-hidden shadow-2xl border border-border/30 bg-muted/30">
+                  <div className="rounded-3xl overflow-hidden shadow-2xl border border-border bg-secondary">
                     {/* Video container */}
                     <div className="relative aspect-video bg-foreground/5">
                       <video
@@ -140,7 +140,7 @@ const DemosSection = () => {
                       <motion.div
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="p-6 text-center bg-background"
+                        className="p-6 text-center bg-card"
                       >
                         <h3 className="font-display font-bold text-lg text-foreground mb-1">
                           <span className="text-accent">{demo.title}</span>
