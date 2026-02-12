@@ -8,6 +8,7 @@ import ROICalculator from "./pages/ROICalculator";
 import Product from "./pages/Product";
 import Solutions from "./pages/Solutions";
 import NotFound from "./pages/NotFound";
+import About from "./pages/About";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,7 @@ const App = () => (
           <Route path="/product" element={<Product />} />
           <Route path="/solutions" element={<Solutions />} />
           <Route path="/roi-calculator" element={<ROICalculator />} />
+          <Route path="/about" element={<About />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

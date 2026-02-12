@@ -94,8 +94,7 @@ const PlaybookModal = ({ open, onOpenChange }: PlaybookModalProps) => {
             <div
               className="p-8 text-center"
               style={{
-                background:
-                  "linear-gradient(135deg, hsl(243 90% 64%) 0%, hsl(243 70% 52%) 50%, hsl(252 70% 65%) 100%)",
+                background: "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(244 58% 55%) 100%)",
               }}
             >
               <div className="w-12 h-12 rounded-xl bg-primary-foreground/20 flex items-center justify-center mx-auto mb-4">
