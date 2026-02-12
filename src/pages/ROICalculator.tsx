@@ -154,7 +154,7 @@ const ROICalculator = () => {
             <div
               className="p-8 text-center"
               style={{
-                background: "linear-gradient(135deg, hsl(243 90% 64%) 0%, hsl(243 70% 52%) 50%, hsl(252 70% 65%) 100%)",
+                background: "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(244 58% 55%) 100%)",
               }}
             >
               <div className="w-14 h-14 rounded-xl bg-primary-foreground/20 flex items-center justify-center mx-auto mb-4">
@@ -233,7 +233,7 @@ const ROICalculator = () => {
                   transition={{ duration: 0.5 }}
                   className="rounded-2xl overflow-hidden shadow-xl sticky top-24"
                   style={{
-                    background: "linear-gradient(135deg, hsl(240 50% 14%) 0%, hsl(243 60% 26%) 50%, hsl(243 90% 58%) 100%)",
+                    background: "linear-gradient(135deg, hsl(var(--section-dark)) 0%, hsl(var(--primary)) 100%)",
                   }}
                 >
                   <div className="p-6 md:p-8 space-y-6">
