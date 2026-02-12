@@ -18,6 +18,7 @@ const featuredArticle = {
     "Zen Dentistry tried 2 AI vendors that failed. Breeh AI delivered 16-23 new patients monthly per location, 17× ROI across 24 locations. \"110% recommend.\"",
   date: "Jan 10",
   readTime: "11 min read",
+  link: "https://www.breehai.com",
 };
 
 const articles = [
@@ -28,6 +29,7 @@ const articles = [
       "Integrate Dentisoft Office Cloud with an AI dental receptionist to capture missed calls, engage after-hours patients, and automate scheduling.",
     date: "Feb 5",
     readTime: "9 min read",
+    link: "https://www.dframerica.com/software",
   },
   {
     type: "blog" as const,
@@ -36,6 +38,7 @@ const articles = [
       "Integrate iDentalSoft with an AI dental receptionist to capture missed calls, engage after-hours patients, and streamline operations.",
     date: "Feb 5",
     readTime: "9 min read",
+    link: "https://www.identalsoft.com",
   },
   {
     type: "blog" as const,
@@ -44,6 +47,7 @@ const articles = [
       "Learn how MacPractice integrates with AI receptionist technology to capture missed calls, automate patient communication, and boost revenue.",
     date: "Feb 5",
     readTime: "9 min read",
+    link: "https://www.macpractice.com",
   },
   {
     type: "case-study" as const,
@@ -52,6 +56,7 @@ const articles = [
       "Allied OMS deployed Breeh AI across 8 locations and saw a 40% increase in new patient bookings within the first quarter.",
     date: "Jan 22",
     readTime: "8 min read",
+    link: "https://www.breehai.com",
   },
   {
     type: "blog" as const,
@@ -60,6 +65,7 @@ const articles = [
       "Learn how tab32 integration with AI receptionists helps dental practices capture missed calls, automate scheduling, and improve patient retention.",
     date: "Feb 5",
     readTime: "9 min read",
+    link: "https://www.tab32.com",
   },
   {
     type: "case-study" as const,
@@ -68,6 +74,7 @@ const articles = [
       "With Breeh AI handling weekend and after-hours calls, Danville Pediatric Dentistry recovered 23 new patients in the first month alone.",
     date: "Jan 15",
     readTime: "7 min read",
+    link: "https://www.breehai.com",
   },
   {
     type: "blog" as const,
@@ -76,6 +83,7 @@ const articles = [
       "Discover how ACE Dental integration with AI receptionists helps practices capture missed calls, automate workflows, and grow revenue.",
     date: "Feb 5",
     readTime: "9 min read",
+    link: "https://www.acedentalsoft.com",
   },
   {
     type: "blog" as const,
@@ -84,6 +92,7 @@ const articles = [
       "Learn how ABELDent integration with AI receptionists helps dental practices capture missed calls, automate patient outreach, and increase bookings.",
     date: "Feb 5",
     readTime: "9 min read",
+    link: "https://www.abeldent.com",
   },
   {
     type: "case-study" as const,
@@ -92,6 +101,7 @@ const articles = [
       "TManagement Group standardized patient communication across 12 locations, reducing missed calls by 78% and saving 120+ staff hours per month.",
     date: "Dec 18",
     readTime: "10 min read",
+    link: "https://www.breehai.com",
   },
 ];
 
@@ -180,9 +190,14 @@ const Resources = () => {
                   <Clock className="w-3.5 h-3.5" /> {featuredArticle.readTime}
                 </span>
               </div>
-              <button className="self-start btn-primary flex items-center gap-2 text-sm px-6 py-3">
+              <a
+                href={featuredArticle.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="self-start btn-primary inline-flex items-center gap-2 text-sm px-6 py-3"
+              >
                 Read Article <ChevronRight className="w-4 h-4" />
-              </button>
+              </a>
             </div>
           </motion.div>
         </div>
@@ -236,7 +251,6 @@ const Resources = () => {
                 {/* Image placeholder */}
                 <div className="aspect-[4/3] bg-secondary flex items-center justify-center relative overflow-hidden">
                   <BookOpen className="w-12 h-12 text-primary/20" />
-                  {/* Decorative corner accent */}
                   <div className="absolute -top-4 -right-4 w-24 h-24 rounded-full bg-primary/10" />
                   <div className="absolute -bottom-4 -left-4 w-20 h-20 rounded-full bg-primary/5" />
                 </div>
@@ -252,14 +266,24 @@ const Resources = () => {
                   <p className="text-sm text-muted-foreground leading-relaxed mb-4 line-clamp-2">
                     {article.excerpt}
                   </p>
-                  <div className="flex items-center gap-3 text-xs text-muted-foreground">
-                    <span className="flex items-center gap-1">
-                      <Calendar className="w-3 h-3" /> {article.date}
-                    </span>
-                    <span>|</span>
-                    <span className="flex items-center gap-1">
-                      <Clock className="w-3 h-3" /> {article.readTime}
-                    </span>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                      <span className="flex items-center gap-1">
+                        <Calendar className="w-3 h-3" /> {article.date}
+                      </span>
+                      <span>|</span>
+                      <span className="flex items-center gap-1">
+                        <Clock className="w-3 h-3" /> {article.readTime}
+                      </span>
+                    </div>
+                    <a
+                      href={article.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary text-xs font-bold flex items-center gap-1 hover:gap-2 transition-all"
+                    >
+                      Read <ArrowRight className="w-3 h-3" />
+                    </a>
                   </div>
                 </div>
               </motion.article>

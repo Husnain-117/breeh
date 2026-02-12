@@ -10,6 +10,7 @@ import Solutions from "./pages/Solutions";
 import NotFound from "./pages/NotFound";
 import About from "./pages/About";
 import Resources from "./pages/Resources";
+import AITransparency from "./pages/AITransparency";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="/roi-calculator" element={<ROICalculator />} />
           <Route path="/about" element={<About />} />
           <Route path="/resources" element={<Resources />} />
+          <Route path="/ai-transparency" element={<AITransparency />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
