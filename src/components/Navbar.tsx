@@ -114,6 +114,12 @@ const Navbar = ({ onBookDemo, onOpenPlaybook }: NavbarProps) => {
             >
               Resources
             </button>
+            <button
+              onClick={() => navigate("/ai-transparency")}
+              className="px-4 py-2 text-sm font-medium text-primary-foreground/70 hover:text-primary-foreground transition-colors duration-300"
+            >
+              AI Transparency
+            </button>
           </div>
 
           {/* Right side: FAQ + CTA */}
@@ -165,6 +171,9 @@ const Navbar = ({ onBookDemo, onOpenPlaybook }: NavbarProps) => {
               </button>
               <button onClick={() => { navigate("/resources"); setMobileOpen(false); }} className="block text-foreground font-medium py-2 w-full text-left">
                 Resources
+              </button>
+              <button onClick={() => { navigate("/ai-transparency"); setMobileOpen(false); }} className="block text-foreground font-medium py-2 w-full text-left">
+                AI Transparency
               </button>
               <div className="pt-4 space-y-3">
                 <button onClick={() => scrollToSection("faq")} className="block text-center text-sm text-foreground/70 w-full">
