@@ -17,7 +17,7 @@ const HeroSection = ({ onBookDemo }: HeroSectionProps) => {
         />
         {/* Overlay with primary color */}
         {/* Simple solid color overlay */}
-        <div className="absolute inset-0 bg-[hsl(244_50%_22%)]/60" />
+        <div className="absolute inset-0 bg-[hsl(244_50%_22%)]/40" />
       </div>
 
       {/* Content - Centered */}
