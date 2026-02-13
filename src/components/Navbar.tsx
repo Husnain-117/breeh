@@ -22,6 +22,11 @@ const Navbar = ({ onBookDemo, onOpenPlaybook }: NavbarProps) => {
 
   const resourceItems = [
     {
+      label: "Blog",
+      desc: "Latest insights on dental AI",
+      onClick: () => { navigate("/blog"); setMobileOpen(false); },
+    },
+    {
       label: "Playbook",
       desc: "The $1M/yr dental practice playbook",
       onClick: () => { onOpenPlaybook?.(); setMobileOpen(false); },
