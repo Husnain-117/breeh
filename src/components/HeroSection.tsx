@@ -15,9 +15,8 @@ const HeroSection = ({ onBookDemo }: HeroSectionProps) => {
           alt="Modern dental office"
           className="w-full h-full object-cover"
         />
-        {/* Overlay with primary color */}
-        {/* Simple solid color overlay */}
-        <div className="absolute inset-0 bg-[hsl(244_50%_22%)]/40" />
+        {/* Gradient overlay for professional look */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(244_58%_61%)]/80 via-[hsl(244_50%_35%)]/70 to-[hsl(244_50%_22%)]/85" />
       </div>
 
       {/* Content - Centered */}
