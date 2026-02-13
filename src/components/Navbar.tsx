@@ -114,7 +114,7 @@ const Navbar = ({ onBookDemo, onOpenPlaybook }: NavbarProps) => {
               Solutions
             </button>
             <button
-              onClick={() => navigate("/casestudies")}
+              onClick={() => navigate("/resources")}
               className="px-4 py-2 text-sm font-medium text-primary-foreground/70 hover:text-primary-foreground transition-colors duration-300"
             >
               Case Studies
