@@ -29,12 +29,18 @@ const Navbar = ({ onBookDemo, onOpenPlaybook }: NavbarProps) => {
     {
       label: "Playbook",
       desc: "The $1M/yr dental practice playbook",
-      onClick: () => { onOpenPlaybook?.(); setMobileOpen(false); },
+      onClick: () => {
+        onOpenPlaybook?.();
+        setMobileOpen(false);
+      },
     },
     {
       label: "ROI Calculator",
       desc: "Estimate your savings with Breeh AI",
-      onClick: () => { navigate("/roi-calculator"); setMobileOpen(false); },
+      onClick: () => {
+        navigate("/roi-calculator");
+        setMobileOpen(false);
+      },
     },
   ];
 
@@ -52,10 +58,9 @@ const Navbar = ({ onBookDemo, onOpenPlaybook }: NavbarProps) => {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? "py-2 px-4 lg:px-8" : "py-4 px-4 lg:px-8"}`}
     >
       <div
-        className={`max-w-7xl mx-auto transition-all duration-500 rounded-2xl px-6 lg:px-8 border border-primary/20 ${scrolled
-          ? "bg-primary shadow-xl shadow-primary/20"
-          : "bg-primary/60 backdrop-blur-md"
-          }`}
+        className={`max-w-7xl mx-auto transition-all duration-500 rounded-2xl px-6 lg:px-8 border border-primary/20 ${
+          scrolled ? "bg-primary shadow-xl shadow-primary/20" : "bg-primary/60 backdrop-blur-md"
+        }`}
       >
         <div className="flex items-center justify-between h-14 lg:h-16">
           {/* Logo */}
@@ -114,10 +119,16 @@ const Navbar = ({ onBookDemo, onOpenPlaybook }: NavbarProps) => {
               Solutions
             </button>
             <button
-              onClick={() => scrollToSection("mission")}
+              onClick={() => navigate("/resources")}
               className="px-4 py-2 text-sm font-medium text-primary-foreground/70 hover:text-primary-foreground transition-colors duration-300"
             >
-              About
+              Case Studies
+            </button>
+            <button
+              onClick={() => navigate("/ai-transparency")}
+              className="px-4 py-2 text-sm font-medium text-primary-foreground/70 hover:text-primary-foreground transition-colors duration-300"
+            >
+              AI Transparency
             </button>
           </div>
 
@@ -158,25 +169,62 @@ const Navbar = ({ onBookDemo, onOpenPlaybook }: NavbarProps) => {
           >
             <div className="px-6 py-6 space-y-4">
               {resourceItems.map((item) => (
-                <button key={item.label} onClick={item.onClick} className="block text-foreground font-medium py-2 w-full text-left">
+                <button
+                  key={item.label}
+                  onClick={item.onClick}
+                  className="block text-foreground font-medium py-2 w-full text-left"
+                >
                   {item.label}
                 </button>
               ))}
-              <button onClick={() => { navigate("/product"); setMobileOpen(false); }} className="block text-foreground font-medium py-2 w-full text-left">
+              <button
+                onClick={() => {
+                  navigate("/product");
+                  setMobileOpen(false);
+                }}
+                className="block text-foreground font-medium py-2 w-full text-left"
+              >
                 Product
               </button>
-              <button onClick={() => { navigate("/solutions"); setMobileOpen(false); }} className="block text-foreground font-medium py-2 w-full text-left">
+              <button
+                onClick={() => {
+                  navigate("/solutions");
+                  setMobileOpen(false);
+                }}
+                className="block text-foreground font-medium py-2 w-full text-left"
+              >
                 Solutions
               </button>
-              <button onClick={() => scrollToSection("mission")} className="block text-foreground font-medium py-2 w-full text-left">
-                About
+              <button
+                onClick={() => {
+                  navigate("/resources");
+                  setMobileOpen(false);
+                }}
+                className="block text-foreground font-medium py-2 w-full text-left"
+              >
+                Resources
+              </button>
+              <button
+                onClick={() => {
+                  navigate("/ai-transparency");
+                  setMobileOpen(false);
+                }}
+                className="block text-foreground font-medium py-2 w-full text-left"
+              >
+                AI Transparency
               </button>
               <div className="pt-4 space-y-3">
-                <button onClick={() => scrollToSection("faq")} className="block text-center text-sm text-foreground/70 w-full">
+                <button
+                  onClick={() => scrollToSection("faq")}
+                  className="block text-center text-sm text-foreground/70 w-full"
+                >
                   FAQ
                 </button>
                 <button
-                  onClick={() => { onBookDemo?.(); setMobileOpen(false); }}
+                  onClick={() => {
+                    onBookDemo?.();
+                    setMobileOpen(false);
+                  }}
                   className="block w-full text-center bg-accent text-accent-foreground font-semibold rounded-full px-6 py-2.5 text-sm"
                 >
                   BOOK DEMO

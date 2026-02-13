@@ -348,7 +348,7 @@ const Product = () => {
                                 initial={{ opacity: 0, scale: 0.95 }}
                                 whileInView={{ opacity: 1, scale: 1 }}
                                 viewport={{ once: true }}
-                                className="bg-foreground rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden aspect-[16/10]"
+                                className="bg-[hsl(var(--section-dark))] rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden aspect-[16/10]"
                             >
                                 <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary/30 to-transparent"></div>
                                 <div className="w-full h-full bg-card/5 rounded-2xl border border-card/10 p-6 flex flex-col text-left">
@@ -530,7 +530,7 @@ const Product = () => {
 
                         <motion.div
                             layoutId="dashboard"
-                            className="bg-[hsl(244_50%_22%)] text-white rounded-3xl p-8 md:p-12 border border-white/10 aspect-video flex flex-col md:flex-row gap-12 text-left shadow-2xl"
+                            className="bg-[hsl(var(--section-dark))] text-white rounded-3xl p-8 md:p-12 border border-white/10 aspect-video flex flex-col md:flex-row gap-12 text-left shadow-2xl"
                         >
                             <div className="flex-1 space-y-6">
                                 <h3 className="font-display font-bold text-2xl text-white">Practice Analytics</h3>
