@@ -7,7 +7,7 @@ import MissionSection from "@/components/MissionSection";
 import HowItWorksSection from "@/components/HowItWorksSection";
 import DemosSection from "@/components/DemosSection";
 import FAQSection from "@/components/FAQSection";
-import CTASection from "@/components/CTASection";
+
 import Footer from "@/components/Footer";
 import FloatingCallButton from "@/components/FloatingCallButton";
 import PlaybookModal from "@/components/PlaybookModal";
@@ -30,7 +30,7 @@ const Index = () => {
       <HowItWorksSection onBookDemo={openCalendly} />
       <DemosSection />
       <FAQSection />
-      <CTASection onBookDemo={openCalendly} />
+      
       <Footer onOpenPlaybook={() => setPlaybookOpen(true)} onBookDemo={openCalendly} />
       <FloatingCallButton />
       <PlaybookModal open={playbookOpen} onOpenChange={setPlaybookOpen} />
