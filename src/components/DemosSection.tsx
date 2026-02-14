@@ -1,34 +1,61 @@
-import { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Play, Pause, ChevronLeft, ChevronRight } from "lucide-react";
-import demoAnalytics from "@/assets/product-hero.jpg";
-import demoCallHandling from "@/assets/product-connection.jpg";
-import demoScheduler from "@/assets/product-integration.jpg";
+import { motion } from "framer-motion";
+import { BarChart3, PhoneCall, CalendarCheck, Shield, Zap, Users } from "lucide-react";
 
 const demos = [
   {
-    title: "Call Analytics Dashboard",
-    description: "Discover powerful analytics for AI agent optimization in your dental practice",
-    image: demoAnalytics,
-  },
-  {
+    icon: PhoneCall,
     title: "AI Call Handling",
-    description: "Unleash the true potential of automated patient communication via Agentic AI",
-    image: demoCallHandling,
+    description:
+      "Every inbound call is answered instantly by Breeh AI — triaging emergencies, answering FAQs, and routing complex cases to your team seamlessly.",
+    stats: "99.7% answer rate",
   },
   {
-    title: "Appointment Scheduler",
-    description: "Smart scheduling that syncs with your PMS and fills your calendar automatically",
-    image: demoScheduler,
+    icon: BarChart3,
+    title: "Call Analytics Dashboard",
+    description:
+      "Track call volume, peak hours, patient sentiment scores, and booking conversion rates in a real-time analytics dashboard built for dental practices.",
+    stats: "Real-time insights",
+  },
+  {
+    icon: CalendarCheck,
+    title: "Smart Appointment Scheduler",
+    description:
+      "Patients book, reschedule, and confirm appointments 24/7 via voice or SMS. Breeh AI syncs directly with your PMS to keep your calendar full.",
+    stats: "24/7 scheduling",
+  },
+  {
+    icon: Shield,
+    title: "HIPAA-Compliant Security",
+    description:
+      "All patient data is encrypted end-to-end and processed in HIPAA-compliant infrastructure. Your practice stays protected at every touchpoint.",
+    stats: "SOC 2 & HIPAA",
+  },
+  {
+    icon: Zap,
+    title: "Instant Integration",
+    description:
+      "Go live in under 48 hours. Breeh AI connects with Dentrix, Eaglesoft, Open Dental and more — no hardware or complex setup required.",
+    stats: "< 48hr setup",
+  },
+  {
+    icon: Users,
+    title: "Patient Follow-Up Engine",
+    description:
+      "Automated recall, reminders, and post-visit follow-ups via SMS, email, and voice reduce no-shows by up to 40% and keep patients engaged.",
+    stats: "40% fewer no-shows",
   },
 ];
 
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, delay: i * 0.1, ease: "easeOut" as const },
+  }),
+};
+
 const DemosSection = () => {
-  const [current, setCurrent] = useState(0);
-
-  const next = () => setCurrent((prev) => (prev + 1) % demos.length);
-  const prev = () => setCurrent((prev) => (prev - 1 + demos.length) % demos.length);
-
   return (
     <section className="py-24 lg:py-32 section-alt relative overflow-hidden" id="demos">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -40,107 +67,44 @@ const DemosSection = () => {
           transition={{ duration: 0.7 }}
           className="text-center mb-16"
         >
-          <p className="text-sm font-semibold text-foreground tracking-wide mb-3">
-            On-demand Interactive Demos
+          <p className="text-sm font-semibold text-accent tracking-wide mb-3">
+            Platform Capabilities
           </p>
-          <h2 className="font-display font-bold text-4xl md:text-5xl text-foreground">
-            Experience our AI Dental Platform
+          <h2 className="font-display font-bold text-4xl md:text-5xl text-foreground mb-4">
+            Everything Your Front Desk Needs
           </h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            A complete AI-powered suite designed for modern dental practices.
+          </p>
         </motion.div>
 
-        {/* Carousel */}
-        <div className="relative">
-          <div className="flex items-center justify-center min-h-[420px] md:min-h-[480px]">
-            {demos.map((demo, index) => {
-              const offset = index - current;
-              const isCenter = index === current;
-
-              return (
-                <motion.div
-                  key={index}
-                  animate={{
-                    scale: isCenter ? 1 : 0.82,
-                    opacity: isCenter ? 1 : 0.4,
-                    x: offset * 100,
-                    zIndex: isCenter ? 10 : 1,
-                  }}
-                  transition={{ duration: 0.5, ease: "easeInOut" }}
-                  className={`absolute w-full max-w-2xl ${isCenter ? "" : "pointer-events-none"
-                    }`}
-                >
-                  <div className="rounded-3xl overflow-hidden shadow-2xl border border-border bg-secondary">
-                    {/* Image container */}
-                    <div className="relative aspect-video bg-foreground/5 cursor-pointer group" onClick={() => window.open("https://calendly.com/breeh-ai/30min", "_blank")}>
-                      <img
-                        src={demo.image}
-                        alt={demo.title}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      />
-                      <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors" />
-
-                      {/* Play overlay */}
-                      {isCenter && (
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <motion.div
-                            initial={{ scale: 0.8, opacity: 0 }}
-                            animate={{ scale: 1, opacity: 1 }}
-                            whileHover={{ scale: 1.1 }}
-                            className="w-20 h-20 rounded-full bg-accent/90 backdrop-blur-sm flex items-center justify-center shadow-lg cursor-pointer"
-                          >
-                            <Play className="w-8 h-8 text-white ml-1" fill="currentColor" />
-                          </motion.div>
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Caption */}
-                    {isCenter && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="p-6 text-center bg-card"
-                      >
-                        <h3 className="font-display font-bold text-lg text-foreground mb-1">
-                          <span className="text-accent">{demo.title}</span>
-                        </h3>
-                        <p className="text-sm text-muted-foreground">{demo.description}</p>
-                      </motion.div>
-                    )}
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
-
-          {/* Bottom Controls */}
-          <div className="flex items-center justify-center gap-4 mt-6">
-            <button
-              onClick={prev}
-              className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:border-primary hover:text-primary transition-colors bg-background shadow-sm"
+        {/* Cards Grid */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {demos.map((demo, i) => (
+            <motion.div
+              key={demo.title}
+              custom={i}
+              variants={cardVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              whileHover={{ y: -6, transition: { duration: 0.25 } }}
+              className="group rounded-2xl border border-border bg-card p-8 shadow-sm hover:shadow-xl hover:border-accent/30 transition-all duration-300"
             >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-
-            <div className="flex gap-2">
-              {demos.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setCurrent(i)}
-                  className={`h-1.5 rounded-full transition-all duration-500 ${i === current
-                    ? "w-10 bg-accent"
-                    : "w-4 bg-border hover:bg-muted-foreground/30"
-                    }`}
-                />
-              ))}
-            </div>
-
-            <button
-              onClick={next}
-              className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:border-primary hover:text-primary transition-colors bg-background shadow-sm"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </button>
-          </div>
+              <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-5 group-hover:bg-accent/20 transition-colors">
+                <demo.icon className="w-6 h-6 text-accent" />
+              </div>
+              <h3 className="font-display font-bold text-lg text-foreground mb-2">
+                {demo.title}
+              </h3>
+              <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+                {demo.description}
+              </p>
+              <span className="inline-block text-xs font-semibold text-accent bg-accent/10 rounded-full px-3 py-1">
+                {demo.stats}
+              </span>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

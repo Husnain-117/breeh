@@ -57,7 +57,7 @@ const Footer = ({ onOpenPlaybook, onBookDemo }: FooterProps) => {
                   key={social.label}
                   href={social.href}
                   aria-label={social.label}
-                  className="w-9 h-9 rounded-lg bg-primary-foreground/10 flex items-center justify-center text-primary-foreground/50 hover:text-primary hover:bg-primary-foreground/20 transition-colors"
+                  className="w-9 h-9 rounded-lg bg-primary-foreground/10 flex items-center justify-center text-primary-foreground/50 hover:text-primary-foreground hover:bg-primary-foreground/20 transition-all duration-300 hover:scale-110"
                 >
                   <social.icon className="w-4 h-4" />
                 </a>
@@ -79,7 +79,7 @@ const Footer = ({ onOpenPlaybook, onBookDemo }: FooterProps) => {
                   <li key={link.label}>
                     <button
                       onClick={link.onClick}
-                      className="text-sm text-primary-foreground/50 hover:text-primary transition-colors duration-200 inline-flex items-center gap-2"
+                      className="text-sm text-primary-foreground/50 hover:text-primary-foreground transition-colors duration-300 inline-flex items-center gap-2 relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 hover:after:w-full after:bg-primary-foreground after:transition-all after:duration-300"
                     >
                       {link.label}
                       {"isNew" in link && link.isNew && (
@@ -97,7 +97,7 @@ const Footer = ({ onOpenPlaybook, onBookDemo }: FooterProps) => {
         <div className="mt-16 pt-8 border-t border-primary-foreground/10 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex flex-wrap gap-6">
             {["Terms of Service", "Privacy Policy", "HIPAA Compliance"].map((link) => (
-              <a key={link} href="#" className="text-xs text-primary-foreground/40 hover:text-primary transition-colors">{link}</a>
+              <a key={link} href="#" className="text-xs text-primary-foreground/40 hover:text-primary-foreground transition-colors duration-300 relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 hover:after:w-full after:bg-primary-foreground/60 after:transition-all after:duration-300">{link}</a>
             ))}
           </div>
           <p className="text-xs text-primary-foreground/40">© {new Date().getFullYear()} Breeh AI. All rights reserved.</p>
