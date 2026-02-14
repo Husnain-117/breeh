@@ -17,7 +17,7 @@ const HeroSection = ({ onBookDemo }: HeroSectionProps) => {
         />
         {/* Strong dark overlay for text readability */}
         <div className="absolute inset-0 bg-black/60" />
-        {/* Purple tint overlay */}
+        {/* Purple tint  */}
         <div className="absolute inset-0 bg-[hsl(244_50%_22%)]/40" />
       </div>
 
