@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PlaybookModal from "@/components/PlaybookModal";
@@ -8,102 +9,9 @@ import {
   ArrowRight, Calendar, Clock, FileText, BookOpen,
   Mail, ChevronRight
 } from "lucide-react";
+import { featuredArticle, articles } from "@/lib/articles";
 
 type Category = "all" | "case-study" | "blog";
-
-const featuredArticle = {
-  category: "Case Study" as const,
-  title: "Zen Dentistry: 17× ROI After Failed AI Vendors — DSO Case Study",
-  excerpt:
-    "Zen Dentistry tried 2 AI vendors that failed. Breeh AI delivered 16-23 new patients monthly per location, 17× ROI across 24 locations. \"110% recommend.\"",
-  date: "Jan 10",
-  readTime: "11 min read",
-  link: "https://www.breehai.com",
-};
-
-const articles = [
-  {
-    type: "blog" as const,
-    title: "Dentisoft Integration With AI Receptionist",
-    excerpt:
-      "Integrate Dentisoft Office Cloud with an AI dental receptionist to capture missed calls, engage after-hours patients, and automate scheduling.",
-    date: "Feb 5",
-    readTime: "9 min read",
-    link: "https://www.dframerica.com/software",
-  },
-  {
-    type: "blog" as const,
-    title: "iDentalSoft Integration With AI Receptionist",
-    excerpt:
-      "Integrate iDentalSoft with an AI dental receptionist to capture missed calls, engage after-hours patients, and streamline operations.",
-    date: "Feb 5",
-    readTime: "9 min read",
-    link: "https://www.identalsoft.com",
-  },
-  {
-    type: "blog" as const,
-    title: "MacPractice Integration With AI Receptionist",
-    excerpt:
-      "Learn how MacPractice integrates with AI receptionist technology to capture missed calls, automate patient communication, and boost revenue.",
-    date: "Feb 5",
-    readTime: "9 min read",
-    link: "https://www.macpractice.com",
-  },
-  {
-    type: "case-study" as const,
-    title: "Allied OMS: How a Multi-Location Practice Scaled With AI",
-    excerpt:
-      "Allied OMS deployed Breeh AI across 8 locations and saw a 40% increase in new patient bookings within the first quarter.",
-    date: "Jan 22",
-    readTime: "8 min read",
-    link: "https://www.breehai.com",
-  },
-  {
-    type: "blog" as const,
-    title: "tab32 Integration With AI Receptionist",
-    excerpt:
-      "Learn how tab32 integration with AI receptionists helps dental practices capture missed calls, automate scheduling, and improve patient retention.",
-    date: "Feb 5",
-    readTime: "9 min read",
-    link: "https://www.tab32.com",
-  },
-  {
-    type: "case-study" as const,
-    title: "Danville Pediatric Dentistry: Weekend Call Recovery Success",
-    excerpt:
-      "With Breeh AI handling weekend and after-hours calls, Danville Pediatric Dentistry recovered 23 new patients in the first month alone.",
-    date: "Jan 15",
-    readTime: "7 min read",
-    link: "https://www.breehai.com",
-  },
-  {
-    type: "blog" as const,
-    title: "ACE Dental Integration With AI Receptionist",
-    excerpt:
-      "Discover how ACE Dental integration with AI receptionists helps practices capture missed calls, automate workflows, and grow revenue.",
-    date: "Feb 5",
-    readTime: "9 min read",
-    link: "https://www.acedentalsoft.com",
-  },
-  {
-    type: "blog" as const,
-    title: "ABELDent Integration With AI Receptionist",
-    excerpt:
-      "Learn how ABELDent integration with AI receptionists helps dental practices capture missed calls, automate patient outreach, and increase bookings.",
-    date: "Feb 5",
-    readTime: "9 min read",
-    link: "https://www.abeldent.com",
-  },
-  {
-    type: "case-study" as const,
-    title: "TManagement Group: Centralized AI for 12 Locations",
-    excerpt:
-      "TManagement Group standardized patient communication across 12 locations, reducing missed calls by 78% and saving 120+ staff hours per month.",
-    date: "Dec 18",
-    readTime: "10 min read",
-    link: "https://www.breehai.com",
-  },
-];
 
 const Resources = () => {
   const [playbookOpen, setPlaybookOpen] = useState(false);
@@ -173,7 +81,7 @@ const Resources = () => {
             {/* Content */}
             <div className="p-8 md:p-12 flex flex-col justify-center">
               <span className="inline-block self-start px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-4">
-                {featuredArticle.category}
+                {featuredArticle.type === "case-study" ? "Case Study" : "Blog Article"}
               </span>
               <h2 className="font-display font-bold text-2xl md:text-3xl text-foreground mb-4 leading-snug">
                 {featuredArticle.title}
@@ -190,14 +98,12 @@ const Resources = () => {
                   <Clock className="w-3.5 h-3.5" /> {featuredArticle.readTime}
                 </span>
               </div>
-              <a
-                href={featuredArticle.link}
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                to={`/resources/${featuredArticle.slug}`}
                 className="self-start btn-primary inline-flex items-center gap-2 text-sm px-6 py-3"
               >
                 Read Article <ChevronRight className="w-4 h-4" />
-              </a>
+              </Link>
             </div>
           </motion.div>
         </div>
@@ -276,14 +182,12 @@ const Resources = () => {
                         <Clock className="w-3 h-3" /> {article.readTime}
                       </span>
                     </div>
-                    <a
-                      href={article.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    <Link
+                      to={`/resources/${article.slug}`}
                       className="text-primary text-xs font-bold flex items-center gap-1 hover:gap-2 transition-all"
                     >
                       Read <ArrowRight className="w-3 h-3" />
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </motion.article>
