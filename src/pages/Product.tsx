@@ -6,14 +6,13 @@ import { SITE_CONFIG } from "@/lib/config";
 import PlaybookModal from "@/components/PlaybookModal";
 import {
     ChevronRight, Play, MessageSquare, PhoneCall, Zap, Share2,
-    MousePointer2, BarChart3, Quote, ArrowRight, ShieldCheck,
-    CheckCircle2, Monitor
+    MousePointer2, Quote, ArrowRight, ShieldCheck,
+    Monitor
 } from "lucide-react";
 
 
 const Product = () => {
     const [playbookOpen, setPlaybookOpen] = useState(false);
-    const [activeTab, setActiveTab] = useState("performance tracking");
 
     const openCalendly = () => {
         window.open(SITE_CONFIG.calendlyUrl, "_blank");
@@ -287,9 +286,9 @@ const Product = () => {
                 </div>
             </section>
 
-            {/* 6. Website Chatbot Section */}
+            {/* 6. Website Chatbot Section — Redesigned */}
             <section className="py-24 section-alt px-6 lg:px-8">
-                <div className="max-w-7xl mx-auto">
+                <div className="max-w-6xl mx-auto">
                     <div className="text-center mb-16">
                         <motion.span
                             {...fadeInUp}
@@ -300,93 +299,101 @@ const Product = () => {
                         <motion.h2
                             {...fadeInUp}
                             transition={{ delay: 0.1, duration: 0.6 }}
-                            className="font-display font-bold text-3xl md:text-5xl mb-6 text-foreground"
+                            className="font-display font-bold text-3xl md:text-5xl mb-6 text-foreground leading-tight"
                         >
-                            Capture Website Visitors with Your <br className="hidden md:block" /> AI Dental Receptionist
+                            Capture Website Visitors <br className="hidden md:block" />
+                            with Your AI Receptionist
                         </motion.h2>
                         <motion.p
                             {...fadeInUp}
                             transition={{ delay: 0.2, duration: 0.6 }}
-                            className="text-muted-foreground max-w-2xl mx-auto mb-10"
+                            className="text-muted-foreground text-lg max-w-2xl mx-auto mb-10"
                         >
-                            Virtual dental receptionist chatbot for your website and patient portal.
+                            A virtual dental receptionist chatbot that lives on your website — engaging visitors, answering questions, and booking appointments around the clock.
                         </motion.p>
-                        <button
+                        <motion.button
+                            {...fadeInUp}
+                            transition={{ delay: 0.3, duration: 0.6 }}
                             onClick={openCalendly}
-                            className="btn-primary flex items-center gap-2 mx-auto"
+                            className="btn-primary px-8 py-4 mx-auto"
                         >
                             Try Website Chat Demo
-                        </button>
+                        </motion.button>
                     </div>
 
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                        <div className="lg:col-span-4 space-y-6">
-                            {[
-                                { title: "Response rates", value: "15%", label: "Increase compared to last week" },
-                                { title: "Conversion rates", value: "8.2%", label: "Increase compared to last week" },
-                                { title: "Booked appointments", value: "15%", label: "You booked 16 out of 115 appointments" },
-                            ].map((stat, i) => (
-                                <motion.div
-                                    key={i}
-                                    initial={{ opacity: 0, x: -20 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: i * 0.1, duration: 0.5 }}
-                                    className="bg-card p-6 rounded-2xl border border-border text-left shadow-sm"
-                                >
-                                    <p className="text-sm text-muted-foreground mb-1">{stat.title}</p>
-                                    <div className="flex items-center gap-2 mb-1">
-                                        <span className="text-2xl font-bold text-foreground">{stat.value}</span>
-                                        <ChevronRight className="w-4 h-4 text-primary rotate-[315deg]" />
-                                    </div>
-                                    <p className="text-[10px] text-muted-foreground">{stat.label}</p>
-                                </motion.div>
-                            ))}
-                        </div>
-                        <div className="lg:col-span-8">
-                            <motion.div
-                                initial={{ opacity: 0, scale: 0.95 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                viewport={{ once: true }}
-                                className="bg-[hsl(var(--section-dark))] rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden aspect-[16/10]"
-                            >
-                                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary/30 to-transparent"></div>
-                                <div className="w-full h-full bg-card/5 rounded-2xl border border-card/10 p-6 flex flex-col text-left">
-                                    <div className="flex items-center gap-2 mb-6 border-b border-card/10 pb-4">
-                                        <div className="w-3 h-3 rounded-full bg-primary/50"></div>
-                                        <div className="w-3 h-3 rounded-full bg-primary/30"></div>
-                                        <div className="w-3 h-3 rounded-full bg-primary/20"></div>
-                                        <div className="ml-4 h-4 w-40 bg-card/10 rounded"></div>
-                                    </div>
-                                    <div className="flex-1 flex gap-6">
-                                        <div className="w-48 hidden md:block space-y-3">
-                                            {[1, 2, 3, 4, 5].map(j => <div key={j} className="h-10 w-full bg-card/5 rounded-lg"></div>)}
+                    {/* Chat mockup + stats */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 40 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8 }}
+                        className="bg-card rounded-3xl border border-border shadow-xl p-8 md:p-12"
+                    >
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+                            {/* Left — Stats */}
+                            <div className="space-y-6">
+                                {[
+                                    { label: "Response rate increase", value: "94%", sub: "AI answers within 2 seconds, 24/7" },
+                                    { label: "Website conversion lift", value: "3.2×", sub: "More visitors become booked patients" },
+                                    { label: "Patient satisfaction", value: "98%", sub: "Patients prefer instant, helpful responses" },
+                                ].map((stat, i) => (
+                                    <motion.div
+                                        key={i}
+                                        initial={{ opacity: 0, x: -20 }}
+                                        whileInView={{ opacity: 1, x: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ delay: 0.2 + i * 0.15 }}
+                                        className="flex items-center gap-5 p-5 rounded-2xl bg-secondary/50 border border-border"
+                                    >
+                                        <div className="text-3xl font-bold text-primary font-display shrink-0 w-20 text-right">
+                                            {stat.value}
                                         </div>
-                                        <div className="flex-1 bg-card/5 rounded-xl p-4 space-y-4">
-                                            <div className="flex gap-3">
-                                                <div className="w-8 h-8 rounded-full bg-primary/20"></div>
-                                                <div className="bg-card/10 p-3 rounded-lg text-card/80 text-[10px] max-w-[70%]">
-                                                    Welcome to our practice. How can I help you today?
-                                                </div>
-                                            </div>
-                                            <div className="flex flex-row-reverse gap-3">
-                                                <div className="w-8 h-8 rounded-full bg-card/10"></div>
-                                                <div className="bg-primary p-3 rounded-lg text-primary-foreground text-[10px] max-w-[70%]">
-                                                    I'm interested in booking a checkup soon.
-                                                </div>
-                                            </div>
+                                        <div>
+                                            <p className="font-semibold text-foreground text-sm">{stat.label}</p>
+                                            <p className="text-xs text-muted-foreground">{stat.sub}</p>
+                                        </div>
+                                    </motion.div>
+                                ))}
+                            </div>
+
+                            {/* Right — Chat UI mockup */}
+                            <div className="bg-foreground rounded-2xl p-6 shadow-lg">
+                                <div className="flex items-center gap-2 mb-5 pb-3 border-b border-muted-foreground/10">
+                                    <div className="w-3 h-3 rounded-full bg-red-400/60" />
+                                    <div className="w-3 h-3 rounded-full bg-yellow-400/60" />
+                                    <div className="w-3 h-3 rounded-full bg-green-400/60" />
+                                    <div className="ml-3 h-3.5 w-32 bg-muted-foreground/10 rounded" />
+                                </div>
+                                <div className="space-y-4">
+                                    <div className="flex gap-3">
+                                        <div className="w-8 h-8 rounded-full bg-primary/20 shrink-0" />
+                                        <div className="bg-muted-foreground/10 p-3.5 rounded-2xl rounded-tl-sm max-w-[80%]">
+                                            <p className="text-xs text-primary-foreground/80">Welcome to our practice! How can I help you today?</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex flex-row-reverse gap-3">
+                                        <div className="w-8 h-8 rounded-full bg-muted-foreground/10 shrink-0" />
+                                        <div className="bg-primary p-3.5 rounded-2xl rounded-tr-sm max-w-[80%]">
+                                            <p className="text-xs text-primary-foreground">I'm interested in booking a checkup soon.</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex gap-3">
+                                        <div className="w-8 h-8 rounded-full bg-primary/20 shrink-0" />
+                                        <div className="bg-muted-foreground/10 p-3.5 rounded-2xl rounded-tl-sm max-w-[80%]">
+                                            <p className="text-xs text-primary-foreground/80">I'd love to help! We have openings tomorrow at 10 AM and 2 PM. Which works best?</p>
                                         </div>
                                     </div>
                                 </div>
-                            </motion.div>
+                            </div>
                         </div>
-                    </div>
+                    </motion.div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-20 text-left">
+                    {/* Feature highlights */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
                         {[
-                            { icon: Monitor, title: "Always available", desc: "Embed your AI dental receptionist on any digital touchpoint to capture leads 24/7." },
-                            { icon: MessageSquare, title: "Context-aware conversations", desc: "Maintains your practice's warm, professional tone while handling complex inquiries intelligently." },
-                            { icon: MousePointer2, title: "Lead conversion", desc: "Busy patients get instant help online—more bookings, every chat synced to your dashboard." }
+                            { icon: Monitor, title: "Always available", desc: "Embed on any digital touchpoint to capture leads 24/7, even after hours." },
+                            { icon: MessageSquare, title: "Context-aware", desc: "Maintains your practice's warm tone while handling complex dental inquiries." },
+                            { icon: MousePointer2, title: "Lead conversion", desc: "Turns casual visitors into booked patients — every chat synced to your dashboard." }
                         ].map((item, i) => (
                             <motion.div
                                 key={i}
@@ -394,13 +401,15 @@ const Product = () => {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: i * 0.1 }}
-                                className="space-y-4"
+                                className="flex items-start gap-4 p-6 rounded-2xl bg-card border border-border hover:border-primary/30 transition-colors"
                             >
-                                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0">
                                     <item.icon className="w-5 h-5" />
                                 </div>
-                                <h3 className="font-display font-bold text-xl text-foreground">{item.title}</h3>
-                                <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+                                <div>
+                                    <h3 className="font-display font-bold text-foreground mb-1">{item.title}</h3>
+                                    <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+                                </div>
                             </motion.div>
                         ))}
                     </div>
@@ -439,9 +448,14 @@ const Product = () => {
                                 <p className="text-muted-foreground text-lg leading-relaxed italic">
                                     "It has made a huge impact on Monday morning. The email our office receives with a summary of the calls we missed over the weekend is a game changer. What used to take a few hours and sometimes missed opportunities is now an effective schedule builder allowing us to prioritize call backs."
                                 </p>
-                                <div className="flex items-center gap-2 text-primary font-bold cursor-pointer group">
-                                    Read Case Study <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                                </div>
+                                <a
+                                    href="/blog"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-2 text-primary font-bold cursor-pointer group"
+                                >
+                                    Read Case Studies <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                                </a>
                             </motion.div>
                         </div>
                     </div>
@@ -476,175 +490,32 @@ const Product = () => {
                                     </motion.div>
                                 ))}
                             </div>
-                            <button className="w-full mt-8 py-3 rounded-xl bg-secondary border border-border text-xs font-bold text-foreground hover:bg-primary/10 transition-colors">
+                            <a
+                                href="/blog"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="block w-full mt-8 py-3 rounded-xl bg-secondary border border-border text-xs font-bold text-foreground hover:bg-primary/10 transition-colors text-center"
+                            >
                                 Read All Stories
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* 8. Analytics/Dashboard Section */}
+            {/* 8. Final CTA Form Section — Color-consistent */}
             <section className="py-24 px-6 lg:px-8 section-alt">
-                <div className="max-w-7xl mx-auto text-center">
-                    <motion.span
-                        {...fadeInUp}
-                        className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-6"
-                    >
-                        Analytics & Control
-                    </motion.span>
-                    <motion.h2
-                        {...fadeInUp}
-                        transition={{ delay: 0.1, duration: 0.6 }}
-                        className="font-display font-bold text-3xl md:text-5xl mb-6 text-foreground"
-                    >
-                        Complete Visibility Into <br /> Your AI Dental Receptionist Performance
-                    </motion.h2>
-                    <motion.p
-                        {...fadeInUp}
-                        transition={{ delay: 0.2, duration: 0.6 }}
-                        className="text-muted-foreground max-w-2xl mx-auto mb-10"
-                    >
-                        Detailed dashboards showing how your virtual receptionist drives ROI.
-                    </motion.p>
-                    <motion.button
-                        {...fadeInUp}
-                        transition={{ delay: 0.3, duration: 0.6 }}
-                        className="btn-primary flex items-center gap-2 mx-auto mb-16"
-                    >
-                        Explore Dashboard
-                    </motion.button>
-
-                    <div className="max-w-4xl mx-auto">
-                        <div className="flex items-center justify-center gap-2 mb-8 overflow-x-auto pb-4 no-scrollbar">
-                            {["Performance tracking", "ROI measurement", "Behavioral insights", "Team efficiency", "Privacy-first", "Full control"].map(tab => (
-                                <button
-                                    key={tab}
-                                    onClick={() => setActiveTab(tab.toLowerCase())}
-                                    className={`px-4 py-2 rounded-full text-[10px] font-bold whitespace-nowrap transition-all ${activeTab === tab.toLowerCase() ? 'bg-card shadow-sm border border-border text-primary' : 'text-muted-foreground hover:text-foreground'}`}
-                                >
-                                    {tab}
-                                </button>
-                            ))}
-                        </div>
-
-                        <motion.div
-                            layoutId="dashboard"
-                            className="bg-[hsl(var(--section-dark))] text-white rounded-3xl p-8 md:p-12 border border-white/10 aspect-video flex flex-col md:flex-row gap-12 text-left shadow-2xl"
-                        >
-                            <div className="flex-1 space-y-6">
-                                <h3 className="font-display font-bold text-2xl text-white">Practice Analytics</h3>
-                                <p className="text-sm text-white/70 leading-relaxed">
-                                    Monitor how your AI dental receptionist handles inbound calls, response rates, and revenue attribution. ROI measurement: Clear data showing how many patients your virtual dental receptionist captured.
-                                </p>
-                            </div>
-                            <div className="flex-1 flex flex-col justify-center items-center text-center">
-                                <div className="text-5xl font-bold text-white mb-2">36%</div>
-                                <p className="text-xs text-white/60 mb-8">of missed new callers don't call back again</p>
-                                <div className="grid grid-cols-4 gap-4">
-                                    {[1, 2, 3, 4].map(k => (
-                                        <div key={k} className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary text-xs">
-                                            😞
-                                        </div>
-                                    ))}
-                                    {[1, 2, 3, 4, 5, 6].map(k => (
-                                        <div key={k} className="w-10 h-10 rounded-full border-2 border-border"></div>
-                                    ))}
-                                </div>
-                            </div>
-                        </motion.div>
-                    </div>
-                </div>
-            </section>
-
-            {/* 9. Custom AI Training Section */}
-            <section className="py-24 px-6 lg:px-8 section-lavender">
-                <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-20 text-left">
-                    <motion.div
-                        initial={{ opacity: 0, x: -30 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        className="flex-1 order-2 md:order-1"
-                    >
-                        <div className="relative group">
-                            <div className="w-full max-w-[400px] mx-auto bg-secondary rounded-3xl aspect-[3/4] p-10 border border-border flex flex-col items-center justify-center text-center">
-                                <div className="w-20 h-20 rounded-full bg-card shadow-lg flex items-center justify-center mb-8 relative border border-border">
-                                    <div className="absolute inset-0 rounded-full border-4 border-primary/20 border-t-primary animate-spin"></div>
-                                    <Zap className="w-8 h-8 text-primary" />
-                                </div>
-                                <h4 className="font-display font-bold text-xl mb-4 text-foreground">Custom AI training</h4>
-                                <p className="text-xs text-muted-foreground leading-relaxed mb-8">
-                                    We train your AI agent for your practice - including in-network insurance and FAQs about coverage and pricing.
-                                </p>
-                                <div className="flex gap-2">
-                                    {[1, 2, 3, 4, 5].map(l => (
-                                        <div key={l} className={`h-1 w-8 rounded-full ${l === 1 ? 'bg-primary' : 'bg-primary/20'}`}></div>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-                    </motion.div>
-
-                    <div className="flex-1 order-1 md:order-2">
-                        <motion.span
-                            {...fadeInUp}
-                            className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-6"
-                        >
-                            Seamless Integration
-                        </motion.span>
-                        <motion.h2
-                            {...fadeInUp}
-                            transition={{ delay: 0.1, duration: 0.6 }}
-                            className="font-display font-bold text-3xl md:text-5xl mb-6 text-foreground"
-                        >
-                            Works With Your <br /> Existing Systems
-                        </motion.h2>
-                        <p className="text-muted-foreground text-lg mb-10">
-                            No disruption to your current workflow
-                        </p>
-                        <button className="btn-primary flex items-center gap-2">
-                            Check Integration Compatibility
-                        </button>
-
-                        <div className="mt-12 space-y-4">
-                            {[
-                                { title: "Direct CRM Sync", desc: "Syncs with Open Dental, Dentrix, Eaglesoft & more" },
-                                { title: "Smart Scheduling", desc: "Books directly into your existing software calendar" },
-                                { title: "HIPAA Compliant", desc: "Enterprise-grade security for patient data" }
-                            ].map((feat, m) => (
-                                <motion.div
-                                    key={m}
-                                    initial={{ opacity: 0, x: 20 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: 0.4 + m * 0.1 }}
-                                    className="flex items-center gap-4"
-                                >
-                                    <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-                                        <CheckCircle2 className="w-3 h-3" />
-                                    </div>
-                                    <div>
-                                        <p className="text-xs font-bold text-foreground">{feat.title}</p>
-                                        <p className="text-[10px] text-muted-foreground">{feat.desc}</p>
-                                    </div>
-                                </motion.div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* 10. Final CTA Form Section */}
-            <section className="py-24 px-6 lg:px-8 section-alt">
-                <div className="max-w-7xl mx-auto bg-foreground rounded-[3rem] p-8 md:p-20 overflow-hidden relative shadow-2xl">
-                    <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/10 to-transparent pointer-events-none"></div>
-                    <div className="flex flex-col lg:flex-row items-center gap-16 relative z-10 text-left">
-                        <div className="flex-1">
+                <div className="max-w-6xl mx-auto overflow-hidden rounded-[2.5rem] shadow-2xl"
+                    style={{ background: "linear-gradient(135deg, hsl(244 50% 22%) 0%, hsl(244 58% 40%) 50%, hsl(244 58% 55%) 100%)" }}
+                >
+                    <div className="flex flex-col lg:flex-row items-center gap-12 p-8 md:p-16 relative">
+                        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/10 to-transparent pointer-events-none" />
+                        <div className="flex-1 relative z-10 text-left">
                             <motion.span
                                 initial={{ opacity: 0 }}
                                 whileInView={{ opacity: 1 }}
                                 viewport={{ once: true }}
-                                className="inline-block px-3 py-1 rounded-full bg-primary/20 text-primary-foreground text-xs font-bold uppercase tracking-wider mb-6"
+                                className="inline-block px-4 py-1.5 rounded-full bg-primary-foreground/10 text-primary-foreground text-xs font-bold uppercase tracking-wider mb-6 border border-primary-foreground/20"
                             >
                                 Ready to Get Started
                             </motion.span>
@@ -652,39 +523,39 @@ const Product = () => {
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                className="font-display font-bold text-4xl md:text-6xl text-primary-foreground mb-6 leading-tight"
+                                className="font-display font-bold text-4xl md:text-5xl text-primary-foreground mb-6 leading-tight"
                             >
                                 Experience <br /> Breeh AI in <br /> Action
                             </motion.h2>
-                            <p className="text-primary-foreground/60 text-lg">
+                            <p className="text-primary-foreground/60 text-lg max-w-md">
                                 See how our AI can work for your specific practice needs.
                             </p>
                         </div>
 
-                        <div className="w-full lg:w-[500px]">
+                        <div className="w-full lg:w-[480px] relative z-10">
                             <motion.div
                                 initial={{ opacity: 0, scale: 0.95 }}
                                 whileInView={{ opacity: 1, scale: 1 }}
                                 viewport={{ once: true }}
-                                className="bg-secondary rounded-3xl p-8 md:p-12 border border-border"
+                                className="bg-secondary rounded-3xl p-8 md:p-10"
                             >
-                                <h3 className="font-display font-bold text-2xl text-foreground mb-2">Discover Your Missed Revenue</h3>
-                                <p className="text-xs text-muted-foreground mb-8">
-                                    Most practices miss 17-25% of calls. See how Breeh AI captures these lost opportunities.
+                                <h3 className="font-display font-bold text-xl text-foreground mb-2">Discover Your Missed Revenue</h3>
+                                <p className="text-xs text-muted-foreground mb-6">
+                                    Most practices miss 17–25% of calls. See how Breeh AI captures these lost opportunities.
                                 </p>
                                 <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
                                     <div className="space-y-1">
                                         <label className="text-[10px] font-bold text-muted-foreground ml-2">Name</label>
-                                        <input type="text" placeholder="John Doe" className="w-full bg-card border border-border rounded-xl p-4 text-xs focus:ring-2 focus:ring-primary/20 outline-none text-foreground" />
+                                        <input type="text" placeholder="John Doe" className="w-full bg-card border border-border rounded-xl p-3.5 text-sm focus:ring-2 focus:ring-primary/20 outline-none text-foreground" />
                                     </div>
-                                    <div className="grid grid-cols-2 gap-4">
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                         <div className="space-y-1">
                                             <label className="text-[10px] font-bold text-muted-foreground ml-2">Work Email Address</label>
-                                            <input type="email" placeholder="example@practice.com" className="w-full bg-card border border-border rounded-xl p-4 text-xs focus:ring-2 focus:ring-primary/20 outline-none text-foreground" />
+                                            <input type="email" placeholder="example@practice.com" className="w-full bg-card border border-border rounded-xl p-3.5 text-sm focus:ring-2 focus:ring-primary/20 outline-none text-foreground" />
                                         </div>
                                         <div className="space-y-1">
                                             <label className="text-[10px] font-bold text-muted-foreground ml-2">Number of Locations</label>
-                                            <select className="w-full bg-card border border-border rounded-xl p-4 text-xs focus:ring-2 focus:ring-primary/20 outline-none text-foreground">
+                                            <select className="w-full bg-card border border-border rounded-xl p-3.5 text-sm focus:ring-2 focus:ring-primary/20 outline-none text-foreground">
                                                 <option>1 Location</option>
                                                 <option>2-5 Locations</option>
                                                 <option>6-10 Locations</option>
@@ -692,7 +563,11 @@ const Product = () => {
                                             </select>
                                         </div>
                                     </div>
-                                    <button className="w-full bg-primary text-primary-foreground font-bold py-4 rounded-xl shadow-lg hover:bg-primary/90 transition-all mt-4 text-xs">
+                                    <button
+                                        onClick={openCalendly}
+                                        type="button"
+                                        className="w-full bg-primary text-primary-foreground font-bold py-4 rounded-xl shadow-lg hover:bg-primary/90 transition-all mt-2 text-sm"
+                                    >
                                         Schedule a Demo
                                     </button>
                                 </form>
