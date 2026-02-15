@@ -70,13 +70,16 @@ const Blog = () => {
 
   useEffect(() => {
     const handleScroll = () => {
+      const container = document.getElementById('blog-content');
+      if (!container) return;
       const sections = tableOfContents.map((item) => item.id);
-      const scrollPosition = window.scrollY + 200;
+      const scrollPosition = container.scrollTop + 200;
 
       for (const sectionId of sections) {
         const element = document.getElementById(sectionId);
         if (element) {
-          const { offsetTop, offsetHeight } = element;
+          const offsetTop = element.offsetTop - container.offsetTop;
+          const offsetHeight = element.offsetHeight;
           if (
             scrollPosition >= offsetTop &&
             scrollPosition < offsetTop + offsetHeight
@@ -88,9 +91,12 @@ const Blog = () => {
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
+    const container = document.getElementById('blog-content');
+    if (container) {
+      container.addEventListener("scroll", handleScroll);
+      handleScroll();
+      return () => container.removeEventListener("scroll", handleScroll);
+    }
   }, []);
 
   const scrollToSection = (id: string) => {
@@ -285,7 +291,7 @@ const Blog = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background overflow-x-hidden font-body">
+    <div className="min-h-screen bg-background overflow-x-hidden">
       <Navbar
         onBookDemo={openCalendly}
         onOpenPlaybook={() => setPlaybookOpen(true)}
@@ -381,14 +387,14 @@ const Blog = () => {
       </section>
 
       {/* ═══════════════════════════════════════════════════
-          MAIN CONTENT — Newspaper Two-Column Layout
+          MAIN CONTENT — Fixed TOC + Scrollable Content
          ═══════════════════════════════════════════════════ */}
-      <section className="py-20 px-6 lg:px-8 bg-background">
+      <section className="bg-background">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
-            {/* ─── Table of Contents ─── */}
-            <aside className="lg:col-span-3">
-              <div className="lg:sticky lg:top-32">
+          <div className="grid grid-cols-1 lg:grid-cols-12 lg:h-[calc(100vh-80px)]">
+            {/* ─── Table of Contents — Fixed left column ─── */}
+            <aside className="lg:col-span-3 lg:h-full lg:overflow-y-auto px-6 lg:px-8 py-12 lg:py-16 border-r border-border">
+              <div>
                 <h3 className="font-display font-bold text-sm uppercase tracking-[0.15em] text-muted-foreground mb-6">
                   In This Issue
                 </h3>
@@ -396,7 +402,16 @@ const Blog = () => {
                   {tableOfContents.map((item, i) => (
                     <button
                       key={item.id}
-                      onClick={() => scrollToSection(item.id)}
+                      onClick={() => {
+                        const el = document.getElementById(item.id);
+                        if (el) {
+                          const container = document.getElementById('blog-content');
+                          if (container) {
+                            const offset = el.offsetTop - container.offsetTop;
+                            container.scrollTo({ top: offset - 32, behavior: 'smooth' });
+                          }
+                        }
+                      }}
                       className={`group flex items-start gap-3 w-full text-left px-4 py-3 rounded-lg text-sm transition-all duration-300 ${
                         activeSection === item.id
                           ? "bg-primary/10 text-primary font-semibold"
@@ -431,8 +446,8 @@ const Blog = () => {
               </div>
             </aside>
 
-            {/* ─── Article Body ─── */}
-            <article className="lg:col-span-9">
+            {/* ─── Article Body — Scrollable right column ─── */}
+            <article id="blog-content" className="lg:col-span-9 lg:h-full lg:overflow-y-auto px-6 lg:px-12 py-12 lg:py-16 scroll-smooth">
               {/* ── Section 1: The Problem ── */}
               <div id="the-problem" className="mb-20 scroll-mt-32">
                 <motion.div {...fadeInUp}>
