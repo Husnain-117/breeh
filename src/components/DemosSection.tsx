@@ -70,7 +70,7 @@ const DemosSection = () => {
           <p className="text-sm font-semibold text-accent tracking-wide mb-3">
             Platform Capabilities
           </p>
-          <h2 className="font-display font-bold text-4xl md:text-5xl text-foreground mb-4">
+          <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-foreground mb-4">
             Everything Your Front Desk Needs
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">

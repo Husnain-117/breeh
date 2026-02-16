@@ -36,7 +36,7 @@ const About = () => {
           <motion.h1
             {...fadeInUp}
             transition={{ delay: 0.1, duration: 0.6 }}
-            className="font-display font-bold text-5xl md:text-7xl text-foreground mb-8 leading-tight"
+            className="font-display font-bold text-3xl sm:text-5xl md:text-7xl text-foreground mb-8 leading-tight"
           >
             Redefining Patient <br />
             <span className="text-primary">Communication</span>

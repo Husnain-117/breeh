@@ -305,16 +305,15 @@ const Blog = () => {
           {/* Dateline */}
           <motion.div
             {...fadeInUp}
-            className="flex items-center justify-center gap-3 text-muted-foreground text-sm mb-8"
+            className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-muted-foreground text-xs sm:text-sm mb-8"
           >
             <span className="uppercase tracking-[0.2em] font-semibold text-primary">
               The Breeh AI Journal
             </span>
-            <span className="w-1 h-1 rounded-full bg-primary" />
+            <span className="hidden sm:block w-1 h-1 rounded-full bg-primary" />
             <span>February 14, 2026</span>
-            <span className="w-1 h-1 rounded-full bg-muted-foreground" />
-            <Clock className="w-4 h-4" />
-            <span>12 min read</span>
+            <span className="hidden sm:block w-1 h-1 rounded-full bg-muted-foreground" />
+            <span className="flex items-center gap-1"><Clock className="w-4 h-4" /> 12 min read</span>
           </motion.div>
 
           {/* Decorative Rule */}
@@ -332,7 +331,7 @@ const Blog = () => {
           <motion.h1
             {...fadeInUp}
             transition={{ delay: 0.1, duration: 0.8 }}
-            className="font-display font-extrabold text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-foreground leading-[1.08] mb-8 tracking-tight"
+            className="font-display font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-7xl text-foreground leading-[1.08] mb-8 tracking-tight"
           >
             Why Every Dental Practice
             <br />
@@ -357,7 +356,7 @@ const Blog = () => {
           <motion.div
             {...fadeInUp}
             transition={{ delay: 0.3, duration: 0.7 }}
-            className="grid grid-cols-3 gap-6 max-w-2xl mx-auto mb-10"
+            className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 max-w-2xl mx-auto mb-10"
           >
             {[
               { value: "338+", label: "Missed Calls Recovered" },
@@ -393,7 +392,7 @@ const Blog = () => {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 lg:h-[calc(100vh-80px)]">
             {/* ─── Table of Contents — Fixed left column ─── */}
-            <aside className="lg:col-span-3 lg:h-full lg:overflow-y-auto px-6 lg:px-8 py-12 lg:py-16 border-r border-border">
+            <aside className="lg:col-span-3 lg:h-full lg:overflow-y-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-16 border-b lg:border-b-0 lg:border-r border-border">
               <div>
                 <h3 className="font-display font-bold text-sm uppercase tracking-[0.15em] text-muted-foreground mb-6">
                   In This Issue
@@ -447,7 +446,7 @@ const Blog = () => {
             </aside>
 
             {/* ─── Article Body — Scrollable right column ─── */}
-            <article id="blog-content" className="lg:col-span-9 lg:h-full lg:overflow-y-auto px-6 lg:px-12 py-12 lg:py-16 scroll-smooth">
+            <article id="blog-content" className="lg:col-span-9 lg:h-full lg:overflow-y-auto px-4 sm:px-6 lg:px-12 py-8 lg:py-16 scroll-smooth">
               {/* ── Section 1: The Problem ── */}
               <div id="the-problem" className="mb-20 scroll-mt-32">
                 <motion.div {...fadeInUp}>

@@ -28,7 +28,7 @@ const MissionSection = () => {
             </div>
 
             {/* Headline */}
-            <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-[2.75rem] text-foreground leading-tight mb-8">
+            <h2 className="font-display font-bold text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem] text-foreground leading-tight mb-8">
               <span className="text-primary">30%</span> of dental practice calls
               go unanswered, and{" "}
               <span className="text-primary">78%</span> of patients book with
