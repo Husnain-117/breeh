@@ -55,7 +55,7 @@ const Article = () => {
             <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-4">
               {article.type === "case-study" ? "Case Study" : "Blog Article"}
             </span>
-            <h1 className="font-display font-bold text-3xl md:text-5xl text-foreground mb-6 leading-tight">
+            <h1 className="font-display font-bold text-2xl sm:text-3xl md:text-5xl text-foreground mb-6 leading-tight">
               {article.title}
             </h1>
             <div className="flex items-center gap-4 text-sm text-muted-foreground">

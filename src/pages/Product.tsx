@@ -41,7 +41,7 @@ const Product = () => {
                     <motion.h1
                         {...fadeInUp}
                         transition={{ delay: 0.1, duration: 0.6 }}
-                        className="font-display font-bold text-5xl md:text-7xl text-foreground mb-8 leading-tight"
+                        className="font-display font-bold text-3xl sm:text-5xl md:text-7xl text-foreground mb-8 leading-tight"
                     >
                         Your AI Dental Receptionist <br />
                         <span className="text-primary">Never Misses a Call</span>
@@ -56,7 +56,7 @@ const Product = () => {
                     <motion.div
                         {...fadeInUp}
                         transition={{ delay: 0.3, duration: 0.6 }}
-                        className="flex items-center justify-center gap-4"
+                        className="flex flex-col sm:flex-row items-center justify-center gap-4"
                     >
                         <button
                             onClick={openCalendly}

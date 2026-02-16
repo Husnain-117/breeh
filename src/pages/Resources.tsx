@@ -46,7 +46,7 @@ const Resources = () => {
         <div className="max-w-5xl mx-auto">
           <motion.h1
             {...fadeInUp}
-            className="font-display font-bold text-5xl md:text-7xl text-foreground mb-6 leading-tight"
+            className="font-display font-bold text-3xl sm:text-5xl md:text-7xl text-foreground mb-6 leading-tight"
           >
             Resources & <br />
             Knowledge Hub

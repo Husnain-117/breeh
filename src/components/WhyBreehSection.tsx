@@ -94,7 +94,7 @@ const WhyBreehSection = () => {
           <p className="text-sm font-semibold text-accent tracking-wide mb-3">
             Why Breeh AI
           </p>
-          <h2 className="font-display font-bold text-4xl md:text-5xl text-foreground mb-6">
+          <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-foreground mb-6">
             The AI Receptionist That
             <br />
             Integrates Seamlessly

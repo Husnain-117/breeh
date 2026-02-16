@@ -115,7 +115,7 @@ const Solutions = () => {
                 <div className="max-w-7xl mx-auto text-center">
                     <motion.h1
                         {...fadeInUp}
-                        className="font-display font-bold text-4xl md:text-6xl text-foreground mb-6 leading-tight"
+                        className="font-display font-bold text-3xl sm:text-4xl md:text-6xl text-foreground mb-6 leading-tight"
                     >
                         AI Dental Receptionist <br />
                         Solutions Tailored for <br />
@@ -138,7 +138,7 @@ const Solutions = () => {
                     </motion.button>
 
                     {/* Role Cards - Navigation */}
-                    <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
                         {roles.map((role, i) => (
                             <motion.div
                                 key={role.id}
@@ -164,7 +164,7 @@ const Solutions = () => {
             <section className="py-24 px-6 lg:px-8 bg-background">
                 <div className="max-w-7xl mx-auto">
                     {/* Tabs (Mobile/Desktop) */}
-                    <div className="flex flex-wrap justify-center gap-2 mb-12 bg-surface p-2 rounded-full max-w-4xl mx-auto">
+                    <div className="flex flex-wrap justify-center gap-2 mb-12 bg-secondary p-2 rounded-2xl sm:rounded-full max-w-4xl mx-auto">
                         {roles.map((role) => (
                             <button
                                 key={role.id}
@@ -183,7 +183,7 @@ const Solutions = () => {
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -20 }}
                             transition={{ duration: 0.4 }}
-                            className="grid md:grid-cols-2 gap-12 items-center bg-[hsl(244_50%_22%)] rounded-3xl p-8 md:p-16 text-white overflow-hidden shadow-2xl relative"
+                            className="grid md:grid-cols-2 gap-8 md:gap-12 items-center bg-[hsl(244_50%_22%)] rounded-3xl p-6 sm:p-8 md:p-16 text-white overflow-hidden shadow-2xl relative"
                         >
                             {/* Decorative background element */}
                             <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-br from-primary/10 to-transparent pointer-events-none"></div>
@@ -370,7 +370,7 @@ const Solutions = () => {
 
             {/* 5. Final CTA Form Section - Dark Green */}
             <section className="py-24 px-6 lg:px-8 bg-white">
-                <div className="max-w-7xl mx-auto bg-[hsl(244_50%_22%)] rounded-[3rem] p-8 md:p-20 overflow-hidden relative shadow-2xl">
+                <div className="max-w-7xl mx-auto bg-[hsl(244_50%_22%)] rounded-2xl sm:rounded-[3rem] p-6 sm:p-8 md:p-20 overflow-hidden relative shadow-2xl">
                     <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/10 to-transparent pointer-events-none"></div>
                     <div className="flex flex-col lg:flex-row items-center gap-16 relative z-10 text-left">
                         <div className="flex-1">
@@ -386,7 +386,7 @@ const Solutions = () => {
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                className="font-display font-bold text-4xl md:text-6xl text-white mb-6 leading-tight"
+                                className="font-display font-bold text-2xl sm:text-4xl md:text-6xl text-white mb-6 leading-tight"
                             >
                                 Experience How <br /> Breeh AI Works <br /> for You
                             </motion.h2>
@@ -411,7 +411,7 @@ const Solutions = () => {
                                         <label className="text-[10px] font-bold text-foreground/60 ml-2">Name</label>
                                         <input type="text" placeholder="John Doe" className="w-full bg-white border-none rounded-xl p-4 text-xs shadow-sm focus:ring-2 focus:ring-primary/20 outline-none" />
                                     </div>
-                                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                         <div className="space-y-1">
                                             <label className="text-[10px] font-bold text-foreground/60 ml-2">Work Email Address</label>
                                             <input type="email" placeholder="example@breeh.com" className="w-full bg-white border-none rounded-xl p-4 text-xs shadow-sm focus:ring-2 focus:ring-primary/20 outline-none" />

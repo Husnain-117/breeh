@@ -46,7 +46,7 @@ const SecuritySection = () => {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="bg-card rounded-2xl p-8 md:p-10 shadow-lg border border-border"
               >
-                <div className="flex gap-5 mb-6">
+                <div className="flex flex-wrap gap-4 sm:gap-5 mb-6">
                   {certifications.map((cert) => (
                     <div key={cert.label} className="text-center">
                       <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-2">

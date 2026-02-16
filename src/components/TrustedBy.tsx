@@ -10,12 +10,12 @@ const TrustedBy = () => {
   return (
     <section className="py-10 bg-primary overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="flex items-center gap-8">
+        <div className="flex items-center gap-4 sm:gap-8">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="flex-shrink-0"
+            className="flex-shrink-0 hidden sm:block"
           >
             <p className="text-primary-foreground/80 text-sm font-semibold leading-tight">
               Trusted by
@@ -24,7 +24,7 @@ const TrustedBy = () => {
             </p>
           </motion.div>
 
-          <div className="h-10 w-px bg-primary-foreground/20 flex-shrink-0" />
+          <div className="h-10 w-px bg-primary-foreground/20 flex-shrink-0 hidden sm:block" />
 
           {/* Scrolling Marquee */}
           <div className="relative overflow-hidden flex-1">
