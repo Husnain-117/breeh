@@ -1,3 +1,5 @@
+"use client";
+
 import { motion } from "framer-motion";
 import { Plug, Settings, PhoneForwarded } from "lucide-react";
 

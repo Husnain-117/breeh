@@ -1,7 +1,10 @@
+"use client";
+
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Menu, X } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface NavbarProps {
   onBookDemo?: () => void;
@@ -12,7 +15,7 @@ const Navbar = ({ onBookDemo, onOpenPlaybook }: NavbarProps) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-  const navigate = useNavigate();
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 60);
@@ -24,7 +27,7 @@ const Navbar = ({ onBookDemo, onOpenPlaybook }: NavbarProps) => {
     {
       label: "Blog",
       desc: "Latest insights on dental AI",
-      onClick: () => { navigate("/blog"); setMobileOpen(false); },
+      href: "/blog",
     },
     {
       label: "Playbook",
@@ -37,18 +40,9 @@ const Navbar = ({ onBookDemo, onOpenPlaybook }: NavbarProps) => {
     {
       label: "ROI Calculator",
       desc: "Estimate your savings with Breeh AI",
-      onClick: () => {
-        navigate("/roi-calculator");
-        setMobileOpen(false);
-      },
+      href: "/roi-calculator",
     },
   ];
-
-  const scrollToSection = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
-    setMobileOpen(false);
-  };
 
   return (
     <motion.nav
@@ -63,14 +57,11 @@ const Navbar = ({ onBookDemo, onOpenPlaybook }: NavbarProps) => {
         }`}
       >
         <div className="flex items-center justify-between h-14 lg:h-16">
-          {/* Logo */}
-          <a href="/" className="flex items-center gap-2 group">
+          <Link href="/" className="flex items-center gap-2 group">
             <span className="font-display font-bold text-xl text-primary-foreground tracking-tight">Breeh AI</span>
-          </a>
+          </Link>
 
-          {/* Desktop Nav Links */}
           <div className="hidden lg:flex items-center gap-1">
-            {/* Resources dropdown */}
             <div
               className="relative"
               onMouseEnter={() => setActiveDropdown("Resources")}
@@ -91,14 +82,25 @@ const Navbar = ({ onBookDemo, onOpenPlaybook }: NavbarProps) => {
                   >
                     <div className="bg-background rounded-xl p-3 min-w-[240px] border border-border shadow-xl">
                       {resourceItems.map((child) => (
-                        <button
-                          key={child.label}
-                          onClick={child.onClick}
-                          className="block w-full text-left px-4 py-3 rounded-lg transition-colors hover:bg-muted"
-                        >
-                          <div className="font-medium text-sm text-foreground">{child.label}</div>
-                          <div className="text-xs text-muted-foreground mt-0.5">{child.desc}</div>
-                        </button>
+                        child.href ? (
+                          <Link
+                            key={child.label}
+                            href={child.href}
+                            className="block w-full text-left px-4 py-3 rounded-lg transition-colors hover:bg-muted"
+                          >
+                            <div className="font-medium text-sm text-foreground">{child.label}</div>
+                            <div className="text-xs text-muted-foreground mt-0.5">{child.desc}</div>
+                          </Link>
+                        ) : (
+                          <button
+                            key={child.label}
+                            onClick={child.onClick}
+                            className="block w-full text-left px-4 py-3 rounded-lg transition-colors hover:bg-muted"
+                          >
+                            <div className="font-medium text-sm text-foreground">{child.label}</div>
+                            <div className="text-xs text-muted-foreground mt-0.5">{child.desc}</div>
+                          </button>
+                        )
                       ))}
                     </div>
                   </motion.div>
@@ -106,33 +108,20 @@ const Navbar = ({ onBookDemo, onOpenPlaybook }: NavbarProps) => {
               </AnimatePresence>
             </div>
 
-            <button
-              onClick={() => navigate("/product")}
-              className="px-4 py-2 text-sm font-medium text-primary-foreground/70 hover:text-primary-foreground transition-colors duration-300"
-            >
+            <Link href="/product" className="px-4 py-2 text-sm font-medium text-primary-foreground/70 hover:text-primary-foreground transition-colors duration-300">
               Product
-            </button>
-            <button
-              onClick={() => navigate("/solutions")}
-              className="px-4 py-2 text-sm font-medium text-primary-foreground/70 hover:text-primary-foreground transition-colors duration-300"
-            >
+            </Link>
+            <Link href="/solutions" className="px-4 py-2 text-sm font-medium text-primary-foreground/70 hover:text-primary-foreground transition-colors duration-300">
               Solutions
-            </button>
-            <button
-              onClick={() => navigate("/resources")}
-              className="px-4 py-2 text-sm font-medium text-primary-foreground/70 hover:text-primary-foreground transition-colors duration-300"
-            >
+            </Link>
+            <Link href="/resources" className="px-4 py-2 text-sm font-medium text-primary-foreground/70 hover:text-primary-foreground transition-colors duration-300">
               Case Studies
-            </button>
-            <button
-              onClick={() => navigate("/ai-transparency")}
-              className="px-4 py-2 text-sm font-medium text-primary-foreground/70 hover:text-primary-foreground transition-colors duration-300"
-            >
+            </Link>
+            <Link href="/ai-transparency" className="px-4 py-2 text-sm font-medium text-primary-foreground/70 hover:text-primary-foreground transition-colors duration-300">
               AI Transparency
-            </button>
+            </Link>
           </div>
 
-          {/* Right side: FAQ + CTA */}
           <div className="hidden lg:flex items-center gap-3">
             <button
               onClick={onBookDemo}
@@ -142,7 +131,6 @@ const Navbar = ({ onBookDemo, onOpenPlaybook }: NavbarProps) => {
             </button>
           </div>
 
-          {/* Mobile Toggle */}
           <button
             className="lg:hidden text-primary-foreground transition-colors"
             onClick={() => setMobileOpen(!mobileOpen)}
@@ -152,7 +140,6 @@ const Navbar = ({ onBookDemo, onOpenPlaybook }: NavbarProps) => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -163,50 +150,28 @@ const Navbar = ({ onBookDemo, onOpenPlaybook }: NavbarProps) => {
           >
             <div className="px-6 py-6 space-y-4">
               {resourceItems.map((item) => (
-                <button
-                  key={item.label}
-                  onClick={item.onClick}
-                  className="block text-foreground font-medium py-2 w-full text-left"
-                >
-                  {item.label}
-                </button>
+                item.href ? (
+                  <Link key={item.label} href={item.href} onClick={() => setMobileOpen(false)} className="block text-foreground font-medium py-2 w-full text-left">
+                    {item.label}
+                  </Link>
+                ) : (
+                  <button key={item.label} onClick={item.onClick} className="block text-foreground font-medium py-2 w-full text-left">
+                    {item.label}
+                  </button>
+                )
               ))}
-              <button
-                onClick={() => {
-                  navigate("/product");
-                  setMobileOpen(false);
-                }}
-                className="block text-foreground font-medium py-2 w-full text-left"
-              >
+              <Link href="/product" onClick={() => setMobileOpen(false)} className="block text-foreground font-medium py-2 w-full text-left">
                 Product
-              </button>
-              <button
-                onClick={() => {
-                  navigate("/solutions");
-                  setMobileOpen(false);
-                }}
-                className="block text-foreground font-medium py-2 w-full text-left"
-              >
+              </Link>
+              <Link href="/solutions" onClick={() => setMobileOpen(false)} className="block text-foreground font-medium py-2 w-full text-left">
                 Solutions
-              </button>
-              <button
-                onClick={() => {
-                  navigate("/resources");
-                  setMobileOpen(false);
-                }}
-                className="block text-foreground font-medium py-2 w-full text-left"
-              >
+              </Link>
+              <Link href="/resources" onClick={() => setMobileOpen(false)} className="block text-foreground font-medium py-2 w-full text-left">
                 Resources
-              </button>
-              <button
-                onClick={() => {
-                  navigate("/ai-transparency");
-                  setMobileOpen(false);
-                }}
-                className="block text-foreground font-medium py-2 w-full text-left"
-              >
+              </Link>
+              <Link href="/ai-transparency" onClick={() => setMobileOpen(false)} className="block text-foreground font-medium py-2 w-full text-left">
                 AI Transparency
-              </button>
+              </Link>
               <div className="pt-4 space-y-3">
                 <button
                   onClick={() => {

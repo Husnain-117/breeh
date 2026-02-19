@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageSquare, Calendar, Phone, BarChart3, ChevronLeft, ChevronRight } from "lucide-react";
