@@ -13,6 +13,9 @@ import About from "./pages/About";
 import Resources from "./pages/Resources";
 import AITransparency from "./pages/AITransparency";
 import ArticlePage from "./pages/Article";
+import CaseStudies from "./pages/CaseStudies";
+import CaseStudyDetail from "./pages/CaseStudyDetail";
+import Integrations from "./pages/Integrations";
 
 const queryClient = new QueryClient();
 
@@ -32,6 +35,9 @@ const App = () => (
           <Route path="/resources" element={<Resources />} />
           <Route path="/resources/:slug" element={<ArticlePage />} />
           <Route path="/ai-transparency" element={<AITransparency />} />
+          <Route path="/case-studies" element={<CaseStudies />} />
+          <Route path="/case-studies/:slug" element={<CaseStudyDetail />} />
+          <Route path="/integrations" element={<Integrations />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

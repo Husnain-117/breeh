@@ -131,11 +131,10 @@ const Resources = () => {
                     setActiveFilter(f.key);
                     setVisibleCount(6);
                   }}
-                  className={`px-5 py-2 rounded-full text-sm font-semibold transition-all border ${
-                    activeFilter === f.key
-                      ? "bg-primary text-primary-foreground border-primary"
-                      : "bg-card text-foreground border-border hover:border-primary/40"
-                  }`}
+                  className={`px-5 py-2 rounded-full text-sm font-semibold transition-all border ${activeFilter === f.key
+                    ? "bg-primary text-primary-foreground border-primary"
+                    : "bg-card text-foreground border-border hover:border-primary/40"
+                    }`}
                 >
                   {f.label}
                 </button>

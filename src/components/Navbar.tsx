@@ -58,9 +58,8 @@ const Navbar = ({ onBookDemo, onOpenPlaybook }: NavbarProps) => {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? "py-2 px-4 lg:px-8" : "py-4 px-4 lg:px-8"}`}
     >
       <div
-        className={`max-w-7xl mx-auto transition-all duration-500 rounded-2xl px-6 lg:px-8 border border-primary/20 ${
-          scrolled ? "bg-primary shadow-xl shadow-primary/20" : "bg-primary/60 backdrop-blur-md"
-        }`}
+        className={`max-w-7xl mx-auto transition-all duration-500 rounded-2xl px-6 lg:px-8 border border-primary/20 ${scrolled ? "bg-primary shadow-xl shadow-primary/20" : "bg-primary/60 backdrop-blur-md"
+          }`}
       >
         <div className="flex items-center justify-between h-14 lg:h-16">
           {/* Logo */}
@@ -119,7 +118,13 @@ const Navbar = ({ onBookDemo, onOpenPlaybook }: NavbarProps) => {
               Solutions
             </button>
             <button
-              onClick={() => navigate("/resources")}
+              onClick={() => navigate("/integrations")}
+              className="px-4 py-2 text-sm font-medium text-primary-foreground/70 hover:text-primary-foreground transition-colors duration-300"
+            >
+              Integrations
+            </button>
+            <button
+              onClick={() => navigate("/case-studies")}
               className="px-4 py-2 text-sm font-medium text-primary-foreground/70 hover:text-primary-foreground transition-colors duration-300"
             >
               Case Studies
@@ -128,7 +133,7 @@ const Navbar = ({ onBookDemo, onOpenPlaybook }: NavbarProps) => {
               onClick={() => navigate("/ai-transparency")}
               className="px-4 py-2 text-sm font-medium text-primary-foreground/70 hover:text-primary-foreground transition-colors duration-300"
             >
-              AI Transparency
+              Who Is This For
             </button>
           </div>
 
@@ -191,12 +196,21 @@ const Navbar = ({ onBookDemo, onOpenPlaybook }: NavbarProps) => {
               </button>
               <button
                 onClick={() => {
-                  navigate("/resources");
+                  navigate("/integrations");
                   setMobileOpen(false);
                 }}
                 className="block text-foreground font-medium py-2 w-full text-left"
               >
-                Resources
+                Integrations
+              </button>
+              <button
+                onClick={() => {
+                  navigate("/case-studies");
+                  setMobileOpen(false);
+                }}
+                className="block text-foreground font-medium py-2 w-full text-left"
+              >
+                Case Studies
               </button>
               <button
                 onClick={() => {
@@ -205,7 +219,7 @@ const Navbar = ({ onBookDemo, onOpenPlaybook }: NavbarProps) => {
                 }}
                 className="block text-foreground font-medium py-2 w-full text-left"
               >
-                AI Transparency
+                Who Is This For?
               </button>
               <div className="pt-4 space-y-3">
                 <button

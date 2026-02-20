@@ -130,39 +130,39 @@ const AITransparency = () => {
             {...fadeInUp}
             className="font-display font-bold text-3xl sm:text-5xl md:text-7xl text-foreground mb-6 leading-tight"
           >
-            Responsible AI, <br /> Built with Care
+            Who Is <br /> Breeh AI For?
           </motion.h1>
           <motion.p
             {...fadeInUp}
             transition={{ delay: 0.1, duration: 0.6 }}
             className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10"
           >
-            Technology should be transparent, accountable, and always designed with human care at its core.
+            Whether you're a solo practitioner, a growing DSO, or a multi-location dental group — Breeh AI is built to automate your patient communication, capture every call, and grow your revenue.
           </motion.p>
           <motion.button
             {...fadeInUp}
             transition={{ delay: 0.2, duration: 0.6 }}
-            onClick={() => (window.location.href = "mailto:hello@breehai.com")}
+            onClick={openCalendly}
             className="btn-primary"
           >
-            Contact Us
+            Book a Demo
           </motion.button>
         </div>
       </section>
 
-      {/* ── Belief Statement ── */}
+      {/* ── Who Benefits ── */}
       <section className="py-24 px-6 lg:px-8 section-alt">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div {...fadeInUp} className="relative">
             <h2 className="font-display font-bold text-3xl md:text-5xl text-foreground leading-snug mb-6">
-              At Breeh AI, we believe{" "}
+              Built for{" "}
               <span className="bg-primary text-primary-foreground px-3 py-1 rounded-lg inline-block">
-                technology should serve people
+                dental teams
               </span>{" "}
-              — not the other way around.
+              that refuse to miss a call.
             </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              That's why we design AI systems that support dental teams with empathy, clarity, and full transparency.
+              From single-location practices to enterprise DSOs — Breeh AI adapts to your workflows, integrates with your tools, and starts delivering results in days, not months.
             </p>
           </motion.div>
         </div>

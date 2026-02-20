@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const brands = [
   { name: "Aspen Dental", color: "bg-primary", textColor: "text-primary-foreground" },
@@ -69,14 +70,14 @@ const CaseStudiesSection = () => {
                 Case study
               </span>
               <p className="text-lg md:text-xl text-foreground leading-relaxed mb-6">
-                "With Breeh AI, we moved from missed calls to delivering real results. 
-                In just four weeks, we launched a fully functioning AI receptionist 
-                that now handles more than 80% of patient calls. Our staff is thrilled, 
+                "With Breeh AI, we moved from missed calls to delivering real results.
+                In just four weeks, we launched a fully functioning AI receptionist
+                that now handles more than 80% of patient calls. Our staff is thrilled,
                 our bookings are up, and patients get instant responses."
               </p>
-              <a href="#" className="inline-flex items-center gap-2 text-accent font-semibold hover:gap-3 transition-all">
+              <Link to="/case-studies/breeh-ai-dental-receptionist-roi" className="inline-flex items-center gap-2 text-accent font-semibold hover:gap-3 transition-all">
                 Read more <ArrowRight className="w-4 h-4" />
-              </a>
+              </Link>
             </div>
 
             <div className="relative">
@@ -105,9 +106,9 @@ const CaseStudiesSection = () => {
           viewport={{ once: true }}
           className="text-center mt-12"
         >
-          <a href="#" className="inline-flex items-center gap-2 text-accent font-semibold hover:gap-3 transition-all">
+          <Link to="/case-studies" className="inline-flex items-center gap-2 text-accent font-semibold hover:gap-3 transition-all">
             View more success stories <ArrowRight className="w-4 h-4" />
-          </a>
+          </Link>
         </motion.div>
       </div>
     </section>
