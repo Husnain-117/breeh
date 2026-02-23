@@ -245,8 +245,8 @@ const CaseStudyDetail = () => {
                                             key={sec.id}
                                             onClick={() => scrollToId(sec.id)}
                                             className={`block w-full text-left pl-4 py-2 text-sm rounded-lg transition-all border-l-2 ${activeSection === sec.id
-                                                    ? "border-primary text-primary font-semibold bg-primary/5"
-                                                    : "border-transparent text-muted-foreground hover:text-foreground hover:border-border"
+                                                ? "border-primary text-primary font-semibold bg-primary/5"
+                                                : "border-transparent text-muted-foreground hover:text-foreground hover:border-border"
                                                 }`}
                                         >
                                             {sec.title}
@@ -504,7 +504,7 @@ const CaseStudyDetail = () => {
                         className="rounded-3xl p-10 md:p-16 overflow-hidden relative shadow-2xl"
                         style={{
                             background:
-                                "linear-gradient(135deg, hsl(244 50% 22%) 0%, hsl(244 58% 40%) 50%, hsl(244 58% 61%) 100%)",
+                                "linear-gradient(135deg, hsl(244 58% 52%) 0%, hsl(244 58% 61%) 50%, hsl(244 55% 67%) 100%)",
                         }}
                     >
                         <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/10 to-transparent pointer-events-none" />

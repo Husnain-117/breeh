@@ -82,9 +82,8 @@ const Article = () => {
             {article.content.map((paragraph, i) => (
               <p
                 key={i}
-                className={`text-muted-foreground leading-relaxed ${
-                  i === 0 ? "text-lg font-medium text-foreground" : "text-base"
-                } ${paragraph.startsWith('"') ? "italic border-l-4 border-primary/30 pl-6 py-2 text-foreground/80" : ""}`}
+                className={`text-muted-foreground leading-relaxed ${i === 0 ? "text-lg font-medium text-foreground" : "text-base"
+                  } ${paragraph.startsWith('"') ? "italic border-l-4 border-primary/30 pl-6 py-2 text-foreground/80" : ""}`}
               >
                 {paragraph}
               </p>
@@ -111,7 +110,7 @@ const Article = () => {
               viewport={{ once: true }}
               className="rounded-3xl p-8 md:p-12 text-center"
               style={{
-                background: "linear-gradient(135deg, hsl(244 50% 22%) 0%, hsl(244 58% 40%) 50%, hsl(244 58% 55%) 100%)",
+                background: "linear-gradient(135deg, hsl(244 58% 52%) 0%, hsl(244 58% 61%) 50%, hsl(244 55% 67%) 100%)",
               }}
             >
               <h3 className="font-display font-bold text-2xl md:text-3xl text-primary-foreground mb-4">

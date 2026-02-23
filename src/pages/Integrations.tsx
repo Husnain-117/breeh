@@ -392,8 +392,8 @@ const Integrations = () => {
                                 key={cat}
                                 onClick={() => setActiveCategory(cat)}
                                 className={`px-5 py-2 rounded-full text-sm font-semibold transition-all border ${activeCategory === cat
-                                        ? "bg-primary text-primary-foreground border-primary"
-                                        : "bg-card text-foreground border-border hover:border-primary/40"
+                                    ? "bg-primary text-primary-foreground border-primary"
+                                    : "bg-card text-foreground border-border hover:border-primary/40"
                                     }`}
                             >
                                 {cat}
@@ -481,7 +481,7 @@ const Integrations = () => {
                         className="rounded-3xl p-10 md:p-16 overflow-hidden relative shadow-2xl"
                         style={{
                             background:
-                                "linear-gradient(135deg, hsl(244 50% 22%) 0%, hsl(244 58% 40%) 50%, hsl(244 58% 61%) 100%)",
+                                "linear-gradient(135deg, hsl(244 58% 52%) 0%, hsl(244 58% 61%) 50%, hsl(244 55% 67%) 100%)",
                         }}
                     >
                         <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/10 to-transparent pointer-events-none" />

@@ -57,7 +57,7 @@ const FloatingCallButton = () => {
             className="fixed bottom-24 right-6 z-50 w-72 rounded-2xl shadow-2xl overflow-hidden border border-border"
             style={{
               background:
-                "linear-gradient(135deg, hsl(244 50% 22%) 0%, hsl(244 58% 40%) 100%)",
+                "linear-gradient(135deg, hsl(244 58% 52%) 0%, hsl(244 58% 61%) 100%)",
             }}
           >
             <div className="p-5">
@@ -125,11 +125,10 @@ const FloatingCallButton = () => {
         <button
           onClick={handleClick}
           disabled={isConnecting}
-          className={`w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 ${
-            conversation.status === "connected"
+          className={`w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 ${conversation.status === "connected"
               ? "bg-destructive shadow-destructive/30 hover:scale-105"
               : "bg-accent shadow-accent/30 hover:scale-110 animate-pulse-glow"
-          }`}
+            }`}
           aria-label={conversation.status === "connected" ? "End call" : "Call Breeh AI"}
         >
           {isConnecting ? (

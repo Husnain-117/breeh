@@ -183,7 +183,8 @@ const Solutions = () => {
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -20 }}
                             transition={{ duration: 0.4 }}
-                            className="grid md:grid-cols-2 gap-8 md:gap-12 items-center bg-[hsl(244_50%_22%)] rounded-3xl p-6 sm:p-8 md:p-16 text-white overflow-hidden shadow-2xl relative"
+                            className="grid md:grid-cols-2 gap-8 md:gap-12 items-center rounded-3xl p-6 sm:p-8 md:p-16 text-white overflow-hidden shadow-2xl relative"
+                            style={{ background: "linear-gradient(135deg, hsl(244 58% 52%) 0%, hsl(244 58% 61%) 50%, hsl(244 55% 67%) 100%)" }}
                         >
                             {/* Decorative background element */}
                             <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-br from-primary/10 to-transparent pointer-events-none"></div>
@@ -191,7 +192,7 @@ const Solutions = () => {
                             <div className="relative z-10 order-2 md:order-1">
                                 <div className="aspect-[4/5] bg-white/10 rounded-2xl overflow-hidden border border-white/10 relative">
                                     <img src={activeRoleData.image} alt={activeRoleData.title} className="w-full h-full object-cover opacity-90" />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-[hsl(244_50%_22%)] via-transparent to-transparent"></div>
+                                    <div className="absolute inset-0 bg-gradient-to-t from-[hsl(244_58%_52%)] via-transparent to-transparent"></div>
                                 </div>
                             </div>
 
@@ -253,7 +254,8 @@ const Solutions = () => {
                         {/* Package 2 - Highlighted */}
                         <motion.div
                             whileHover={{ y: -5 }}
-                            className="bg-[hsl(244_50%_22%)] text-white rounded-3xl p-8 border border-border flex flex-col relative overflow-hidden shadow-xl"
+                            className="text-white rounded-3xl p-8 border border-border flex flex-col relative overflow-hidden shadow-xl"
+                            style={{ background: "linear-gradient(135deg, hsl(244 58% 52%) 0%, hsl(244 58% 61%) 50%, hsl(244 55% 67%) 100%)" }}
                         >
                             <div className="absolute top-4 right-4 bg-white/20 px-2 py-1 rounded text-[10px] font-bold">
                                 Most Popular
@@ -348,7 +350,7 @@ const Solutions = () => {
                                         whileInView={{ opacity: 1, x: 0 }}
                                         viewport={{ once: true }}
                                         transition={{ delay: i * 0.1 }}
-                                        className={`p-4 rounded-xl flex items-center gap-4 transition-all cursor-pointer ${i === 0 ? 'bg-[hsl(244_50%_22%)] text-white shadow-lg' : 'hover:bg-primary/5'}`}
+                                        className={`p-4 rounded-xl flex items-center gap-4 transition-all cursor-pointer ${i === 0 ? 'bg-primary text-primary-foreground shadow-lg' : 'hover:bg-primary/5'}`}
                                     >
                                         <div className="w-10 h-10 rounded-lg bg-white/20 flex items-center justify-center text-xl">
                                             {author.icon}
@@ -370,7 +372,7 @@ const Solutions = () => {
 
             {/* 5. Final CTA Form Section - Dark Green */}
             <section className="py-24 px-6 lg:px-8 bg-white">
-                <div className="max-w-7xl mx-auto bg-[hsl(244_50%_22%)] rounded-2xl sm:rounded-[3rem] p-6 sm:p-8 md:p-20 overflow-hidden relative shadow-2xl">
+                <div className="max-w-7xl mx-auto rounded-2xl sm:rounded-[3rem] p-6 sm:p-8 md:p-20 overflow-hidden relative shadow-2xl" style={{ background: "linear-gradient(135deg, hsl(244 58% 52%) 0%, hsl(244 58% 61%) 50%, hsl(244 55% 67%) 100%)" }}>
                     <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/10 to-transparent pointer-events-none"></div>
                     <div className="flex flex-col lg:flex-row items-center gap-16 relative z-10 text-left">
                         <div className="flex-1">
@@ -411,7 +413,7 @@ const Solutions = () => {
                                         <label className="text-[10px] font-bold text-foreground/60 ml-2">Name</label>
                                         <input type="text" placeholder="John Doe" className="w-full bg-white border-none rounded-xl p-4 text-xs shadow-sm focus:ring-2 focus:ring-primary/20 outline-none" />
                                     </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                         <div className="space-y-1">
                                             <label className="text-[10px] font-bold text-foreground/60 ml-2">Work Email Address</label>
                                             <input type="email" placeholder="example@breeh.com" className="w-full bg-white border-none rounded-xl p-4 text-xs shadow-sm focus:ring-2 focus:ring-primary/20 outline-none" />

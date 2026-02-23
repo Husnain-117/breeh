@@ -267,7 +267,7 @@ const Resources = () => {
                 <div className="flex flex-wrap gap-3">
                   <button
                     onClick={() =>
-                      (window.location.href = "mailto:hello@breehai.com")
+                      (window.location.href = "mailto:husnain.akram@gmail.com")
                     }
                     className="bg-primary text-primary-foreground font-semibold rounded-full px-8 py-3 text-sm hover:bg-primary/90 transition-colors"
                   >

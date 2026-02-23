@@ -6,8 +6,7 @@ import { SITE_CONFIG } from "@/lib/config";
 import PlaybookModal from "@/components/PlaybookModal";
 import {
     ChevronRight, Play, MessageSquare, PhoneCall, Zap, Share2,
-    MousePointer2, Quote, ArrowRight, ShieldCheck,
-    Monitor
+    Quote, ArrowRight, ShieldCheck
 } from "lucide-react";
 
 
@@ -29,77 +28,112 @@ const Product = () => {
         <div className="min-h-screen bg-background overflow-x-hidden font-body">
             <Navbar onBookDemo={openCalendly} onOpenPlaybook={() => setPlaybookOpen(true)} />
 
-            {/* 1. Hero Section - Text Only */}
-            <section className="pt-32 pb-20 px-6 lg:px-8 section-lavender">
-                <div className="max-w-4xl mx-auto text-center">
-                    <motion.p
-                        {...fadeInUp}
-                        className="text-primary font-semibold tracking-wide mb-4 text-sm uppercase"
-                    >
-                        AI That Augments Your Team
-                    </motion.p>
-                    <motion.h1
-                        {...fadeInUp}
-                        transition={{ delay: 0.1, duration: 0.6 }}
-                        className="font-display font-bold text-3xl sm:text-5xl md:text-7xl text-foreground mb-8 leading-tight"
-                    >
-                        Your AI Dental Receptionist <br />
-                        <span className="text-primary">Never Misses a Call</span>
-                    </motion.h1>
-                    <motion.p
-                        {...fadeInUp}
-                        transition={{ delay: 0.2, duration: 0.6 }}
-                        className="text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed"
-                    >
-                        Advanced virtual dental receptionist technology built specifically for modern practices, dental groups, and DSOs.
-                    </motion.p>
-                    <motion.div
-                        {...fadeInUp}
-                        transition={{ delay: 0.3, duration: 0.6 }}
-                        className="flex flex-col sm:flex-row items-center justify-center gap-4"
-                    >
-                        <button
-                            onClick={openCalendly}
-                            className="btn-primary flex items-center gap-2 px-8 py-4 text-lg"
-                        >
-                            See Product Demo <ChevronRight className="w-5 h-5" />
-                        </button>
-                    </motion.div>
+            {/* 1. Hero Section - With Image */}
+            <section className="pt-32 pb-20 px-6 lg:px-8 section-lavender relative overflow-hidden">
+                {/* Hero background image */}
+                <div className="absolute inset-0 z-0">
+                    <img
+                        src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1600&h=900&fit=crop&q=80"
+                        alt=""
+                        className="w-full h-full object-cover opacity-[0.06]"
+                    />
+                </div>
 
-                    <motion.div
-                        initial={{ opacity: 0, y: 40 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.4, duration: 0.8 }}
-                        className="mt-20 relative max-w-3xl mx-auto"
-                    >
-                        <div className="bg-white/50 backdrop-blur-sm rounded-3xl p-8 border border-white/20 shadow-xl relative overflow-hidden">
-                            {/* Decorative gradients */}
-                            <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -z-10"></div>
-                            <div className="absolute bottom-0 left-0 w-64 h-64 bg-accent/5 rounded-full blur-3xl -z-10"></div>
-
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div className="bg-white p-6 rounded-2xl flex items-center gap-4 border border-border shadow-sm">
-                                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
-                                        <MessageSquare className="w-6 h-6" />
-                                    </div>
-                                    <div className="text-left">
-                                        <p className="text-xs text-muted-foreground font-semibold uppercase tracking-wider mb-1">New Inquiry</p>
-                                        <p className="text-base font-medium text-foreground">"Can I schedule an appointment for tomorrow?"</p>
-                                    </div>
-                                </div>
-                                <div className="bg-primary/5 p-6 rounded-2xl flex items-center gap-4 border border-primary/10 shadow-sm">
-                                    <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white shrink-0">
-                                        <Zap className="w-6 h-6" />
-                                    </div>
-                                    <div className="text-left">
-                                        <p className="text-xs text-primary font-semibold uppercase tracking-wider mb-1">AI Response</p>
-                                        <p className="text-base font-medium text-foreground">"I found a slot at 2 PM. Booked firmly!"</p>
-                                    </div>
-                                </div>
-                            </div>
+                <div className="max-w-6xl mx-auto relative z-10">
+                    <div className="grid lg:grid-cols-2 gap-16 items-center">
+                        {/* Left — Text */}
+                        <div>
+                            <motion.p
+                                {...fadeInUp}
+                                className="text-primary font-semibold tracking-wide mb-4 text-sm uppercase"
+                            >
+                                AI That Augments Your Team
+                            </motion.p>
+                            <motion.h1
+                                {...fadeInUp}
+                                transition={{ delay: 0.1, duration: 0.6 }}
+                                className="font-display font-bold text-3xl sm:text-5xl md:text-6xl text-foreground mb-8 leading-tight"
+                            >
+                                Your AI Dental Receptionist <br />
+                                <span className="text-primary">Never Misses a Call</span>
+                            </motion.h1>
+                            <motion.p
+                                {...fadeInUp}
+                                transition={{ delay: 0.2, duration: 0.6 }}
+                                className="text-xl text-muted-foreground max-w-xl mb-10 leading-relaxed"
+                            >
+                                Advanced virtual dental receptionist technology built specifically for modern practices, dental groups, and DSOs.
+                            </motion.p>
+                            <motion.div
+                                {...fadeInUp}
+                                transition={{ delay: 0.3, duration: 0.6 }}
+                                className="flex flex-col sm:flex-row items-start gap-4"
+                            >
+                                <button
+                                    onClick={openCalendly}
+                                    className="btn-primary flex items-center gap-2 px-8 py-4 text-lg"
+                                >
+                                    See Product Demo <ChevronRight className="w-5 h-5" />
+                                </button>
+                            </motion.div>
                         </div>
-                    </motion.div>
+
+                        {/* Right — Hero Image */}
+                        <motion.div
+                            initial={{ opacity: 0, x: 40 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.3, duration: 0.8 }}
+                            className="relative"
+                        >
+                            <div className="rounded-3xl overflow-hidden shadow-2xl border border-border/30">
+                                <img
+                                    src="https://images.unsplash.com/photo-1629909615184-74f495363b67?w=700&h=500&fit=crop&q=80"
+                                    alt="Modern dental office with AI technology"
+                                    className="w-full h-80 lg:h-[420px] object-cover"
+                                />
+                            </div>
+                            {/* Floating conversation card */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: 0.6, duration: 0.6 }}
+                                className="absolute -bottom-6 -left-6 bg-card/95 backdrop-blur-md rounded-2xl p-5 shadow-xl border border-border max-w-xs"
+                            >
+                                <div className="flex items-center gap-3 mb-3">
+                                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                                        <MessageSquare className="w-5 h-5" />
+                                    </div>
+                                    <div>
+                                        <p className="text-xs text-muted-foreground font-semibold uppercase tracking-wider">New Inquiry</p>
+                                        <p className="text-sm font-medium text-foreground">"Can I schedule for tomorrow?"</p>
+                                    </div>
+                                </div>
+                                <div className="flex items-center gap-3">
+                                    <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white shrink-0">
+                                        <Zap className="w-5 h-5" />
+                                    </div>
+                                    <div>
+                                        <p className="text-xs text-primary font-semibold uppercase tracking-wider">AI Response</p>
+                                        <p className="text-sm font-medium text-foreground">"Booked for 2 PM tomorrow!"</p>
+                                    </div>
+                                </div>
+                            </motion.div>
+
+                            {/* Floating stats badge */}
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                whileInView={{ opacity: 1, scale: 1 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: 0.8, duration: 0.5 }}
+                                className="absolute -top-4 -right-4 bg-primary text-white rounded-2xl px-5 py-3 shadow-lg shadow-primary/30"
+                            >
+                                <p className="font-display font-bold text-2xl">99.7%</p>
+                                <p className="text-xs text-white/70">Answer Rate</p>
+                            </motion.div>
+                        </motion.div>
+                    </div>
                 </div>
             </section>
 
@@ -286,135 +320,7 @@ const Product = () => {
                 </div>
             </section>
 
-            {/* 6. Website Chatbot Section — Redesigned */}
-            <section className="py-24 section-alt px-6 lg:px-8">
-                <div className="max-w-6xl mx-auto">
-                    <div className="text-center mb-16">
-                        <motion.span
-                            {...fadeInUp}
-                            className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-6"
-                        >
-                            AI Website Chat
-                        </motion.span>
-                        <motion.h2
-                            {...fadeInUp}
-                            transition={{ delay: 0.1, duration: 0.6 }}
-                            className="font-display font-bold text-3xl md:text-5xl mb-6 text-foreground leading-tight"
-                        >
-                            Capture Website Visitors <br className="hidden md:block" />
-                            with Your AI Receptionist
-                        </motion.h2>
-                        <motion.p
-                            {...fadeInUp}
-                            transition={{ delay: 0.2, duration: 0.6 }}
-                            className="text-muted-foreground text-lg max-w-2xl mx-auto mb-10"
-                        >
-                            A virtual dental receptionist chatbot that lives on your website — engaging visitors, answering questions, and booking appointments around the clock.
-                        </motion.p>
-                        <motion.button
-                            {...fadeInUp}
-                            transition={{ delay: 0.3, duration: 0.6 }}
-                            onClick={openCalendly}
-                            className="btn-primary px-8 py-4 mx-auto"
-                        >
-                            Try Website Chat Demo
-                        </motion.button>
-                    </div>
 
-                    {/* Chat mockup + stats */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 40 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.8 }}
-                        className="bg-card rounded-3xl border border-border shadow-xl p-8 md:p-12"
-                    >
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-                            {/* Left — Stats */}
-                            <div className="space-y-6">
-                                {[
-                                    { label: "Response rate increase", value: "94%", sub: "AI answers within 2 seconds, 24/7" },
-                                    { label: "Website conversion lift", value: "3.2×", sub: "More visitors become booked patients" },
-                                    { label: "Patient satisfaction", value: "98%", sub: "Patients prefer instant, helpful responses" },
-                                ].map((stat, i) => (
-                                    <motion.div
-                                        key={i}
-                                        initial={{ opacity: 0, x: -20 }}
-                                        whileInView={{ opacity: 1, x: 0 }}
-                                        viewport={{ once: true }}
-                                        transition={{ delay: 0.2 + i * 0.15 }}
-                                        className="flex items-center gap-5 p-5 rounded-2xl bg-secondary/50 border border-border"
-                                    >
-                                        <div className="text-3xl font-bold text-primary font-display shrink-0 w-20 text-right">
-                                            {stat.value}
-                                        </div>
-                                        <div>
-                                            <p className="font-semibold text-foreground text-sm">{stat.label}</p>
-                                            <p className="text-xs text-muted-foreground">{stat.sub}</p>
-                                        </div>
-                                    </motion.div>
-                                ))}
-                            </div>
-
-                            {/* Right — Chat UI mockup */}
-                            <div className="bg-foreground rounded-2xl p-6 shadow-lg">
-                                <div className="flex items-center gap-2 mb-5 pb-3 border-b border-muted-foreground/10">
-                                    <div className="w-3 h-3 rounded-full bg-red-400/60" />
-                                    <div className="w-3 h-3 rounded-full bg-yellow-400/60" />
-                                    <div className="w-3 h-3 rounded-full bg-green-400/60" />
-                                    <div className="ml-3 h-3.5 w-32 bg-muted-foreground/10 rounded" />
-                                </div>
-                                <div className="space-y-4">
-                                    <div className="flex gap-3">
-                                        <div className="w-8 h-8 rounded-full bg-primary/20 shrink-0" />
-                                        <div className="bg-muted-foreground/10 p-3.5 rounded-2xl rounded-tl-sm max-w-[80%]">
-                                            <p className="text-xs text-primary-foreground/80">Welcome to our practice! How can I help you today?</p>
-                                        </div>
-                                    </div>
-                                    <div className="flex flex-row-reverse gap-3">
-                                        <div className="w-8 h-8 rounded-full bg-muted-foreground/10 shrink-0" />
-                                        <div className="bg-primary p-3.5 rounded-2xl rounded-tr-sm max-w-[80%]">
-                                            <p className="text-xs text-primary-foreground">I'm interested in booking a checkup soon.</p>
-                                        </div>
-                                    </div>
-                                    <div className="flex gap-3">
-                                        <div className="w-8 h-8 rounded-full bg-primary/20 shrink-0" />
-                                        <div className="bg-muted-foreground/10 p-3.5 rounded-2xl rounded-tl-sm max-w-[80%]">
-                                            <p className="text-xs text-primary-foreground/80">I'd love to help! We have openings tomorrow at 10 AM and 2 PM. Which works best?</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </motion.div>
-
-                    {/* Feature highlights */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
-                        {[
-                            { icon: Monitor, title: "Always available", desc: "Embed on any digital touchpoint to capture leads 24/7, even after hours." },
-                            { icon: MessageSquare, title: "Context-aware", desc: "Maintains your practice's warm tone while handling complex dental inquiries." },
-                            { icon: MousePointer2, title: "Lead conversion", desc: "Turns casual visitors into booked patients — every chat synced to your dashboard." }
-                        ].map((item, i) => (
-                            <motion.div
-                                key={i}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: i * 0.1 }}
-                                className="flex items-start gap-4 p-6 rounded-2xl bg-card border border-border hover:border-primary/30 transition-colors"
-                            >
-                                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0">
-                                    <item.icon className="w-5 h-5" />
-                                </div>
-                                <div>
-                                    <h3 className="font-display font-bold text-foreground mb-1">{item.title}</h3>
-                                    <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </section>
 
             {/* 7. Testimonials Section */}
             <section className="py-24 px-6 lg:px-8 section-lavender overflow-hidden">
@@ -503,74 +409,127 @@ const Product = () => {
                 </div>
             </section>
 
-            {/* 8. Final CTA Form Section — Color-consistent */}
-            <section className="py-24 px-6 lg:px-8 section-alt">
-                <div className="max-w-6xl mx-auto overflow-hidden rounded-[2.5rem] shadow-2xl"
-                    style={{ background: "linear-gradient(135deg, hsl(244 50% 22%) 0%, hsl(244 58% 40%) 50%, hsl(244 58% 55%) 100%)" }}
+            {/* 8. Final CTA Form Section — Premium Redesign */}
+            <section className="py-28 px-6 lg:px-8 section-alt relative overflow-hidden">
+                {/* Background decorative elements */}
+                <div className="absolute inset-0 pointer-events-none">
+                    <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+                    <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent/5 rounded-full blur-3xl" />
+                </div>
+
+                <div className="max-w-6xl mx-auto relative z-10 overflow-hidden rounded-[2.5rem] shadow-2xl"
+                    style={{ background: "linear-gradient(135deg, hsl(244 58% 52%) 0%, hsl(244 58% 61%) 40%, hsl(244 55% 67%) 100%)" }}
                 >
-                    <div className="flex flex-col lg:flex-row items-center gap-12 p-8 md:p-16 relative">
-                        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/10 to-transparent pointer-events-none" />
+                    {/* Inner decorative orbs */}
+                    <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-bl from-primary/20 via-primary/5 to-transparent rounded-full blur-2xl pointer-events-none -translate-y-1/4 translate-x-1/4" />
+                    <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-gradient-to-tr from-primary/15 to-transparent rounded-full blur-2xl pointer-events-none translate-y-1/4 -translate-x-1/4" />
+
+                    <div className="flex flex-col lg:flex-row items-center gap-16 p-10 md:p-20 relative">
+                        {/* Left — Text */}
                         <div className="flex-1 relative z-10 text-left">
                             <motion.span
-                                initial={{ opacity: 0 }}
-                                whileInView={{ opacity: 1 }}
+                                initial={{ opacity: 0, y: 10 }}
+                                whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                className="inline-block px-4 py-1.5 rounded-full bg-primary-foreground/10 text-primary-foreground text-xs font-bold uppercase tracking-wider mb-6 border border-primary-foreground/20"
+                                transition={{ duration: 0.5 }}
+                                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-white/90 text-xs font-semibold uppercase tracking-widest mb-8 border border-white/10 backdrop-blur-sm"
                             >
+                                <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
                                 Ready to Get Started
                             </motion.span>
                             <motion.h2
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                className="font-display font-bold text-4xl md:text-5xl text-primary-foreground mb-6 leading-tight"
+                                transition={{ delay: 0.1, duration: 0.6 }}
+                                className="font-display font-bold text-4xl md:text-5xl lg:text-[3.5rem] text-white mb-6 leading-[1.15]"
                             >
-                                Experience <br /> Breeh AI in <br /> Action
+                                Experience <br className="hidden sm:block" />
+                                Breeh AI <br className="hidden sm:block" />
+                                <span className="bg-gradient-to-r from-white via-purple-200 to-white bg-clip-text text-transparent">in Action</span>
                             </motion.h2>
-                            <p className="text-primary-foreground/60 text-lg max-w-md">
-                                See how our AI can work for your specific practice needs.
-                            </p>
+                            <motion.p
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: 0.2, duration: 0.6 }}
+                                className="text-white/50 text-lg max-w-md leading-relaxed mb-10"
+                            >
+                                See how our AI can work for your specific practice needs. Join hundreds of dental practices already growing with Breeh.
+                            </motion.p>
+
+                            {/* Trust indicators */}
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                whileInView={{ opacity: 1 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: 0.4, duration: 0.6 }}
+                                className="flex flex-wrap items-center gap-6 text-white/40 text-xs"
+                            >
+                                <div className="flex items-center gap-2">
+                                    <ShieldCheck className="w-4 h-4" />
+                                    <span>HIPAA Compliant</span>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <Zap className="w-4 h-4" />
+                                    <span>5-Min Setup</span>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <MessageSquare className="w-4 h-4" />
+                                    <span>24/7 Support</span>
+                                </div>
+                            </motion.div>
                         </div>
 
-                        <div className="w-full lg:w-[480px] relative z-10">
+                        {/* Right — Form Card */}
+                        <div className="w-full lg:w-[460px] relative z-10">
                             <motion.div
-                                initial={{ opacity: 0, scale: 0.95 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                className="bg-secondary rounded-3xl p-8 md:p-10"
+                                transition={{ delay: 0.2, duration: 0.7 }}
+                                className="rounded-3xl p-8 md:p-10 border border-white/10 shadow-2xl backdrop-blur-md"
+                                style={{ background: "linear-gradient(165deg, rgba(255,255,255,0.95) 0%, rgba(245,243,255,0.98) 100%)" }}
                             >
-                                <h3 className="font-display font-bold text-xl text-foreground mb-2">Discover Your Missed Revenue</h3>
-                                <p className="text-xs text-muted-foreground mb-6">
-                                    Most practices miss 17–25% of calls. See how Breeh AI captures these lost opportunities.
-                                </p>
-                                <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-                                    <div className="space-y-1">
-                                        <label className="text-[10px] font-bold text-muted-foreground ml-2">Name</label>
-                                        <input type="text" placeholder="John Doe" className="w-full bg-card border border-border rounded-xl p-3.5 text-sm focus:ring-2 focus:ring-primary/20 outline-none text-foreground" />
+                                <div className="mb-7">
+                                    <h3 className="font-display font-bold text-xl text-foreground mb-2">Discover Your Missed Revenue</h3>
+                                    <p className="text-sm text-muted-foreground leading-relaxed">
+                                        Most practices miss 17–25% of calls. See how Breeh AI captures these lost opportunities.
+                                    </p>
+                                </div>
+                                <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
+                                    <div className="space-y-1.5">
+                                        <label className="text-xs font-semibold text-foreground/70 ml-1">Full Name</label>
+                                        <input type="text" placeholder="Dr. John Doe" className="w-full bg-white border border-border/60 rounded-xl px-4 py-3.5 text-sm focus:ring-2 focus:ring-primary/30 focus:border-primary/40 outline-none text-foreground placeholder:text-muted-foreground/50 transition-all shadow-sm" />
                                     </div>
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                        <div className="space-y-1">
-                                            <label className="text-[10px] font-bold text-muted-foreground ml-2">Work Email Address</label>
-                                            <input type="email" placeholder="example@practice.com" className="w-full bg-card border border-border rounded-xl p-3.5 text-sm focus:ring-2 focus:ring-primary/20 outline-none text-foreground" />
+                                        <div className="space-y-1.5">
+                                            <label className="text-xs font-semibold text-foreground/70 ml-1">Work Email</label>
+                                            <input type="email" placeholder="you@practice.com" className="w-full bg-white border border-border/60 rounded-xl px-4 py-3.5 text-sm focus:ring-2 focus:ring-primary/30 focus:border-primary/40 outline-none text-foreground placeholder:text-muted-foreground/50 transition-all shadow-sm" />
                                         </div>
-                                        <div className="space-y-1">
-                                            <label className="text-[10px] font-bold text-muted-foreground ml-2">Number of Locations</label>
-                                            <select className="w-full bg-card border border-border rounded-xl p-3.5 text-sm focus:ring-2 focus:ring-primary/20 outline-none text-foreground">
+                                        <div className="space-y-1.5">
+                                            <label className="text-xs font-semibold text-foreground/70 ml-1">Locations</label>
+                                            <select className="w-full bg-white border border-border/60 rounded-xl px-4 py-3.5 text-sm focus:ring-2 focus:ring-primary/30 focus:border-primary/40 outline-none text-foreground transition-all shadow-sm">
                                                 <option>1 Location</option>
-                                                <option>2-5 Locations</option>
-                                                <option>6-10 Locations</option>
+                                                <option>2–5 Locations</option>
+                                                <option>6–10 Locations</option>
                                                 <option>10+ Locations</option>
                                             </select>
                                         </div>
                                     </div>
-                                    <button
+                                    <motion.button
+                                        whileHover={{ scale: 1.02 }}
+                                        whileTap={{ scale: 0.98 }}
                                         onClick={openCalendly}
                                         type="button"
-                                        className="w-full bg-primary text-primary-foreground font-bold py-4 rounded-xl shadow-lg hover:bg-primary/90 transition-all mt-2 text-sm"
+                                        className="w-full bg-gradient-to-r from-primary to-primary/85 text-white font-bold py-4 rounded-xl shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all mt-1 text-sm flex items-center justify-center gap-2"
                                     >
-                                        Schedule a Demo
-                                    </button>
+                                        Schedule a Demo <ArrowRight className="w-4 h-4" />
+                                    </motion.button>
                                 </form>
+                                <p className="text-center text-[11px] text-muted-foreground/60 mt-5">
+                                    No credit card required · Free consultation
+                                </p>
                             </motion.div>
                         </div>
                     </div>

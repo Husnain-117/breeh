@@ -1,5 +1,5 @@
 import { Linkedin, Twitter, Youtube, Instagram, Mail, Phone, MapPin } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { SITE_CONFIG } from "@/lib/config";
 
 interface FooterProps {
@@ -64,8 +64,8 @@ const Footer = ({ onOpenPlaybook, onBookDemo }: FooterProps) => {
               ))}
             </div>
             <div className="space-y-2">
-              <a href="mailto:hello@breehai.com" className="flex items-center gap-2 text-sm text-primary-foreground/50 hover:text-primary transition-colors">
-                <Mail className="w-3.5 h-3.5" /> hello@breehai.com
+              <a href="mailto:husnain.akram@gmail.com" className="flex items-center gap-2 text-sm text-primary-foreground/50 hover:text-primary transition-colors">
+                <Mail className="w-3.5 h-3.5" /> husnain.akram@gmail.com
               </a>
             </div>
           </div>
@@ -96,8 +96,12 @@ const Footer = ({ onOpenPlaybook, onBookDemo }: FooterProps) => {
         {/* Bottom Bar */}
         <div className="mt-16 pt-8 border-t border-primary-foreground/10 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex flex-wrap gap-6">
-            {["Terms of Service", "Privacy Policy", "HIPAA Compliance"].map((link) => (
-              <a key={link} href="#" className="text-xs text-primary-foreground/40 hover:text-primary-foreground transition-colors duration-300 relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 hover:after:w-full after:bg-primary-foreground/60 after:transition-all after:duration-300">{link}</a>
+            {[
+              { label: "Terms of Service", to: "/terms" },
+              { label: "Privacy Policy", to: "/privacy" },
+              { label: "HIPAA Compliance", to: "/hipaa" },
+            ].map((link) => (
+              <Link key={link.label} to={link.to} className="text-xs text-primary-foreground/40 hover:text-primary-foreground transition-colors duration-300 relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 hover:after:w-full after:bg-primary-foreground/60 after:transition-all after:duration-300">{link.label}</Link>
             ))}
           </div>
           <p className="text-xs text-primary-foreground/40">© {new Date().getFullYear()} Breeh AI. All rights reserved.</p>

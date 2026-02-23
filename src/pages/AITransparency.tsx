@@ -202,7 +202,8 @@ const AITransparency = () => {
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="bg-foreground rounded-3xl p-8 md:p-10"
+            className="rounded-3xl p-8 md:p-10"
+            style={{ background: "linear-gradient(135deg, hsl(244 58% 56%) 0%, hsl(244 58% 61%) 50%, hsl(244 55% 65%) 100%)" }}
           >
             <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center mb-6">
               <Shield className="w-6 h-6 text-primary-foreground" />
@@ -299,7 +300,8 @@ const AITransparency = () => {
         <div className="max-w-5xl mx-auto">
           <motion.div
             {...fadeInUp}
-            className="bg-foreground rounded-3xl p-10 md:p-16 overflow-hidden relative shadow-2xl"
+            className="rounded-3xl p-10 md:p-16 overflow-hidden relative shadow-2xl"
+            style={{ background: "linear-gradient(135deg, hsl(244 58% 52%) 0%, hsl(244 58% 61%) 50%, hsl(244 55% 67%) 100%)" }}
           >
             <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/10 to-transparent pointer-events-none" />
             <div className="relative z-10 flex flex-col lg:flex-row items-center gap-10">
@@ -316,7 +318,7 @@ const AITransparency = () => {
                 </p>
                 <div className="flex flex-wrap gap-3">
                   <button
-                    onClick={() => (window.location.href = "mailto:hello@breehai.com")}
+                    onClick={() => (window.location.href = "mailto:husnain.akram@gmail.com")}
                     className="bg-primary text-primary-foreground font-semibold rounded-full px-8 py-3 text-sm hover:bg-primary/90 transition-colors"
                   >
                     Contact Our Experts

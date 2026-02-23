@@ -6,45 +6,41 @@ const features = [
   {
     icon: Phone,
     title: "Always-On Front Desk",
-    description:
-      "Breeh AI answers every patient call instantly, 24/7. It handles complex scheduling, questions, and triage just like a human receptionist, but without hold times.",
+    description: "Every call answered instantly, 24/7. Handles scheduling, questions, and triage — no hold times.",
     chat: [
-      { from: "patient", text: "Hi! I'd like to schedule a cleaning appointment for next week." },
-      { from: "ai", text: "Of course! I have openings on Tuesday at 2pm and Thursday at 10am. Which works best for you?" },
-      { from: "patient", text: "Tuesday at 2pm works perfectly!" },
+      { from: "patient", text: "Hi, I'd like to schedule a cleaning for next week." },
+      { from: "ai", text: "Of course! I have Tuesday 2pm or Thursday 10am. Which works?" },
+      { from: "patient", text: "Tuesday at 2pm, please." },
     ],
   },
   {
     icon: Calendar,
-    title: "Intelligent Scheduling",
-    description:
-      "Automatically book, reschedule and confirm appointments in real-time. Breeh AI syncs with your practice management system so your calendar is always up to date.",
+    title: "Smart Scheduling",
+    description: "Book, reschedule, and confirm in real-time. Syncs directly with your PMS.",
     chat: [
-      { from: "patient", text: "I need to reschedule my Thursday appointment." },
-      { from: "ai", text: "No problem! I can move it to Friday at 3pm or Monday at 11am. Your preference?" },
-      { from: "patient", text: "Monday at 11am please." },
+      { from: "patient", text: "I need to move my Thursday appointment." },
+      { from: "ai", text: "No problem — Friday 3pm or Monday 11am?" },
+      { from: "patient", text: "Monday works." },
     ],
   },
   {
     icon: MessageSquare,
-    title: "Patient Follow-Up & Recall",
-    description:
-      "Send automated appointment reminders, recall notices, and post-visit follow-ups via SMS, email, and voice — reducing no-shows by up to 40%.",
+    title: "Automated Follow-Up",
+    description: "Reminders, recall notices, and post-visit follow-ups via SMS, email, and voice.",
     chat: [
-      { from: "ai", text: "Hi Sarah! Just a reminder about your cleaning tomorrow at 10am with Dr. Smith." },
-      { from: "patient", text: "Thanks! I'll be there." },
-      { from: "ai", text: "Great! We'll see you then. Reply HELP if you need to reschedule." },
+      { from: "ai", text: "Hi Sarah, reminder: cleaning tomorrow at 10am with Dr. Smith." },
+      { from: "patient", text: "Thanks, I'll be there!" },
+      { from: "ai", text: "Great — reply HELP if you need to reschedule." },
     ],
   },
   {
     icon: BarChart3,
     title: "Practice Analytics",
-    description:
-      "Real-time dashboards with call analytics, booking trends, patient satisfaction scores, and staff performance metrics to optimize your practice.",
+    description: "Call volume, booking trends, satisfaction scores, and performance metrics in real-time.",
     chat: [
-      { from: "ai", text: "Weekly report: 142 calls handled, 95% satisfaction, 23 new appointments booked." },
-      { from: "patient", text: "Show me the busiest hours this week." },
-      { from: "ai", text: "Peak hours were Mon & Wed 9-11am. I recommend adding capacity during those slots." },
+      { from: "ai", text: "Weekly: 142 calls handled, 95% satisfaction, 23 appointments booked." },
+      { from: "patient", text: "Show me the busiest hours." },
+      { from: "ai", text: "Peak: Mon & Wed 9–11am. Consider adding capacity." },
     ],
   },
 ];
@@ -68,7 +64,6 @@ const WhyBreehSection = () => {
     setActiveIndex(i);
   }, [activeIndex]);
 
-  // Auto-play every 5 seconds
   useEffect(() => {
     const interval = setInterval(next, 5000);
     return () => clearInterval(interval);
@@ -81,7 +76,7 @@ const WhyBreehSection = () => {
   };
 
   return (
-    <section className="section-lavender py-20 lg:py-28 relative overflow-hidden" id="why-breeh">
+    <section className="section-lavender py-24 lg:py-32 relative overflow-hidden" id="why-breeh">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -94,18 +89,17 @@ const WhyBreehSection = () => {
           <p className="text-sm font-semibold text-accent tracking-wide mb-3">
             Why Breeh AI
           </p>
-          <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-foreground mb-6">
-            The AI Receptionist That
+          <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-foreground mb-4">
+            Your AI Receptionist,
             <br />
-            Integrates Seamlessly
+            Seamlessly Integrated
           </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Delight patients, empower staff, and provide useful insights to practice
-            owners with an always-on digital front desk.
+          <p className="text-muted-foreground max-w-2xl mx-auto text-sm">
+            Delight patients, empower staff, and gain actionable insights with an always-on digital front desk.
           </p>
         </motion.div>
 
-        {/* Card Container */}
+        {/* Card */}
         <div className="relative min-h-[380px] md:min-h-[340px]">
           <AnimatePresence mode="wait" custom={direction}>
             <motion.div
@@ -118,32 +112,29 @@ const WhyBreehSection = () => {
               transition={{ duration: 0.5, ease: "easeInOut" }}
               className="grid lg:grid-cols-5 gap-0 rounded-3xl overflow-hidden shadow-xl"
             >
-              {/* Dark Left Panel */}
               <div
                 className="lg:col-span-3 p-10 md:p-12 flex flex-col justify-center"
                 style={{
-                  background:
-                    "linear-gradient(135deg, hsl(244 58% 50%) 0%, hsl(244 55% 40%) 50%, hsl(244 50% 30%) 100%)",
+                  background: "linear-gradient(135deg, hsl(244 55% 62%) 0%, hsl(244 50% 55%) 50%, hsl(244 48% 50%) 100%)",
                 }}
               >
-                <div className="w-12 h-12 rounded-xl bg-accent/20 flex items-center justify-center mb-6">
+                <div className="w-10 h-10 rounded-xl bg-white/15 flex items-center justify-center mb-6">
                   {(() => {
                     const Icon = features[activeIndex].icon;
-                    return <Icon className="w-6 h-6 text-accent-foreground" />;
+                    return <Icon className="w-5 h-5 text-white" />;
                   })()}
                 </div>
-                <h3 className="font-display font-bold text-2xl md:text-3xl text-primary-foreground mb-4">
+                <h3 className="font-display font-bold text-2xl md:text-3xl text-white mb-3">
                   {features[activeIndex].title}
                 </h3>
-                <p className="text-primary-foreground/60 leading-relaxed text-base">
+                <p className="text-white/70 leading-relaxed text-sm">
                   {features[activeIndex].description}
                 </p>
               </div>
 
-              {/* Light Right Panel - Chat mockup */}
               <div className="lg:col-span-2 bg-secondary p-8 flex items-center justify-center">
-                <div className="bg-card rounded-2xl p-6 w-full max-w-xs shadow-sm border border-border">
-                  <div className="space-y-3">
+                <div className="bg-card rounded-2xl p-5 w-full max-w-xs shadow-sm border border-border">
+                  <div className="space-y-2.5">
                     {features[activeIndex].chat.map((msg, i) => (
                       <motion.div
                         key={i}
@@ -159,11 +150,11 @@ const WhyBreehSection = () => {
                       </motion.div>
                     ))}
                   </div>
-                  <div className="mt-4 flex items-center gap-2">
-                    <div className="w-6 h-6 rounded-full bg-accent flex items-center justify-center">
-                      <span className="text-[10px] font-bold text-accent-foreground">B</span>
+                  <div className="mt-3 flex items-center gap-2">
+                    <div className="w-5 h-5 rounded-full bg-accent flex items-center justify-center">
+                      <span className="text-[9px] font-bold text-accent-foreground">B</span>
                     </div>
-                    <span className="text-[10px] text-muted-foreground">Breeh AI Assistant</span>
+                    <span className="text-[10px] text-muted-foreground">Breeh AI</span>
                   </div>
                 </div>
               </div>
@@ -171,33 +162,31 @@ const WhyBreehSection = () => {
           </AnimatePresence>
         </div>
 
-        {/* Bottom Controls — progress dots + arrows centered */}
+        {/* Controls */}
         <div className="flex items-center justify-center gap-4 mt-8">
           <button
             onClick={prev}
-            className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:border-accent hover:text-accent transition-colors bg-background shadow-sm"
+            className="w-9 h-9 rounded-full border border-border flex items-center justify-center hover:border-accent hover:text-accent transition-colors bg-background"
           >
-            <ChevronLeft className="w-5 h-5" />
+            <ChevronLeft className="w-4 h-4" />
           </button>
-
           <div className="flex gap-2">
             {features.map((_, i) => (
               <button
                 key={i}
                 onClick={() => goTo(i)}
                 className={`h-1.5 rounded-full transition-all duration-500 ${i === activeIndex
-                  ? "w-10 bg-accent"
-                  : "w-4 bg-border hover:bg-muted-foreground/30"
+                  ? "w-8 bg-accent"
+                  : "w-3 bg-border hover:bg-muted-foreground/30"
                   }`}
               />
             ))}
           </div>
-
           <button
             onClick={next}
-            className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:border-accent hover:text-accent transition-colors bg-background shadow-sm"
+            className="w-9 h-9 rounded-full border border-border flex items-center justify-center hover:border-accent hover:text-accent transition-colors bg-background"
           >
-            <ChevronRight className="w-5 h-5" />
+            <ChevronRight className="w-4 h-4" />
           </button>
         </div>
       </div>

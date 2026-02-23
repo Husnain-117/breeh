@@ -81,18 +81,27 @@ const CaseStudiesSection = () => {
             </div>
 
             <div className="relative">
-              <div className="bg-muted rounded-2xl p-6 aspect-video flex items-end justify-center">
-                <div className="bg-background rounded-xl p-4 shadow-lg flex gap-6">
-                  <div className="text-center">
-                    <p className="text-xs text-accent font-semibold uppercase">Calls Handled</p>
-                    <p className="font-display font-bold text-3xl text-foreground">80%</p>
-                    <p className="text-xs text-muted-foreground">Automated in 4 weeks</p>
-                  </div>
-                  <div className="text-center">
-                    <p className="text-xs text-accent font-semibold uppercase">Patient Satisfaction</p>
-                    <p className="font-display font-bold text-3xl text-foreground">95%</p>
-                    <p className="text-xs text-muted-foreground">CSAT Score</p>
-                  </div>
+              {/* Real image with stats overlay */}
+              <div className="rounded-2xl overflow-hidden shadow-lg">
+                <img
+                  src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=800&h=500&fit=crop&q=80"
+                  alt="Modern dental practice with advanced technology"
+                  className="w-full h-64 md:h-80 object-cover"
+                />
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/20 to-transparent rounded-2xl" />
+              </div>
+              {/* Floating stats */}
+              <div className="absolute bottom-4 left-4 right-4 flex gap-3">
+                <div className="flex-1 bg-card/95 backdrop-blur-md border border-border rounded-xl p-4 text-center shadow-lg">
+                  <p className="text-xs text-accent font-semibold uppercase">Calls Handled</p>
+                  <p className="font-display font-bold text-3xl text-foreground">80%</p>
+                  <p className="text-xs text-muted-foreground">Automated in 4 weeks</p>
+                </div>
+                <div className="flex-1 bg-card/95 backdrop-blur-md border border-border rounded-xl p-4 text-center shadow-lg">
+                  <p className="text-xs text-accent font-semibold uppercase">Patient Satisfaction</p>
+                  <p className="font-display font-bold text-3xl text-foreground">95%</p>
+                  <p className="text-xs text-muted-foreground">CSAT Score</p>
                 </div>
               </div>
             </div>

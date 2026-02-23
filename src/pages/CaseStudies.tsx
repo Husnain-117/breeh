@@ -10,8 +10,6 @@ import {
     ArrowRight,
     Calendar,
     Clock,
-    Quote,
-    FileText,
     ChevronRight,
 } from "lucide-react";
 
@@ -68,16 +66,14 @@ const CaseStudies = () => {
                             viewport={{ once: true }}
                             className="grid md:grid-cols-2 gap-0 rounded-3xl overflow-hidden border border-border bg-card shadow-sm group hover:border-primary/30 transition-all"
                         >
-                            {/* Image placeholder */}
-                            <div className="bg-secondary flex items-center justify-center min-h-[280px] md:min-h-[360px] relative overflow-hidden">
-                                <div className="text-center p-8">
-                                    <FileText className="w-16 h-16 text-primary/30 mx-auto mb-4" />
-                                    <p className="text-muted-foreground text-sm">
-                                        Featured Image
-                                    </p>
-                                </div>
-                                <div className="absolute -top-6 -right-6 w-32 h-32 rounded-full bg-primary/10" />
-                                <div className="absolute -bottom-6 -left-6 w-28 h-28 rounded-full bg-primary/5" />
+                            {/* Featured image */}
+                            <div className="relative min-h-[280px] md:min-h-[360px] overflow-hidden">
+                                <img
+                                    src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=800&h=500&fit=crop&q=80"
+                                    alt={featured.title}
+                                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-r from-card/20 to-transparent" />
                             </div>
                             {/* Content */}
                             <div className="p-8 md:p-12 flex flex-col justify-center">
@@ -127,11 +123,21 @@ const CaseStudies = () => {
                                     to={`/case-studies/${cs.slug}`}
                                     className="group block bg-card rounded-3xl border border-border overflow-hidden hover:border-primary/30 hover:-translate-y-1 transition-all shadow-sm"
                                 >
-                                    {/* Image placeholder */}
-                                    <div className="aspect-[4/3] bg-secondary flex items-center justify-center relative overflow-hidden">
-                                        <Quote className="w-12 h-12 text-primary/20" />
-                                        <div className="absolute -top-4 -right-4 w-24 h-24 rounded-full bg-primary/10" />
-                                        <div className="absolute -bottom-4 -left-4 w-20 h-20 rounded-full bg-primary/5" />
+                                    {/* Case study image */}
+                                    <div className="aspect-[4/3] overflow-hidden relative">
+                                        <img
+                                            src={[
+                                                'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=500&h=375&fit=crop&q=80',
+                                                'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=500&h=375&fit=crop&q=80',
+                                                'https://images.unsplash.com/photo-1629909615184-74f495363b67?w=500&h=375&fit=crop&q=80',
+                                                'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=500&h=375&fit=crop&q=80',
+                                                'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500&h=375&fit=crop&q=80',
+                                            ][i % 5]}
+                                            alt={cs.title}
+                                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                            loading="lazy"
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-card/30 to-transparent" />
                                     </div>
                                     <div className="p-6">
                                         <span className="inline-block px-2.5 py-1 rounded-md bg-secondary text-xs font-bold text-foreground uppercase tracking-wider mb-3">
@@ -173,7 +179,7 @@ const CaseStudies = () => {
                         className="rounded-3xl p-10 md:p-16 overflow-hidden relative shadow-2xl"
                         style={{
                             background:
-                                "linear-gradient(135deg, hsl(244 50% 22%) 0%, hsl(244 58% 40%) 50%, hsl(244 58% 61%) 100%)",
+                                "linear-gradient(135deg, hsl(244 58% 52%) 0%, hsl(244 58% 61%) 50%, hsl(244 55% 67%) 100%)",
                         }}
                     >
                         <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/10 to-transparent pointer-events-none" />
