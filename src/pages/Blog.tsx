@@ -1,294 +1,101 @@
-import { useState, useEffect } from "react";
+import { useState, useMemo, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { SITE_CONFIG } from "@/lib/config";
 import PlaybookModal from "@/components/PlaybookModal";
+import BlogCard from "@/components/BlogCard";
+import BlogSearch from "@/components/BlogSearch";
+import { SITE_CONFIG } from "@/lib/config";
 import {
-  Calendar,
-  Clock,
-  ChevronRight,
-  CheckCircle2,
-  ArrowRight,
-  Shield,
-  Zap,
-  Users,
-  BarChart3,
-  MessageSquare,
-  PhoneCall,
-  Phone,
-  Bot,
-  HeadphonesIcon,
-  Lock,
-  Layers,
-  Timer,
-  DollarSign,
-  Mic,
-  InfinityIcon,
-  Settings,
-  Award,
-  TrendingUp,
-  X,
-  Check,
-} from "lucide-react";
+  featuredArticle,
+  articles,
+  categories,
+  getAllArticles,
+} from "@/lib/articles";
+import { Clock, X, ArrowRight, Search } from "lucide-react";
+
+/* ── Skeleton card ── */
+const SkeletonCard = () => (
+  <div className="bg-card rounded-xl overflow-hidden border border-border/50 animate-pulse">
+    <div className="aspect-[16/10] bg-muted" />
+    <div className="p-6 space-y-3">
+      <div className="h-4 bg-muted rounded w-3/4" />
+      <div className="h-4 bg-muted rounded w-1/2" />
+      <div className="h-3 bg-muted rounded w-full" />
+      <div className="h-3 bg-muted rounded w-2/3" />
+      <div className="flex justify-between mt-4">
+        <div className="h-3 bg-muted rounded w-20" />
+        <div className="h-3 bg-muted rounded w-16" />
+      </div>
+    </div>
+  </div>
+);
 
 const Blog = () => {
   const [playbookOpen, setPlaybookOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("");
+  const [activeCategory, setActiveCategory] = useState("All");
+  const [showNewsletter, setShowNewsletter] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [newsletterSuccess, setNewsletterSuccess] = useState(false);
 
   const openCalendly = () => {
     window.open(SITE_CONFIG.calendlyUrl, "_blank");
   };
 
-  const fadeInUp = {
-    initial: { opacity: 0, y: 30 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: "-50px" },
-    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const },
-  };
-
-  const staggerContainer = {
-    initial: {},
-    whileInView: { transition: { staggerChildren: 0.1 } },
-    viewport: { once: true },
-  };
-
-  const staggerChild = {
-    initial: { opacity: 0, y: 20 },
-    whileInView: { opacity: 1, y: 0 },
-    transition: { duration: 0.5 },
-  };
-
-  const tableOfContents = [
-    { id: "the-problem", label: "The Silent Revenue Killer" },
-    { id: "why-breeh", label: "Why Choose Breeh AI" },
-    { id: "ten-reasons", label: "10 Reasons to Switch" },
-    { id: "comparison", label: "Competitor Comparison" },
-    { id: "technical", label: "Technical Architecture" },
-    { id: "closing", label: "The Bottom Line" },
-  ];
-
+  // Cmd+K listener to open search
   useEffect(() => {
-    const handleScroll = () => {
-      const container = document.getElementById('blog-content');
-      if (!container) return;
-      const sections = tableOfContents.map((item) => item.id);
-      const scrollPosition = container.scrollTop + 200;
-
-      for (const sectionId of sections) {
-        const element = document.getElementById(sectionId);
-        if (element) {
-          const offsetTop = element.offsetTop - container.offsetTop;
-          const offsetHeight = element.offsetHeight;
-          if (
-            scrollPosition >= offsetTop &&
-            scrollPosition < offsetTop + offsetHeight
-          ) {
-            setActiveSection(sectionId);
-            break;
-          }
-        }
+    const handler = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+        e.preventDefault();
+        setSearchOpen(true);
       }
     };
-
-    const container = document.getElementById('blog-content');
-    if (container) {
-      container.addEventListener("scroll", handleScroll);
-      handleScroll();
-      return () => container.removeEventListener("scroll", handleScroll);
-    }
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
   }, []);
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      const offset = 100;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
-      window.scrollTo({ top: offsetPosition, behavior: "smooth" });
-    }
+  // Newsletter scroll trigger (show after 30% scroll)
+  useEffect(() => {
+    const handler = () => {
+      const scrolled = window.scrollY;
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      if (total > 0 && scrolled / total > 0.3) {
+        setShowNewsletter(true);
+      }
+    };
+    window.addEventListener("scroll", handler, { passive: true });
+    return () => window.removeEventListener("scroll", handler);
+  }, []);
+
+  // Simulate loading on category change
+  const handleCategoryChange = (cat: string) => {
+    if (cat === activeCategory) return;
+    setIsLoading(true);
+    setActiveCategory(cat);
+    setTimeout(() => setIsLoading(false), 300);
   };
 
-  const reasons = [
-    {
-      icon: <TrendingUp className="w-6 h-6" />,
-      number: "01",
-      title: "We Don't Just Answer Calls — We Recover Lost Patients",
-      description:
-        "Most tools work only when someone answers the phone. We work when calls are missed, which is where most revenue is lost. Every unanswered ring is a patient walking to your competitor. Breeh intercepts that moment and turns it into a booked appointment.",
-    },
-    {
-      icon: <Bot className="w-6 h-6" />,
-      number: "02",
-      title: "Built Specifically for Dental Practices",
-      description:
-        "We're designed only for dental workflows — appointments, urgency detection, patient intent recognition, and insurance verification. Other tools are adapted from generic call centers. Breeh is dental-first, dental-only, dental-always.",
-    },
-    {
-      icon: <Clock className="w-6 h-6" />,
-      number: "03",
-      title: "Works 24/7, Even During Peak Hours",
-      description:
-        "Peak hours and after-hours are when most calls are missed. Your front desk is overwhelmed at 9 AM and gone at 6 PM. Breeh answers every call, any time, without extra staff — turning your practice into a round-the-clock patient acquisition machine.",
-    },
-    {
-      icon: <DollarSign className="w-6 h-6" />,
-      number: "04",
-      title: "Direct Impact on Revenue, Not Just Features",
-      description:
-        "We focus on one thing: turning missed calls into booked appointments and real revenue. While other platforms sell you dashboards and reports, we sell you patients. The ROI isn't theoretical — it shows up in your bank account.",
-    },
-    {
-      icon: <Mic className="w-6 h-6" />,
-      number: "05",
-      title: "Sounds Human, Not Robotic",
-      description:
-        "Patients feel like they're talking to a real receptionist, so they're comfortable booking — not hanging up. Our voice AI uses natural cadence, empathetic responses, and dental-specific language that puts anxious patients at ease.",
-    },
-    {
-      icon: <InfinityIcon className="w-6 h-6" />,
-      number: "06",
-      title: "Handles Unlimited Calls Simultaneously",
-      description:
-        "Your front desk can handle one call at a time. Breeh handles dozens simultaneously — no hold music, no voicemail, no lost patients. During your busiest Monday morning, every single caller gets answered within seconds.",
-    },
-    {
-      icon: <Settings className="w-6 h-6" />,
-      number: "07",
-      title: "No Change to How Your Team Works",
-      description:
-        "We fit into your existing system and workflow seamlessly. Your staff focuses on in-office patients while Breeh handles the phones. No new software to learn, no workflows to redesign, no disruption to your practice culture.",
-    },
-    {
-      icon: <Lock className="w-6 h-6" />,
-      number: "08",
-      title: "HIPAA-Compliant and Secure",
-      description:
-        "Patient data is protected with enterprise-grade encryption, role-based access controls, and full HIPAA compliance. Built for dental practices and DSOs that cannot afford a single data breach. Security isn't an add-on — it's foundational.",
-    },
-    {
-      icon: <Award className="w-6 h-6" />,
-      number: "09",
-      title: "Proven AI Experience, Not Experimental",
-      description:
-        "We've been building voice AI for years and deployed it in real businesses generating real revenue. This isn't a beta product or a weekend project — it's production-ready infrastructure trusted by practices across the country.",
-    },
-    {
-      icon: <DollarSign className="w-6 h-6" />,
-      number: "10",
-      title: "Breeh Pays for Itself",
-      description:
-        "Even a few recovered patients per month cover the entire cost. Everything after that is pure profit. Most practices see positive ROI within their first 30 days. The question isn't whether you can afford Breeh — it's whether you can afford not to have it.",
-    },
-  ];
+  const filteredArticles = useMemo(() => {
+    let filtered = articles;
+    if (activeCategory !== "All") {
+      filtered = filtered.filter((a) => a.category === activeCategory);
+    }
+    return filtered;
+  }, [activeCategory]);
 
-  const comparisonData = [
-    {
-      feature: "Missed Call Recovery",
-      breeh: true,
-      generic: false,
-      callCenter: false,
-    },
-    {
-      feature: "Dental-Specific AI",
-      breeh: true,
-      generic: false,
-      callCenter: false,
-    },
-    {
-      feature: "24/7 Availability",
-      breeh: true,
-      generic: true,
-      callCenter: true,
-    },
-    {
-      feature: "Sub-2s Voice Response",
-      breeh: true,
-      generic: false,
-      callCenter: false,
-    },
-    {
-      feature: "Unlimited Concurrent Calls",
-      breeh: true,
-      generic: false,
-      callCenter: false,
-    },
-    {
-      feature: "HIPAA Compliance",
-      breeh: true,
-      generic: false,
-      callCenter: true,
-    },
-    {
-      feature: "No Workflow Disruption",
-      breeh: true,
-      generic: false,
-      callCenter: false,
-    },
-    {
-      feature: "Human-Like Voice",
-      breeh: true,
-      generic: false,
-      callCenter: true,
-    },
-    {
-      feature: "Revenue-First Design",
-      breeh: true,
-      generic: false,
-      callCenter: false,
-    },
-    {
-      feature: "PMS Integration",
-      breeh: true,
-      generic: true,
-      callCenter: false,
-    },
-    {
-      feature: "Patient Intent Detection",
-      breeh: true,
-      generic: false,
-      callCenter: false,
-    },
-    {
-      feature: "Self-Paying ROI",
-      breeh: true,
-      generic: false,
-      callCenter: false,
-    },
-  ];
+  // Trending = first 4
+  const trending = articles.slice(0, 4);
 
-  const techDetails = [
-    {
-      icon: <Layers className="w-8 h-8" />,
-      title: "Controlled, Layered Architecture",
-      description:
-        "Purpose-built for dental workflows with a multi-layer AI pipeline that separates intent recognition, context management, and response generation. Each layer is independently optimizable, ensuring consistent quality across all patient interactions.",
-    },
-    {
-      icon: <Timer className="w-8 h-8" />,
-      title: "Sub-2 Second Response Time",
-      description:
-        "End-to-end response time stays under 1–1.5 seconds for text and sub-2 seconds for voice. We pre-cache common dental intents (appointment booking, emergency triage, insurance queries) and minimize generation latency through edge-deployed inference.",
-    },
-    {
-      icon: <Settings className="w-8 h-8" />,
-      title: "Infrastructure-Grade Reliability",
-      description:
-        "Built like critical infrastructure, not a chatbot demo. 99.9% uptime SLA, automatic failover, load balancing across regions, and graceful degradation under extreme traffic. Your patients never hear silence.",
-    },
-    {
-      icon: <Shield className="w-8 h-8" />,
-      title: "Healthcare-Grade Compliance from Day One",
-      description:
-        "HIPAA compliance wasn't bolted on — it was the foundation. End-to-end encryption, audit logging, BAA-ready architecture, PHI isolation, and zero-retention processing ensure patient data is never at risk.",
-    },
-    {
-      icon: <Zap className="w-8 h-8" />,
-      title: "Intelligent Control Layer",
-      description:
-        "Our strength isn't in the model — it's in the control layer around it. Guardrails prevent hallucination, context managers maintain conversation coherence, and dental-specific validation ensures every response is clinically appropriate and operationally useful.",
-    },
-  ];
+  const handleNewsletterSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (newsletterEmail.includes("@")) {
+      setNewsletterSuccess(true);
+      setTimeout(() => setShowNewsletter(false), 3000);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
@@ -297,592 +104,342 @@ const Blog = () => {
         onOpenPlaybook={() => setPlaybookOpen(true)}
       />
 
-      {/* ═══════════════════════════════════════════════════
-          NEWSPAPER HERO — Editorial Masthead
-         ═══════════════════════════════════════════════════ */}
-      <section className="pt-32 pb-20 px-6 lg:px-8 bg-background border-b border-border">
-        <div className="max-w-5xl mx-auto text-center">
-          {/* Dateline */}
-          <motion.div
-            {...fadeInUp}
-            className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-muted-foreground text-xs sm:text-sm mb-8"
-          >
-            <span className="uppercase tracking-[0.2em] font-semibold text-primary">
-              The Breeh AI Journal
-            </span>
-            <span className="hidden sm:block w-1 h-1 rounded-full bg-primary" />
-            <span>February 14, 2026</span>
-            <span className="hidden sm:block w-1 h-1 rounded-full bg-muted-foreground" />
-            <span className="flex items-center gap-1"><Clock className="w-4 h-4" /> 12 min read</span>
-          </motion.div>
+      {/* Search Modal */}
+      <BlogSearch open={searchOpen} onClose={() => setSearchOpen(false)} />
 
-          {/* Decorative Rule */}
-          <motion.div
-            {...fadeInUp}
-            transition={{ delay: 0.05 }}
-            className="flex items-center justify-center gap-4 mb-10"
-          >
-            <div className="h-[2px] w-16 bg-primary" />
-            <div className="h-[2px] w-32 bg-primary/60" />
-            <div className="h-[2px] w-16 bg-primary" />
-          </motion.div>
-
-          {/* Headline */}
-          <motion.h1
-            {...fadeInUp}
-            transition={{ delay: 0.1, duration: 0.8 }}
-            className="font-display font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-7xl text-foreground leading-[1.08] mb-8 tracking-tight"
-          >
-            Why Every Dental Practice
-            <br />
-            <span className="gradient-text">Needs Breeh AI</span>
-          </motion.h1>
-
-          {/* Subhead */}
-          <motion.p
-            {...fadeInUp}
-            transition={{ delay: 0.2, duration: 0.7 }}
-            className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-3xl mx-auto mb-10"
-          >
-            Other tools help manage calls.{" "}
-            <strong className="text-foreground">
-              Breeh AI makes sure no patient — and no revenue — is ever lost.
-            </strong>{" "}
-            An in-depth editorial on the technology, philosophy, and undeniable
-            results behind the AI receptionist built exclusively for dentistry.
-          </motion.p>
-
-          {/* Stats Row */}
-          <motion.div
-            {...fadeInUp}
-            transition={{ delay: 0.3, duration: 0.7 }}
-            className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 max-w-2xl mx-auto mb-10"
-          >
-            {[
-              { value: "338+", label: "Missed Calls Recovered" },
-              { value: "<2s", label: "Voice Response Time" },
-              { value: "24/7", label: "Always Available" },
-            ].map((stat, i) => (
-              <div key={i} className="text-center">
-                <div className="font-display font-extrabold text-3xl md:text-4xl text-primary mb-1">
-                  {stat.value}
-                </div>
-                <div className="text-xs md:text-sm text-muted-foreground">
-                  {stat.label}
-                </div>
-              </div>
-            ))}
-          </motion.div>
-
-          <motion.div {...fadeInUp} transition={{ delay: 0.4 }}>
-            <button
-              onClick={openCalendly}
-              className="btn-primary inline-flex items-center gap-2 text-lg"
-            >
-              Book a Demo <ArrowRight className="w-5 h-5" />
-            </button>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════
-          MAIN CONTENT — Fixed TOC + Scrollable Content
-         ═══════════════════════════════════════════════════ */}
-      <section className="bg-background">
+      {/* ═══════════════════════════════════════
+          HEADER
+         ═══════════════════════════════════════ */}
+      <section className="pt-28 pb-12 px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 lg:h-[calc(100vh-80px)]">
-            {/* ─── Table of Contents — Fixed left column ─── */}
-            <aside className="lg:col-span-3 lg:h-full lg:overflow-y-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-16 border-b lg:border-b-0 lg:border-r border-border">
-              <div>
-                <h3 className="font-display font-bold text-sm uppercase tracking-[0.15em] text-muted-foreground mb-6">
-                  In This Issue
-                </h3>
-                <nav className="space-y-1">
-                  {tableOfContents.map((item, i) => (
-                    <button
-                      key={item.id}
-                      onClick={() => {
-                        const el = document.getElementById(item.id);
-                        if (el) {
-                          const container = document.getElementById('blog-content');
-                          if (container) {
-                            const offset = el.offsetTop - container.offsetTop;
-                            container.scrollTo({ top: offset - 32, behavior: 'smooth' });
-                          }
-                        }
-                      }}
-                      className={`group flex items-start gap-3 w-full text-left px-4 py-3 rounded-lg text-sm transition-all duration-300 ${
-                        activeSection === item.id
-                          ? "bg-primary/10 text-primary font-semibold"
-                          : "text-muted-foreground hover:text-foreground hover:bg-muted"
-                      }`}
-                    >
-                      <span className="font-mono text-xs mt-0.5 opacity-50">
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                      {item.label}
-                    </button>
-                  ))}
-                </nav>
-
-                {/* Newsletter */}
-                <div className="mt-10 p-5 rounded-2xl border border-border bg-card">
-                  <p className="font-display font-bold text-sm text-foreground mb-2">
-                    Subscribe to Our Newsletter
-                  </p>
-                  <p className="text-xs text-muted-foreground mb-4">
-                    Get dental AI insights delivered weekly.
-                  </p>
-                  <input
-                    type="email"
-                    placeholder="your@email.com"
-                    className="w-full px-4 py-2.5 rounded-lg border border-border bg-background text-sm mb-3 focus:outline-none focus:ring-2 focus:ring-primary/30"
-                  />
-                  <button className="w-full btn-primary text-sm py-2.5">
-                    Subscribe
-                  </button>
-                </div>
-              </div>
-            </aside>
-
-            {/* ─── Article Body — Scrollable right column ─── */}
-            <article id="blog-content" className="lg:col-span-9 lg:h-full lg:overflow-y-auto px-4 sm:px-6 lg:px-12 py-8 lg:py-16 scroll-smooth">
-              {/* ── Section 1: The Problem ── */}
-              <div id="the-problem" className="mb-20 scroll-mt-32">
-                <motion.div {...fadeInUp}>
-                  <span className="inline-block font-mono text-xs text-primary uppercase tracking-[0.2em] mb-4">
-                    Chapter 01
-                  </span>
-                  <h2 className="font-display font-extrabold text-3xl md:text-4xl text-foreground mb-8 leading-tight">
-                    The Silent Revenue Killer in Every Dental Practice
-                  </h2>
-                </motion.div>
-
-                <motion.div
-                  {...fadeInUp}
-                  transition={{ delay: 0.1 }}
-                  className="space-y-6 text-muted-foreground text-lg leading-relaxed"
-                >
-                  <p>
-                    <span className="font-display font-bold text-foreground text-5xl float-left mr-3 mt-1 leading-none">
-                      E
-                    </span>
-                    very dental practice has a silent problem. It doesn't announce
-                    itself in quarterly reports or staff meetings. It hides in the
-                    gap between a phone ringing and no one picking up. It lives in
-                    the voicemail that was never returned, the patient who called
-                    during lunch and booked with a competitor instead.
-                  </p>
-                  <p>
-                    The average dental practice misses{" "}
-                    <strong className="text-foreground">
-                      30–40% of incoming calls
-                    </strong>
-                    . Each missed call represents a potential patient worth{" "}
-                    <strong className="text-foreground">$800–$1,200</strong> in
-                    lifetime value. For a practice receiving 200 calls per month,
-                    that's up to{" "}
-                    <strong className="text-foreground">
-                      $96,000 in annual lost revenue
-                    </strong>{" "}
-                    — silently bleeding out through the phone line.
-                  </p>
-                  <p>
-                    Front desk teams are talented, dedicated professionals. But
-                    they're human. They can only handle one call at a time. During
-                    peak hours — Monday mornings, lunch breaks, after-school rushes
-                    — the phone becomes the bottleneck of your entire operation.
-                    And after 5 PM? The phone simply doesn't get answered at all.
-                  </p>
-
-                  {/* Pull Quote */}
-                  <motion.blockquote
-                    {...fadeInUp}
-                    className="border-l-4 border-primary pl-8 py-6 my-10 bg-primary/5 rounded-r-2xl"
-                  >
-                    <p className="font-display font-bold text-xl md:text-2xl text-foreground italic leading-snug">
-                      "The biggest threat to a dental practice's revenue isn't a
-                      competitor down the street — it's the phone call that nobody
-                      answered."
-                    </p>
-                  </motion.blockquote>
-
-                  <p>
-                    This is where Breeh AI enters the picture. Not as another piece
-                    of software, not as a marketing gimmick — but as the
-                    infrastructure layer between your practice and the patients
-                    you're currently losing.
-                  </p>
-                </motion.div>
-              </div>
-
-              {/* ── Section 2: Why Breeh ── */}
-              <div id="why-breeh" className="mb-20 scroll-mt-32">
-                <motion.div {...fadeInUp}>
-                  <span className="inline-block font-mono text-xs text-primary uppercase tracking-[0.2em] mb-4">
-                    Chapter 02
-                  </span>
-                  <h2 className="font-display font-extrabold text-3xl md:text-4xl text-foreground mb-8 leading-tight">
-                    Why Choose Breeh AI Over Everything Else?
-                  </h2>
-                </motion.div>
-
-                <motion.div
-                  {...fadeInUp}
-                  transition={{ delay: 0.1 }}
-                  className="space-y-6 text-muted-foreground text-lg leading-relaxed"
-                >
-                  <p>
-                    The dental AI market is noisy. Dozens of companies promise
-                    automation, efficiency, and patient engagement. But here's what
-                    they don't tell you: most of them are{" "}
-                    <strong className="text-foreground">
-                      generic AI platforms
-                    </strong>{" "}
-                    with a dental label slapped on top. They were built for call
-                    centers, adapted for healthcare, and forced into dental.
-                  </p>
-                  <p>
-                    Breeh AI took a different path. It was{" "}
-                    <strong className="text-foreground">
-                      engineered from the ground up
-                    </strong>{" "}
-                    for a single purpose: ensuring that no dental practice ever
-                    loses a patient due to a missed call. Every line of code, every
-                    AI model, every workflow was designed with dentists, hygienists,
-                    and front desk teams in mind.
-                  </p>
-                  <p>
-                    The result? A system that doesn't just answer phones — it
-                    understands dental context, recognizes patient urgency,
-                    schedules appointments in real time, and does it all while
-                    sounding like the warmest, most competent receptionist your
-                    practice has ever had.
-                  </p>
-                </motion.div>
-              </div>
-
-              {/* ── Section 3: 10 Reasons ── */}
-              <div id="ten-reasons" className="mb-20 scroll-mt-32">
-                <motion.div {...fadeInUp}>
-                  <span className="inline-block font-mono text-xs text-primary uppercase tracking-[0.2em] mb-4">
-                    Chapter 03
-                  </span>
-                  <h2 className="font-display font-extrabold text-3xl md:text-4xl text-foreground mb-4 leading-tight">
-                    10 Reasons Breeh AI is the Best Choice
-                  </h2>
-                  <p className="text-muted-foreground text-lg mb-12">
-                    Not features. Not promises.{" "}
-                    <strong className="text-foreground">
-                      Reasons backed by architecture, results, and real-world
-                      deployment.
-                    </strong>
-                  </p>
-                </motion.div>
-
-                <div className="space-y-8">
-                  {reasons.map((reason, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0, x: -30 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true, margin: "-30px" }}
-                      transition={{
-                        duration: 0.6,
-                        delay: i * 0.05,
-                        ease: [0.22, 1, 0.36, 1],
-                      }}
-                      className="group relative flex gap-6 p-6 md:p-8 rounded-2xl border border-border bg-card hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-500"
-                    >
-                      {/* Number */}
-                      <div className="shrink-0">
-                        <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500">
-                          {reason.icon}
-                        </div>
-                      </div>
-                      <div>
-                        <div className="flex items-baseline gap-3 mb-2">
-                          <span className="font-mono text-xs text-primary/60">
-                            {reason.number}
-                          </span>
-                          <h3 className="font-display font-bold text-lg md:text-xl text-foreground">
-                            {reason.title}
-                          </h3>
-                        </div>
-                        <p className="text-muted-foreground leading-relaxed">
-                          {reason.description}
-                        </p>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-
-              {/* ── Section 4: Comparison Table ── */}
-              <div id="comparison" className="mb-20 scroll-mt-32">
-                <motion.div {...fadeInUp}>
-                  <span className="inline-block font-mono text-xs text-primary uppercase tracking-[0.2em] mb-4">
-                    Chapter 04
-                  </span>
-                  <h2 className="font-display font-extrabold text-3xl md:text-4xl text-foreground mb-4 leading-tight">
-                    How Breeh AI Compares
-                  </h2>
-                  <p className="text-muted-foreground text-lg mb-12">
-                    A transparent, side-by-side comparison against generic AI
-                    platforms and traditional call center solutions.
-                  </p>
-                </motion.div>
-
-                <motion.div
-                  {...fadeInUp}
-                  transition={{ delay: 0.1 }}
-                  className="overflow-hidden rounded-2xl border border-border"
-                >
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-sm">
-                      <thead>
-                        <tr className="bg-primary text-primary-foreground">
-                          <th className="text-left px-6 py-5 font-display font-bold text-base">
-                            Capability
-                          </th>
-                          <th className="text-center px-6 py-5 font-display font-bold text-base">
-                            <span className="inline-flex items-center gap-2">
-                              <Zap className="w-5 h-5" />
-                              Breeh AI
-                            </span>
-                          </th>
-                          <th className="text-center px-6 py-5 font-display font-bold text-base">
-                            Generic AI
-                          </th>
-                          <th className="text-center px-6 py-5 font-display font-bold text-base">
-                            Call Centers
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {comparisonData.map((row, i) => (
-                          <motion.tr
-                            key={i}
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: i * 0.03 }}
-                            className={`border-b border-border ${
-                              i % 2 === 0 ? "bg-card" : "bg-muted/30"
-                            } hover:bg-primary/5 transition-colors`}
-                          >
-                            <td className="px-6 py-4 font-medium text-foreground">
-                              {row.feature}
-                            </td>
-                            <td className="px-6 py-4 text-center">
-                              <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary">
-                                <Check className="w-5 h-5" />
-                              </span>
-                            </td>
-                            <td className="px-6 py-4 text-center">
-                              {row.generic ? (
-                                <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary">
-                                  <Check className="w-5 h-5" />
-                                </span>
-                              ) : (
-                                <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-destructive/10 text-destructive">
-                                  <X className="w-5 h-5" />
-                                </span>
-                              )}
-                            </td>
-                            <td className="px-6 py-4 text-center">
-                              {row.callCenter ? (
-                                <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary">
-                                  <Check className="w-5 h-5" />
-                                </span>
-                              ) : (
-                                <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-destructive/10 text-destructive">
-                                  <X className="w-5 h-5" />
-                                </span>
-                              )}
-                            </td>
-                          </motion.tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </motion.div>
-
-                {/* Score summary */}
-                <motion.div
-                  {...fadeInUp}
-                  transition={{ delay: 0.2 }}
-                  className="grid grid-cols-3 gap-4 mt-8"
-                >
-                  {[
-                    { label: "Breeh AI", score: "12/12", color: "primary" },
-                    { label: "Generic AI", score: "3/12", color: "muted-foreground" },
-                    { label: "Call Centers", score: "3/12", color: "muted-foreground" },
-                  ].map((item, i) => (
-                    <div
-                      key={i}
-                      className={`text-center p-5 rounded-xl border ${
-                        i === 0
-                          ? "border-primary bg-primary/5"
-                          : "border-border bg-card"
-                      }`}
-                    >
-                      <div
-                        className={`font-display font-extrabold text-2xl mb-1 ${
-                          i === 0 ? "text-primary" : "text-muted-foreground"
-                        }`}
-                      >
-                        {item.score}
-                      </div>
-                      <div className="text-sm text-muted-foreground">
-                        {item.label}
-                      </div>
-                    </div>
-                  ))}
-                </motion.div>
-              </div>
-
-              {/* ── Section 5: Technical Architecture ── */}
-              <div id="technical" className="mb-20 scroll-mt-32">
-                <motion.div {...fadeInUp}>
-                  <span className="inline-block font-mono text-xs text-primary uppercase tracking-[0.2em] mb-4">
-                    Chapter 05
-                  </span>
-                  <h2 className="font-display font-extrabold text-3xl md:text-4xl text-foreground mb-4 leading-tight">
-                    Under the Hood: Technical Architecture
-                  </h2>
-                  <p className="text-muted-foreground text-lg mb-12">
-                    For the technically curious — here's why Breeh AI performs at a
-                    level no generic platform can match.
-                  </p>
-                </motion.div>
-
-                <div className="space-y-6">
-                  {techDetails.map((tech, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{
-                        duration: 0.6,
-                        delay: i * 0.08,
-                      }}
-                      className="group relative overflow-hidden rounded-2xl border border-border bg-card p-8 hover:border-primary/30 transition-all duration-500"
-                    >
-                      {/* Subtle bg gradient on hover */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-primary/0 to-primary/0 group-hover:from-primary/5 group-hover:to-transparent transition-all duration-700" />
-
-                      <div className="relative flex gap-6 items-start">
-                        <div className="shrink-0 w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500">
-                          {tech.icon}
-                        </div>
-                        <div>
-                          <h3 className="font-display font-bold text-xl text-foreground mb-3">
-                            {tech.title}
-                          </h3>
-                          <p className="text-muted-foreground leading-relaxed">
-                            {tech.description}
-                          </p>
-                        </div>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-
-                {/* Architecture Highlight */}
-                <motion.div
-                  {...fadeInUp}
-                  className="mt-10 p-8 rounded-2xl bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/20"
-                >
-                  <div className="flex items-start gap-4">
-                    <Zap className="w-8 h-8 text-primary shrink-0 mt-1" />
-                    <div>
-                      <h4 className="font-display font-bold text-xl text-foreground mb-3">
-                        The Breeh Difference in One Sentence
-                      </h4>
-                      <p className="text-lg text-foreground font-medium italic">
-                        "Our strength is not in the model — it's in the control
-                        layer around the model. The guardrails, the dental context,
-                        the patient empathy, the compliance framework. That's what
-                        makes Breeh production-ready, not just demo-ready."
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
-              </div>
-
-              {/* ── Section 6: Closing ── */}
-              <div id="closing" className="mb-16 scroll-mt-32">
-                <motion.div {...fadeInUp}>
-                  <span className="inline-block font-mono text-xs text-primary uppercase tracking-[0.2em] mb-4">
-                    Chapter 06
-                  </span>
-                  <h2 className="font-display font-extrabold text-3xl md:text-4xl text-foreground mb-8 leading-tight">
-                    The Bottom Line
-                  </h2>
-                </motion.div>
-
-                <motion.div
-                  {...fadeInUp}
-                  transition={{ delay: 0.1 }}
-                  className="space-y-6 text-muted-foreground text-lg leading-relaxed"
-                >
-                  <p>
-                    The dental industry doesn't need another chatbot. It doesn't
-                    need another SaaS dashboard. It doesn't need another tool that
-                    promises "AI-powered" anything while delivering generic, one-
-                    size-fits-all automation.
-                  </p>
-                  <p>
-                    What it needs is a system that understands the unique rhythm of
-                    a dental practice — the Monday morning rush, the after-hours
-                    emergency call, the anxious patient who just needs someone to
-                    pick up the phone and say{" "}
-                    <em className="text-foreground">"We're here for you."</em>
-                  </p>
-                  <p>
-                    <strong className="text-foreground">
-                      That system is Breeh AI.
-                    </strong>
-                  </p>
-
-                  <motion.blockquote
-                    {...fadeInUp}
-                    className="border-l-4 border-primary pl-8 py-6 my-10 bg-primary/5 rounded-r-2xl"
-                  >
-                    <p className="font-display font-bold text-xl md:text-2xl text-foreground leading-snug">
-                      "Other tools help manage calls. Breeh AI makes sure no
-                      patient — and no revenue — is ever lost."
-                    </p>
-                  </motion.blockquote>
-                </motion.div>
-              </div>
-
-              {/* ── Final CTA ── */}
-              <motion.div
-                {...fadeInUp}
-                className="bg-gradient-to-br from-primary to-primary/80 rounded-3xl p-10 md:p-14 text-center"
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-xs font-semibold text-primary uppercase tracking-[0.2em] mb-4"
+          >
+            The Breeh AI Blog
+          </motion.p>
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+            <div>
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.05 }}
+                className="font-display font-bold text-4xl md:text-5xl text-foreground max-w-3xl leading-tight mb-4"
               >
-                <h2 className="font-display font-extrabold text-3xl md:text-4xl text-primary-foreground mb-4">
-                  Ready to Stop Losing Patients?
-                </h2>
-                <p className="text-primary-foreground/90 text-lg mb-8 max-w-2xl mx-auto">
-                  Join the practices that have already recovered thousands in
-                  lost revenue with Breeh AI. Your 15-minute demo could be the
-                  most profitable quarter-hour of your year.
-                </p>
-                <button
-                  onClick={openCalendly}
-                  className="bg-primary-foreground text-foreground font-bold px-10 py-4 rounded-full hover:bg-primary-foreground/90 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 inline-flex items-center gap-2 text-lg"
-                >
-                  Schedule Your Demo <ArrowRight className="w-5 h-5" />
-                </button>
-              </motion.div>
-            </article>
+                Insights for modern
+                <br />
+                <span className="gradient-text">dental practices</span>
+              </motion.h1>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="text-lg text-muted-foreground max-w-2xl"
+              >
+                Expert perspectives on AI, patient experience, and practice
+                growth.
+              </motion.p>
+            </div>
+
+            {/* Search trigger */}
+            <motion.button
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+              onClick={() => setSearchOpen(true)}
+              className="flex items-center gap-3 px-5 py-3 rounded-xl border border-border bg-card text-muted-foreground hover:border-primary/30 hover:text-foreground transition-all group w-full lg:w-72 shrink-0"
+            >
+              <Search className="w-4 h-4" />
+              <span className="text-sm flex-1 text-left">Search articles...</span>
+              <kbd className="hidden sm:inline-flex items-center gap-0.5 px-2 py-0.5 rounded border border-border text-[10px] font-mono bg-muted group-hover:border-primary/30 transition-colors">
+                ⌘K
+              </kbd>
+            </motion.button>
           </div>
         </div>
       </section>
+
+      {/* ═══════════════════════════════════════
+          CATEGORY FILTER
+         ═══════════════════════════════════════ */}
+      <div className="sticky top-20 z-30 bg-background/80 backdrop-blur-xl border-y border-border py-3">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <nav
+            className="relative flex gap-1.5 overflow-x-auto no-scrollbar snap-x snap-mandatory"
+            aria-label="Article categories"
+          >
+            {/* Left fade mask */}
+            <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-background/80 to-transparent pointer-events-none z-10 hidden md:block" />
+
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => handleCategoryChange(cat)}
+                data-active={activeCategory === cat}
+                className="relative whitespace-nowrap px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 snap-center"
+              >
+                {activeCategory === cat && (
+                  <motion.span
+                    layoutId="activeCategoryPill"
+                    transition={{
+                      type: "spring",
+                      stiffness: 400,
+                      damping: 30,
+                    }}
+                    className="absolute inset-0 bg-primary rounded-full shadow-lg shadow-primary/25"
+                  />
+                )}
+                <span
+                  className={`relative z-10 ${activeCategory === cat
+                    ? "text-white"
+                    : "text-muted-foreground hover:text-foreground"
+                    }`}
+                >
+                  {cat}
+                </span>
+              </button>
+            ))}
+
+            {/* Right fade mask */}
+            <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-background/80 to-transparent pointer-events-none z-10 hidden md:block" />
+          </nav>
+        </div>
+      </div>
+
+      {/* ═══════════════════════════════════════
+          HERO — Featured + Trending
+         ═══════════════════════════════════════ */}
+      {activeCategory === "All" && (
+        <section className="py-12 px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
+            {/* Featured Article — 8 cols */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="lg:col-span-8"
+            >
+              <Link
+                to={`/resources/${featuredArticle.slug}`}
+                className="group block relative aspect-[16/9] overflow-hidden rounded-2xl shadow-lg"
+              >
+                <img
+                  src={featuredArticle.coverImage}
+                  alt={featuredArticle.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+
+                {/* Content overlay */}
+                <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10">
+                  <span className="inline-block bg-primary text-white px-3 py-1 rounded-full text-xs font-semibold mb-4">
+                    {featuredArticle.category}
+                  </span>
+                  <h2 className="font-display font-bold text-2xl md:text-3xl lg:text-4xl text-white mb-4 group-hover:underline decoration-2 underline-offset-4 leading-snug max-w-2xl">
+                    {featuredArticle.title}
+                  </h2>
+                  <p className="text-white/70 hidden md:block max-w-xl text-sm mb-4 leading-relaxed">
+                    {featuredArticle.excerpt}
+                  </p>
+                  <div className="flex items-center gap-4 text-white/80 text-sm">
+                    <div className="flex items-center gap-2">
+                      <div className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white text-xs font-bold">
+                        {featuredArticle.author.name.charAt(0)}
+                      </div>
+                      <span className="font-medium">
+                        {featuredArticle.author.name}
+                      </span>
+                    </div>
+                    <span className="w-1 h-1 rounded-full bg-white/50" />
+                    <span>{featuredArticle.date}</span>
+                    <span className="w-1 h-1 rounded-full bg-white/50" />
+                    <span className="flex items-center gap-1">
+                      <Clock className="w-3.5 h-3.5" />
+                      {featuredArticle.readTime}
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            </motion.div>
+
+            {/* Trending Sidebar — 4 cols */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+              className="lg:col-span-4 flex flex-col"
+            >
+              <h3 className="text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground mb-6">
+                Trending Now
+              </h3>
+              <div className="flex flex-col gap-0 divide-y divide-border">
+                {trending.map((article, i) => (
+                  <Link
+                    key={article.slug}
+                    to={`/resources/${article.slug}`}
+                    className="flex gap-4 py-5 first:pt-0 group cursor-pointer"
+                  >
+                    <span className="text-3xl font-bold text-muted-foreground/15 group-hover:text-primary/30 transition-colors duration-300 shrink-0 leading-none tracking-tight font-display">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <div className="flex-1 min-w-0">
+                      <h4 className="text-sm font-semibold leading-snug group-hover:text-primary transition-colors duration-300 line-clamp-2 mb-1">
+                        {article.title}
+                      </h4>
+                      <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                        <span>{article.category}</span>
+                        <span className="w-1 h-1 rounded-full bg-muted-foreground/30" />
+                        <span>{article.readTime}</span>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </section>
+      )}
+
+      {/* ═══════════════════════════════════════
+          ARTICLE GRID
+         ═══════════════════════════════════════ */}
+      <section className="py-12 px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <AnimatePresence mode="wait">
+            {isLoading ? (
+              <motion.div
+                key="loading"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+              >
+                {[0, 1, 2, 3, 4, 5].map((i) => (
+                  <SkeletonCard key={i} />
+                ))}
+              </motion.div>
+            ) : filteredArticles.length === 0 ? (
+              <motion.div
+                key="empty"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="text-center py-20"
+              >
+                <p className="text-muted-foreground text-lg">
+                  No articles found for "{activeCategory}".
+                </p>
+                <button
+                  onClick={() => handleCategoryChange("All")}
+                  className="text-primary font-medium mt-4 hover:underline"
+                >
+                  View all articles
+                </button>
+              </motion.div>
+            ) : (
+              <motion.div
+                key={activeCategory}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -15 }}
+                transition={{ duration: 0.35 }}
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+              >
+                {filteredArticles.map((article, i) => (
+                  <BlogCard key={article.slug} article={article} index={i} />
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════
+          NEWSLETTER BANNER — scroll triggered
+         ═══════════════════════════════════════ */}
+      <AnimatePresence>
+        {showNewsletter && (
+          <motion.div
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 100, opacity: 0 }}
+            transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+            className="fixed bottom-0 left-0 right-0 bg-card/95 backdrop-blur-xl border-t border-primary/10 p-4 md:p-5 z-40 shadow-2xl shadow-primary/5"
+            style={{
+              borderImage:
+                "linear-gradient(to right, transparent, hsl(244 58% 52% / 0.3), transparent) 1",
+            }}
+          >
+            <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+              {newsletterSuccess ? (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="flex items-center gap-3 text-green-600"
+                >
+                  <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
+                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span className="font-semibold text-sm">
+                    You're in! Check your inbox.
+                  </span>
+                </motion.div>
+              ) : (
+                <>
+                  <div className="flex items-center gap-3 text-center sm:text-left">
+                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="font-display font-bold text-foreground text-sm">
+                        Get weekly dental AI insights
+                      </p>
+                      <p className="text-xs text-muted-foreground">
+                        Join 2,000+ practice owners · No spam, unsubscribe anytime
+                      </p>
+                    </div>
+                  </div>
+
+                  <form
+                    onSubmit={handleNewsletterSubmit}
+                    className="flex gap-2 w-full sm:w-auto"
+                  >
+                    <input
+                      type="email"
+                      value={newsletterEmail}
+                      onChange={(e) => setNewsletterEmail(e.target.value)}
+                      placeholder="your@email.com"
+                      required
+                      className="flex-1 sm:min-w-[280px] px-4 py-2.5 rounded-lg border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all"
+                    />
+                    <button
+                      type="submit"
+                      className="bg-primary text-white rounded-lg px-5 py-2.5 text-sm font-semibold hover:bg-primary/90 transition-colors whitespace-nowrap flex items-center gap-2"
+                    >
+                      Subscribe
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
+                  </form>
+                </>
+              )}
+
+              <button
+                onClick={() => setShowNewsletter(false)}
+                className="absolute top-2 right-2 sm:relative sm:top-auto sm:right-auto text-muted-foreground hover:text-foreground transition-colors p-1"
+                aria-label="Close newsletter banner"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <Footer
         onOpenPlaybook={() => setPlaybookOpen(true)}

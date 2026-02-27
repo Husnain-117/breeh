@@ -3,7 +3,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PlaybookModal from "@/components/PlaybookModal";
-import { motion } from "framer-motion";
+import { motion, useScroll, useSpring } from "framer-motion";
 import { SITE_CONFIG } from "@/lib/config";
 import {
     getCaseStudyBySlug,
@@ -14,30 +14,24 @@ import {
     Calendar,
     Clock,
     ArrowRight,
-    Quote,
-    CheckCircle2,
-    Send,
+    Share2,
+    Download,
+    Eye,
     ChevronLeft,
-    ChevronRight as ChevronRightIcon,
 } from "lucide-react";
 
-/* ────────────────────────────── helpers ────────────────────────────── */
-
-const fadeIn = {
-    initial: { opacity: 0, y: 24 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true },
-    transition: { duration: 0.55 },
-};
-
-/* ────────────────────────────── component ─────────────────────────── */
+import ResultsDashboard from "@/components/case-studies/ResultsDashboard";
+import BeforeAfterTool from "@/components/case-studies/BeforeAfterTool";
+import VideoTestimonial from "@/components/case-studies/VideoTestimonial";
+import ExpertAnalysis from "@/components/case-studies/ExpertAnalysis";
+import ImplementationTimeline from "@/components/case-studies/ImplementationTimeline";
+import CaseStudyFinalCTA from "@/components/case-studies/CaseStudyFinalCTA";
 
 const CaseStudyDetail = () => {
     const { slug } = useParams<{ slug: string }>();
     const navigate = useNavigate();
     const [playbookOpen, setPlaybookOpen] = useState(false);
-    const [activeSection, setActiveSection] = useState<string>("");
-    const [testimonialIdx, setTestimonialIdx] = useState(0);
+    const [activeSection, setActiveSection] = useState<string>("overview");
     const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
 
     const caseStudy = useMemo(
@@ -51,84 +45,51 @@ const CaseStudyDetail = () => {
 
     const openCalendly = () => window.open(SITE_CONFIG.calendlyUrl, "_blank");
 
-    /* ── SEO meta ── */
+    const { scrollYProgress } = useScroll();
+    const scaleX = useSpring(scrollYProgress, {
+        stiffness: 100,
+        damping: 30,
+        restDelta: 0.001
+    });
+
     useEffect(() => {
         if (!caseStudy) return;
-        document.title = caseStudy.seo.title;
-        const setMeta = (name: string, content: string) => {
-            let tag = document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement | null;
-            if (!tag) {
-                tag = document.createElement("meta");
-                tag.name = name;
-                document.head.appendChild(tag);
-            }
-            tag.content = content;
-        };
-        const setOg = (property: string, content: string) => {
-            let tag = document.querySelector(`meta[property="${property}"]`) as HTMLMetaElement | null;
-            if (!tag) {
-                tag = document.createElement("meta");
-                tag.setAttribute("property", property);
-                document.head.appendChild(tag);
-            }
-            tag.content = content;
-        };
-        setMeta("description", caseStudy.seo.description);
-        setOg("og:title", caseStudy.seo.title);
-        setOg("og:description", caseStudy.seo.description);
-        if (caseStudy.seo.ogImage) setOg("og:image", caseStudy.seo.ogImage);
-        setOg("og:type", "article");
+        document.title = `${caseStudy.title} | Breeh AI Case Study`;
     }, [caseStudy]);
 
-    /* ── Intersection Observer for TOC ── */
     useEffect(() => {
-        if (!caseStudy) return;
         const observer = new IntersectionObserver(
             (entries) => {
-                for (const entry of entries) {
+                entries.forEach((entry) => {
                     if (entry.isIntersecting) {
                         setActiveSection(entry.target.id);
                     }
-                }
+                });
             },
             { rootMargin: "-20% 0px -60% 0px", threshold: 0.1 }
         );
-        Object.values(sectionRefs.current).forEach((el) => {
+
+        const currentRefs = sectionRefs.current;
+        Object.values(currentRefs).forEach((el) => {
             if (el) observer.observe(el);
         });
+
         return () => observer.disconnect();
     }, [caseStudy]);
 
-    /* ── Scroll to top on slug change ── */
     useEffect(() => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        window.scrollTo({ top: 0, behavior: "instant" });
     }, [slug]);
 
-    /* ── testimonial auto-rotate ── */
-    useEffect(() => {
-        if (!caseStudy || caseStudy.testimonials.length <= 1) return;
-        const iv = setInterval(
-            () => setTestimonialIdx((i) => (i + 1) % caseStudy.testimonials.length),
-            5000
-        );
-        return () => clearInterval(iv);
-    }, [caseStudy]);
-
-    /* ── 404 guard ── */
     if (!caseStudy) {
         return (
             <div className="min-h-screen bg-background flex flex-col">
                 <Navbar onBookDemo={openCalendly} onOpenPlaybook={() => setPlaybookOpen(true)} />
                 <div className="flex-1 flex items-center justify-center">
                     <div className="text-center">
-                        <h1 className="font-display font-bold text-4xl text-foreground mb-4">
-                            Case Study Not Found
-                        </h1>
-                        <p className="text-muted-foreground mb-8">
-                            The case study you're looking for doesn't exist.
-                        </p>
-                        <Link to="/case-studies" className="btn-primary inline-flex items-center gap-2">
-                            Browse Case Studies <ArrowRight className="w-4 h-4" />
+                        <h1 className="text-4xl font-bold mb-4">Story Missing</h1>
+                        <Link to="/case-studies" className="text-primary font-bold flex items-center justify-center gap-2">
+                            <ChevronLeft className="w-4 h-4" /> Return to library
                         </Link>
                     </div>
                 </div>
@@ -142,394 +103,208 @@ const CaseStudyDetail = () => {
         if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
     };
 
+    const sidebarLinks = [
+        { id: "overview", label: "Overview" },
+        { id: "the-problem", label: "The Challenge" },
+        { id: "the-solution", label: "The Solution" },
+        { id: "30-day-results", label: "Key Results" },
+        { id: "expert-analysis", label: "Expert View" },
+        { id: "deployment-process", label: "Implementation" },
+    ];
+
     return (
-        <div className="min-h-screen bg-background overflow-x-hidden font-body">
+        <div className="min-h-screen bg-background text-foreground selection:bg-primary/20">
             <Navbar onBookDemo={openCalendly} onOpenPlaybook={() => setPlaybookOpen(true)} />
 
-            {/* ═══════════════════ 1. Breadcrumb ═══════════════════ */}
-            <section className="pt-28 pb-4 px-6 lg:px-8 section-lavender">
-                <div className="max-w-6xl mx-auto">
-                    <nav className="flex items-center gap-2 text-sm text-muted-foreground flex-wrap">
-                        <Link to="/resources" className="hover:text-primary transition-colors">
-                            Resources
-                        </Link>
-                        <ChevronRight className="w-3.5 h-3.5" />
-                        <Link to="/case-studies" className="hover:text-primary transition-colors">
-                            Case Studies
-                        </Link>
-                        <ChevronRight className="w-3.5 h-3.5" />
-                        <span className="text-foreground font-medium truncate max-w-xs lg:max-w-lg">
-                            {caseStudy.title}
-                        </span>
-                    </nav>
-                </div>
-            </section>
+            {/* Progress Bar */}
+            <motion.div
+                className="fixed top-20 left-0 right-0 h-1 bg-primary origin-left z-50"
+                style={{ scaleX }}
+            />
 
-            {/* ═══════════════════ 2. Hero ═══════════════════ */}
-            <section className="pb-12 px-6 lg:px-8 section-lavender">
-                <div className="max-w-6xl mx-auto">
-                    <div className="grid lg:grid-cols-5 gap-10 items-start">
-                        {/* Left — title */}
-                        <motion.div {...fadeIn} className="lg:col-span-3">
-                            <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-5">
+            {/* ── Cinematic Hero ── */}
+            <section className="relative h-[70vh] min-h-[500px] flex items-end pb-20 overflow-hidden">
+                <div className="absolute inset-0 z-0">
+                    <img
+                        src="https://images.unsplash.com/photo-1629909608115-f93f044922c3?q=80&w=2067&auto=format&fit=crop"
+                        alt={caseStudy.title}
+                        className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
+                </div>
+
+                <div className="container max-w-7xl mx-auto px-6 relative z-10">
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="max-w-4xl"
+                    >
+                        <div className="flex items-center gap-4 mb-6">
+                            <span className="px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-bold uppercase tracking-wider backdrop-blur-md border border-primary/20">
                                 {caseStudy.category}
                             </span>
-                            <h1 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl text-foreground leading-tight mb-6">
-                                {caseStudy.title}
-                            </h1>
-                            <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                                <span className="flex items-center gap-1.5">
-                                    <Calendar className="w-4 h-4" /> {caseStudy.date}
-                                </span>
-                                <span>|</span>
-                                <span className="flex items-center gap-1.5">
-                                    <Clock className="w-4 h-4" /> {caseStudy.readTime}
-                                </span>
+                            <div className="flex items-center gap-2 text-muted-foreground text-xs font-medium">
+                                <Calendar className="w-3.5 h-3.5" /> {caseStudy.date}
+                                <span className="mx-2">•</span>
+                                <Clock className="w-3.5 h-3.5" /> {caseStudy.readTime}
                             </div>
-                        </motion.div>
-
-                        {/* Right — stats */}
-                        <motion.div
-                            {...fadeIn}
-                            transition={{ delay: 0.15, duration: 0.55 }}
-                            className="lg:col-span-2 grid grid-cols-2 gap-4"
-                        >
-                            {caseStudy.heroStats.map((stat) => (
-                                <div
-                                    key={stat.label}
-                                    className="bg-card rounded-2xl p-6 border border-border shadow-sm text-center"
-                                >
-                                    <p className="font-display font-bold text-3xl md:text-4xl text-primary mb-1">
-                                        {stat.value}
-                                    </p>
-                                    <p className="text-sm text-muted-foreground font-medium">
-                                        {stat.label}
-                                    </p>
-                                </div>
-                            ))}
-                        </motion.div>
-                    </div>
-                </div>
-            </section>
-
-            {/* ═══════════════════ 3. Hero Image ═══════════════════ */}
-            <section className="px-6 lg:px-8 pb-16 section-lavender">
-                <motion.div
-                    {...fadeIn}
-                    className="max-w-6xl mx-auto rounded-3xl overflow-hidden bg-secondary border border-border"
-                >
-                    <div className="aspect-[21/9] flex items-center justify-center">
-                        <div className="text-center">
-                            <div className="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                                <Quote className="w-10 h-10 text-primary/30" />
-                            </div>
-                            <p className="text-muted-foreground text-sm">Case Study Hero Image</p>
                         </div>
-                    </div>
-                </motion.div>
-            </section>
-
-            {/* ═══════════════════ 4-16. Two-Column: TOC + Content ═══════════════════ */}
-            <section className="py-16 px-6 lg:px-8 bg-background">
-                <div className="max-w-6xl mx-auto">
-                    <div className="grid lg:grid-cols-12 gap-12">
-                        {/* ── Sticky TOC (desktop) ── */}
-                        <aside className="hidden lg:block lg:col-span-3">
-                            <div className="sticky top-28">
-                                <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-4">
-                                    Table of Contents
-                                </p>
-                                <nav className="space-y-1">
-                                    {caseStudy.sections.map((sec) => (
-                                        <button
-                                            key={sec.id}
-                                            onClick={() => scrollToId(sec.id)}
-                                            className={`block w-full text-left pl-4 py-2 text-sm rounded-lg transition-all border-l-2 ${activeSection === sec.id
-                                                ? "border-primary text-primary font-semibold bg-primary/5"
-                                                : "border-transparent text-muted-foreground hover:text-foreground hover:border-border"
-                                                }`}
-                                        >
-                                            {sec.title}
-                                        </button>
-                                    ))}
-                                </nav>
-                            </div>
-                        </aside>
-
-                        {/* ── Main Content ── */}
-                        <div className="lg:col-span-9 space-y-16">
-                            {/* Article sections */}
-                            {caseStudy.sections.map((sec, idx) => (
-                                <motion.div
-                                    key={sec.id}
-                                    id={sec.id}
-                                    ref={(el) => { sectionRefs.current[sec.id] = el; }}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ duration: 0.5, delay: 0.05 }}
-                                >
-                                    <h2 className="font-display font-bold text-2xl md:text-3xl text-foreground mb-5">
-                                        {sec.title}
-                                    </h2>
-                                    <p className="text-muted-foreground leading-relaxed text-base mb-4">
-                                        {sec.content}
-                                    </p>
-                                    {sec.bullets && (
-                                        <ul className="space-y-3 mt-4">
-                                            {sec.bullets.map((b, i) => (
-                                                <li key={i} className="flex items-start gap-3">
-                                                    <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 shrink-0" />
-                                                    <span className="text-muted-foreground leading-relaxed">
-                                                        {b}
-                                                    </span>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    )}
-
-                                    {/* ── 30-Day Results → inject metrics grid ── */}
-                                    {sec.id === "30-day-results" && (
-                                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-8">
-                                            {caseStudy.metricsCards.map((m) => (
-                                                <div
-                                                    key={m.label}
-                                                    className="feature-card text-center py-6"
-                                                >
-                                                    <p className="font-display font-bold text-2xl md:text-3xl text-primary mb-1">
-                                                        {m.value}
-                                                    </p>
-                                                    <p className="text-xs text-muted-foreground font-medium uppercase tracking-wide">
-                                                        {m.label}
-                                                    </p>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    )}
-
-                                    {/* ── Quote block after "What Leadership Says" ── */}
-                                    {sec.id === "what-leadership-says" && (
-                                        <div className="section-dark rounded-2xl p-8 md:p-10 mt-8">
-                                            <Quote className="w-8 h-8 text-primary-foreground/30 mb-4" />
-                                            <p className="text-lg md:text-xl text-primary-foreground leading-relaxed mb-6 italic">
-                                                "{caseStudy.quote.text}"
-                                            </p>
-                                            <div>
-                                                <p className="text-primary-foreground font-semibold">
-                                                    {caseStudy.quote.author}
-                                                </p>
-                                                <p className="text-primary-foreground/50 text-sm">
-                                                    {caseStudy.quote.role}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    )}
-                                </motion.div>
-                            ))}
-
-                            {/* ═══════════════════ 17. Lead Capture Form ═══════════════════ */}
-                            <motion.div
-                                {...fadeIn}
-                                className="bg-card rounded-3xl border border-border p-8 md:p-12 shadow-sm"
-                            >
-                                <h3 className="font-display font-bold text-2xl text-foreground mb-2">
-                                    Want results like these?
-                                </h3>
-                                <p className="text-muted-foreground text-sm mb-8">
-                                    Get a personalized demo and see how Breeh AI can transform
-                                    your practice.
-                                </p>
-                                <form
-                                    onSubmit={(e) => e.preventDefault()}
-                                    className="grid md:grid-cols-3 gap-4"
-                                >
-                                    <input
-                                        type="text"
-                                        placeholder="Your Name"
-                                        className="bg-background border border-border rounded-xl px-5 py-3 text-sm focus:ring-2 focus:ring-primary/20 outline-none text-foreground"
-                                    />
-                                    <input
-                                        type="email"
-                                        placeholder="Work Email"
-                                        className="bg-background border border-border rounded-xl px-5 py-3 text-sm focus:ring-2 focus:ring-primary/20 outline-none text-foreground"
-                                    />
-                                    <input
-                                        type="text"
-                                        placeholder="Company Size"
-                                        className="bg-background border border-border rounded-xl px-5 py-3 text-sm focus:ring-2 focus:ring-primary/20 outline-none text-foreground"
-                                    />
-                                    <div className="md:col-span-3">
-                                        <button
-                                            type="submit"
-                                            className="btn-primary inline-flex items-center gap-2 text-sm w-full md:w-auto justify-center"
-                                        >
-                                            <Send className="w-4 h-4" /> Experience Breeh AI
-                                        </button>
-                                    </div>
-                                </form>
-                            </motion.div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* ═══════════════════ 18. Similar Articles ═══════════════════ */}
-            {related.length > 0 && (
-                <section className="py-20 px-6 lg:px-8 section-alt">
-                    <div className="max-w-6xl mx-auto">
-                        <motion.h2
-                            {...fadeIn}
-                            className="font-display font-bold text-3xl text-foreground mb-12 text-center"
-                        >
-                            More Case Studies
-                        </motion.h2>
-                        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                            {related.map((cs, i) => (
-                                <motion.div
-                                    key={cs.slug}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: i * 0.1, duration: 0.5 }}
-                                >
-                                    <Link
-                                        to={`/case-studies/${cs.slug}`}
-                                        className="group block bg-card rounded-3xl border border-border overflow-hidden hover:border-primary/30 hover:-translate-y-1 transition-all shadow-sm"
-                                    >
-                                        <div className="aspect-[4/3] bg-secondary flex items-center justify-center relative overflow-hidden">
-                                            <Quote className="w-12 h-12 text-primary/20" />
-                                            <div className="absolute -top-4 -right-4 w-24 h-24 rounded-full bg-primary/10" />
-                                            <div className="absolute -bottom-4 -left-4 w-20 h-20 rounded-full bg-primary/5" />
-                                        </div>
-                                        <div className="p-6">
-                                            <span className="inline-block px-2.5 py-1 rounded-md bg-secondary text-xs font-bold text-foreground uppercase tracking-wider mb-3">
-                                                Case Study
-                                            </span>
-                                            <h3 className="font-display font-bold text-lg text-foreground mb-2 leading-snug group-hover:text-primary transition-colors">
-                                                {cs.title}
-                                            </h3>
-                                            <div className="flex items-center justify-between mt-4">
-                                                <div className="flex items-center gap-3 text-xs text-muted-foreground">
-                                                    <span className="flex items-center gap-1">
-                                                        <Calendar className="w-3 h-3" /> {cs.date}
-                                                    </span>
-                                                    <span>|</span>
-                                                    <span className="flex items-center gap-1">
-                                                        <Clock className="w-3 h-3" /> {cs.readTime}
-                                                    </span>
-                                                </div>
-                                                <span className="text-primary text-xs font-bold flex items-center gap-1 group-hover:gap-2 transition-all">
-                                                    Read <ArrowRight className="w-3 h-3" />
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </Link>
-                                </motion.div>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-            )}
-
-            {/* ═══════════════════ 19. Testimonial Carousel ═══════════════════ */}
-            {caseStudy.testimonials.length > 0 && (
-                <section className="py-20 px-6 lg:px-8 section-lavender">
-                    <div className="max-w-4xl mx-auto">
-                        <motion.h2
-                            {...fadeIn}
-                            className="font-display font-bold text-3xl text-foreground mb-12 text-center"
-                        >
-                            What Our Clients Say
-                        </motion.h2>
-                        <div className="relative">
-                            <div className="bg-card rounded-3xl border border-border p-8 md:p-12 shadow-sm text-center min-h-[220px] flex flex-col items-center justify-center">
-                                <Quote className="w-10 h-10 text-primary/20 mb-6" />
-                                <p className="text-lg md:text-xl text-foreground leading-relaxed mb-6 italic max-w-2xl">
-                                    "{caseStudy.testimonials[testimonialIdx].quote}"
-                                </p>
-                                <p className="font-display font-semibold text-foreground">
-                                    {caseStudy.testimonials[testimonialIdx].name}
-                                </p>
-                                <p className="text-sm text-muted-foreground">
-                                    {caseStudy.testimonials[testimonialIdx].role},{" "}
-                                    {caseStudy.testimonials[testimonialIdx].company}
-                                </p>
-                            </div>
-                            {caseStudy.testimonials.length > 1 && (
-                                <div className="flex items-center justify-center gap-4 mt-6">
-                                    <button
-                                        onClick={() =>
-                                            setTestimonialIdx(
-                                                (i) =>
-                                                    (i - 1 + caseStudy.testimonials.length) %
-                                                    caseStudy.testimonials.length
-                                            )
-                                        }
-                                        className="w-10 h-10 rounded-full border border-border bg-card flex items-center justify-center hover:border-primary/40 transition-colors"
-                                    >
-                                        <ChevronLeft className="w-4 h-4 text-foreground" />
-                                    </button>
-                                    <div className="flex gap-2">
-                                        {caseStudy.testimonials.map((_, i) => (
-                                            <button
-                                                key={i}
-                                                onClick={() => setTestimonialIdx(i)}
-                                                className={`w-2.5 h-2.5 rounded-full transition-colors ${i === testimonialIdx ? "bg-primary" : "bg-border"
-                                                    }`}
-                                            />
-                                        ))}
-                                    </div>
-                                    <button
-                                        onClick={() =>
-                                            setTestimonialIdx(
-                                                (i) => (i + 1) % caseStudy.testimonials.length
-                                            )
-                                        }
-                                        className="w-10 h-10 rounded-full border border-border bg-card flex items-center justify-center hover:border-primary/40 transition-colors"
-                                    >
-                                        <ChevronRightIcon className="w-4 h-4 text-foreground" />
-                                    </button>
-                                </div>
-                            )}
-                        </div>
-                    </div>
-                </section>
-            )}
-
-            {/* ═══════════════════ 20. CTA Section ═══════════════════ */}
-            <section className="py-20 px-6 lg:px-8 section-alt">
-                <div className="max-w-5xl mx-auto">
-                    <motion.div
-                        {...fadeIn}
-                        className="rounded-3xl p-10 md:p-16 overflow-hidden relative shadow-2xl"
-                        style={{
-                            background:
-                                "linear-gradient(135deg, hsl(244 58% 52%) 0%, hsl(244 58% 61%) 50%, hsl(244 55% 67%) 100%)",
-                        }}
-                    >
-                        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/10 to-transparent pointer-events-none" />
-                        <div className="relative z-10 text-center max-w-2xl mx-auto">
-                            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-foreground/10 text-primary-foreground text-xs font-bold uppercase tracking-wider mb-6">
-                                <span className="w-2 h-2 rounded-full bg-primary-foreground animate-pulse" />
-                                Ready to Get Started
-                            </span>
-                            <h2 className="font-display font-bold text-3xl md:text-4xl text-primary-foreground mb-4 leading-tight">
-                                Ready to Automate Your Calls with Breeh AI?
-                            </h2>
-                            <p className="text-primary-foreground/60 mb-8">
-                                Join hundreds of practices already using Breeh AI to capture
-                                every call and fill their schedules.
-                            </p>
-                            <button
-                                onClick={openCalendly}
-                                className="inline-block bg-primary-foreground text-foreground font-semibold rounded-full px-10 py-4 text-base transition-all duration-300 hover:bg-primary-foreground/90 hover:-translate-y-0.5 hover:shadow-lg"
-                            >
-                                Book a Demo
+                        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-8 leading-[1.1]">
+                            {caseStudy.title}
+                        </h1>
+                        <div className="flex flex-wrap gap-4">
+                            <button className="flex items-center gap-2 bg-foreground text-background px-6 py-3 rounded-xl font-bold hover:scale-105 transition-all">
+                                <Share2 className="w-4 h-4" /> Share Story
+                            </button>
+                            <button className="flex items-center gap-2 bg-muted text-foreground px-6 py-3 rounded-xl font-bold hover:bg-muted/80 transition-all border border-border">
+                                <Download className="w-4 h-4" /> Get PDF
                             </button>
                         </div>
                     </motion.div>
                 </div>
             </section>
+
+            {/* ── Main Layout (Content + Sidebar) ── */}
+            <section className="py-20 px-6">
+                <div className="container max-w-7xl mx-auto">
+                    <div className="grid lg:grid-cols-12 gap-16">
+                        {/* Sidebar Navigation */}
+                        <aside className="hidden lg:block lg:col-span-3">
+                            <div className="sticky top-32 space-y-8">
+                                <div>
+                                    <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em] mb-6">Chapter Navigation</p>
+                                    <nav className="flex flex-col gap-1">
+                                        {sidebarLinks.map((link) => (
+                                            <button
+                                                key={link.id}
+                                                onClick={() => scrollToId(link.id)}
+                                                className={`text-left px-4 py-3 rounded-xl text-sm font-semibold transition-all flex items-center justify-between group ${activeSection === link.id
+                                                        ? "bg-primary/5 text-primary border-l-2 border-primary"
+                                                        : "text-muted-foreground hover:bg-muted hover:text-foreground border-l-2 border-transparent"
+                                                    }`}
+                                            >
+                                                {link.label}
+                                                <ChevronRight className={`w-3.5 h-3.5 transition-transform ${activeSection === link.id ? "translate-x-0 opacity-100" : "-translate-x-2 opacity-0 group-hover:translate-x-0 group-hover:opacity-100"}`} />
+                                            </button>
+                                        ))}
+                                    </nav>
+                                </div>
+
+                                <div className="p-6 bg-surface/50 rounded-3xl border border-border">
+                                    <h4 className="font-bold text-sm mb-4">Quick Stats</h4>
+                                    <div className="space-y-4">
+                                        {caseStudy.heroStats.map((stat, i) => (
+                                            <div key={i}>
+                                                <p className="text-2xl font-bold text-foreground">{stat.value}</p>
+                                                <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">{stat.label}</p>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        </aside>
+
+                        {/* Story Content */}
+                        <div className="lg:col-span-9 space-y-24">
+                            {/* Overview Section */}
+                            <article id="overview" ref={(el) => (sectionRefs.current["overview"] = el)} className="scroll-mt-32">
+                                <h2 className="text-3xl font-bold mb-8 font-display">The Overview</h2>
+                                <div className="prose prose-lg prose-invert max-w-none text-muted-foreground leading-relaxed">
+                                    <p className="text-xl text-foreground font-medium mb-8 leading-relaxed">
+                                        {caseStudy.sections[0]?.content}
+                                    </p>
+                                    <p>{caseStudy.sections[1]?.content}</p>
+                                </div>
+                            </article>
+
+                            {/* Challenge Section */}
+                            <article id="the-problem" ref={(el) => (sectionRefs.current["the-problem"] = el)} className="scroll-mt-32">
+                                <div className="p-8 md:p-12 bg-surface rounded-[40px] border border-border relative overflow-hidden group">
+                                    <h2 className="text-3xl font-bold mb-8 font-display">The Challenge</h2>
+                                    <p className="text-muted-foreground leading-relaxed mb-8">
+                                        {caseStudy.sections.find(s => s.id === "the-problem")?.content}
+                                    </p>
+                                    <ul className="grid md:grid-cols-2 gap-4">
+                                        {caseStudy.sections.find(s => s.id === "the-problem")?.bullets?.map((bullet, i) => (
+                                            <li key={i} className="flex gap-4 p-4 rounded-2xl bg-muted/50 border border-border/50">
+                                                <div className="w-1.5 h-1.5 rounded-full bg-red-400 mt-2 flex-shrink-0" />
+                                                <span className="text-sm font-medium text-foreground">{bullet}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </article>
+
+                            {/* Solution Section */}
+                            <article id="the-solution" ref={(el) => (sectionRefs.current["the-solution"] = el)} className="scroll-mt-32">
+                                <h2 className="text-3xl font-bold mb-8 font-display">The Solution</h2>
+                                <div className="space-y-8">
+                                    <p className="text-muted-foreground leading-relaxed">
+                                        {caseStudy.sections.find(s => s.id === "the-solution")?.content}
+                                    </p>
+
+                                    {/* Interactive Transform Tool */}
+                                    <BeforeAfterTool
+                                        beforeImage="https://images.unsplash.com/photo-1599381413149-62383501f2fb?w=1200"
+                                        afterImage="https://images.unsplash.com/photo-1629909608115-f93f044922c3?w=1200"
+                                    />
+                                </div>
+                            </article>
+
+                            {/* Results Section */}
+                            <article id="30-day-results" ref={(el) => (sectionRefs.current["30-day-results"] = el)} className="scroll-mt-32">
+                                <ResultsDashboard />
+
+                                <div className="mt-12">
+                                    <VideoTestimonial />
+                                </div>
+                            </article>
+
+                            {/* Expert Analysis Section */}
+                            <article id="expert-analysis" ref={(el) => (sectionRefs.current["expert-analysis"] = el)} className="scroll-mt-32">
+                                <ExpertAnalysis />
+                            </article>
+
+                            {/* Deployment Section */}
+                            <article id="deployment-process" ref={(el) => (sectionRefs.current["deployment-process"] = el)} className="scroll-mt-32">
+                                <ImplementationTimeline />
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Related Stories */}
+            {related.length > 0 && (
+                <section className="py-24 bg-surface/30">
+                    <div className="container max-w-7xl mx-auto px-6">
+                        <div className="flex items-center justify-between mb-12">
+                            <h2 className="text-3xl font-bold font-display">Continue Reading</h2>
+                            <Link to="/case-studies" className="text-primary font-bold flex items-center gap-2 hover:gap-3 transition-all">
+                                View library <ArrowRight className="w-5 h-5" />
+                            </Link>
+                        </div>
+                        <div className="grid md:grid-cols-3 gap-8">
+                            {related.map((cs) => (
+                                <Link key={cs.slug} to={`/case-studies/${cs.slug}`} className="group p-6 bg-card rounded-3xl border border-border hover:border-primary/30 transition-all">
+                                    <div className="flex items-center gap-2 mb-4">
+                                        <Eye className="w-4 h-4 text-primary" />
+                                        <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">{cs.category}</span>
+                                    </div>
+                                    <h4 className="font-bold text-lg mb-4 group-hover:text-primary transition-colors">{cs.title}</h4>
+                                    <div className="flex items-center gap-4 text-[10px] font-bold text-muted-foreground uppercase tracking-widest">
+                                        <span>{cs.date}</span>
+                                        <span>{cs.readTime}</span>
+                                    </div>
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            )}
+
+            {/* Final CTA */}
+            <CaseStudyFinalCTA />
 
             <Footer onOpenPlaybook={() => setPlaybookOpen(true)} onBookDemo={openCalendly} />
             <PlaybookModal open={playbookOpen} onOpenChange={setPlaybookOpen} />
