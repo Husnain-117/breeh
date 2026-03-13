@@ -1,4 +1,5 @@
 import { useState } from "react";
+import SEOHead, { organizationJsonLd, websiteJsonLd, softwareJsonLd } from "@/components/SEOHead";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import TrustedBy from "@/components/TrustedBy";
