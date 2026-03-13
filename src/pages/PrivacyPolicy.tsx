@@ -1,4 +1,5 @@
 import { useState } from "react";
+import SEOHead from "@/components/SEOHead";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PlaybookModal from "@/components/PlaybookModal";
@@ -60,6 +61,11 @@ const PrivacyPolicy = () => {
 
     return (
         <div className="min-h-screen bg-background overflow-x-hidden">
+            <SEOHead
+                title="Privacy Policy — Breeh AI"
+                description="Breeh AI's privacy policy. Learn how we collect, use, and protect your data and patient information."
+                canonical="/privacy"
+            />
             <Navbar onBookDemo={openCalendly} onOpenPlaybook={() => setPlaybookOpen(true)} />
 
             {/* Hero */}

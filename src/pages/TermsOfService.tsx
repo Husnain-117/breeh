@@ -1,4 +1,5 @@
 import { useState } from "react";
+import SEOHead from "@/components/SEOHead";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PlaybookModal from "@/components/PlaybookModal";
@@ -65,6 +66,11 @@ const TermsOfService = () => {
 
     return (
         <div className="min-h-screen bg-background overflow-x-hidden">
+            <SEOHead
+                title="Terms of Service — Breeh AI"
+                description="Breeh AI terms of service. Read our terms and conditions for using our AI dental receptionist platform."
+                canonical="/terms"
+            />
             <Navbar onBookDemo={openCalendly} onOpenPlaybook={() => setPlaybookOpen(true)} />
 
             {/* Hero */}

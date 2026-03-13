@@ -1,4 +1,5 @@
 import { useState } from "react";
+import SEOHead from "@/components/SEOHead";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PlaybookModal from "@/components/PlaybookModal";
@@ -121,6 +122,11 @@ const AITransparency = () => {
 
   return (
     <div className="min-h-screen bg-background overflow-x-hidden font-body">
+      <SEOHead
+        title="AI Transparency — How Breeh AI Works for Dental Practices"
+        description="Learn how Breeh AI's dental receptionist works: NLP models, call handling, data processing, and our commitment to ethical AI in healthcare."
+        canonical="/ai-transparency"
+      />
       <Navbar onBookDemo={openCalendly} onOpenPlaybook={() => setPlaybookOpen(true)} />
 
       {/* ── Hero ── */}

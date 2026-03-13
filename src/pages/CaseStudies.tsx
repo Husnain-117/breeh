@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import SEOHead from "@/components/SEOHead";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PlaybookModal from "@/components/PlaybookModal";
@@ -57,6 +58,11 @@ const CaseStudies = () => {
 
     return (
         <div className="min-h-screen bg-background overflow-x-hidden font-body text-foreground">
+            <SEOHead
+                title="Dental AI Case Studies — Real Results from Real Practices"
+                description="See how dental practices increased revenue by 17x ROI with Breeh AI. Real case studies from single locations to multi-location DSOs."
+                canonical="/case-studies"
+            />
             <Navbar
                 onBookDemo={openCalendly}
                 onOpenPlaybook={() => setPlaybookOpen(true)}

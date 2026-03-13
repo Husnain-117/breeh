@@ -1,6 +1,7 @@
 import { useState, useMemo, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import SEOHead from "@/components/SEOHead";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PlaybookModal from "@/components/PlaybookModal";
@@ -99,6 +100,11 @@ const Blog = () => {
 
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
+      <SEOHead
+        title="Dental AI Blog — Tips, Guides & Industry Insights"
+        description="Expert articles on AI dental receptionists, HIPAA compliance, practice automation, and patient engagement. Learn how to grow your dental practice with AI."
+        canonical="/blog"
+      />
       <Navbar
         onBookDemo={openCalendly}
         onOpenPlaybook={() => setPlaybookOpen(true)}

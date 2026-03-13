@@ -1,4 +1,5 @@
 import { useState } from "react";
+import SEOHead from "@/components/SEOHead";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PlaybookModal from "@/components/PlaybookModal";
@@ -24,6 +25,11 @@ const Solutions = () => {
 
     return (
         <div className="min-h-screen bg-background overflow-x-hidden font-body">
+            <SEOHead
+                title="AI Solutions for Dental Practices — By Role & Practice Size"
+                description="Discover how Breeh AI solves challenges for solo practices, DSOs, and multi-location groups. ROI calculator, implementation timeline, and success stories."
+                canonical="/solutions"
+            />
             <Navbar onBookDemo={openCalendly} onOpenPlaybook={() => setPlaybookOpen(true)} />
 
             {/* 1. Hero — Role-based selector */}

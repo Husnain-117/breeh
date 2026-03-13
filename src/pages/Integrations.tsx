@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import SEOHead from "@/components/SEOHead";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PlaybookModal from "@/components/PlaybookModal";
@@ -38,6 +39,11 @@ const Integrations = () => {
 
     return (
         <div className="min-h-screen bg-background overflow-x-hidden font-body text-foreground">
+            <SEOHead
+                title="Dental Software Integrations — Connect Breeh AI to Your PMS"
+                description="Breeh AI integrates with Dentrix, Eaglesoft, Open Dental, and 50+ dental tools. Seamless setup, no disruption to your workflow."
+                canonical="/integrations"
+            />
             <Navbar onBookDemo={openCalendly} onOpenPlaybook={() => setPlaybookOpen(true)} />
 
             {/* 1. HERO — Search, Pills, Spotlight */}
