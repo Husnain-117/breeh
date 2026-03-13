@@ -1,5 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { useState, useEffect, useMemo } from "react";
+import SEOHead, { articleJsonLd, breadcrumbJsonLd } from "@/components/SEOHead";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PlaybookModal from "@/components/PlaybookModal";
