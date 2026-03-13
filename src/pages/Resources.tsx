@@ -37,6 +37,11 @@ const Resources = () => {
 
   return (
     <div className="min-h-screen bg-background overflow-x-hidden font-body">
+      <SEOHead
+        title="Dental AI Resources — Articles, Case Studies & Guides"
+        description="Browse Breeh AI resources: ROI case studies, HIPAA guides, AI vs answering service comparisons, and dental practice automation tips."
+        canonical="/resources"
+      />
       <Navbar
         onBookDemo={openCalendly}
         onOpenPlaybook={() => setPlaybookOpen(true)}

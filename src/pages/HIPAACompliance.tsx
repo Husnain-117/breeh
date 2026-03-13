@@ -78,6 +78,11 @@ const HIPAACompliance = () => {
 
     return (
         <div className="min-h-screen bg-background overflow-x-hidden">
+            <SEOHead
+                title="HIPAA Compliance — How Breeh AI Protects Patient Data"
+                description="Breeh AI is fully HIPAA compliant with AES-256 encryption, BAA agreements, SOC 2 Type II certification, and comprehensive administrative safeguards."
+                canonical="/hipaa"
+            />
             <Navbar onBookDemo={openCalendly} onOpenPlaybook={() => setPlaybookOpen(true)} />
 
             {/* Hero */}

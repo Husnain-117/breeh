@@ -190,6 +190,11 @@ const ROICalculator = () => {
   // Calculator
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead
+        title="Dental AI ROI Calculator — See How Much Revenue You're Missing"
+        description="Calculate how much revenue your dental practice loses to missed calls. Free ROI calculator shows your potential savings with Breeh AI receptionist."
+        canonical="/roi-calculator"
+      />
       <div className="max-w-6xl mx-auto px-4 py-8 md:py-12">
         <button onClick={() => navigate("/")} className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-8 transition-colors">
           <ArrowLeft className="w-4 h-4" /> Back to Home
