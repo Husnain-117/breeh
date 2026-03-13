@@ -26,6 +26,11 @@ const About = () => {
 
   return (
     <div className="min-h-screen bg-background overflow-x-hidden font-body">
+      <SEOHead
+        title="About Breeh AI — Our Mission to Transform Dental Reception"
+        description="Learn about Breeh AI's mission to eliminate missed patient calls in dental practices. Meet our team and discover why dental offices trust our AI receptionist."
+        canonical="/about"
+      />
       <Navbar onBookDemo={openCalendly} onOpenPlaybook={() => setPlaybookOpen(true)} />
 
       {/* Hero */}

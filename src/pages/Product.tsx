@@ -24,6 +24,11 @@ const Product = () => {
 
     return (
         <div className="min-h-screen bg-background overflow-x-hidden font-body">
+            <SEOHead
+                title="AI Dental Receptionist Features — Breeh AI Product"
+                description="Explore Breeh AI's features: AI call answering, automatic appointment scheduling, patient follow-ups, website chat, and PMS integrations. HIPAA compliant."
+                canonical="/product"
+            />
             <Navbar onBookDemo={openCalendly} onOpenPlaybook={() => setPlaybookOpen(true)} />
 
             {/* 1. Hero — "The Aha Moment" */}
