@@ -119,6 +119,30 @@ const Article = () => {
 
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
+      <SEOHead
+        title={article.title}
+        description={article.excerpt}
+        canonical={`/resources/${article.slug}`}
+        type="article"
+        article={{
+          publishedTime: article.date,
+          section: article.type === "case-study" ? "Case Study" : "Blog",
+          tags: ["dental AI", "AI receptionist", "dental practice", article.type],
+        }}
+        jsonLd={[
+          articleJsonLd({
+            title: article.title,
+            description: article.excerpt,
+            slug: article.slug,
+            datePublished: article.date,
+          }),
+          breadcrumbJsonLd([
+            { name: "Home", url: "/" },
+            { name: "Resources", url: "/resources" },
+            { name: article.title, url: `/resources/${article.slug}` },
+          ]),
+        ]}
+      />
       {/* Reading progress bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-[3px] bg-primary z-[60] origin-left"
