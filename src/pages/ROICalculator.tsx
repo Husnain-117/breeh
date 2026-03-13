@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import SEOHead from "@/components/SEOHead";
 import { ArrowLeft, Calculator, TrendingUp, DollarSign, Save, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
