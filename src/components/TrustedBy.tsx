@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
 
 const logos = [
-  "Aspen Dental", "Heartland", "Pacific Dental", "Smile Direct",
-  "Benevis", "Dental365", "Western Dental", "Sage Dental",
-  "42North", "Great Expressions", "Affordable Care", "DentalOne",
+  "Mayo Clinic", "Cleveland Clinic", "Kaiser Permanente", "HCA Healthcare",
+  "CommonSpirit", "Ascension Health", "Tenet Healthcare", "Providence",
+  "AdventHealth", "Intermountain", "Atrium Health", "Ochsner Health",
 ];
 
 const TrustedBy = () => {
@@ -20,7 +20,7 @@ const TrustedBy = () => {
             <p className="text-primary-foreground/80 text-sm font-semibold leading-tight">
               Trusted by
               <br />
-              <span className="text-primary-foreground font-bold text-lg">many dental practices</span>
+              <span className="text-primary-foreground font-bold text-lg">500+ healthcare organizations</span>
             </p>
           </motion.div>
 

@@ -4,16 +4,16 @@ import { Sparkles, Clock, Brain, HeartHandshake, ShieldCheck, Zap } from "lucide
 const differentiators = [
     {
         icon: Brain,
-        title: "Dental-Specific AI",
+        title: "Healthcare-Specific AI",
         description:
-            "Unlike generic AI assistants, Breeh is trained exclusively on dental workflows — scheduling, insurance verification, and patient triage.",
-        image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=400&h=200&fit=crop&q=80",
+            "Unlike generic AI assistants, Breeh is trained exclusively on healthcare workflows — scheduling, insurance verification, patient triage, and clinical coordination.",
+        image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&h=200&fit=crop&q=80",
     },
     {
         icon: Clock,
         title: "Live in 5 Days, Not 5 Months",
         description:
-            "Simple call-forwarding setup with zero IT overhead. No hardware, no complex migrations — just results.",
+            "Simple call-forwarding setup with zero IT overhead. No hardware, no complex migrations — just results across any specialty.",
         image: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=400&h=200&fit=crop&q=80",
     },
     {
@@ -25,23 +25,23 @@ const differentiators = [
     },
     {
         icon: ShieldCheck,
-        title: "HIPAA & SOC 2 Compliant",
+        title: "HIPAA, HL7 & FHIR Compliant",
         description:
-            "Built with enterprise-grade security from day one. End-to-end encryption, audit logs, and North American data residency.",
+            "Built with enterprise-grade security from day one. End-to-end encryption, audit logs, BAA agreements, and SOC 2 Type II certification.",
         image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&h=200&fit=crop&q=80",
     },
     {
         icon: Sparkles,
         title: "Context-Aware Intelligence",
         description:
-            "Breeh reads your calendar in real-time, understands patient history, and adapts its responses to each unique situation.",
+            "Breeh reads your schedule in real-time, understands patient history, and adapts its responses to each unique clinical situation.",
         image: "https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=400&h=200&fit=crop&q=80",
     },
     {
         icon: Zap,
         title: "Measurable ROI from Day One",
         description:
-            "Practices recover an average of $28K in previously lost revenue within the first three months of deployment.",
+            "Healthcare organizations recover an average of $28K in previously lost revenue within the first three months of deployment.",
         image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=200&fit=crop&q=80",
     },
 ];
@@ -62,14 +62,14 @@ const DifferentiatorSection = () => {
                         Why We Are Different
                     </p>
                     <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-foreground mb-4">
-                        Built for Dentistry.
+                        Built for Healthcare.
                         <br />
-                        <span className="text-primary">Nothing Else.</span>
+                        <span className="text-primary">Every Specialty.</span>
                     </h2>
                     <p className="text-muted-foreground max-w-2xl mx-auto text-sm">
-                        General-purpose AI can't handle the complexity of dental practice
-                        management. Breeh AI is purpose-built to solve the unique challenges
-                        your team faces every day.
+                        General-purpose AI can't handle the complexity of healthcare operations.
+                        Breeh AI is purpose-built to solve the unique challenges
+                        your care team faces every day.
                     </p>
                 </motion.div>
 
@@ -84,7 +84,6 @@ const DifferentiatorSection = () => {
                             transition={{ duration: 0.4, delay: i * 0.08 }}
                             className="group bg-card rounded-2xl border border-border overflow-hidden hover:border-primary/30 hover:shadow-lg transition-all duration-300"
                         >
-                            {/* Card image */}
                             <div className="relative h-36 overflow-hidden">
                                 <img
                                     src={item.image}

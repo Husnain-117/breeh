@@ -8,7 +8,7 @@ interface HeroSectionProps {
 
 /* ── Chat messages for the phone mockup ── */
 const chatMessages = [
-  { role: "patient", text: "Hi, I'd like to schedule a cleaning please.", delay: 0.8 },
+  { role: "patient", text: "Hi, I'd like to schedule a follow-up appointment please.", delay: 0.8 },
   { role: "ai", text: "Of course! I have openings this Thursday at 2 PM or Friday at 10 AM. Which works best?", delay: 2.2 },
   { role: "patient", text: "Thursday at 2 works great!", delay: 4.0 },
   { role: "ai", text: "Perfect! You're confirmed for Thursday at 2 PM with Dr. Smith. I'll send a reminder! 😊", delay: 5.4 },
@@ -185,8 +185,8 @@ const HeroSection = ({ onBookDemo }: HeroSectionProps) => {
   const [count, setCount] = useState(0);
   useEffect(() => {
     let frame: number;
-    const target = 200;
-    const dur = 2000; // ms
+    const target = 500;
+    const dur = 2000;
     const start = performance.now();
     const tick = (now: number) => {
       const t = Math.min((now - start) / dur, 1);
@@ -247,17 +247,17 @@ const HeroSection = ({ onBookDemo }: HeroSectionProps) => {
             >
               <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
               <span className="text-xs font-semibold tracking-wide text-white/80 uppercase">
-                AI-Powered Dental Receptionist
+                The Operating System for Modern Healthcare
               </span>
             </motion.div>
 
             {/* Headline */}
             <h1 className="font-display font-bold text-4xl sm:text-5xl md:text-6xl lg:text-[68px] leading-[1.05] tracking-tight text-white mb-6">
-              <AnimatedHeadline line="Never Miss a" delay={0.15} />
+              <AnimatedHeadline line="Run Every Corner of" delay={0.15} />
               <br />
-              <AnimatedHeadline line="Patient Call" delay={0.4} gradient />
+              <AnimatedHeadline line="Your Healthcare" delay={0.4} gradient />
               <br />
-              <AnimatedHeadline line="Again" delay={0.65} />
+              <AnimatedHeadline line="Operation" delay={0.65} />
             </h1>
 
             {/* Sub-headline */}
@@ -267,8 +267,7 @@ const HeroSection = ({ onBookDemo }: HeroSectionProps) => {
               transition={{ duration: 0.7, delay: 0.8 }}
               className="text-base md:text-lg text-white/60 max-w-lg mx-auto lg:mx-0 mb-10 leading-relaxed"
             >
-              Breeh AI answers, schedules, and follows up with patients 24/7 —
-              so your team can focus on delivering exceptional care.
+              Breeh AI streamlines clinical workflows, reduces administrative burden, and improves patient outcomes across every specialty and care setting — 24/7.
             </motion.p>
 
             {/* CTAs */}
@@ -278,7 +277,6 @@ const HeroSection = ({ onBookDemo }: HeroSectionProps) => {
               transition={{ duration: 0.7, delay: 1.0 }}
               className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
             >
-              {/* Primary CTA */}
               <button
                 onClick={onBookDemo}
                 className="group relative font-semibold rounded-full px-10 py-4 text-sm tracking-wide text-white transition-all duration-300 hover:-translate-y-0.5 overflow-hidden"
@@ -290,12 +288,11 @@ const HeroSection = ({ onBookDemo }: HeroSectionProps) => {
                 </span>
               </button>
 
-              {/* Secondary CTA */}
               <button
                 onClick={onBookDemo}
                 className="font-semibold rounded-full px-10 py-4 text-sm tracking-wide text-white transition-all duration-300 hover:-translate-y-0.5 backdrop-blur-md bg-white/10 border border-white/20 hover:bg-white/20"
               >
-                Watch Demo
+                See How It Works
               </button>
             </motion.div>
 
@@ -306,7 +303,6 @@ const HeroSection = ({ onBookDemo }: HeroSectionProps) => {
               transition={{ duration: 0.7, delay: 1.3 }}
               className="mt-10 flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start"
             >
-              {/* Star rating */}
               <div className="flex items-center gap-1">
                 {[0, 1, 2, 3, 4].map((i) => (
                   <Star
@@ -319,7 +315,7 @@ const HeroSection = ({ onBookDemo }: HeroSectionProps) => {
                 ))}
               </div>
               <p className="text-sm text-white/60">
-                Trusted by <span className="text-white font-semibold">{count}+</span> dental practices
+                Trusted by <span className="text-white font-semibold">{count}+</span> healthcare organizations
               </p>
             </motion.div>
           </div>

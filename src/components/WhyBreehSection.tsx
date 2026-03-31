@@ -5,11 +5,11 @@ import { MessageSquare, Calendar, Phone, BarChart3 } from "lucide-react";
 const features = [
   {
     icon: Phone,
-    title: "Always-On Front Desk",
+    title: "Always-On Patient Access",
     description:
       "Every call answered instantly, 24/7. Handles scheduling, questions, and triage — no hold times, no missed revenue.",
     chat: [
-      { from: "patient", text: "Hi, I'd like to schedule a cleaning for next week." },
+      { from: "patient", text: "Hi, I'd like to schedule a follow-up appointment for next week." },
       { from: "ai", text: "Of course! I have Tuesday 2pm or Thursday 10am. Which works?" },
       { from: "patient", text: "Tuesday at 2pm, please." },
       { from: "ai", text: "You're booked! I'll send a confirmation text right away. 😊" },
@@ -17,9 +17,9 @@ const features = [
   },
   {
     icon: Calendar,
-    title: "Smart Scheduling",
+    title: "Multi-Provider Scheduling",
     description:
-      "Book, reschedule, and confirm in real-time. Syncs directly with your PMS so double-bookings never happen.",
+      "Book, reschedule, and confirm in real-time. Syncs directly with your EHR so double-bookings never happen.",
     chat: [
       { from: "patient", text: "I need to move my Thursday appointment." },
       { from: "ai", text: "No problem — Friday 3pm or Monday 11am?" },
@@ -33,14 +33,14 @@ const features = [
     description:
       "Reminders, recall notices, and post-visit follow-ups via SMS, email, and voice — fully automated.",
     chat: [
-      { from: "ai", text: "Hi Sarah, reminder: cleaning tomorrow at 10am with Dr. Smith." },
+      { from: "ai", text: "Hi Sarah, reminder: your appointment is tomorrow at 10am with Dr. Smith." },
       { from: "patient", text: "Thanks, I'll be there!" },
       { from: "ai", text: "Great — reply HELP if you need to reschedule. See you soon!" },
     ],
   },
   {
     icon: BarChart3,
-    title: "Practice Analytics",
+    title: "Operational Analytics",
     description:
       "Call volume, booking trends, satisfaction scores, and performance — all in real-time dashboards.",
     chat: [
@@ -140,13 +140,13 @@ const WhyBreehSection = () => {
             Why Breeh AI
           </p>
           <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-foreground mb-4">
-            Your AI Receptionist,
+            Your AI-Powered Operations Hub,
             <br />
             <span className="gradient-text">Seamlessly Integrated</span>
           </h2>
           <p className="text-muted-foreground text-sm md:text-base">
             Delight patients, empower staff, and gain actionable insights with an
-            always-on digital front desk.
+            always-on intelligent operations platform.
           </p>
         </motion.div>
 
