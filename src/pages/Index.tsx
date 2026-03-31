@@ -26,8 +26,8 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
       <SEOHead
-        title="Breeh AI — #1 AI Receptionist for Dental Practices | 24/7 Call Answering"
-        description="Breeh AI answers every patient call, schedules appointments, and manages follow-ups 24/7. HIPAA compliant AI receptionist built for dental practices. Start your free trial."
+        title="Breeh AI — #1 AI-Powered Healthcare Operations Platform | 24/7"
+        description="Breeh AI streamlines clinical workflows, reduces administrative burden, and improves patient outcomes across every healthcare specialty. HIPAA compliant. Start your free trial."
         canonical="/"
         jsonLd={[organizationJsonLd, websiteJsonLd, softwareJsonLd]}
       />
