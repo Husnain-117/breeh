@@ -94,7 +94,7 @@ const PhoneMockup = () => {
 /* ═══════════════════════════ HERO SECTION ═══════════════════════════ */
 const HeroSection = ({ onBookDemo }: HeroSectionProps) => {
   return (
-    <section className="relative bg-primary overflow-hidden">
+    <section className="relative overflow-hidden" style={{ background: 'linear-gradient(135deg, hsl(244 58% 65%), hsl(244 55% 58%))' }}>
       {/* Subtle pattern overlay */}
       <div className="absolute inset-0 opacity-[0.04]" style={{
         backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)",
