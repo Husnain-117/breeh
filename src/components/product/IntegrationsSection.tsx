@@ -2,28 +2,28 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plug, Clock, ArrowRight, Check } from "lucide-react";
 
-const categories = ["All", "Practice Management", "Communication", "Analytics"];
+const categories = ["All", "EHR/EMR", "Communication", "Billing & RCM"];
 
 const integrations = [
-    { name: "Dentrix", category: "Practice Management", setup: "5 min", logo: "🦷" },
-    { name: "Eaglesoft", category: "Practice Management", setup: "5 min", logo: "🦅" },
-    { name: "Open Dental", category: "Practice Management", setup: "3 min", logo: "🔓" },
-    { name: "Curve Dental", category: "Practice Management", setup: "5 min", logo: "📈" },
-    { name: "Denticon", category: "Practice Management", setup: "5 min", logo: "🏥" },
-    { name: "PracticeWorks", category: "Practice Management", setup: "5 min", logo: "⚙️" },
+    { name: "Epic", category: "EHR/EMR", setup: "10 min", logo: "🏥" },
+    { name: "Cerner", category: "EHR/EMR", setup: "10 min", logo: "📋" },
+    { name: "Athenahealth", category: "EHR/EMR", setup: "5 min", logo: "⚕️" },
+    { name: "eClinicalWorks", category: "EHR/EMR", setup: "5 min", logo: "💊" },
+    { name: "NextGen", category: "EHR/EMR", setup: "5 min", logo: "🔬" },
+    { name: "DrChrono", category: "EHR/EMR", setup: "5 min", logo: "📊" },
     { name: "Twilio", category: "Communication", setup: "2 min", logo: "📞" },
     { name: "RingCentral", category: "Communication", setup: "3 min", logo: "💬" },
-    { name: "Google Voice", category: "Communication", setup: "2 min", logo: "📱" },
+    { name: "Luma Health", category: "Communication", setup: "3 min", logo: "📱" },
     { name: "Slack", category: "Communication", setup: "1 min", logo: "💡" },
-    { name: "Google Analytics", category: "Analytics", setup: "2 min", logo: "📊" },
-    { name: "HubSpot", category: "Analytics", setup: "3 min", logo: "🧲" },
+    { name: "Kareo", category: "Billing & RCM", setup: "5 min", logo: "💳" },
+    { name: "Waystar", category: "Billing & RCM", setup: "5 min", logo: "🧲" },
 ];
 
 const setupSteps = [
-    { step: "1", title: "Connect", desc: "Link your PMS account", icon: Plug },
-    { step: "2", title: "Configure", desc: "Set your preferences", icon: "⚙️" },
+    { step: "1", title: "Connect", desc: "Link your EHR/EMR", icon: Plug },
+    { step: "2", title: "Configure", desc: "Set your workflows", icon: "⚙️" },
     { step: "3", title: "Sync", desc: "Import existing data", icon: "🔄" },
-    { step: "4", title: "Go Live", desc: "Start answering calls", icon: Check },
+    { step: "4", title: "Go Live", desc: "Start handling calls", icon: Check },
 ];
 
 const IntegrationsSection = () => {
@@ -31,9 +31,8 @@ const IntegrationsSection = () => {
     const filtered = activeCat === "All" ? integrations : integrations.filter((i) => i.category === activeCat);
 
     return (
-        <section className="py-28 px-6 lg:px-8 bg-background relative overflow-hidden">
+        <section className="py-20 px-6 lg:px-8 bg-background relative overflow-hidden">
             <div className="max-w-7xl mx-auto relative z-10">
-                {/* Header */}
                 <div className="text-center mb-12">
                     <motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
                         className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-5">
@@ -45,11 +44,10 @@ const IntegrationsSection = () => {
                     </motion.h2>
                     <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
                         className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                        50+ pre-built integrations. Set up in minutes, not months.
+                        50+ pre-built integrations with leading EHR/EMR systems, billing platforms, and communication tools.
                     </motion.p>
                 </div>
 
-                {/* Category filter */}
                 <div className="flex justify-center gap-2 mb-12 flex-wrap">
                     {categories.map((cat) => (
                         <button key={cat} onClick={() => setActiveCat(cat)} className="relative px-5 py-2 rounded-full text-sm font-medium transition-all">
@@ -62,7 +60,6 @@ const IntegrationsSection = () => {
                     ))}
                 </div>
 
-                {/* Integration grid */}
                 <AnimatePresence mode="wait">
                     <motion.div key={activeCat} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}
                         className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-16">
@@ -82,20 +79,19 @@ const IntegrationsSection = () => {
                     </motion.div>
                 </AnimatePresence>
 
-                {/* Featured integration */}
                 <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
                     className="bg-gradient-to-r from-primary/5 to-purple-500/5 rounded-3xl p-8 md:p-10 border border-primary/20 mb-16">
                     <div className="grid md:grid-cols-2 gap-8 items-center">
                         <div>
                             <div className="flex items-center gap-3 mb-4">
-                                <span className="text-4xl">🦷</span>
+                                <span className="text-4xl">🏥</span>
                                 <div>
-                                    <h3 className="font-display font-bold text-xl text-foreground">Dentrix Integration</h3>
-                                    <p className="text-sm text-muted-foreground">Two-way sync with Dentrix Enterprise &amp; G6</p>
+                                    <h3 className="font-display font-bold text-xl text-foreground">Epic Integration</h3>
+                                    <p className="text-sm text-muted-foreground">Two-way sync with Epic EHR</p>
                                 </div>
                             </div>
                             <div className="space-y-3 mt-6">
-                                {["Automatic appointment syncing", "Patient data import", "Treatment plan integration", "Real-time availability checks"].map((f, i) => (
+                                {["Automatic appointment syncing", "Patient demographic import", "Clinical workflow integration", "Real-time availability checks"].map((f, i) => (
                                     <div key={i} className="flex items-center gap-2">
                                         <Check className="w-4 h-4 text-primary shrink-0" />
                                         <span className="text-sm text-foreground">{f}</span>
@@ -114,24 +110,23 @@ const IntegrationsSection = () => {
                                 <span className="ml-2">setup.ts</span>
                             </div>
                             <pre className="text-muted-foreground whitespace-pre-wrap">
-                                {`import { Breeh } from '@breeh/sdk';
+{`import { Breeh } from '@breeh/sdk';
 
 const client = new Breeh({
   apiKey: 'your-api-key',
-  pms: 'dentrix'
+  ehr: 'epic'
 });
 
 await client.connect();
 // ✅ Syncing appointments...`}
                             </pre>
                             <div className="mt-3 inline-flex items-center gap-1 bg-green-100 text-green-700 px-2 py-1 rounded text-[10px] font-sans font-semibold">
-                                <Clock className="w-3 h-3" /> Setup time: 5 minutes
+                                <Clock className="w-3 h-3" /> Setup time: 10 minutes
                             </div>
                         </div>
                     </div>
                 </motion.div>
 
-                {/* Setup timeline */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 relative">
                     <div className="hidden md:block absolute top-8 left-[12%] right-[12%] h-0.5 bg-gradient-to-r from-primary/20 via-primary/50 to-primary/20" />
                     {setupSteps.map((s, i) => (

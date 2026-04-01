@@ -17,26 +17,20 @@ const features = [
 
 const SecuritySection = () => {
     return (
-        <section className="py-28 px-6 lg:px-8 bg-gray-950 text-white relative overflow-hidden">
-            {/* Background */}
-            <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[150px]" />
-                <div className="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] bg-purple-500/5 rounded-full blur-[120px]" />
-            </div>
-
+        <section className="py-20 px-6 lg:px-8 section-alt relative overflow-hidden">
             <div className="max-w-7xl mx-auto relative z-10">
                 {/* Header */}
                 <div className="text-center mb-16">
                     <motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
-                        className="inline-block px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-bold uppercase tracking-wider mb-5">
+                        className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-5">
                         Security &amp; Compliance
                     </motion.span>
                     <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                        className="font-display font-bold text-3xl md:text-5xl mb-4">
+                        className="font-display font-bold text-3xl md:text-5xl text-foreground mb-4">
                         Enterprise-grade protection
                     </motion.h2>
                     <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
-                        className="text-lg text-white/50 max-w-2xl mx-auto">
+                        className="text-lg text-muted-foreground max-w-2xl mx-auto">
                         Your patient data is protected by industry-leading security measures.
                     </motion.p>
                 </div>
@@ -47,12 +41,12 @@ const SecuritySection = () => {
                         <motion.div key={i} initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }}
                             transition={{ delay: i * 0.1 }}
                             whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
-                            className="bg-white/5 backdrop-blur rounded-2xl p-6 border border-white/10 hover:bg-white/10 hover:border-primary/30 transition-all text-center group cursor-default">
-                            <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center text-primary mx-auto mb-4 group-hover:shadow-lg group-hover:shadow-primary/20 transition-shadow">
+                            className="bg-card backdrop-blur rounded-2xl p-6 border border-border hover:border-primary/30 hover:shadow-lg transition-all text-center group cursor-default">
+                            <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mx-auto mb-4 group-hover:shadow-lg group-hover:shadow-primary/20 transition-shadow">
                                 <badge.icon className="w-6 h-6" />
                             </div>
-                            <h3 className="font-bold text-sm mb-2">{badge.title}</h3>
-                            <p className="text-xs text-white/50 leading-relaxed">{badge.desc}</p>
+                            <h3 className="font-bold text-sm text-foreground mb-2">{badge.title}</h3>
+                            <p className="text-xs text-muted-foreground leading-relaxed">{badge.desc}</p>
                         </motion.div>
                     ))}
                 </div>
@@ -62,13 +56,13 @@ const SecuritySection = () => {
                     {features.map((feat, i) => (
                         <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
                             transition={{ delay: i * 0.1 }}
-                            className="flex gap-4 p-5 rounded-xl bg-white/5 border border-white/10 hover:border-primary/20 transition-colors">
-                            <div className="w-10 h-10 rounded-lg bg-primary/15 flex items-center justify-center text-primary shrink-0 mt-0.5">
+                            className="flex gap-4 p-5 rounded-xl bg-card border border-border hover:border-primary/20 transition-colors">
+                            <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary shrink-0 mt-0.5">
                                 <Check className="w-5 h-5" />
                             </div>
                             <div>
-                                <h4 className="font-semibold text-sm mb-1">{feat.title}</h4>
-                                <p className="text-xs text-white/50 leading-relaxed">{feat.desc}</p>
+                                <h4 className="font-semibold text-sm text-foreground mb-1">{feat.title}</h4>
+                                <p className="text-xs text-muted-foreground leading-relaxed">{feat.desc}</p>
                             </div>
                         </motion.div>
                     ))}
@@ -76,18 +70,18 @@ const SecuritySection = () => {
 
                 {/* Enterprise CTA */}
                 <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                    className="bg-gradient-to-r from-primary/15 to-purple-500/15 rounded-2xl p-8 border border-primary/20 text-center">
-                    <h3 className="font-display font-bold text-xl mb-2">Need a security audit?</h3>
-                    <p className="text-sm text-white/50 mb-6 max-w-lg mx-auto">
+                    className="bg-gradient-to-r from-primary/5 to-purple-500/5 rounded-2xl p-8 border border-primary/20 text-center">
+                    <h3 className="font-display font-bold text-xl text-foreground mb-2">Need a security audit?</h3>
+                    <p className="text-sm text-muted-foreground mb-6 max-w-lg mx-auto">
                         Our team will provide a comprehensive security assessment tailored to your organization's requirements.
                     </p>
-                    <button className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-white/20 text-sm font-semibold hover:bg-white/10 transition-colors">
+                    <button className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-border text-sm font-semibold text-foreground hover:bg-muted transition-colors">
                         Request Audit <ArrowRight className="w-4 h-4" />
                     </button>
                 </motion.div>
 
                 {/* Certifications bar */}
-                <div className="mt-12 pt-8 border-t border-white/10 flex justify-center items-center gap-8 flex-wrap opacity-40 text-xs uppercase tracking-wider">
+                <div className="mt-12 pt-8 border-t border-border flex justify-center items-center gap-8 flex-wrap opacity-40 text-xs uppercase tracking-wider text-muted-foreground">
                     {["HIPAA", "SOC 2", "GDPR", "CCPA", "HITRUST"].map((cert) => (
                         <span key={cert} className="font-bold">{cert}</span>
                     ))}
