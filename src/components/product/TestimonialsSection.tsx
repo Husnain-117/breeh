@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { Star, ArrowRight } from "lucide-react";
+import { Star } from "lucide-react";
 
 function useCountUp(target: number, duration = 2000, inView = false) {
     const [count, setCount] = useState(0);
@@ -19,58 +19,58 @@ function useCountUp(target: number, duration = 2000, inView = false) {
 }
 
 const metrics = [
-    { value: 2, suffix: "M+", label: "Calls answered" },
+    { value: 2, suffix: "M+", label: "Patient interactions managed" },
     { value: 98, suffix: "%", label: "Patient satisfaction" },
-    { value: 500, suffix: "K+", label: "Appointments booked" },
-    { value: 10, suffix: "M+", label: "Revenue recovered" },
+    { value: 500, suffix: "K+", label: "Appointments scheduled" },
+    { value: 40, suffix: "%", label: "Admin time reduction" },
 ];
 
 const testimonials = [
     {
-        quote: "Breeh has completely transformed our Monday mornings. What used to take hours of callbacks is now handled automatically.",
+        quote: "Breeh has completely transformed our operations. What used to take hours of callbacks is now handled automatically across all departments.",
         name: "Patricia W.",
-        role: "Director of Operations",
-        practice: "TManagement",
-        result: "40% more bookings",
+        role: "VP of Operations",
+        practice: "Regional Health System",
+        result: "40% efficiency gain",
         stars: 5,
     },
     {
         quote: "We went from missing 30% of calls to answering 100%. The ROI was obvious within the first week.",
-        name: "Dr. Arshjot A.",
-        role: "DDS, FCAD",
-        practice: "Zen Dentistry",
+        name: "Dr. James L.",
+        role: "Chief Medical Officer",
+        practice: "Multispecialty Group",
         result: "Saved 20 hrs/week",
         stars: 5,
     },
     {
         quote: "Our patients love the instant response. They don't even realize they're talking to AI until we tell them.",
         name: "Pamela W.",
-        role: "Office Manager",
-        practice: "Danville Pediatric",
-        result: "$72K revenue increase",
+        role: "Practice Manager",
+        practice: "Family Medicine Center",
+        result: "98% satisfaction rate",
         stars: 5,
     },
     {
         quote: "Managing 8 locations used to be a nightmare. Now Breeh handles all our call routing and scheduling seamlessly.",
         name: "Brent A.",
-        role: "Regional Operations Director",
-        practice: "Allied OMS",
+        role: "Director of Operations",
+        practice: "Allied Health Network",
         result: "8 locations unified",
         stars: 5,
     },
     {
-        quote: "The integration with Dentrix was seamless. We were up and running in literally 5 minutes.",
+        quote: "The integration with our EHR was seamless. We were up and running in literally 10 minutes.",
         name: "Dr. Sarah Chen",
-        role: "Owner",
-        practice: "Bright Smile Dental",
-        result: "5 min setup",
+        role: "Medical Director",
+        practice: "Sunrise Health Clinic",
+        result: "10 min setup",
         stars: 5,
     },
     {
-        quote: "Best investment we've made this year. The AI handles emergency calls perfectly and our staff can focus on patients.",
+        quote: "Best investment we've made this year. The AI handles urgent triage perfectly and our staff can focus on in-person care.",
         name: "Dr. Michael R.",
-        role: "Practice Owner",
-        practice: "Family Dental Group",
+        role: "Chief Operating Officer",
+        practice: "Metro Urgent Care",
         result: "99.7% answer rate",
         stars: 5,
     },
@@ -91,9 +91,8 @@ const TestimonialsSection = () => {
     const counts = metrics.map((m) => useCountUp(m.value, 2000, inView));
 
     return (
-        <section className="py-28 px-6 lg:px-8 section-alt" ref={ref}>
+        <section className="py-20 px-6 lg:px-8 section-alt" ref={ref}>
             <div className="max-w-7xl mx-auto">
-                {/* Header */}
                 <div className="text-center mb-16">
                     <motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
                         className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-5">
@@ -101,11 +100,10 @@ const TestimonialsSection = () => {
                     </motion.span>
                     <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
                         className="font-display font-bold text-3xl md:text-5xl text-foreground mb-4">
-                        Trusted by 200+ dental practices
+                        Trusted by many healthcare organizations
                     </motion.h2>
                 </div>
 
-                {/* Metrics bar */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
                     {metrics.map((m, i) => (
                         <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
@@ -118,12 +116,10 @@ const TestimonialsSection = () => {
                     ))}
                 </div>
 
-                {/* Testimonial cards */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
                     {testimonials.map((t, i) => (
                         <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                            transition={{ delay: i * 0.08 }}
-                            whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                            transition={{ delay: i * 0.08 }} whileHover={{ y: -4, transition: { duration: 0.2 } }}
                             className="bg-card rounded-2xl p-6 border border-border hover:shadow-lg transition-all">
                             <div className="flex gap-0.5 mb-4">
                                 {[...Array(t.stars)].map((_, j) => (
@@ -140,14 +136,11 @@ const TestimonialsSection = () => {
                                     <p className="text-[11px] text-muted-foreground">{t.role}, {t.practice}</p>
                                 </div>
                             </div>
-                            <span className="inline-block bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-medium">
-                                {t.result}
-                            </span>
+                            <span className="inline-block bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-medium">{t.result}</span>
                         </motion.div>
                     ))}
                 </div>
 
-                {/* Trust badges */}
                 <div className="flex justify-center items-center gap-8 flex-wrap text-sm text-muted-foreground">
                     {[
                         { label: "G2", rating: "4.9/5" },
