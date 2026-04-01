@@ -96,7 +96,7 @@ const SecuritySection = () => {
                   </div>
                 ))}
               </div>
-              <span className="text-sm text-foreground/50 font-medium">Trusted by 500+ organizations</span>
+              <span className="text-sm text-foreground/50 font-medium">Trusted by many healthcare organizations</span>
             </div>
           </motion.div>
         </div>

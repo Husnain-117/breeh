@@ -72,18 +72,18 @@ const HowItWorksSection = ({ onBookDemo }: HowItWorksSectionProps) => {
                   </motion.div>
                 </div>
 
-                <div className="bg-card border border-border rounded-2xl overflow-hidden transition-all duration-300 group-hover:shadow-xl group-hover:shadow-primary/10 group-hover:-translate-y-1 group-hover:border-primary/20">
-                  <div className="relative h-44 overflow-hidden">
+                <div className="bg-card border border-border rounded-2xl overflow-hidden transition-all duration-300 group-hover:shadow-xl group-hover:shadow-primary/10 group-hover:-translate-y-1 group-hover:border-primary/20 flex flex-col h-full">
+                  <div className="relative h-44 overflow-hidden flex-shrink-0">
                     <img src={step.image} alt={step.imageAlt} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
                     <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-transparent" />
                   </div>
-                  <div className="p-6">
+                  <div className="p-6 flex flex-col flex-1">
                     <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
                       <step.icon className="w-5 h-5 text-primary" />
                     </div>
                     <h3 className="font-display font-bold text-lg text-foreground mb-2">{step.title}</h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed mb-4">{step.description}</p>
-                    <div className="flex flex-wrap gap-2">
+                    <p className="text-muted-foreground text-sm leading-relaxed mb-4 flex-1">{step.description}</p>
+                    <div className="flex flex-wrap gap-2 mt-auto">
                       {step.features.map((feat) => (
                         <span key={feat} className="inline-flex items-center gap-1 text-[10px] font-medium text-primary bg-primary/8 px-2.5 py-1 rounded-full">
                           <Check className="w-3 h-3" />{feat}

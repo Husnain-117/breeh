@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Phone, MessageSquare, Calendar, ArrowRight, Clock, CheckCircle2 } from "lucide-react";
+import { Phone, MessageSquare, ArrowRight } from "lucide-react";
 
 interface HeroSectionProps {
   onBookDemo?: () => void;
@@ -87,26 +87,6 @@ const PhoneMockup = () => {
         </div>
       </div>
 
-      {/* Floating badges */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 1.8, duration: 0.4 }}
-        className="absolute -top-3 -right-4 flex items-center gap-1.5 bg-card border border-border/60 rounded-full px-3 py-1.5 shadow-md"
-      >
-        <Calendar className="w-3 h-3 text-primary" />
-        <span className="text-[10px] font-medium text-foreground">Appointment Set</span>
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 2.4, duration: 0.4 }}
-        className="absolute -bottom-2 -left-4 flex items-center gap-1.5 bg-card border border-border/60 rounded-full px-3 py-1.5 shadow-md"
-      >
-        <CheckCircle2 className="w-3 h-3 text-green-500" />
-        <span className="text-[10px] font-medium text-foreground">HIPAA Compliant</span>
-      </motion.div>
     </motion.div>
   );
 };
@@ -114,7 +94,7 @@ const PhoneMockup = () => {
 /* ═══════════════════════════ HERO SECTION ═══════════════════════════ */
 const HeroSection = ({ onBookDemo }: HeroSectionProps) => {
   return (
-    <section className="relative bg-primary overflow-hidden">
+    <section className="relative overflow-hidden" style={{ background: 'linear-gradient(135deg, hsl(244 58% 65%), hsl(244 55% 58%))' }}>
       {/* Subtle pattern overlay */}
       <div className="absolute inset-0 opacity-[0.04]" style={{
         backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)",

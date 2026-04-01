@@ -122,7 +122,7 @@ const WhyBreehSection = () => {
 
   return (
     <section
-      className="section-lavender py-24 lg:py-32 relative overflow-hidden"
+      className="section-lavender py-16 lg:py-20 relative overflow-hidden"
       id="why-breeh"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
@@ -134,7 +134,7 @@ const WhyBreehSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="text-center mb-16 max-w-2xl mx-auto"
+          className="text-center mb-10 max-w-2xl mx-auto"
         >
           <p className="text-sm font-semibold text-accent tracking-widest uppercase mb-3">
             Why Breeh AI

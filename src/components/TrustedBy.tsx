@@ -8,7 +8,7 @@ const logos = [
 
 const TrustedBy = () => {
   return (
-    <section className="py-10 bg-primary overflow-hidden">
+    <section className="py-10 overflow-hidden" style={{ background: 'linear-gradient(135deg, hsl(244 55% 58%), hsl(244 50% 52%))' }}>
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center gap-4 sm:gap-8">
           <motion.div
@@ -20,7 +20,7 @@ const TrustedBy = () => {
             <p className="text-primary-foreground/80 text-sm font-semibold leading-tight">
               Trusted by
               <br />
-              <span className="text-primary-foreground font-bold text-lg">500+ healthcare organizations</span>
+              <span className="text-primary-foreground font-bold text-lg">Many healthcare organizations</span>
             </p>
           </motion.div>
 
