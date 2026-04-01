@@ -77,7 +77,7 @@ const HowItWorksSection = ({ onBookDemo }: HowItWorksSectionProps) => {
                     <img src={step.image} alt={step.imageAlt} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
                     <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-transparent" />
                   </div>
-                  <div className="p-6">
+                  <div className="p-6 flex flex-col flex-1">
                     <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
                       <step.icon className="w-5 h-5 text-primary" />
                     </div>
