@@ -1,163 +1,111 @@
-import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
-import { useRef, useState, useEffect, useCallback } from "react";
-import { Star, Phone, MessageSquare, Calendar, ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
+import { Phone, MessageSquare, Calendar, ArrowRight, Clock, CheckCircle2 } from "lucide-react";
 
 interface HeroSectionProps {
   onBookDemo?: () => void;
 }
 
-/* ── Chat messages for the phone mockup ── */
-const chatMessages = [
-  { role: "patient", text: "Hi, I'd like to schedule a follow-up appointment please.", delay: 0.8 },
-  { role: "ai", text: "Of course! I have openings this Thursday at 2 PM or Friday at 10 AM. Which works best?", delay: 2.2 },
-  { role: "patient", text: "Thursday at 2 works great!", delay: 4.0 },
-  { role: "ai", text: "Perfect! You're confirmed for Thursday at 2 PM with Dr. Smith. I'll send a reminder! 😊", delay: 5.4 },
-];
-
-/* ── Word-by-word headline component ── */
-const AnimatedHeadline = ({ line, delay = 0, gradient = false }: { line: string; delay?: number; gradient?: boolean }) => {
-  const words = line.split(" ");
-  return (
-    <span className="inline">
-      {words.map((word, i) => (
-        <motion.span
-          key={i}
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: 0.5,
-            delay: delay + i * 0.08,
-            ease: [0.25, 0.46, 0.45, 0.94],
-          }}
-          className={`inline-block mr-[0.3em] ${gradient ? "bg-clip-text text-transparent bg-gradient-to-r from-white via-purple-200 to-purple-300" : ""}`}
-        >
-          {word}
-        </motion.span>
-      ))}
-    </span>
-  );
-};
-
 /* ── Phone Mockup ── */
-const PhoneMockup = ({ mouseX, mouseY }: { mouseX: ReturnType<typeof useSpring>; mouseY: ReturnType<typeof useSpring> }) => {
-  const rotateX = useTransform(mouseY, [-0.5, 0.5], [8, -8]);
-  const rotateY = useTransform(mouseX, [-0.5, 0.5], [-8, 8]);
-  const translateX = useTransform(mouseX, [-0.5, 0.5], [-15, 15]);
-  const translateY = useTransform(mouseY, [-0.5, 0.5], [-15, 15]);
+const PhoneMockup = () => {
+  const messages = [
+    { role: "patient" as const, text: "Hi, I need to reschedule my appointment with Dr. Patel.", time: "9:41 AM" },
+    { role: "ai" as const, text: "Of course! Dr. Patel has availability Thursday at 2:00 PM or Friday at 10:30 AM. Which works for you?", time: "9:41 AM" },
+    { role: "patient" as const, text: "Friday at 10:30 please.", time: "9:42 AM" },
+    { role: "ai" as const, text: "Done — you're confirmed for Friday at 10:30 AM. A reminder will be sent 24 hours before.", time: "9:42 AM" },
+  ];
 
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.85, y: 40 }}
-      animate={{ opacity: 1, scale: 1, y: 0 }}
-      transition={{ duration: 0.9, delay: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
-      style={{
-        rotateX,
-        rotateY,
-        x: translateX,
-        y: translateY,
-        perspective: 1000,
-      }}
-      className="relative"
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7, delay: 0.4, ease: "easeOut" }}
+      className="relative w-[270px] sm:w-[290px]"
     >
-      {/* Phone frame */}
-      <div className="relative w-[280px] sm:w-[300px] h-[560px] sm:h-[600px] rounded-[40px] bg-gradient-to-b from-gray-800 to-gray-900 p-[3px] shadow-2xl shadow-black/40">
-        <div className="w-full h-full rounded-[38px] bg-gradient-to-b from-gray-900 to-[#1a1a2e] overflow-hidden flex flex-col">
-          {/* Notch */}
-          <div className="flex justify-center pt-3 pb-2">
-            <div className="w-24 h-6 bg-black rounded-full" />
-          </div>
-
-          {/* Chat header */}
-          <div className="px-4 py-3 border-b border-white/10 flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center">
-              <Phone className="w-4 h-4 text-white" />
-            </div>
-            <div>
-              <p className="text-white text-sm font-semibold">Breeh AI</p>
-              <p className="text-green-400 text-[10px] flex items-center gap-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-green-400 inline-block" />
-                Online now
-              </p>
+      {/* Phone shell */}
+      <div className="rounded-[32px] border border-border/60 bg-card shadow-xl shadow-primary/5 overflow-hidden">
+        {/* Status bar */}
+        <div className="flex items-center justify-between px-5 pt-3 pb-1 bg-primary/[0.03]">
+          <span className="text-[10px] font-medium text-foreground/70">9:41</span>
+          <div className="w-16 h-[18px] bg-foreground/10 rounded-full" />
+          <div className="flex items-center gap-1">
+            <div className="w-3.5 h-2 border border-foreground/40 rounded-sm relative">
+              <div className="absolute inset-[1px] right-[2px] bg-foreground/40 rounded-[1px]" />
             </div>
           </div>
+        </div>
 
-          {/* Chat messages */}
-          <div className="flex-1 px-4 py-4 space-y-3 overflow-hidden">
-            {chatMessages.map((msg, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20, scale: 0.9 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ duration: 0.4, delay: msg.delay, ease: "easeOut" }}
-                className={`flex ${msg.role === "patient" ? "justify-end" : "justify-start"}`}
-              >
+        {/* Chat header */}
+        <div className="px-4 py-3 border-b border-border/50 flex items-center gap-3 bg-card">
+          <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+            <Phone className="w-3.5 h-3.5 text-primary" />
+          </div>
+          <div className="flex-1">
+            <p className="text-xs font-semibold text-foreground">Breeh AI Assistant</p>
+            <p className="text-[10px] text-muted-foreground flex items-center gap-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-green-500 inline-block" />
+              Active now
+            </p>
+          </div>
+        </div>
+
+        {/* Messages */}
+        <div className="px-3 py-4 space-y-2.5 bg-muted/30 min-h-[320px]">
+          {messages.map((msg, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.35, delay: 0.8 + i * 0.6 }}
+              className={`flex ${msg.role === "patient" ? "justify-end" : "justify-start"}`}
+            >
+              <div className="max-w-[82%]">
                 <div
-                  className={`max-w-[85%] px-3 py-2 rounded-2xl text-[11px] leading-relaxed ${msg.role === "patient"
-                      ? "bg-purple-500 text-white rounded-br-md"
-                      : "bg-white/10 text-white/90 rounded-bl-md"
-                    }`}
+                  className={`px-3 py-2 rounded-2xl text-[11px] leading-relaxed ${
+                    msg.role === "patient"
+                      ? "bg-primary text-primary-foreground rounded-br-md"
+                      : "bg-card border border-border/50 text-foreground rounded-bl-md shadow-sm"
+                  }`}
                 >
                   {msg.text}
                 </div>
-              </motion.div>
-            ))}
-
-            {/* Typing indicator */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 6.8 }}
-              className="flex justify-start"
-            >
-              <div className="bg-white/10 px-4 py-2.5 rounded-2xl rounded-bl-md flex gap-1.5">
-                {[0, 1, 2].map((dot) => (
-                  <span
-                    key={dot}
-                    className="w-1.5 h-1.5 bg-white/60 rounded-full"
-                    style={{
-                      animation: `typing-dot 1.4s ease-in-out ${dot * 0.2}s infinite`,
-                    }}
-                  />
-                ))}
+                <p className={`text-[9px] text-muted-foreground mt-0.5 ${msg.role === "patient" ? "text-right" : ""} px-1`}>
+                  {msg.time}
+                </p>
               </div>
             </motion.div>
-          </div>
+          ))}
+        </div>
 
-          {/* Bottom bar */}
-          <div className="px-4 py-3 border-t border-white/10 flex items-center gap-2">
-            <div className="flex-1 h-8 bg-white/5 rounded-full px-3 flex items-center">
-              <span className="text-white/30 text-[10px]">Type a message...</span>
-            </div>
-            <div className="w-8 h-8 rounded-full bg-purple-500/60 flex items-center justify-center">
-              <ArrowRight className="w-3.5 h-3.5 text-white" />
-            </div>
+        {/* Input bar */}
+        <div className="px-3 py-2.5 border-t border-border/50 flex items-center gap-2 bg-card">
+          <div className="flex-1 h-8 bg-muted rounded-full px-3 flex items-center">
+            <span className="text-muted-foreground text-[10px]">Type a message…</span>
+          </div>
+          <div className="w-7 h-7 rounded-full bg-primary flex items-center justify-center">
+            <ArrowRight className="w-3 h-3 text-primary-foreground" />
           </div>
         </div>
       </div>
 
-      {/* Floating icons around phone */}
+      {/* Floating badges */}
       <motion.div
-        animate={{ y: [0, -10, 0] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -top-4 -right-6 w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-400/80 to-purple-600/80 backdrop-blur-sm flex items-center justify-center shadow-lg shadow-purple-500/30"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 1.8, duration: 0.4 }}
+        className="absolute -top-3 -right-4 flex items-center gap-1.5 bg-card border border-border/60 rounded-full px-3 py-1.5 shadow-md"
       >
-        <Calendar className="w-5 h-5 text-white" />
+        <Calendar className="w-3 h-3 text-primary" />
+        <span className="text-[10px] font-medium text-foreground">Appointment Set</span>
       </motion.div>
 
       <motion.div
-        animate={{ y: [0, 12, 0] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-        className="absolute -bottom-2 -left-8 w-11 h-11 rounded-2xl bg-gradient-to-br from-teal-400/80 to-teal-600/80 backdrop-blur-sm flex items-center justify-center shadow-lg shadow-teal-500/30"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 2.4, duration: 0.4 }}
+        className="absolute -bottom-2 -left-4 flex items-center gap-1.5 bg-card border border-border/60 rounded-full px-3 py-1.5 shadow-md"
       >
-        <MessageSquare className="w-5 h-5 text-white" />
-      </motion.div>
-
-      <motion.div
-        animate={{ y: [0, -8, 0] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-        className="absolute top-1/3 -left-10 w-10 h-10 rounded-xl bg-gradient-to-br from-pink-400/60 to-purple-500/60 backdrop-blur-sm flex items-center justify-center shadow-lg"
-      >
-        <Phone className="w-4 h-4 text-white" />
+        <CheckCircle2 className="w-3 h-3 text-green-500" />
+        <span className="text-[10px] font-medium text-foreground">HIPAA Compliant</span>
       </motion.div>
     </motion.div>
   );
@@ -165,170 +113,88 @@ const PhoneMockup = ({ mouseX, mouseY }: { mouseX: ReturnType<typeof useSpring>;
 
 /* ═══════════════════════════ HERO SECTION ═══════════════════════════ */
 const HeroSection = ({ onBookDemo }: HeroSectionProps) => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const rawMouseX = useMotionValue(0);
-  const rawMouseY = useMotionValue(0);
-  const mouseX = useSpring(rawMouseX, { stiffness: 100, damping: 30 });
-  const mouseY = useSpring(rawMouseY, { stiffness: 100, damping: 30 });
-
-  const handleMouseMove = useCallback(
-    (e: React.MouseEvent<HTMLElement>) => {
-      const rect = sectionRef.current?.getBoundingClientRect();
-      if (!rect) return;
-      rawMouseX.set((e.clientX - rect.left) / rect.width - 0.5);
-      rawMouseY.set((e.clientY - rect.top) / rect.height - 0.5);
-    },
-    [rawMouseX, rawMouseY]
-  );
-
-  /* Animated counter */
-  const [count, setCount] = useState(0);
-  useEffect(() => {
-    let frame: number;
-    const target = 500;
-    const dur = 2000;
-    const start = performance.now();
-    const tick = (now: number) => {
-      const t = Math.min((now - start) / dur, 1);
-      setCount(Math.floor(t * target));
-      if (t < 1) frame = requestAnimationFrame(tick);
-    };
-    const timer = setTimeout(() => {
-      frame = requestAnimationFrame(tick);
-    }, 1200);
-    return () => { clearTimeout(timer); cancelAnimationFrame(frame); };
-  }, []);
-
   return (
-    <section
-      ref={sectionRef}
-      onMouseMove={handleMouseMove}
-      className="relative min-h-screen flex items-center overflow-hidden hero-gradient-mesh"
-    >
-      {/* ── Animated gradient orbs ── */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div
-          className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] rounded-full opacity-40"
-          style={{
-            background: "radial-gradient(circle, hsla(260, 80%, 75%, 0.6), transparent 70%)",
-            filter: "blur(80px)",
-            animation: "orb-drift-1 20s ease-in-out infinite",
-          }}
-        />
-        <div
-          className="absolute bottom-[-15%] left-[-10%] w-[450px] h-[450px] rounded-full opacity-30"
-          style={{
-            background: "radial-gradient(circle, hsla(330, 60%, 70%, 0.5), transparent 70%)",
-            filter: "blur(80px)",
-            animation: "orb-drift-2 25s ease-in-out infinite",
-          }}
-        />
-        <div
-          className="absolute top-[30%] left-[40%] w-[350px] h-[350px] rounded-full opacity-25"
-          style={{
-            background: "radial-gradient(circle, hsla(200, 70%, 70%, 0.4), transparent 70%)",
-            filter: "blur(80px)",
-            animation: "orb-drift-3 22s ease-in-out infinite",
-          }}
-        />
-      </div>
+    <section className="relative bg-primary overflow-hidden">
+      {/* Subtle pattern overlay */}
+      <div className="absolute inset-0 opacity-[0.04]" style={{
+        backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)",
+        backgroundSize: "32px 32px",
+      }} />
 
-      {/* ── Main content ── */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full py-24 md:py-0">
-        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-8">
-          {/* LEFT — Text (55%) */}
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full pt-32 pb-20 md:pt-36 md:pb-24">
+        <div className="flex flex-col lg:flex-row items-center gap-14 lg:gap-10">
+          {/* LEFT — Copy */}
           <div className="lg:w-[55%] text-center lg:text-left">
-            {/* Tag */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
+            {/* Tagline */}
+            <motion.p
+              initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-2 mb-8 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm"
+              transition={{ duration: 0.5 }}
+              className="text-xs font-semibold tracking-widest uppercase text-primary-foreground/60 mb-5"
             >
-              <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-              <span className="text-xs font-semibold tracking-wide text-white/80 uppercase">
-                The Operating System for Modern Healthcare
-              </span>
-            </motion.div>
+              AI-Powered Healthcare Platform
+            </motion.p>
 
             {/* Headline */}
-            <h1 className="font-display font-bold text-4xl sm:text-5xl md:text-6xl lg:text-[68px] leading-[1.05] tracking-tight text-white mb-6">
-              <AnimatedHeadline line="Run Every Corner of" delay={0.15} />
-              <br />
-              <AnimatedHeadline line="Your Healthcare" delay={0.4} gradient />
-              <br />
-              <AnimatedHeadline line="Operation" delay={0.65} />
-            </h1>
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="font-display font-bold text-3xl sm:text-4xl md:text-[44px] leading-[1.15] tracking-tight text-primary-foreground mb-5"
+            >
+              Streamline Your Healthcare Operations with AI
+            </motion.h1>
 
             {/* Sub-headline */}
             <motion.p
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.8 }}
-              className="text-base md:text-lg text-white/60 max-w-lg mx-auto lg:mx-0 mb-10 leading-relaxed"
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-sm md:text-base text-primary-foreground/70 max-w-md mx-auto lg:mx-0 mb-8 leading-relaxed"
             >
-              Breeh AI streamlines clinical workflows, reduces administrative burden, and improves patient outcomes across every specialty and care setting — 24/7.
+              Reduce administrative burden, improve patient communication, and scale operations across every specialty and care setting — around the clock.
             </motion.p>
 
             {/* CTAs */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 1.0 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start"
             >
               <button
                 onClick={onBookDemo}
-                className="group relative font-semibold rounded-full px-10 py-4 text-sm tracking-wide text-white transition-all duration-300 hover:-translate-y-0.5 overflow-hidden"
+                className="inline-flex items-center justify-center gap-2 font-semibold rounded-full px-8 py-3 text-sm bg-card text-primary hover:bg-card/90 transition-colors shadow-md"
               >
-                <span className="absolute inset-0 bg-gradient-to-r from-purple-500 to-purple-700 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-purple-500/40" />
-                <span className="relative z-10 flex items-center justify-center gap-2">
-                  Book a Demo
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </span>
+                Book a Demo
+                <ArrowRight className="w-4 h-4" />
               </button>
 
               <button
                 onClick={onBookDemo}
-                className="font-semibold rounded-full px-10 py-4 text-sm tracking-wide text-white transition-all duration-300 hover:-translate-y-0.5 backdrop-blur-md bg-white/10 border border-white/20 hover:bg-white/20"
+                className="inline-flex items-center justify-center font-semibold rounded-full px-8 py-3 text-sm text-primary-foreground border border-primary-foreground/25 hover:bg-primary-foreground/10 transition-colors"
               >
                 See How It Works
               </button>
             </motion.div>
 
-            {/* Social Proof */}
-            <motion.div
+            {/* Trust line */}
+            <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.7, delay: 1.3 }}
-              className="mt-10 flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start"
+              transition={{ duration: 0.5, delay: 0.6 }}
+              className="mt-8 text-xs text-primary-foreground/50"
             >
-              <div className="flex items-center gap-1">
-                {[0, 1, 2, 3, 4].map((i) => (
-                  <Star
-                    key={i}
-                    className="w-4 h-4 text-yellow-400 fill-yellow-400"
-                    style={{
-                      animation: `star-pop 0.4s ease-out ${1.5 + i * 0.12}s both`,
-                    }}
-                  />
-                ))}
-              </div>
-              <p className="text-sm text-white/60">
-                Trusted by <span className="text-white font-semibold">{count}+</span> healthcare organizations
-              </p>
-            </motion.div>
+              Trusted by healthcare organizations across the country
+            </motion.p>
           </div>
 
-          {/* RIGHT — Phone Mockup (45%) */}
+          {/* RIGHT — Phone Mockup */}
           <div className="lg:w-[45%] flex justify-center lg:justify-end">
-            <PhoneMockup mouseX={mouseX} mouseY={mouseY} />
+            <PhoneMockup />
           </div>
         </div>
       </div>
-
-      {/* Bottom fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent z-[5]" />
     </section>
   );
 };
