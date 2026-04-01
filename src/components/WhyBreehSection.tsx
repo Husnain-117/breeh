@@ -122,7 +122,7 @@ const WhyBreehSection = () => {
 
   return (
     <section
-      className="section-lavender py-24 lg:py-32 relative overflow-hidden"
+      className="section-lavender py-16 lg:py-20 relative overflow-hidden"
       id="why-breeh"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
