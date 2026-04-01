@@ -72,8 +72,8 @@ const HowItWorksSection = ({ onBookDemo }: HowItWorksSectionProps) => {
                   </motion.div>
                 </div>
 
-                <div className="bg-card border border-border rounded-2xl overflow-hidden transition-all duration-300 group-hover:shadow-xl group-hover:shadow-primary/10 group-hover:-translate-y-1 group-hover:border-primary/20">
-                  <div className="relative h-44 overflow-hidden">
+                <div className="bg-card border border-border rounded-2xl overflow-hidden transition-all duration-300 group-hover:shadow-xl group-hover:shadow-primary/10 group-hover:-translate-y-1 group-hover:border-primary/20 flex flex-col h-full">
+                  <div className="relative h-44 overflow-hidden flex-shrink-0">
                     <img src={step.image} alt={step.imageAlt} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
                     <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-transparent" />
                   </div>
