@@ -82,8 +82,8 @@ const HowItWorksSection = ({ onBookDemo }: HowItWorksSectionProps) => {
                       <step.icon className="w-5 h-5 text-primary" />
                     </div>
                     <h3 className="font-display font-bold text-lg text-foreground mb-2">{step.title}</h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed mb-4">{step.description}</p>
-                    <div className="flex flex-wrap gap-2">
+                    <p className="text-muted-foreground text-sm leading-relaxed mb-4 flex-1">{step.description}</p>
+                    <div className="flex flex-wrap gap-2 mt-auto">
                       {step.features.map((feat) => (
                         <span key={feat} className="inline-flex items-center gap-1 text-[10px] font-medium text-primary bg-primary/8 px-2.5 py-1 rounded-full">
                           <Check className="w-3 h-3" />{feat}

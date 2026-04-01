@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Phone, MessageSquare, Calendar, ArrowRight, Clock, CheckCircle2 } from "lucide-react";
+import { Phone, MessageSquare, ArrowRight } from "lucide-react";
 
 interface HeroSectionProps {
   onBookDemo?: () => void;

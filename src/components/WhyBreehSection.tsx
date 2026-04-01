@@ -134,7 +134,7 @@ const WhyBreehSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="text-center mb-16 max-w-2xl mx-auto"
+          className="text-center mb-10 max-w-2xl mx-auto"
         >
           <p className="text-sm font-semibold text-accent tracking-widest uppercase mb-3">
             Why Breeh AI
