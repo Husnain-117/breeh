@@ -2,7 +2,7 @@ import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useRef, useState, useEffect } from "react";
-import missionImg from "@/assets/hero-dental-1.jpg";
+import missionImg from "@/assets/hero-healthcare-mission.jpg";
 
 const useCountUp = (target: number, duration = 2000, suffix = "") => {
   const [value, setValue] = useState(0);
