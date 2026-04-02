@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Check, X, Minus, ArrowRight } from "lucide-react";
+import { SITE_CONFIG } from "@/lib/config";
 
 type Feature = { name: string; essentials: boolean | "partial"; professional: boolean | "partial"; enterprise: boolean | "partial" };
 
