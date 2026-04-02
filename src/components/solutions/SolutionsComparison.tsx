@@ -17,7 +17,7 @@ const categories: { name: string; features: Feature[] }[] = [
     {
         name: "Scheduling",
         features: [
-            { name: "PMS sync", essentials: true, professional: true, enterprise: true },
+            { name: "EHR sync", essentials: true, professional: true, enterprise: true },
             { name: "Multi-location scheduling", essentials: false, professional: true, enterprise: true },
             { name: "Automated confirmations", essentials: true, professional: true, enterprise: true },
             { name: "Waitlist management", essentials: false, professional: true, enterprise: true },
@@ -93,7 +93,6 @@ const SolutionsComparison = () => {
                         className="font-display font-bold text-3xl md:text-5xl text-foreground mb-4">Find your perfect fit</motion.h2>
                 </div>
 
-                {/* Table */}
                 <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
                     className="bg-card rounded-2xl border border-border overflow-auto mb-12">
                     <table className="w-full text-sm">
@@ -129,7 +128,6 @@ const SolutionsComparison = () => {
                     </table>
                 </motion.div>
 
-                {/* Recommendation wizard */}
                 <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
                     className="bg-card rounded-2xl p-8 border border-border max-w-3xl mx-auto">
                     <h3 className="font-display font-bold text-lg text-foreground text-center mb-6">Not sure which to choose?</h3>
@@ -140,8 +138,7 @@ const SolutionsComparison = () => {
                                 <div className="flex flex-wrap gap-2">
                                     {wq.options.map((opt, oi) => (
                                         <button key={oi} onClick={() => setAnswers((a) => { const n = [...a]; n[qi] = oi; return n; })}
-                                            className={`px-4 py-2 rounded-lg text-sm transition-all ${answers[qi] === oi ? "bg-primary text-white shadow-md" : "bg-muted text-muted-foreground hover:text-foreground"
-                                                }`}>{opt}</button>
+                                            className={`px-4 py-2 rounded-lg text-sm transition-all ${answers[qi] === oi ? "bg-primary text-white shadow-md" : "bg-muted text-muted-foreground hover:text-foreground"}`}>{opt}</button>
                                     ))}
                                 </div>
                             </div>
@@ -152,7 +149,7 @@ const SolutionsComparison = () => {
                             className="mt-6 p-4 rounded-xl bg-primary/5 border border-primary/20 text-center">
                             <p className="text-sm text-muted-foreground">We recommend:</p>
                             <p className="font-display font-bold text-xl text-primary mt-1">{recommendation}</p>
-                            <button onClick={() => window.open("https://calendly.com", "_blank")}
+                            <button onClick={() => window.open(SITE_CONFIG.calendlyUrl, "_blank")}
                                 className="mt-3 inline-flex items-center gap-1 text-sm text-primary font-semibold hover:gap-2 transition-all">
                                 Get started <ArrowRight className="w-4 h-4" />
                             </button>

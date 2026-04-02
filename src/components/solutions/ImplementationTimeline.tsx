@@ -2,8 +2,8 @@ import { motion } from "framer-motion";
 import { Plug, Settings, RefreshCw, Rocket, ShieldCheck, Check, Mail, Phone, Users } from "lucide-react";
 
 const steps = [
-    { day: "Day 1", title: "Discovery", icon: Users, desc: "Understanding your workflows", activities: ["Call flow audit", "PMS review", "Staff interviews"], deliverable: "Custom configuration plan" },
-    { day: "Day 2", title: "Setup", icon: Plug, desc: "Technical integration", activities: ["PMS connection", "Call routing setup", "AI training"], deliverable: "Working test environment" },
+    { day: "Day 1", title: "Discovery", icon: Users, desc: "Understanding your workflows", activities: ["Call flow audit", "EHR system review", "Staff interviews"], deliverable: "Custom configuration plan" },
+    { day: "Day 2", title: "Setup", icon: Plug, desc: "Technical integration", activities: ["EHR connection", "Call routing setup", "AI training"], deliverable: "Working test environment" },
     { day: "Day 3", title: "Training", icon: Settings, desc: "Staff onboarding", activities: ["Dashboard walkthrough", "Best practices", "Q&A session"], deliverable: "Trained team + documentation" },
     { day: "Day 4", title: "Testing", icon: RefreshCw, desc: "Go-live preparation", activities: ["Parallel running", "Call quality review", "Fine-tuning"], deliverable: "Validated system" },
     { day: "Day 5", title: "Launch", icon: Rocket, desc: "You're live!", activities: ["Full cutover", "24/7 monitoring", "Celebration 🎉"], deliverable: "AI answering active", highlight: true },

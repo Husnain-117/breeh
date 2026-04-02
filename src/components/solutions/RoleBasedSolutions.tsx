@@ -4,16 +4,16 @@ import { Briefcase, Headphones, Smile, Shield, Check, ArrowRight } from "lucide-
 const personas = [
     {
         icon: Briefcase,
-        title: "Practice Owner",
+        title: "Administrator",
         focus: "Growth & Revenue",
         gradient: true,
-        pains: ["Missing new patient opportunities", "Rising staffing costs", "No visibility into front desk"],
-        benefits: ["Capture 35% more leads", "Reduce overhead by $50K/year", "Real-time performance dashboard"],
-        cta: "Owner's guide to AI",
+        pains: ["Missing new patient opportunities", "Rising staffing costs", "No visibility into front desk performance"],
+        benefits: ["Capture 35% more leads", "Reduce administrative overhead", "Real-time performance dashboard"],
+        cta: "Administrator's guide to AI",
     },
     {
         icon: Headphones,
-        title: "Office Manager",
+        title: "Operations Manager",
         focus: "Operations & Efficiency",
         gradient: false,
         pains: ["Constantly putting out fires", "Staff turnover and training", "Patient complaints about hold times"],
@@ -43,7 +43,7 @@ const personas = [
 const beforeAfter = [
     { time: "8:00 AM", before: "20 voicemails from overnight", after: "0 voicemails — all handled by Breeh" },
     { time: "10:00 AM", before: "3 calls on hold, 2 patients waiting", after: "Routine calls auto-handled, staff focuses on patients" },
-    { time: "12:00 PM", before: "Lunch rush chaos, missed calls spike", after: "AI handles peak volume seamlessly" },
+    { time: "12:00 PM", before: "Peak hour chaos, missed calls spike", after: "AI handles peak volume seamlessly" },
     { time: "3:00 PM", before: "Playing phone tag with 8 patients", after: "Follow-ups sent automatically via SMS" },
     { time: "5:00 PM", before: "Staff exhausted, tomorrow's calls already piling", after: "Staff leaves on time, Breeh takes over" },
 ];
@@ -70,8 +70,7 @@ const RoleBasedSolutions = () => {
                         <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
                             transition={{ delay: i * 0.1 }}
                             whileHover={{ y: -4, transition: { duration: 0.2 } }}
-                            className={`rounded-2xl p-6 transition-all ${p.gradient ? "bg-gradient-to-b from-primary/5 to-transparent border border-primary/20" : "bg-card border border-border hover:border-primary/20"
-                                }`}>
+                            className={`rounded-2xl p-6 transition-all ${p.gradient ? "bg-gradient-to-b from-primary/5 to-transparent border border-primary/20" : "bg-card border border-border hover:border-primary/20"}`}>
                             <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-4 ${p.gradient ? "bg-primary/10 text-primary" : "bg-muted text-muted-foreground"}`}>
                                 <p.icon className="w-5 h-5" />
                             </div>

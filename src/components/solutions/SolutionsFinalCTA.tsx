@@ -7,7 +7,6 @@ const SolutionsFinalCTA = () => {
 
     return (
         <section className="py-28 px-6 lg:px-8 bg-gradient-to-b from-background to-primary/10 relative overflow-hidden">
-            {/* Decorative */}
             <div className="absolute inset-0 pointer-events-none">
                 <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-primary/10 rounded-full blur-[150px]" />
                 <div className="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] bg-purple-400/10 rounded-full blur-[120px]" />
@@ -21,15 +20,14 @@ const SolutionsFinalCTA = () => {
 
                 <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
                     className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-foreground leading-tight mb-6">
-                    Ready to transform <br className="hidden sm:block" /> your practice?
+                    Ready to transform <br className="hidden sm:block" /> your organization?
                 </motion.h2>
 
                 <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
                     className="text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
-                    Join 200+ practices already using Breeh. No credit card required.
+                    Join many healthcare organizations already using Breeh. No credit card required.
                 </motion.p>
 
-                {/* CTAs */}
                 <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
                     className="flex flex-col sm:flex-row gap-4 justify-center">
                     <motion.button whileHover={{ scale: 1.02, y: -2 }} whileTap={{ scale: 0.98 }} onClick={openCalendly}
@@ -42,7 +40,6 @@ const SolutionsFinalCTA = () => {
                     </motion.button>
                 </motion.div>
 
-                {/* Trust */}
                 <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.3 }}
                     className="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
                     {["No credit card required", "5-minute setup", "Cancel anytime"].map((t) => (
@@ -50,7 +47,6 @@ const SolutionsFinalCTA = () => {
                     ))}
                 </motion.div>
 
-                {/* Live support */}
                 <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.4 }}
                     className="mt-12 inline-flex items-center gap-4 bg-card rounded-2xl px-6 py-4 border border-border shadow-sm">
                     <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
@@ -63,14 +59,13 @@ const SolutionsFinalCTA = () => {
                     <button onClick={openCalendly} className="px-4 py-2 bg-primary/10 text-primary rounded-lg text-sm font-semibold hover:bg-primary/20 transition-all">Start chat</button>
                 </motion.div>
 
-                {/* Urgency */}
                 <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.5 }}
                     className="mt-6 inline-flex items-center gap-2 bg-orange-100 text-orange-700 px-4 py-2 rounded-full text-sm">
                     <span className="relative flex h-2.5 w-2.5">
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-500 opacity-75" />
                         <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-orange-500" />
                     </span>
-                    Limited spots available for March onboarding
+                    Limited spots available for upcoming onboarding
                 </motion.div>
             </div>
         </section>
