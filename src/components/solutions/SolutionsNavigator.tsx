@@ -7,7 +7,7 @@ const solutions = [
         name: "Essentials",
         icon: Phone,
         tagline: "AI answering for single locations",
-        bestFor: "1–2 location practices, 5–15 staff",
+        bestFor: "1–2 location clinics, 5–15 staff",
         price: "$299/month",
         features: ["24/7 call answering", "Smart scheduling", "Basic analytics", "Email support", "Standard integrations"],
         popular: false,
@@ -26,8 +26,8 @@ const solutions = [
     {
         name: "Enterprise",
         icon: Network,
-        tagline: "DSO and large group solutions",
-        bestFor: "10+ locations, DSOs, PE-backed groups",
+        tagline: "Health system & large group solutions",
+        bestFor: "10+ locations, health systems, PE-backed groups",
         price: "Custom",
         features: ["Everything in Professional", "White-label options", "Dedicated success manager", "SLA guarantees", "Custom AI training", "API access"],
         popular: false,
@@ -41,7 +41,6 @@ const SolutionsNavigator = () => {
     return (
         <section className="py-28 px-6 lg:px-8 section-alt">
             <div className="max-w-7xl mx-auto">
-                {/* Header */}
                 <div className="text-center mb-16">
                     <motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
                         className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-5">
@@ -53,11 +52,10 @@ const SolutionsNavigator = () => {
                     </motion.h2>
                     <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
                         className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                        Every practice is different. Find the setup that works for yours.
+                        Every healthcare organization is different. Find the setup that works for yours.
                     </motion.p>
                 </div>
 
-                {/* Solution cards */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start max-w-5xl mx-auto">
                     {solutions.map((sol, i) => (
                         <motion.div key={sol.name}
@@ -67,9 +65,8 @@ const SolutionsNavigator = () => {
                             transition={{ delay: i * 0.1 }}
                             whileHover={{ y: -6, transition: { duration: 0.2 } }}
                             className={`relative rounded-2xl p-8 transition-all ${sol.popular
-                                    ? "border-2 border-primary shadow-xl shadow-primary/10 md:scale-105 z-10 bg-card"
-                                    : "bg-card border border-border hover:border-primary/30 hover:shadow-lg"
-                                }`}
+                                ? "border-2 border-primary shadow-xl shadow-primary/10 md:scale-105 z-10 bg-card"
+                                : "bg-card border border-border hover:border-primary/30 hover:shadow-lg"}`}
                         >
                             {sol.popular && (
                                 <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
@@ -81,13 +78,10 @@ const SolutionsNavigator = () => {
                             </div>
                             <h3 className={`font-display font-bold text-2xl ${sol.popular ? "text-primary" : "text-foreground"}`}>{sol.name}</h3>
                             <p className="text-sm text-muted-foreground mt-1">{sol.tagline}</p>
-
                             <div className="mt-3 mb-5">
                                 <span className="text-xs bg-muted px-2 py-0.5 rounded text-muted-foreground">Best for: {sol.bestFor}</span>
                             </div>
-
                             <p className="font-display font-bold text-2xl text-foreground mb-5">{sol.price}</p>
-
                             <div className="space-y-3 mb-8">
                                 {sol.features.map((f, j) => (
                                     <div key={j} className="flex items-start gap-2">
@@ -96,10 +90,8 @@ const SolutionsNavigator = () => {
                                     </div>
                                 ))}
                             </div>
-
                             <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} onClick={openCalendly}
-                                className={`w-full py-3 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 transition-all ${sol.popular ? "bg-primary text-white shadow-lg shadow-primary/25" : "border border-border hover:border-primary hover:text-primary"
-                                    }`}>
+                                className={`w-full py-3 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 transition-all ${sol.popular ? "bg-primary text-white shadow-lg shadow-primary/25" : "border border-border hover:border-primary hover:text-primary"}`}>
                                 {sol.popular ? "Get started" : sol.price === "Custom" ? "Contact sales" : "Learn more"}
                                 <ArrowRight className="w-4 h-4" />
                             </motion.button>
@@ -107,7 +99,6 @@ const SolutionsNavigator = () => {
                     ))}
                 </div>
 
-                {/* Solution wizard CTA */}
                 <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
                     className="mt-12 text-center">
                     <p className="text-muted-foreground mb-3">Not sure which fits?</p>

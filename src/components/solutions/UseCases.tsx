@@ -1,47 +1,47 @@
 import { motion } from "framer-motion";
-import { Moon, Clock, MapPin, AlertTriangle, TrendingUp, TrendingDown, ArrowRight } from "lucide-react";
+import { Moon, Clock, MapPin, AlertTriangle, TrendingUp, TrendingDown } from "lucide-react";
 
 const scenarios = [
     {
         badge: "After-Hours Coverage",
         badgeColor: "bg-orange-500/10 text-orange-600",
         title: "Capture every after-hours opportunity",
-        problem: "40% of calls come after 5pm. Most go to voicemail and are never recovered.",
+        problem: "40% of calls come after 5 pm. Most go to voicemail and are never recovered.",
         solution: "Breeh answers 24/7, books appointments, and sends you a morning summary.",
         metrics: [
             { icon: TrendingUp, label: "35% more appointments booked", positive: true },
             { icon: TrendingDown, label: "0% missed after-hours calls", positive: true },
         ],
         quote: "We woke up to 12 new appointments. That never happened before.",
-        author: "Dr. Martinez, Bright Smile Dental",
+        author: "Dr. Martinez, Riverside Medical Group",
         icon: Moon,
     },
     {
         badge: "Peak Hour Management",
         badgeColor: "bg-blue-500/10 text-blue-600",
-        title: "Handle the 12pm chaos",
-        problem: "Front desk overwhelmed during lunch rush — patients waiting, phones ringing nonstop.",
+        title: "Handle the midday rush",
+        problem: "Front desk overwhelmed during peak hours — patients waiting, phones ringing nonstop.",
         solution: "Breeh triages calls, answers routine questions, and schedules follow-ups automatically.",
         metrics: [
             { icon: TrendingDown, label: "60% reduction in hold times", positive: true },
             { icon: TrendingUp, label: "Staff productivity up 40%", positive: true },
         ],
-        quote: "Lunch hour used to be pandemonium. Now it runs itself.",
-        author: "Pamela W., Danville Pediatric",
+        quote: "Peak hours used to be pandemonium. Now they run themselves.",
+        author: "Pamela W., Clearview Health Center",
         icon: Clock,
     },
     {
         badge: "Multi-Location",
         badgeColor: "bg-purple-500/10 text-purple-600",
         title: "One system, every location",
-        problem: "Different processes at each office, no visibility into performance across locations.",
+        problem: "Different processes at each facility, no visibility into performance across locations.",
         solution: "Unified dashboard, standardized patient experience, location-by-location analytics.",
         metrics: [
             { icon: TrendingUp, label: "Standardized across 8 locations", positive: true },
             { icon: TrendingUp, label: "Centralized reporting & insights", positive: true },
         ],
-        quote: "Finally, I can see what's happening at every office from one screen.",
-        author: "Brent A., Allied OMS",
+        quote: "Finally, I can see what's happening at every facility from one screen.",
+        author: "Brent A., Allied Healthcare Network",
         icon: MapPin,
     },
     {
@@ -55,7 +55,7 @@ const scenarios = [
             { icon: TrendingDown, label: "Zero missed urgent cases", positive: true },
         ],
         quote: "The peace of mind knowing emergencies are handled instantly is priceless.",
-        author: "Dr. Sarah Chen, Family Dental",
+        author: "Dr. Sarah Chen, Family Health Partners",
         icon: AlertTriangle,
     },
 ];
@@ -75,7 +75,7 @@ const UseCases = () => {
                         Solutions for every scenario
                     </motion.h2>
                     <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
-                        className="text-lg text-muted-foreground">See how Breeh solves real practice challenges.</motion.p>
+                        className="text-lg text-muted-foreground">See how Breeh solves real healthcare challenges.</motion.p>
                 </div>
 
                 {/* Scenario cards */}

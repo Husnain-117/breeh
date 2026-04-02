@@ -4,39 +4,39 @@ import { Check, ArrowRight } from "lucide-react";
 
 const specialties = [
     {
-        id: "general",
-        label: "General Dentistry",
-        challenges: "High daily call volume with routine scheduling, recall reminders, and insurance questions.",
-        features: ["Automated recall scheduling", "Insurance verification", "New patient intake", "Appointment reminders"],
-        caseStudy: { name: "Bright Smile Dental", result: "40% more bookings", quote: "Breeh handles our 50+ daily calls without breaking a sweat." },
+        id: "primary-care",
+        label: "Primary Care",
+        challenges: "High daily call volume with routine scheduling, prescription refills, and insurance questions.",
+        features: ["Automated appointment scheduling", "Insurance verification", "New patient intake", "Prescription refill requests"],
+        caseStudy: { name: "Riverside Medical Group", result: "40% more bookings", quote: "Breeh handles our 50+ daily calls without breaking a sweat." },
     },
     {
-        id: "ortho",
-        label: "Orthodontics",
-        challenges: "Long treatment plans requiring careful scheduling, payment coordination, and progress tracking.",
-        features: ["Multi-visit scheduling", "Payment plan coordination", "Treatment progress updates", "Retainer check reminders"],
-        caseStudy: { name: "SmileCraft Ortho", result: "30% fewer no-shows", quote: "Treatment compliance went up after Breeh started handling our follow-ups." },
+        id: "specialty",
+        label: "Specialty Clinics",
+        challenges: "Complex referral management, prior authorizations, and multi-step treatment coordination.",
+        features: ["Referral intake automation", "Prior authorization tracking", "Treatment plan follow-ups", "Specialist coordination"],
+        caseStudy: { name: "Metro Cardiology Associates", result: "30% fewer no-shows", quote: "Patient compliance improved significantly after Breeh started handling our follow-ups." },
     },
     {
-        id: "oral-surgery",
-        label: "Oral Surgery",
-        challenges: "Complex pre-op consultations, medical history collection, and post-op follow-up requirements.",
-        features: ["Pre-op checklist automation", "Medical history intake", "Post-op care instructions", "Insurance pre-authorization"],
-        caseStudy: { name: "Allied OMS", result: "8 locations unified", quote: "Standardizing our call handling across all locations was a game changer." },
+        id: "urgent-care",
+        label: "Urgent Care",
+        challenges: "Unpredictable patient volume, triage requirements, and after-hours call management.",
+        features: ["AI-powered triage routing", "Wait time communication", "After-hours call handling", "Walk-in vs. appointment management"],
+        caseStudy: { name: "Allied Urgent Care Network", result: "8 locations unified", quote: "Standardizing our call handling across all locations was a game changer." },
     },
     {
-        id: "pediatric",
-        label: "Pediatric Dentistry",
-        challenges: "Parent communication, anxious patient management, and family scheduling across siblings.",
-        features: ["Family scheduling coordination", "Parent-friendly communication", "Reward program reminders", "Emergency triage for children"],
-        caseStudy: { name: "Danville Pediatric", result: "Saved 20 hrs/week", quote: "Parents love the instant response, and our staff loves the quiet phones." },
+        id: "behavioral",
+        label: "Behavioral Health",
+        challenges: "Sensitive patient communication, confidentiality requirements, and crisis triage protocols.",
+        features: ["Confidential intake processing", "Crisis escalation protocols", "Appointment reminders", "Insurance eligibility checks"],
+        caseStudy: { name: "Clearview Behavioral Health", result: "Saved 20 hrs/week", quote: "Patients appreciate the empathetic, instant response — and our staff loves the quiet phones." },
     },
     {
-        id: "perio",
-        label: "Periodontics",
-        challenges: "Specialized treatment scheduling, referral management, and compliance tracking.",
-        features: ["Referral intake automation", "Maintenance scheduling", "Treatment plan follow-ups", "Specialist coordination"],
-        caseStudy: { name: "Zen Dentistry", result: "25% more referrals", quote: "We never miss a referral call now, and the intake is flawless." },
+        id: "multispecialty",
+        label: "Multi-Specialty Groups",
+        challenges: "Coordinating across departments, managing diverse workflows, and maintaining consistent patient experience.",
+        features: ["Department-specific routing", "Cross-specialty scheduling", "Unified patient experience", "Centralized analytics"],
+        caseStudy: { name: "Summit Health Partners", result: "25% more referrals", quote: "We never miss a referral call now, and the cross-department coordination is seamless." },
     },
 ];
 
@@ -54,7 +54,7 @@ const IndustrySolutions = () => {
                     </motion.span>
                     <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
                         className="font-display font-bold text-3xl md:text-5xl text-foreground mb-4">
-                        Built for dental, ready for healthcare
+                        Built for healthcare, ready for every specialty
                     </motion.h2>
                 </div>
 

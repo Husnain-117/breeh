@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Star, Quote, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { Star, Quote, ChevronLeft, ChevronRight } from "lucide-react";
 
 function useCountUp(target: number, duration = 2000, inView = false) {
     const [count, setCount] = useState(0);
@@ -18,21 +18,21 @@ function useCountUp(target: number, duration = 2000, inView = false) {
     return count;
 }
 
-const filters = ["All", "Single Location", "Multi-Location", "DSO"];
+const filters = ["All", "Single Location", "Multi-Location", "Health System"];
 
 const stories = [
-    { name: "Bright Smile Dental", type: "Single Location", result: "40% more bookings", quote: "Breeh has completely transformed our Monday mornings. What used to take hours of callbacks is now handled automatically.", author: "Dr. Martinez", tags: ["After-hours", "Scheduling"] },
-    { name: "Danville Pediatric", type: "Single Location", result: "Saved 20 hrs/week", quote: "Parents love the instant response, and our staff loves the quiet phones.", author: "Pamela W.", tags: ["Peak hours", "Patient experience"] },
-    { name: "Allied OMS", type: "Multi-Location", result: "8 locations unified", quote: "Finally, I can see what's happening at every office from one screen.", author: "Brent A.", tags: ["Multi-location", "Operations"] },
-    { name: "Zen Dentistry", type: "Single Location", result: "25% more referrals", quote: "We never miss a referral call now, and the intake is flawless.", author: "Dr. Arshjot A.", tags: ["Referrals", "Intake"] },
-    { name: "SmileCraft Ortho", type: "Multi-Location", result: "30% fewer no-shows", quote: "Treatment compliance went up after Breeh started handling our follow-ups.", author: "Dr. Kim", tags: ["Orthodontics", "Follow-ups"] },
-    { name: "Family Dental Group", type: "DSO", result: "99.7% answer rate", quote: "Best investment we've made this year. The AI handles emergency calls perfectly.", author: "Dr. Michael R.", tags: ["Emergency", "ROI"] },
+    { name: "Riverside Medical Group", type: "Single Location", result: "40% more bookings", quote: "Breeh has completely transformed our Monday mornings. What used to take hours of callbacks is now handled automatically.", author: "Dr. Martinez", tags: ["After-hours", "Scheduling"] },
+    { name: "Clearview Health Center", type: "Single Location", result: "Saved 20 hrs/week", quote: "Patients love the instant response, and our staff loves the quiet phones.", author: "Pamela W.", tags: ["Peak hours", "Patient experience"] },
+    { name: "Allied Healthcare Network", type: "Multi-Location", result: "8 locations unified", quote: "Finally, I can see what's happening at every facility from one screen.", author: "Brent A.", tags: ["Multi-location", "Operations"] },
+    { name: "Summit Health Partners", type: "Single Location", result: "25% more referrals", quote: "We never miss a referral call now, and the intake is flawless.", author: "Dr. Arshjot A.", tags: ["Referrals", "Intake"] },
+    { name: "Metro Cardiology Associates", type: "Multi-Location", result: "30% fewer no-shows", quote: "Patient compliance improved after Breeh started handling our follow-ups.", author: "Dr. Kim", tags: ["Specialty", "Follow-ups"] },
+    { name: "Family Health Partners", type: "Health System", result: "99.7% answer rate", quote: "Best investment we've made this year. The AI handles emergency calls perfectly.", author: "Dr. Michael R.", tags: ["Emergency", "ROI"] },
 ];
 
 const carouselQuotes = [
-    { text: "The email our office receives with a summary of the calls we missed over the weekend is a game changer.", author: "Patricia W.", role: "Director of Operations, TManagement" },
-    { text: "It has made a huge impact on Monday morning. What used to take a few hours is now an effective schedule builder.", author: "Pamela W.", role: "Office Manager, Danville Pediatric" },
-    { text: "We went from missing 30% of calls to answering 100%. The ROI was obvious within the first week.", author: "Dr. Arshjot A.", role: "DDS, FCAD, Zen Dentistry" },
+    { text: "The email our team receives with a summary of the calls we missed over the weekend is a game changer.", author: "Patricia W.", role: "Director of Operations, TManagement" },
+    { text: "It has made a huge impact on Monday morning. What used to take a few hours is now an effective schedule builder.", author: "Pamela W.", role: "Operations Manager, Clearview Health Center" },
+    { text: "We went from missing 30% of calls to answering 100%. The ROI was obvious within the first week.", author: "Dr. Arshjot A.", role: "Medical Director, Summit Health Partners" },
 ];
 
 const SuccessStories = () => {
@@ -48,7 +48,6 @@ const SuccessStories = () => {
         obs.observe(el); return () => obs.disconnect();
     }, []);
 
-    // Auto-rotate carousel
     useEffect(() => {
         const id = setInterval(() => setQuoteIdx((p) => (p + 1) % carouselQuotes.length), 5000);
         return () => clearInterval(id);
@@ -56,7 +55,7 @@ const SuccessStories = () => {
 
     const filtered = activeFilter === "All" ? stories : stories.filter((s) => s.type === activeFilter);
     const metrics = [
-        { value: 200, suffix: "+", label: "Practices" },
+        { value: 200, suffix: "+", label: "Organizations" },
         { value: 2, suffix: "M+", label: "Calls handled" },
         { value: 10, suffix: "M+", label: "Revenue recovered" },
         { value: 98, suffix: "%", label: "Satisfaction" },
@@ -66,17 +65,15 @@ const SuccessStories = () => {
     return (
         <section className="py-28 px-6 lg:px-8 bg-background" ref={ref}>
             <div className="max-w-7xl mx-auto">
-                {/* Header */}
                 <div className="text-center mb-12">
                     <motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
                         className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-5">
                         Success Stories
                     </motion.span>
                     <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                        className="font-display font-bold text-3xl md:text-5xl text-foreground mb-4">Real practices, real results</motion.h2>
+                        className="font-display font-bold text-3xl md:text-5xl text-foreground mb-4">Real organizations, real results</motion.h2>
                 </div>
 
-                {/* Metrics */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
                     {metrics.map((m, i) => (
                         <div key={i} className="text-center">
@@ -86,7 +83,6 @@ const SuccessStories = () => {
                     ))}
                 </div>
 
-                {/* Filters */}
                 <div className="flex justify-center gap-2 mb-10 flex-wrap">
                     {filters.map((f) => (
                         <button key={f} onClick={() => setActiveFilter(f)}
@@ -100,7 +96,6 @@ const SuccessStories = () => {
                     ))}
                 </div>
 
-                {/* Story cards */}
                 <AnimatePresence mode="wait">
                     <motion.div key={activeFilter} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
                         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
@@ -122,7 +117,6 @@ const SuccessStories = () => {
                     </motion.div>
                 </AnimatePresence>
 
-                {/* Quote carousel */}
                 <div className="max-w-3xl mx-auto text-center relative">
                     <Quote className="w-10 h-10 text-primary/10 mx-auto mb-4" />
                     <AnimatePresence mode="wait">
