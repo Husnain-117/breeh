@@ -12,7 +12,7 @@ import CaseStudyFilters from "@/components/case-studies/CaseStudyFilters";
 import StoryGrid from "@/components/case-studies/StoryGrid";
 import CaseStudyFinalCTA from "@/components/case-studies/CaseStudyFinalCTA";
 
-const categories = ["All", "Single Location", "Multi-Location", "DSO", "Dental", "Specialty"];
+const categories = ["All", "Single Location", "Multi-Location", "Health System", "Specialty"];
 
 const CaseStudies = () => {
     const [playbookOpen, setPlaybookOpen] = useState(false);
@@ -27,7 +27,7 @@ const CaseStudies = () => {
         return caseStudies.map((cs, i) => ({
             slug: cs.slug,
             title: cs.title,
-            category: cs.slug.includes("multi") ? "Multi-Location" : cs.slug.includes("pediatric") ? "Single Location" : "Dental",
+            category: cs.slug.includes("multi") ? "Multi-Location" : cs.slug.includes("centralized") ? "Health System" : "Single Location",
             excerpt: cs.sections[0]?.content || "",
             image: [
                 "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
@@ -59,8 +59,8 @@ const CaseStudies = () => {
     return (
         <div className="min-h-screen bg-background overflow-x-hidden font-body text-foreground">
             <SEOHead
-                title="Dental AI Case Studies — Real Results from Real Practices"
-                description="See how dental practices increased revenue by 17x ROI with Breeh AI. Real case studies from single locations to multi-location DSOs."
+                title="Healthcare AI Case Studies — Real Results from Real Organizations"
+                description="See how healthcare organizations increased revenue and efficiency with Breeh AI. Real case studies from clinics to multi-location health systems."
                 canonical="/case-studies"
             />
             <Navbar
