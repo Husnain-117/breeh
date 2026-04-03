@@ -9,7 +9,7 @@ import IntegrationsHero from "@/components/integrations/IntegrationsHero";
 import IntegrationDirectory from "@/components/integrations/IntegrationDirectory";
 import IntegrationCategories from "@/components/integrations/IntegrationCategories";
 import BuildYourStack from "@/components/integrations/BuildYourStack";
-import APISection from "@/components/integrations/APISection";
+
 import IntegrationStories from "@/components/integrations/IntegrationStories";
 import SetupResources from "@/components/integrations/SetupResources";
 import IntegrationRoadmap from "@/components/integrations/IntegrationRoadmap";
