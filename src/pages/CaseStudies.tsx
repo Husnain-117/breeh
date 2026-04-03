@@ -12,7 +12,7 @@ import CaseStudyFilters from "@/components/case-studies/CaseStudyFilters";
 import StoryGrid from "@/components/case-studies/StoryGrid";
 import CaseStudyFinalCTA from "@/components/case-studies/CaseStudyFinalCTA";
 
-const categories = ["All", "Single Location", "Multi-Location", "DSO", "Dental", "Specialty"];
+const categories = ["All", "Single Location", "Multi-Location", "Health System", "Specialty"];
 
 const CaseStudies = () => {
     const [playbookOpen, setPlaybookOpen] = useState(false);
