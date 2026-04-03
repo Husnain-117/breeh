@@ -1,189 +1,244 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Check, ArrowRight, Calculator } from "lucide-react";
+import { Check, ArrowRight, Phone, MessageSquare } from "lucide-react";
 import { SITE_CONFIG } from "@/lib/config";
 
 const roles = [
-    {
-        id: "owner",
-        label: "Administrator",
-        eyebrow: "For Administrators",
-        headline: "Grow your organization without growing your payroll",
-        sub: "Stop losing patients to missed calls. Breeh answers 24/7 so you capture every opportunity.",
-        benefits: ["Capture 35% more new patients", "Reduce administrative overhead significantly", "Real-time performance dashboard"],
-        cta: "Calculate my ROI",
-        visual: "📊",
-    },
-    {
-        id: "manager",
-        label: "Operations Manager",
-        eyebrow: "For Operations Managers",
-        headline: "Finally get ahead of the phones",
-        sub: "Let Breeh handle routine calls so your team can focus on the patients right in front of them.",
-        benefits: ["Automate 80% of routine calls", "Eliminate hold-time complaints", "Consistent patient experience"],
-        cta: "See admin dashboard",
-        visual: "📋",
-    },
-    {
-        id: "it",
-        label: "IT Director",
-        eyebrow: "For IT Directors",
-        headline: "Deploy AI without the infrastructure headache",
-        sub: "HIPAA-compliant, SOC 2 certified, zero infrastructure to manage. Just works.",
-        benefits: ["HIPAA-compliant by design", "50+ native integrations", "No servers to manage"],
-        cta: "View security docs",
-        visual: "🛡️",
-    },
-    {
-        id: "exec",
-        label: "Health System Executive",
-        eyebrow: "For Health System Executives",
-        headline: "Standardize patient experience across all locations",
-        sub: "One platform, every location. Unified analytics, consistent quality, total control.",
-        benefits: ["Unified multi-location dashboard", "Standardized call handling", "Enterprise SLA guarantees"],
-        cta: "Schedule executive demo",
-        visual: "🏢",
-    },
+  {
+    id: "owner",
+    label: "Administrator",
+    eyebrow: "For Administrators",
+    headline: "Grow your organization without growing your payroll",
+    sub: "Stop losing patients to missed calls. Breeh answers 24/7 so you capture every opportunity.",
+    benefits: ["Capture 35% more new patients", "Reduce administrative overhead significantly", "Real-time performance dashboard"],
+    cta: "Calculate my ROI",
+    chatMessages: [
+      { role: "ai" as const, text: "3 new patient inquiries received while your office was closed last night.", time: "7:00 AM" },
+      { role: "ai" as const, text: "All 3 have been scheduled for this week. Estimated revenue: $4,200.", time: "7:00 AM" },
+    ],
+  },
+  {
+    id: "manager",
+    label: "Operations Manager",
+    eyebrow: "For Operations Managers",
+    headline: "Finally get ahead of the phones",
+    sub: "Let Breeh handle routine calls so your team can focus on the patients right in front of them.",
+    benefits: ["Automate 80% of routine calls", "Eliminate hold-time complaints", "Consistent patient experience"],
+    cta: "See admin dashboard",
+    chatMessages: [
+      { role: "patient" as const, text: "I need to cancel my appointment tomorrow.", time: "2:15 PM" },
+      { role: "ai" as const, text: "Done — your appointment is cancelled. Would you like to reschedule for next week?", time: "2:15 PM" },
+    ],
+  },
+  {
+    id: "it",
+    label: "IT Director",
+    eyebrow: "For IT Directors",
+    headline: "Deploy AI without the infrastructure headache",
+    sub: "HIPAA-compliant, SOC 2 certified, zero infrastructure to manage. Just works.",
+    benefits: ["HIPAA-compliant by design", "50+ native integrations", "No servers to manage"],
+    cta: "View security docs",
+    chatMessages: [
+      { role: "ai" as const, text: "All patient data is encrypted at rest and in transit. HIPAA audit log updated.", time: "11:30 AM" },
+      { role: "ai" as const, text: "EHR sync completed — 2,847 records processed with zero errors.", time: "11:31 AM" },
+    ],
+  },
+  {
+    id: "exec",
+    label: "Health System Executive",
+    eyebrow: "For Health System Executives",
+    headline: "Standardize patient experience across all locations",
+    sub: "One platform, every location. Unified analytics, consistent quality, total control.",
+    benefits: ["Unified multi-location dashboard", "Standardized call handling", "Enterprise SLA guarantees"],
+    cta: "Schedule executive demo",
+    chatMessages: [
+      { role: "ai" as const, text: "Weekly report: 12,400 calls handled across 8 locations. 99.2% satisfaction.", time: "8:00 AM" },
+      { role: "ai" as const, text: "Downtown clinic saw a 28% increase in bookings this week.", time: "8:00 AM" },
+    ],
+  },
 ];
 
+/* ── Phone Mockup ── */
+const PhoneMockup = ({ messages }: { messages: { role: "patient" | "ai"; text: string; time: string }[] }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 30 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
+    className="relative w-[270px] sm:w-[290px]"
+  >
+    <div className="rounded-[32px] border border-white/20 bg-card shadow-xl overflow-hidden">
+      {/* Status bar */}
+      <div className="flex items-center justify-between px-5 pt-3 pb-1 bg-primary/[0.03]">
+        <span className="text-[10px] font-medium text-foreground/70">9:41</span>
+        <div className="w-16 h-[18px] bg-foreground/10 rounded-full" />
+        <div className="flex items-center gap-1">
+          <div className="w-3.5 h-2 border border-foreground/40 rounded-sm relative">
+            <div className="absolute inset-[1px] right-[2px] bg-foreground/40 rounded-[1px]" />
+          </div>
+        </div>
+      </div>
+
+      {/* Chat header */}
+      <div className="px-4 py-3 border-b border-border/50 flex items-center gap-3 bg-card">
+        <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+          <Phone className="w-3.5 h-3.5 text-primary" />
+        </div>
+        <div className="flex-1">
+          <p className="text-xs font-semibold text-foreground">Breeh AI Assistant</p>
+          <p className="text-[10px] text-muted-foreground flex items-center gap-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-green-500 inline-block" />
+            Active now
+          </p>
+        </div>
+      </div>
+
+      {/* Messages */}
+      <div className="px-3 py-4 space-y-2.5 bg-muted/30 min-h-[220px]">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={messages.map(m => m.text).join()}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="space-y-2.5"
+          >
+            {messages.map((msg, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.35, delay: 0.2 + i * 0.4 }}
+                className={`flex ${msg.role === "patient" ? "justify-end" : "justify-start"}`}
+              >
+                <div className="max-w-[82%]">
+                  <div
+                    className={`px-3 py-2 rounded-2xl text-[11px] leading-relaxed ${
+                      msg.role === "patient"
+                        ? "bg-primary text-primary-foreground rounded-br-md"
+                        : "bg-card border border-border/50 text-foreground rounded-bl-md shadow-sm"
+                    }`}
+                  >
+                    {msg.text}
+                  </div>
+                  <p className={`text-[9px] text-muted-foreground mt-0.5 ${msg.role === "patient" ? "text-right" : ""} px-1`}>
+                    {msg.time}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      {/* Input bar */}
+      <div className="px-3 py-2.5 border-t border-border/50 flex items-center gap-2 bg-card">
+        <div className="flex-1 h-8 bg-muted rounded-full px-3 flex items-center">
+          <span className="text-muted-foreground text-[10px]">Type a message…</span>
+        </div>
+        <div className="w-7 h-7 rounded-full bg-primary flex items-center justify-center">
+          <ArrowRight className="w-3 h-3 text-primary-foreground" />
+        </div>
+      </div>
+    </div>
+  </motion.div>
+);
+
 const SolutionsHero = () => {
-    const [activeRole, setActiveRole] = useState(roles[0]);
-    const [calls, setCalls] = useState(30);
-    const savedPerMonth = Math.round(calls * 0.25 * 250);
+  const [activeRole, setActiveRole] = useState(roles[0]);
 
-    return (
-        <section
-            className="relative overflow-hidden pt-32 sm:pt-36 pb-20 px-6 lg:px-8"
-            style={{ background: "linear-gradient(135deg, hsl(244 58% 65%), hsl(244 55% 58%))" }}
-        >
-            {/* Subtle dot overlay */}
-            <div className="absolute inset-0 pointer-events-none opacity-[0.04]"
-                style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
+  return (
+    <section
+      className="relative overflow-hidden"
+      style={{ background: "linear-gradient(135deg, hsl(244 58% 65%), hsl(244 55% 58%))" }}
+    >
+      {/* Dot pattern overlay */}
+      <div
+        className="absolute inset-0 opacity-[0.04]"
+        style={{
+          backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)",
+          backgroundSize: "32px 32px",
+        }}
+      />
 
-            {/* Role selector */}
-            <div className="relative z-20 mb-12">
-                <div className="flex justify-center gap-2 flex-wrap max-w-4xl mx-auto">
-                    {roles.map((r) => (
-                        <button key={r.id} onClick={() => setActiveRole(r)}
-                            className="relative px-5 py-2 rounded-full text-sm font-medium transition-all">
-                            {activeRole.id === r.id && (
-                                <motion.span layoutId="solRolePill" transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                                    className="absolute inset-0 bg-white rounded-full shadow-lg" />
-                            )}
-                            <span className={`relative z-10 ${activeRole.id === r.id ? "text-primary" : "text-white/70 hover:text-white"}`}>{r.label}</span>
-                        </button>
-                    ))}
-                </div>
-            </div>
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full pt-32 pb-20 md:pt-36 md:pb-24">
+        {/* Role selector pills */}
+        <div className="mb-12">
+          <div className="flex justify-center gap-2 flex-wrap max-w-4xl mx-auto">
+            {roles.map((r) => (
+              <button
+                key={r.id}
+                onClick={() => setActiveRole(r)}
+                className="relative px-5 py-2 rounded-full text-sm font-medium transition-all"
+              >
+                {activeRole.id === r.id && (
+                  <motion.span
+                    layoutId="solRolePill"
+                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                    className="absolute inset-0 bg-card rounded-full shadow-lg"
+                  />
+                )}
+                <span className={`relative z-10 ${activeRole.id === r.id ? "text-primary" : "text-primary-foreground/70 hover:text-primary-foreground"}`}>
+                  {r.label}
+                </span>
+              </button>
+            ))}
+          </div>
+        </div>
 
-            <div className="max-w-7xl mx-auto relative z-10 w-full">
-                <div className="grid lg:grid-cols-2 gap-16 items-center">
-                    {/* Left — Dynamic content */}
-                    <AnimatePresence mode="wait">
-                        <motion.div
-                            key={activeRole.id}
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: 20 }}
-                            transition={{ duration: 0.3 }}
-                        >
-                            <span className="inline-block px-3 py-1 rounded-full bg-white/15 text-white text-xs font-bold uppercase tracking-wider mb-5">
-                                {activeRole.eyebrow}
-                            </span>
-                            <h1 className="font-display font-bold text-3xl sm:text-4xl md:text-[44px] text-white mb-6 leading-[1.15]">
-                                {activeRole.headline}
-                            </h1>
-                            <p className="text-lg text-white/80 max-w-xl mb-8 leading-relaxed">{activeRole.sub}</p>
-                            <div className="space-y-3 mb-8">
-                                {activeRole.benefits.map((b, i) => (
-                                    <div key={i} className="flex items-center gap-2">
-                                        <Check className="w-5 h-5 text-white shrink-0" />
-                                        <span className="text-white font-medium">{b}</span>
-                                    </div>
-                                ))}
-                            </div>
-                            <motion.button
-                                whileHover={{ scale: 1.02 }}
-                                whileTap={{ scale: 0.98 }}
-                                onClick={() => window.open(SITE_CONFIG.calendlyUrl, "_blank")}
-                                className="bg-white text-primary px-8 py-4 rounded-xl text-lg font-semibold shadow-xl hover:shadow-2xl transition-all flex items-center gap-2"
-                            >
-                                {activeRole.cta} <ArrowRight className="w-5 h-5" />
-                            </motion.button>
-                        </motion.div>
-                    </AnimatePresence>
+        <div className="flex flex-col lg:flex-row items-center gap-14 lg:gap-10">
+          {/* LEFT — Copy */}
+          <div className="lg:w-[55%] text-center lg:text-left">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeRole.id}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 20 }}
+                transition={{ duration: 0.3 }}
+              >
+                <p className="text-xs font-semibold tracking-widest uppercase text-primary-foreground/60 mb-5">
+                  {activeRole.eyebrow}
+                </p>
 
-                    {/* Right — Contextual visual */}
-                    <AnimatePresence mode="wait">
-                        <motion.div
-                            key={activeRole.id + "-vis"}
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0, scale: 0.95 }}
-                            transition={{ duration: 0.4 }}
-                            className="bg-white/10 backdrop-blur-sm rounded-3xl border border-white/20 p-8 shadow-xl relative overflow-hidden"
-                        >
-                            <div className="text-center text-6xl mb-6">{activeRole.visual}</div>
-                            <div className="space-y-4">
-                                {[
-                                    { label: "Calls Answered", value: "100%", bar: 100 },
-                                    { label: "Patient Satisfaction", value: "98%", bar: 98 },
-                                    { label: "Staff Time Saved", value: "15 hrs/wk", bar: 75 },
-                                ].map((m) => (
-                                    <div key={m.label}>
-                                        <div className="flex justify-between text-sm mb-1">
-                                            <span className="text-white/70">{m.label}</span>
-                                            <span className="font-bold text-white">{m.value}</span>
-                                        </div>
-                                        <div className="h-2 bg-white/20 rounded-full overflow-hidden">
-                                            <motion.div
-                                                initial={{ width: 0 }}
-                                                whileInView={{ width: `${m.bar}%` }}
-                                                viewport={{ once: true }}
-                                                transition={{ duration: 1, delay: 0.3 }}
-                                                className="h-full bg-white rounded-full"
-                                            />
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </motion.div>
-                    </AnimatePresence>
+                <h1 className="font-display font-bold text-3xl sm:text-4xl md:text-[44px] leading-[1.15] tracking-tight text-primary-foreground mb-5">
+                  {activeRole.headline}
+                </h1>
+
+                <p className="text-sm md:text-base text-primary-foreground/70 max-w-md mx-auto lg:mx-0 mb-8 leading-relaxed">
+                  {activeRole.sub}
+                </p>
+
+                <div className="space-y-3 mb-8">
+                  {activeRole.benefits.map((b, i) => (
+                    <div key={i} className="flex items-center gap-2 justify-center lg:justify-start">
+                      <Check className="w-4 h-4 text-primary-foreground/80 shrink-0" />
+                      <span className="text-sm text-primary-foreground font-medium">{b}</span>
+                    </div>
+                  ))}
                 </div>
 
-                {/* Quick ROI Calculator */}
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="mt-16 max-w-lg mx-auto bg-white/10 backdrop-blur-sm rounded-2xl shadow-2xl border border-white/20 p-6"
-                >
-                    <div className="flex items-center gap-2 mb-4">
-                        <Calculator className="w-5 h-5 text-white" />
-                        <h3 className="font-bold text-sm text-white">Quick ROI Check</h3>
-                    </div>
-                    <label className="text-xs text-white/70">Calls per day: <span className="font-bold text-white">{calls}</span></label>
-                    <input
-                        type="range"
-                        min={10}
-                        max={100}
-                        value={calls}
-                        onChange={(e) => setCalls(Number(e.target.value))}
-                        className="w-full mt-2 accent-white"
-                    />
-                    <div className="flex justify-between text-[10px] text-white/50 -mt-1 mb-3">
-                        <span>10</span><span>100</span>
-                    </div>
-                    <p className="text-center">
-                        <span className="text-xs text-white/70">You could save </span>
-                        <span className="font-display font-bold text-2xl text-white">${savedPerMonth.toLocaleString()}</span>
-                        <span className="text-xs text-white/70">/month</span>
-                    </p>
-                    <a href="#roi" className="block text-center text-xs text-white font-semibold mt-2 hover:underline">Full calculator →</a>
-                </motion.div>
-            </div>
-        </section>
-    );
+                <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
+                  <button
+                    onClick={() => window.open(SITE_CONFIG.calendlyUrl, "_blank")}
+                    className="inline-flex items-center justify-center gap-2 font-semibold rounded-full px-8 py-3 text-sm bg-card text-primary hover:bg-card/90 transition-colors shadow-md"
+                  >
+                    {activeRole.cta}
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* RIGHT — Phone Mockup */}
+          <div className="lg:w-[45%] flex justify-center lg:justify-end">
+            <PhoneMockup messages={activeRole.chatMessages} />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default SolutionsHero;
