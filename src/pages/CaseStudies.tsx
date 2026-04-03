@@ -59,8 +59,8 @@ const CaseStudies = () => {
     return (
         <div className="min-h-screen bg-background overflow-x-hidden font-body text-foreground">
             <SEOHead
-                title="Dental AI Case Studies — Real Results from Real Practices"
-                description="See how dental practices increased revenue by 17x ROI with Breeh AI. Real case studies from single locations to multi-location DSOs."
+                title="Healthcare AI Case Studies — Real Results from Real Organizations"
+                description="See how healthcare organizations increased revenue and efficiency with Breeh AI. Real case studies from clinics to multi-location health systems."
                 canonical="/case-studies"
             />
             <Navbar

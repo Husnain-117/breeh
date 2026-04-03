@@ -25,11 +25,11 @@ function useCountUp(target: number, duration = 2500, inView = false) {
 
 const metrics = [
     {
-        label: "Practices Transformed",
+        label: "Organizations Transformed",
         value: 200,
         suffix: "+",
         icon: Users,
-        trend: "+12% this month"
+        trend: "Growing monthly"
     },
     {
         label: "Revenue Impact",
@@ -37,10 +37,10 @@ const metrics = [
         suffix: "M+",
         prefix: "$",
         icon: TrendingUp,
-        trend: "+$4.2M recovered"
+        trend: "Across all clients"
     },
     {
-        label: "Calls Handled",
+        label: "Patient Calls Handled",
         value: 2,
         suffix: "M+",
         icon: PhoneCall,
@@ -60,7 +60,7 @@ const AggregateMetrics = () => {
     const isInView = useInView(ref, { once: true, margin: "-100px" });
 
     return (
-        <section ref={ref} className="bg-surface/50 border-y border-border py-20 relative overflow-hidden">
+        <section ref={ref} className="bg-muted/50 border-y border-border py-20 relative overflow-hidden">
             <div className="container max-w-7xl mx-auto px-6">
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
                     {metrics.map((metric, i) => {
@@ -94,7 +94,6 @@ const AggregateMetrics = () => {
                 </div>
             </div>
 
-            {/* Decorative Orbs */}
             <div className="absolute top-1/2 left-0 -translate-y-1/2 w-64 h-64 bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
             <div className="absolute top-1/2 right-0 -translate-y-1/2 w-96 h-96 bg-purple-500/5 rounded-full blur-[120px] pointer-events-none" />
         </section>
