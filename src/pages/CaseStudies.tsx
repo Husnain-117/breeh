@@ -27,7 +27,7 @@ const CaseStudies = () => {
         return caseStudies.map((cs, i) => ({
             slug: cs.slug,
             title: cs.title,
-            category: cs.slug.includes("multi") ? "Multi-Location" : cs.slug.includes("pediatric") ? "Single Location" : "Dental",
+            category: cs.slug.includes("multi") ? "Multi-Location" : cs.slug.includes("centralized") ? "Health System" : "Single Location",
             excerpt: cs.sections[0]?.content || "",
             image: [
                 "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
