@@ -66,8 +66,6 @@ const Integrations = () => {
             {/* 4. BUILD YOUR STACK — Interactive tool */}
             <BuildYourStack />
 
-            {/* 5. API & CUSTOM — For Developers */}
-            <APISection />
 
             {/* 6. SUCCESS STORIES — Real Connections */}
             <IntegrationStories />
